@@ -69,7 +69,7 @@
 
 	Lists the ECs predicted by each tool 
 	for which there is no trained random forest classifier (default settings).   
-	Separates those ECs	based on the level of confidence with which they are predicted. 
+	Separates those ECs	based on the level of confidence with which they are predicted.  
 	This is as per the cutoffs used for the random forest classifier.  
 	This is an optional script, but recommended for model reconstruction. 				
   
