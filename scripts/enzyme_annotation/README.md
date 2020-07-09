@@ -45,19 +45,19 @@
 		--output_folder, -o (required): Folder where the predictions are going to be written.
 		
 		--method, -m        (optional): The ensemble method to run (default is random forest). 
-							Options are: 
-							- Majority 
-							- EC_specific 
-							- NB 
-							- Regression 
-							- RF 
+						Options are: 
+						- Majority 
+						- EC_specific 
+						- NB 
+						- Regression 
+						- RF 
 										
 		--arguments, -a     (optional): Additional parameters to override default ones (*) for ensemble methods. 
-							- Majority: [1, 2*, 3], [high*, low] 
-							- EC_specific: [all*, high] 
-							- NB: [bernouilli*, binomial], [all*, high] 
-							- Regression: [balanced, not_balanced*] 
-							- RF: [ec_specific, generic*], [balanced, not_balanced*, balanced_subsample] 
+						- Majority: [1, 2*, 3], [high*, low] 
+						- EC_specific: [all*, high] 
+						- NB: [bernouilli*, binomial], [all*, high] 
+						- Regression: [balanced, not_balanced*] 
+						- RF: [ec_specific, generic*], [balanced, not_balanced*, balanced_subsample] 
 					
 - x_list_ecs_left_out_by_RF_classifier.py: Lists the ECs predicted by each tool 
 	for which there is no trained random forest classifier (default settings).   
