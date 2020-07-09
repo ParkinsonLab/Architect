@@ -28,29 +28,31 @@
 - 0_get_readable_results.py: Formats the results obtained from above 
 	into a form that can be read easily by the ensemble approaches we have. 
 	Arguments: 
-		--input_folder, -i (required): folder containing all the formatted results 
-								       (basically output from 0_format_raw_results.py) 
-		--output_file, -o  (required): file with the readable predictions for the  
-									   next steps. 
+	
+		--input_folder, -i (required): folder containing all the formatted results (basically output from 0_format_raw_results.py) 
+		
+		--output_file, -o  (required): file with the readable predictions for the next steps. 
 	
 - run_ensemble_approach.py: Runs ensemble approach of choosing given the  
   formatted results put in readable format. 
 	Arguments: 
-		--input_file, -i    (required): File where all predictions from the  
-										different methods are. 
+	
+		--input_file, -i    (required): File where all predictions from the different methods are. 
+		
 		--training_data, -t (required): Folder where the training data is. 
-		--output_folder, -o (required): Folder where the predictions are going  
-										to be written. 
-		--method, -m        (optional): The ensemble method to run (default is 
-										random forest). 
+		
+		--output_folder, -o (required): Folder where the predictions are going to be written.
+		
+		--method, -m        (optional): The ensemble method to run (default is random forest). 
 										Options are: 
 										- Majority 
 										- EC_specific 
 										- NB 
 										- Regression 
 										- RF 
-		--arguments, -a     (optional): Additional parameters to override 
-										default ones (*) for ensemble methods. 
+										
+		--arguments, -a     (optional): Additional parameters to override default ones (*) for ensemble methods. 
+		
 										- Majority: [1, 2*, 3], [high*, low] 
 										- EC_specific: [all*, high] 
 										- NB: [bernouilli*, binomial], [all*, high] 
