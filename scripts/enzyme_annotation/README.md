@@ -1,5 +1,6 @@
 - 0_format_raw_results.py: Formats the raw results from specified methods.  
 	Arguments:
+	
 		```
 		--output_folder (required): Folder where the formatted results will be written to.  
 									
