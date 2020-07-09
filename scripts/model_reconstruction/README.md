@@ -1,4 +1,5 @@
 This folder contains a set of scripts for model reconstruction.
+Uses python v3.
 
 * _0_get_high_conf_set_of_reactions_from_ec.py_:
 

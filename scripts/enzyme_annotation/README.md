@@ -1,4 +1,5 @@
 This folder contains a set of scripts for enzyme annotation.
+Currently using python v2, but being migrated to v3.
 
 * _0_format_raw_results.py_: 
 
