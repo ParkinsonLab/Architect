@@ -61,9 +61,8 @@
 					
 - x_list_ecs_left_out_by_RF_classifier.py: Lists the ECs predicted by each tool 
 	for which there is no trained random forest classifier (default settings).   
-	Separates those ECs	based on the level of confidence with which they are  
-	predicted--as per the cutoffs I used for the random forest classifier. This  
-	is an optional script.	 				
+	Separates those ECs	based on the level of confidence with which they are predicted--as per the cutoffs I used for the random forest classifier.  
+	This is an optional script, but recommended for model reconstruction. 				
   
 - different_ensemble_approaches.py: File containing the different ensemble 
   approaches that are run from 1_run_ensemble_approach.py. 
