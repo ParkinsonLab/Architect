@@ -25,8 +25,8 @@
 		python 0_format_raw_results.py --output_folder OUTPUT_FOLDER --Catfam_raw all_catfam_results.out --fasta_file file_with_sequences.fa
 	
 	Re-formatted Catfam results are written to OUTPUT_FOLDER given raw results
-	found in all_catfam_results.out.  In the case of DETECT and EnzDP, the
-	headers should be preferably removed by the user. 
+	found in all_catfam_results.out. 
+	In the case of DETECT and EnzDP, the headers should be preferably removed by the user. 
 	
 - _0_get_readable_results.py_: 
 
@@ -69,13 +69,13 @@
 
 	Lists the ECs predicted by each tool 
 	for which there is no trained random forest classifier (default settings).   
-	Separates those ECs	based on the level of confidence with which they are predicted--as per the cutoffs I used for the random forest classifier.  
+	Separates those ECs	based on the level of confidence with which they are predicted. 
+	This is as per the cutoffs used for the random forest classifier.  
 	This is an optional script, but recommended for model reconstruction. 				
   
 - _different_ensemble_approaches.py_: 
 
-	File containing the different ensemble 
-  approaches that are run from 1_run_ensemble_approach.py. 
+	File containing the different ensemble approaches that are run from 1_run_ensemble_approach.py. 
   
 - _utils.py_: 
 
