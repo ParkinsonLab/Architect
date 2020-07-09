@@ -1,5 +1,6 @@
 - 0_format_raw_results.py: Formats the raw results from specified methods.  
-	Arguments: 
+	Arguments:
+		'''
 		--output_folder (required): Folder where the formatted results will be  
 									written to.  
 		--fasta_file    (required): File containing the sequences that we have  
@@ -13,6 +14,7 @@
 									ie. the output found in the .res file 
 		--priam_raw	    (optional): Raw file containing all output from PRIAM 
 									ie. the output found in the seqsECs.txt file 
+		'''
 									
 	Example usage:  
 	python 0_format_raw_results.py --output_folder OUTPUT_FOLDER 
