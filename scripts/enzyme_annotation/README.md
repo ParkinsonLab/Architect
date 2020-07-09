@@ -18,8 +18,8 @@
 
 									
 	Example usage:  
-	python 0_format_raw_results.py --output_folder OUTPUT_FOLDER 
-	--Catfam_raw all_catfam_results.out --fasta_file file_with_sequences.fa
+	
+		python 0_format_raw_results.py --output_folder OUTPUT_FOLDER --Catfam_raw all_catfam_results.out --fasta_file file_with_sequences.fa
 	
 	Re-formatted Catfam results are written to OUTPUT_FOLDER given raw results
 	found in all_catfam_results.out.  In the case of DETECT and EnzDP, the
