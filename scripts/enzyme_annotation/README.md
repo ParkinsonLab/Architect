@@ -3,15 +3,21 @@
 		```
 		--output_folder (required): Folder where the formatted results will be  
 									written to.  
+									
 		--fasta_file    (required): File containing the sequences that we have  
 									the predictions from.  
+									
 		--catfam_raw    (optional): Raw file containing all output from CatFam  
+		
 		--detect_raw	(optional): Raw file containing all output from DETECT  
 									ie. the output found in the .out file 
+									
 		--eficaz_raw    (optional): Raw file containing all output from EFICAz 
 									ie. the output found in the .ecpred file 
+									
 		--enzdp_raw	    (optional): Raw file containing all output from EnzDP 
 									ie. the output found in the .res file 
+									
 		--priam_raw	    (optional): Raw file containing all output from PRIAM 
 									ie. the output found in the seqsECs.txt file 
 		```
