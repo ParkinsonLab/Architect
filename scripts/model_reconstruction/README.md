@@ -1,3 +1,5 @@
+This folder contains a set of scripts for model reconstruction.
+
 * _0_get_high_conf_set_of_reactions_from_ec.py_:
 
 	Writes reactions from high-confidence ECs predicted for an organism, appending all spontaneous/non-enzymatic reactions.
