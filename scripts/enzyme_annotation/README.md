@@ -1,4 +1,6 @@
-- 0_format_raw_results.py: Formats the raw results from specified methods.
+- _0_format_raw_results.py_: 
+
+	Formats the raw results from specified methods.
   
 	Arguments:
 	
@@ -26,7 +28,9 @@
 	found in all_catfam_results.out.  In the case of DETECT and EnzDP, the
 	headers should be preferably removed by the user. 
 	
-- 0_get_readable_results.py: Formats the results obtained from above into a form that can be read easily by the ensemble approaches we have. 
+- _0_get_readable_results.py_: 
+
+	Formats the results obtained from above into a form that can be read easily by the ensemble approaches we have. 
 	
 	Arguments: 
 	
@@ -34,7 +38,9 @@
 		
 		--output_file, -o  (required): file with the readable predictions for the next steps. 
 	
-- run_ensemble_approach.py: Runs ensemble approach of choosing given the formatted results put in readable format. 
+- _run_ensemble_approach.py_: 
+
+	Runs ensemble approach of choosing given the formatted results put in readable format. 
 	
 	Arguments: 
 	
@@ -59,14 +65,20 @@
 						- Regression: [balanced, not_balanced*] 
 						- RF: [ec_specific, generic*], [balanced, not_balanced*, balanced_subsample] 
 					
-- x_list_ecs_left_out_by_RF_classifier.py: Lists the ECs predicted by each tool 
+- _x_list_ecs_left_out_by_RF_classifier.py_: 
+
+	Lists the ECs predicted by each tool 
 	for which there is no trained random forest classifier (default settings).   
 	Separates those ECs	based on the level of confidence with which they are predicted--as per the cutoffs I used for the random forest classifier.  
 	This is an optional script, but recommended for model reconstruction. 				
   
-- different_ensemble_approaches.py: File containing the different ensemble 
+- _different_ensemble_approaches.py_: 
+
+	File containing the different ensemble 
   approaches that are run from 1_run_ensemble_approach.py. 
   
-- utils.py: File containing functions that can be used for processing input from 
+- _utils.py_: 
+
+	File containing functions that can be used for processing input from 
 	the user, as well as other functions that involve simple processing that can 
 	be used in different scripts. 
