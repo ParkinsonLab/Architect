@@ -148,13 +148,11 @@ if __name__ == '__main__':
     metabolites_to_ignore = read_column_from_file(file_with_content_to_ignore)
     high_conf_deadend_metabolites = get_deadend_metabolites(high_conf_model_rxn_to_info, high_conf_model_met_to_rxn)
     high_conf_deadend_metabolites = get_difference(high_conf_deadend_metabolites, metabolites_to_ignore)
+    exchange_reactions = get_exchange_reactions(high_conf_deadend_metabolites, [])
 
-    # (3) Get exchange reactions for high-confidence and high+low-confidence deadend metabolites from above.
-    new_exchange_reactions = get_exchange_reactions(high_conf_deadend_metabolites, [])
-
-    # (4) In the universal model, include the low-confidence reactions and the exchange reactions I have mentioned above.
+    # (3) In the universal model, include the low-confidence reactions and the exchange reactions I have mentioned above.
     #   an additional file with the high-confidence reactions as well.
-    utils.write_model_with_new_reactions(candidate_rxn_to_info, new_exchange_reactions, output_only_candidates)
-    utils.write_model_with_new_reactions(candidate_rxn_to_info, new_exchange_reactions,
+    utils.write_model_with_new_reactions(candidate_rxn_to_info, exchange_reactions, output_only_candidates)
+    utils.write_model_with_new_reactions(candidate_rxn_to_info, exchange_reactions,
                                    output_candidates_with_exchange_reactions)
     utils.append_default_reactions(output_candidates_with_exchange_reactions, input_high_conf_model_file)
