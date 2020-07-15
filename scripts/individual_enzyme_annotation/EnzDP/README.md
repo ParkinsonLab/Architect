@@ -8,4 +8,4 @@ TEMPLATE_project.py is the template for individualize_project.sh.
 (2) Then, run individualize_project, which writes a project file for each of the sequences in Split_seqs.
 
 (3) Last, run run_enzdp.sh, which operates on the parameters given in each project file. 
-EnzDP generates many intermediate files.  These are written onto the dev nodes (Niagara), and subsequently deleted.
+EnzDP generates many intermediate files.  These are written onto the RAM disk (Niagara), and subsequently deleted.

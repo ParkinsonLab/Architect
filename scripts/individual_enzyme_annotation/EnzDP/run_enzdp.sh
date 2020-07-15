@@ -6,7 +6,7 @@
 # Customize path to EnzDP.
 ENZDP_TOOL=${HOME}/EnzDP/EnzDP_src/enzdp.py
 
-# Specify full path to working directory (containing Project folder; see README), and path to a folder which can contain many files.
+# Specify full path to working directory (containing Project folder; see README), and path to RAM disk.
 # (EnzDP generates many intermediate files, which may occupy space that the user does not have enough of.)
 folder=EnzDP
 local_path=/dev/EnzDP
