@@ -9,3 +9,5 @@ TEMPLATE_project.py is the template for individualize_project.sh.
 
 (3) Last, run run_enzdp.sh, which operates on the parameters given in each project file. 
 EnzDP generates many intermediate files.  These are written onto the RAM disk (Niagara), and subsequently deleted.
+
+Special acknowledgements to Dr Xuejian Xiong and Dr Swapna Seshadri for help with RAM disk and sed tricks.

@@ -8,3 +8,5 @@ These scripts assume the presence of a folder called Split_seqs containing your 
 
 (3) Run eficaz_1.sh, eficaz_2.sh, ... eficaz_k.sh.
 EFICAz generates many intermediate files.  These are written onto the RAM disk (Niagara), and subsequently deleted.
+
+Special acknowledgements to Dr Xuejian Xiong and Dr Swapna Seshadri for help with RAM disk and sed tricks.
