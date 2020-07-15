@@ -7,4 +7,4 @@ These scripts assume the presence of a folder called Split_seqs containing your 
 (2) Then, run individualize_project, which creates eficaz_1.sh, eficaz_2.sh, ... eficaz_k.sh in folder Scripts.
 
 (3) Run eficaz_1.sh, eficaz_2.sh, ... eficaz_k.sh.
-EnzDP generates many intermediate files.  These are written onto the RAM disk (Niagara), and subsequently deleted.
+EFICAz generates many intermediate files.  These are written onto the RAM disk (Niagara), and subsequently deleted.
