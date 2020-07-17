@@ -1,4 +1,4 @@
-This folder contains some of the scripts part of EnzDP, modified for use as part of Architect.
+This folder contains some of the scripts part of EnzDP, modified for use as part of Architect (changes commented in the script).
 
 Additional datasets required for running the tool can be downloaded from the project's repository.
 
