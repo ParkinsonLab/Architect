@@ -12,11 +12,22 @@ This README details the steps going from protein sequence to gap-filled model, a
 
 Database files will be made available on the Parkinson lab’s website at http://compsysbio.org. 
 
-The manuscript for Architect is currently in preparation.  For more information, please contact nnursimulu@cs.toronto.edu
+The manuscript for Architect is currently in preparation.  Please cite the tools that Architect uses when using our approach:
+
+	* CatFam (Yu et al, 2009)
+	* DETECT (Hung et al, 2010; Nursimulu et al, 2018)
+	* EFICAz (Kumar et al, 2012)
+	* EnzDP (Nguyen et al, 2015)
+	* PRIAM (Claudel-Renard et al, 2003)
+	* CarveMe (Machado et al, 2018)
+
+For more information, please contact nnursimulu@cs.toronto.edu
 
 # Bibliography
 
 Yu, C., et al., Genome-wide enzyme annotation with precision control: catalytic families (CatFam) databases. Proteins, 2009. 74(2): p. 449-60.
+
+Hung, S.S., et al., DETECT--a density estimation tool for enzyme classification and its application to Plasmodium falciparum. Bioinformatics, 2010. 26(14): p. 1690-8.
 
 Nursimulu, N., et al., Improved enzyme annotation with EC-specific cutoffs using DETECT v2. Bioinformatics, 2018. 34(19): p. 3393-3395.
 
