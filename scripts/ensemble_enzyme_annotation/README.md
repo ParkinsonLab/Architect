@@ -1,6 +1,10 @@
 This folder contains a set of scripts for enzyme annotation.
 Currently using python v2, but being migrated to v3.
 
+* _main.sh_:
+	
+	This is the main script that takes raw results from the various tools and automatically produces the results from the random forest classifier (default).  Details of the involved scripts are given below, as well as options other than the default.
+
 * _0_concatenate_raw_results.py_: 
 
 	Concatenates the results from the different tools.
