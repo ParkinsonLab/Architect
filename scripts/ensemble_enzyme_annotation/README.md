@@ -1,9 +1,27 @@
 This folder contains a set of scripts for enzyme annotation.
 Currently using python v2, but being migrated to v3.
 
+* _0_concatenate_raw_results.py_: 
+
+	Concatenates the results from the different tools.
+	
+	Arguments:
+	
+		--output_folder  (required): Folder where the raw results are present.
+		
+		--catfam_results (optional): Folder where the raw CatFam results are.
+		
+		--detect_results (optional): File where the raw DETECT results are.
+		
+		--eficaz_results (optional): Folder where the raw EFICAz results are.
+		
+		--enzdp_results  (optional): Folder where the raw EnzDP results are.
+		
+		--priam_results  (optional): File where the raw PRIAM results are.
+
 * _0_format_raw_results.py_: 
 
-	Formats the raw results from specified methods.
+	Formats the raw results from specified tools.
   
 	Arguments:
 	
@@ -47,7 +65,7 @@ Currently using python v2, but being migrated to v3.
 	
 	Arguments: 
 	
-		--input_file, -i    (required): File where all predictions from the different methods are. 
+		--input_file, -i    (required): File where all predictions from the different tools are. 
 		
 		--training_data, -t (required): Folder where the training data is. 
 		
