@@ -1,5 +1,7 @@
 # Under construction.
 import math
+from argparse import ArgumentParser
+import sys, os
 
 def read_parameter_values(file_name):
 
@@ -30,18 +32,17 @@ def determine_num_to_split(sequence_file):
 
     tool_to_num_split = {}
     num_seqs = count_num_of_seqs(sequence_file)
-    for tool_name in ["CatFam, EFICAz, EnzDP"]:
+    for tool_name in ["CatFam", "EFICAz", "EnzDP"]:
         k = 1
-        while True:
+        answer = ""
+        while answer != "Y":
             num_files = 40 * k
             suggested = math.ceil(num_seqs/40)
-            answer = ""
-            while answer.strip().upper() not in ["Y", "N"]:
-                answer = input("For " + tool_name + ", split sequences into " + str(num_files) + " files with at most " \
-                    + str(suggested) + " sequences? [y/n]")
-            if answer == "Y":
-                break
-            k += 1
+            answer = input("Architect: For " + tool_name + ", split sequences into " + str(num_files) + " files with at most " \
+                + str(suggested) + " sequences? [y/n]: ")
+            answer = answer.strip().upper()
+            if answer == "N":
+                k += 1
         tool_to_num_split[tool_name] = suggested
     return tool_to_num_split
 
@@ -86,12 +87,20 @@ def customize_priam(parameter_values):
 
 if __name__ == '__main__':
 
+    sys.path.append(os.getcwd())
+    print (os.getcwd())
+
     try:
         input = raw_input
     except NameError:
         pass
 
-    parameter_values = read_parameter_values("sample_run.tsv")
+    parser = ArgumentParser(description="Sets up the scripts for the individual enzyme annotation tools.")
+    parser.add_argument("--arguments_file", type=str, help="File with the values of the parameters.", required=True)
+    args = parser.parse_args()
+    arguments_file = args.arguments_file
+
+    parameter_values = read_parameter_values(arguments_file)
     catfam_num_split, eficaz_num_split, enzdp_num_split = determine_num_to_split(parameter_values["SEQUENCE_FILE"])
 
     customize_catfam(parameter_values)
