@@ -1,9 +1,8 @@
-KEY             VALUE
-PROJECT_NAME    some_organism
+*KEY            *VALUE
 BLAST_DIR       path/to/blast/blast-2.2.26/bin
 CATFAM_DIR      path/to/catfam
-EMBOSS_DIR      path/to/EMBOSS/EMBOSS-6.6.0/emboss/:$PATH
-DETECT_DIR      path/to/DETECTv2/detect_2.2.7.py
+EMBOSS_DIR      path/to/EMBOSS/EMBOSS-6.6.0/emboss
+DETECT_DIR      path/to/DETECTv2
 EFICAz_DIR      path/to/EFICAz2.5.1
 EnzDP_DIR       path/to/EnzDP/EnzDP_src/enzdp.py
 PRIAM_DIR       path/to/PRIAM/PRIAM_search_2018.jar

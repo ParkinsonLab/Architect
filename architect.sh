@@ -1,3 +1,8 @@
-python architect/set_up_individual_tools.py --arguments_file sample_run.tsv
+PROJECT=organism
+INPUT_FILE=sample_run.in
+
+python architect/set_up_individual_tools.py --arguments_file $INPUT_FILE --project_name $PROJECT
+
+
 
 #IPR

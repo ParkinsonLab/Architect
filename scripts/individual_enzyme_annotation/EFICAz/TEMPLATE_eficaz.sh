@@ -1,7 +1,7 @@
 #!/bin/bash
 #SBATCH --nodes=1
 #SBATCH --time=12:00:00
-#SBATCH --job-name=EFICAz_SEQUENCE_FILENAME_1
+#SBATCH --job-name=EFICAz_SEQUENCE_FILENAME_X1
 
 # Customize path to EFICAz.
 EFICAz25_PATH=${HOME}/EFICAz2.5.1
