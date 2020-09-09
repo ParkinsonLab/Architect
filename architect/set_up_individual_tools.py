@@ -90,8 +90,7 @@ def determine_num_to_split(sequence_file):
             k_to_split[k] = current_split
         else:
             tool_to_num_split[tool_name] = k_to_split[k]
-                
-    return tool_to_num_split
+    return tool_to_num_split, rec_tool_to_time["DETECT"], rec_tool_to_time["PRIAM"]
 
 
 def get_recommended_per_tool(num_seqs, max_num_per_file):
@@ -209,18 +208,19 @@ def customize_catfam(parameter_values, project_name, current_working_directory, 
     write_split_seqs(current_folder + "/Split_seqs", i_to_num_split, parameter_values["SEQUENCE_FILE"])
 
 
-def customize_detect(parameter_values, project_name, current_working_directory):
+def customize_detect(parameter_values, project_name, current_working_directory, time):
     
     current_folder = project_name + "/DETECT"
     os.mkdir(current_folder)
     num_to_new_line = {}
+    num_to_new_line[3] = "#SBATCH --time=" + str(time) + ":00:00"
     num_to_new_line[4] = "#SBATCH --job-name=DETECT_" + project_name
     num_to_new_line[7] = "DETECT_TOOL=" + parameter_values["DETECT_DIR"] + "/detect_2.2.7.py"
     num_to_new_line[10] = "export PATH=" + parameter_values["DETECT_DIR"] + "/:$PATH"
     num_to_new_line[11] = "export PATH=" + parameter_values["EMBOSS_DIR"] + ":$PATH"
     num_to_new_line[21] = "cd " + current_working_directory + "/" + project_name + "/DETECT"
     num_to_new_line[27] = "SEQ_NAME=../../" + parameter_values["SEQUENCE_FILE"]
-    copy_and_replace("scripts/individual_enzyme_annotation/CatFam/run_detect.sh", \
+    copy_and_replace("scripts/individual_enzyme_annotation/DETECT/run_detect.sh", \
         current_folder + "/run_detect.sh", num_to_new_line)
 
 
@@ -246,7 +246,7 @@ def customize_enzdp(parameter_values, project_name, current_working_directory, i
 
     current_folder = project_name + "/EnzDP"
     os.mkdir(current_folder)
-    copy_and_replace("scripts/individual_enzyme_annotation/EnzDP/individualize.sh", current_folder + "/individualize.sh", {})
+    copy_and_replace("scripts/individual_enzyme_annotation/EnzDP/individualize_project.sh", current_folder + "/individualize_project.sh", {})
     copy_and_replace("scripts/individual_enzyme_annotation/EnzDP/TEMPLATE_project.py", current_folder + "/TEMPLATE_project.py", {})
     
     num_to_new_line = {}
@@ -259,12 +259,13 @@ def customize_enzdp(parameter_values, project_name, current_working_directory, i
     write_split_seqs(current_folder + "/Split_seqs", i_to_num_split, parameter_values["SEQUENCE_FILE"])
 
 
-def customize_priam(parameter_values, project_name, current_working_directory):
+def customize_priam(parameter_values, project_name, current_working_directory, time):
 
     current_folder = project_name + "/PRIAM"
     os.mkdir(current_folder)
 
     num_to_new_line = {}
+    num_to_new_line[3] = "#SBATCH --time=" + str(time) + ":00:00"
     num_to_new_line[4] = "#SBATCH --job-name=PRIAM_" + project_name
     num_to_new_line[7] = "my_WORKDIR=" + current_working_directory + "/" + project_name + "/PRIAM"
     num_to_new_line[8] = "TEST=" + parameter_values["SEQUENCE_FILE"]
@@ -279,7 +280,7 @@ def copy_and_replace(original_file_name, new_file_name, line_to_new_text):
         with open(new_file_name, "w") as writer:
             for i, line in enumerate(input_file):
                 if (i+1) in line_to_new_text:
-                    new_text = line_to_new_text[i]
+                    new_text = line_to_new_text[i+1]
                     writer.write(new_text + "\n")
                 else:
                     writer.write(line)
@@ -297,7 +298,8 @@ def write_split_seqs(folder_name, i_to_num_split, sequence_file):
                 continue
             if line[0] == ">":
                 curr_num_seqs += 1
-                if curr_num_seqs >= i_to_num_split[i]:
+                if curr_num_seqs > i_to_num_split[i]:
+                    curr_num_seqs = 1
                     i += 1
                     writer.close()
                     writer = open(folder_name + "/SEQ_" + str(i) + ".fa", "w") 
@@ -328,10 +330,10 @@ if __name__ == '__main__':
     os.mkdir(project_name)
 
     parameter_values = read_parameter_values(arguments_file)
-    tool_to_num_split = determine_num_to_split(parameter_values["SEQUENCE_FILE"])
+    tool_to_num_split, detect_time, priam_time = determine_num_to_split(parameter_values["SEQUENCE_FILE"])
 
     customize_catfam(parameter_values, project_name, current_working_directory, tool_to_num_split["CatFam"])
-    customize_detect(parameter_values, project_name, current_working_directory)
+    customize_detect(parameter_values, project_name, current_working_directory, detect_time)
     customize_eficaz(parameter_values, project_name, current_working_directory, tool_to_num_split["EFICAz"])
     customize_enzdp(parameter_values, project_name, current_working_directory, tool_to_num_split["EnzDP"])
-    customize_priam(parameter_values, project_name, current_working_directory)
+    customize_priam(parameter_values, project_name, current_working_directory, priam_time)
