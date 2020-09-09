@@ -1,3 +1,5 @@
+PATH=/cygdrive/c/Users/nirva/AppData/Local/Programs/Python/Python37/:${PATH}
+
 PROJECT=organism
 INPUT_FILE=sample_run.in
 

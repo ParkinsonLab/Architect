@@ -35,15 +35,42 @@ def determine_num_to_split(sequence_file):
     k_to_split = {}
     num_seqs = count_num_of_seqs(sequence_file)
 
-    # Print recommended to user and ask if they accept.
-    accept, tool_to_num_split = print_recommended(num_seqs)
+    # Get recommended information.
+    rec_tool_to_num_split, rec_tool_to_max_seqs, rec_tool_to_time = get_recommended_overall(num_seqs)
 
     # Otherwise, iterate until user specifies what they want.
-    if not accept:
-        for tool_name in ["CatFam", "EFICAz", "EnzDP"]:
+    for tool_name in ["CatFam", "DETECT", "EFICAz", "EnzDP", "PRIAM"]:
+        rec_num_split = rec_tool_to_num_split[tool_name]
+        rec_num_files = rec_num_split * 40
+        rec_max_seq = rec_tool_to_max_seqs[tool_name]
+        rec_time = rec_tool_to_time[tool_name]
+
+        if tool_name in ["DETECT", "PRIAM"]:
+            input ("Architect: for " + tool_name + ", sequences will not be split and job will run for maximum " + \
+                str(rec_time) + " hours.\n" +\
+                    "Customizations to be made separately by user. Press enter to continue.")
+            continue
+
+        # Check user input only for CatFam, EFICAz and EnzDP.
+        accept = False
+        answer = ""
+        while answer not in ["Y", "N"]:
+            answer = input("Architect: Recommends that for " + tool_name + ", split sequences into " + str(rec_num_files) + \
+                " files with at most " + str(rec_max_seq) + " sequences, for maximum running time of " + str(rec_time) + " hours." +\
+                    "\nAccept? [y/n]:")
+            answer = answer.strip().upper()
+        accept = (answer == "Y")
+
+        if accept:
+            k = rec_num_split
+
+        else:
             k = 1
             answer = ""
             while answer != "Y":
+                if (k == rec_num_split):
+                    k += 1
+                    continue
                 num_files = 40 * k
                 suggested = math.ceil(num_seqs/(num_files))
                 if ((num_files + 40) > num_seqs):
@@ -52,30 +79,75 @@ def determine_num_to_split(sequence_file):
                     else:
                         print ("Architect: Warning: splitting into " + str(num_files) + " files may lead to unexpected behaviour.")
                 answer = input("Architect: For " + tool_name + ", split sequences into " + str(num_files) + " files with at most " \
-                    + str(suggested) + " sequences? [y/n]: ")
+                    + str(suggested) + " sequences for maximum running time of " + str(rec_time) + " hours? [y/n]: ")
                 answer = answer.strip().upper()
                 if answer == "N":
                     k += 1
 
-            if k not in k_to_split:
-                current_split = get_num_seqs_per_file(num_seqs, k)
-                tool_to_num_split[tool_name] = current_split
-                k_to_split[k] = current_split
-            else:
-                tool_to_num_split[tool_name] = k_to_split[k]
+        if k not in k_to_split:
+            current_split = get_num_seqs_per_file(num_seqs, k)
+            tool_to_num_split[tool_name] = current_split
+            k_to_split[k] = current_split
+        else:
+            tool_to_num_split[tool_name] = k_to_split[k]
                 
     return tool_to_num_split
 
 
-def print_recommended(num_seqs):
+def get_recommended_per_tool(num_seqs, max_num_per_file):
 
-    accept = False
-    tool_to_num_split = {}
-    #TODO: recommended for CatFam
-    # catfam_recommended = 
-    #TODO: recommended for EFICAz
-    #TODO: recommended for EnzDP
-    return accept, tool_to_num_split
+    k = 1
+    num_files = 40 * k
+    num_seqs_per_file = math.ceil(num_seqs/(num_files))
+    while num_seqs_per_file > max_num_per_file:
+        k += 1
+        num_files = 40 * k
+        num_seqs_per_file = math.ceil(num_seqs/(num_files))
+    return k, num_seqs_per_file
+
+
+def get_recommended_overall(num_seqs):
+
+    catfam_k, catfam_num_seqs = get_recommended_per_tool(num_seqs, 5000)
+    eficaz_k, eficaz_num_seqs = get_recommended_per_tool(num_seqs, 180)
+    enzdp_k, enzdp_num_seqs = get_recommended_per_tool(num_seqs, 1800)
+
+    # For CatFam, EFICAz and EnzDP, divisions are likely performed.
+    tool_to_num_split, tool_to_max_seqs, tool_to_time = {}, {}, {}
+
+    tool_to_num_split["CatFam"] = catfam_k
+    tool_to_num_split["EFICAz"] = eficaz_k
+    tool_to_num_split["EnzDP"] = enzdp_k
+
+    tool_to_max_seqs["CatFam"] = catfam_num_seqs
+    tool_to_max_seqs["EFICAz"] = eficaz_num_seqs
+    tool_to_max_seqs["EnzDP"] = enzdp_num_seqs
+
+    tool_to_time["CatFam"] = 3
+    tool_to_time["EFICAz"] = 12
+    tool_to_time["EnzDP"] = 3
+
+    # For DETECT and PRIAM, implementations involve some kind of parallelization.
+    # Check the number of sequences to ensure that we are more or less sure that jobs will finish on time.
+    if num_seqs <= 30000:
+        tool_to_time["DETECT"] = 12
+    else:
+        tool_to_time["DETECT"] = 24
+
+    if num_seqs <=40000:
+        tool_to_time["PRIAM"] = 3
+    else:
+        k = 1
+        while num_seqs > 40000 * k:
+            k += 1
+        tool_to_time["PRIAM"] = 3 * k
+        
+    tool_to_num_split["DETECT"] = 0
+    tool_to_max_seqs["DETECT"] = num_seqs
+    tool_to_num_split["PRIAM"] = 0
+    tool_to_max_seqs["PRIAM"] = num_seqs
+
+    return tool_to_num_split, tool_to_max_seqs, tool_to_time
 
 
 def get_num_seqs_per_file(num_seqs, k):
@@ -104,7 +176,7 @@ def get_num_seqs_per_file(num_seqs, k):
             file_index_to_num[i] += 1
             total_placed_seqs += 1
             i += 1
-            
+ 
     return file_index_to_num
 
 

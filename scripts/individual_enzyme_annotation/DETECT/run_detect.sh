@@ -1,6 +1,6 @@
 #!/bin/bash
 #SBATCH --nodes=1
-#SBATCH --time=2:00:00
+#SBATCH --time=12:00:00
 #SBATCH --job-name=DETECT
 
 # Customize path to DETECT.
