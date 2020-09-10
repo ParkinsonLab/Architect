@@ -326,8 +326,16 @@ if __name__ == '__main__':
 
     # If the folder already exists, throw an exception.
     if os.path.isdir(project_name):
-        raise Exception("Architect: Please specify a different project name.  Corresponding directory already exists.")
-    os.mkdir(project_name)
+        answer = ""
+        while answer != "Y":
+            answer = input("Architect: Directory already exists. \n" + \
+                "Type 'y' to continue; existing subdirectories in directory may be modified (not recommended)." + \
+                    "\nType 'n' to quit.")
+            answer = answer.strip().upper()
+            if answer == "N":
+                exit()
+    else:
+        os.mkdir(project_name)
 
     parameter_values = read_parameter_values(arguments_file)
     tool_to_num_split, detect_time, priam_time = determine_num_to_split(parameter_values["SEQUENCE_FILE"])
