@@ -2,6 +2,7 @@
 import math
 from argparse import ArgumentParser
 import sys, os
+import subprocess
 
 def read_parameter_values(file_name):
 
@@ -306,6 +307,12 @@ def write_split_seqs(folder_name, i_to_num_split, sequence_file):
             writer.write(line + "\n")
 
 
+def get_shell_to_python_readable_location(shell_file_location):
+
+    cmd = 'echo ' + shell_file_location
+    p = subprocess.Popen(cmd, stdout=subprocess.PIPE, shell=True, executable='/bin/bash')
+    return p.stdout.readlines()[0].strip()
+
 
 if __name__ == '__main__':
 
@@ -320,9 +327,11 @@ if __name__ == '__main__':
     parser = ArgumentParser(description="Sets up the scripts for the individual enzyme annotation tools.")
     parser.add_argument("--arguments_file", type=str, help="File with the values of the parameters.", required=True)
     parser.add_argument("--project_name", type=str, help="Name of the project (eg: organism name).", required=True)
+    parser.add_argument("--project_dir", type=str, help="Location of project directory (default: current working directory).", required=False, default="")
     args = parser.parse_args()
     arguments_file = args.arguments_file
-    project_name = args.project_name
+    project_dir = args.project_dir
+    project_name = project_dir + "/" + args.project_name
 
     # If the folder already exists, throw an exception.
     if os.path.isdir(project_name):
@@ -338,6 +347,7 @@ if __name__ == '__main__':
         os.mkdir(project_name)
 
     parameter_values = read_parameter_values(arguments_file)
+    parameter_values["SEQUENCE_FILE"] = get_shell_to_python_readable_location(parameter_values["SEQUENCE_FILE"])
     tool_to_num_split, detect_time, priam_time = determine_num_to_split(parameter_values["SEQUENCE_FILE"])
 
     customize_catfam(parameter_values, project_name, current_working_directory, tool_to_num_split["CatFam"])
