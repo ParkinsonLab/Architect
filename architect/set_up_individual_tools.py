@@ -217,7 +217,7 @@ def customize_detect(parameter_values, project_name, current_working_directory, 
     num_to_new_line[4] = "#SBATCH --job-name=DETECT_" + project_name
     num_to_new_line[7] = "DETECT_TOOL=" + parameter_values["DETECT_DIR"] + "/detect_2.2.7.py"
     num_to_new_line[10] = "export PATH=" + parameter_values["DETECT_DIR"] + "/:$PATH"
-    num_to_new_line[11] = "export PATH=" + parameter_values["EMBOSS_DIR"] + ":$PATH"
+    num_to_new_line[11] = "export PATH=" + parameter_values["EMBOSS_DIR"] + "/:$PATH"
     num_to_new_line[21] = "cd " + current_working_directory + "/" + project_name + "/DETECT"
     num_to_new_line[27] = "SEQ_NAME=../../" + parameter_values["SEQUENCE_FILE"]
     copy_and_replace("scripts/individual_enzyme_annotation/DETECT/run_detect.sh", \
