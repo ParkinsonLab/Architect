@@ -339,16 +339,13 @@ if __name__ == '__main__':
     parser = ArgumentParser(description="Sets up the scripts for the individual enzyme annotation tools.")
     parser.add_argument("--arguments_file", type=str, help="File with the values of the parameters.", required=True)
     parser.add_argument("--project_name", type=str, help="Name of the project (eg: organism name).", required=True)
-    parser.add_argument("--project_dir", type=str, help="Location of project directory (default: current working directory).", required=False, default="")
+    parser.add_argument("--project_dir", type=str, help="Location of project directory (default: current working directory).", required=False, default=current_working_directory)
     parser.add_argument("--architect_path", type=str, help="Location of Architect project directory", required=True)
 
     args = parser.parse_args()
     arguments_file = args.arguments_file
     project_dir = args.project_dir
-    if project_dir != "":
-        project_name = project_dir + "/" + args.project_name
-    else:
-        project_name = args.project_name
+    project_name = project_dir + "/" + args.project_name
     architect_location = args.architect_path
 
     # If the folder already exists, throw an exception.
