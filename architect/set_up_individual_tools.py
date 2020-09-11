@@ -204,14 +204,14 @@ def mkdir_if_not_exists(folder, delete_if_exists=False):
             os.mkdir(folder)
 
 
-def customize_catfam(architect_location, parameter_values, project_name, current_working_directory, i_to_num_split):
+def customize_catfam(architect_location, parameter_values, project_name, output_dir, i_to_num_split):
 
-    current_folder = project_name + "/CatFam"
+    current_folder = output_dir + "/" + project_name + "/CatFam"
     mkdir_if_not_exists(current_folder)
     num_to_new_line = {}
     num_to_new_line[4] = "#SBATCH --job-name=CatFam_" + project_name
     num_to_new_line[7] = "PATH=$PATH:" + parameter_values["BLAST_DIR"]
-    num_to_new_line[10] = "cd " + current_working_directory + "/" + project_name + "/CatFam"
+    num_to_new_line[10] = "cd " + current_folder
     num_to_new_line[13] = "CATFAM_DIR=" + parameter_values["CATFAM_DIR"]
     copy_and_replace(architect_location + "/scripts/individual_enzyme_annotation/CatFam/run_catfam.sh", \
         current_folder + "/run_catfam.sh", num_to_new_line)
@@ -220,9 +220,9 @@ def customize_catfam(architect_location, parameter_values, project_name, current
     write_split_seqs(current_folder + "/Split_seqs", i_to_num_split, parameter_values["SEQUENCE_FILE"])
 
 
-def customize_detect(architect_location, parameter_values, project_name, current_working_directory, time):
+def customize_detect(architect_location, parameter_values, project_name, output_dir, time):
     
-    current_folder = project_name + "/DETECT"
+    current_folder = output_dir + "/" + project_name + "/DETECT"
     mkdir_if_not_exists(current_folder)
     num_to_new_line = {}
     num_to_new_line[3] = "#SBATCH --time=" + str(time) + ":00:00"
@@ -230,23 +230,23 @@ def customize_detect(architect_location, parameter_values, project_name, current
     num_to_new_line[7] = "DETECT_TOOL=" + parameter_values["DETECT_DIR"] + "/detect_2.2.7.py"
     num_to_new_line[10] = "export PATH=" + parameter_values["DETECT_DIR"] + "/:$PATH"
     num_to_new_line[11] = "export PATH=" + parameter_values["EMBOSS_DIR"] + "/:$PATH"
-    num_to_new_line[21] = "cd " + current_working_directory + "/" + project_name + "/DETECT"
-    num_to_new_line[27] = "SEQ_NAME=../../" + parameter_values["SEQUENCE_FILE"]
+    num_to_new_line[21] = "cd " + current_folder
+    num_to_new_line[27] = "SEQ_NAME=" + parameter_values["SEQUENCE_FILE"]
     copy_and_replace(architect_location + "/scripts/individual_enzyme_annotation/DETECT/run_detect.sh", \
         current_folder + "/run_detect.sh", num_to_new_line)
 
 
-def customize_eficaz(architect_location, parameter_values, project_name, current_working_directory, i_to_num_split):
+def customize_eficaz(architect_location, parameter_values, project_name, output_dir, i_to_num_split):
 
-    current_folder = project_name + "/EFICAz"
+    current_folder = output_dir + "/" + project_name + "/EFICAz"
     mkdir_if_not_exists(current_folder)
     copy_and_replace(architect_location + "/scripts/individual_enzyme_annotation/EFICAz/individualize.sh", current_folder + "/individualize.sh", {})
 
     num_to_new_line = {}
     num_to_new_line[4] = "#SBATCH --job-name=EFICAz_" + project_name + "_SEQUENCE_FILENAME_X1"
     num_to_new_line[7] = "EFICAz25_PATH=" + parameter_values["EFICAz_DIR"]
-    num_to_new_line[13] = "cd " + current_working_directory + "/" + project_name + "/EFICAz"
-    num_to_new_line[104] = "\tmy_scratch=" + current_working_directory + "/" + project_name + "/EFICAz/Results"
+    num_to_new_line[13] = "cd " + current_folder
+    num_to_new_line[104] = "\tmy_scratch=" + current_folder + "/Results"
     copy_and_replace(architect_location + "/scripts/individual_enzyme_annotation/EFICAz/TEMPLATE_eficaz.sh", \
         current_folder + "/TEMPLATE_eficaz.sh", num_to_new_line)
 
@@ -254,32 +254,36 @@ def customize_eficaz(architect_location, parameter_values, project_name, current
     write_split_seqs(current_folder + "/Split_seqs", i_to_num_split, parameter_values["SEQUENCE_FILE"])
 
 
-def customize_enzdp(architect_location, parameter_values, project_name, current_working_directory, i_to_num_split):
+def customize_enzdp(architect_location, parameter_values, project_name, output_dir, i_to_num_split):
 
-    current_folder = project_name + "/EnzDP"
+    current_folder = output_dir + "/" + project_name + "/EnzDP"
     mkdir_if_not_exists(current_folder)
     copy_and_replace(architect_location + "/scripts/individual_enzyme_annotation/EnzDP/individualize_project.sh", current_folder + "/individualize_project.sh", {})
-    copy_and_replace(architect_location + "/scripts/individual_enzyme_annotation/EnzDP/TEMPLATE_project.py", current_folder + "/TEMPLATE_project.py", {})
+
+    num_to_new_line = {}
+    num_to_new_line[3] = "FASTA_FILE=" + current_folder + "/Split_seqs/SEQ_NAME"
+    num_to_new_line[5] = "OUTPUT_FILE=" + current_folder + "/Results/SEQ_NAME.out"
+    copy_and_replace(architect_location + "/scripts/individual_enzyme_annotation/EnzDP/TEMPLATE_project.py", current_folder + "/TEMPLATE_project.py", num_to_new_line)
     
     num_to_new_line = {}
     num_to_new_line[4] = "#SBATCH --job-name=EnzDP_" + project_name
     num_to_new_line[7] = "ENZDP_TOOL=" + parameter_values["EnzDP_DIR"]
-    num_to_new_line[11] = "folder=" + current_working_directory + "/" + project_name + "/EnzDP"
+    num_to_new_line[11] = "folder=" + current_folder
     copy_and_replace(architect_location + "/scripts/individual_enzyme_annotation/EnzDP/run_enzdp.sh", current_folder + "/run_enzdp.sh", num_to_new_line)
 
     mkdir_if_not_exists(current_folder + "/Split_seqs", True)
     write_split_seqs(current_folder + "/Split_seqs", i_to_num_split, parameter_values["SEQUENCE_FILE"])
 
 
-def customize_priam(architect_location, parameter_values, project_name, current_working_directory, time):
+def customize_priam(architect_location, parameter_values, project_name, output_dir, time):
 
-    current_folder = project_name + "/PRIAM"
+    current_folder = output_dir + "/" + project_name + "/PRIAM"
     mkdir_if_not_exists(current_folder)
 
     num_to_new_line = {}
     num_to_new_line[3] = "#SBATCH --time=" + str(time) + ":00:00"
     num_to_new_line[4] = "#SBATCH --job-name=PRIAM_" + project_name
-    num_to_new_line[7] = "my_WORKDIR=" + current_working_directory + "/" + project_name + "/PRIAM"
+    num_to_new_line[7] = "my_WORKDIR=" + current_folder
     num_to_new_line[8] = "TEST=" + parameter_values["SEQUENCE_FILE"]
     num_to_new_line[9] = "PRIAM_SEARCH=" + parameter_values["PRIAM_DIR"]
     num_to_new_line[21] = "BLAST_BIN=" + parameter_values["BLAST_DIR"]
@@ -339,17 +343,17 @@ if __name__ == '__main__':
     parser = ArgumentParser(description="Sets up the scripts for the individual enzyme annotation tools.")
     parser.add_argument("--arguments_file", type=str, help="File with the values of the parameters.", required=True)
     parser.add_argument("--project_name", type=str, help="Name of the project (eg: organism name).", required=True)
-    parser.add_argument("--project_dir", type=str, help="Location of project directory (default: current working directory).", required=False, default=current_working_directory)
+    parser.add_argument("--output_dir", type=str, help="Location of project directory (default: current working directory).", required=False, default=current_working_directory)
     parser.add_argument("--architect_path", type=str, help="Location of Architect project directory", required=True)
 
     args = parser.parse_args()
     arguments_file = args.arguments_file
-    project_dir = args.project_dir
-    project_name = project_dir + "/" + args.project_name
+    output_dir = args.output_dir
+    project_name = args.project_name
     architect_location = args.architect_path
 
     # If the folder already exists, throw an exception.
-    if os.path.isdir(project_name):
+    if os.path.isdir(output_dir + "/" + args.project_name):
         answer = ""
         while answer != "Y":
             answer = input("Architect: Directory already exists. \n" + \
@@ -359,14 +363,14 @@ if __name__ == '__main__':
             if answer == "N":
                 exit()
     else:
-        os.mkdir(project_name)
+        os.mkdir(output_dir + "/" + args.project_name)
 
     parameter_values = read_parameter_values(arguments_file)
     parameter_values["SEQUENCE_FILE"] = get_shell_to_python_readable_location(parameter_values["SEQUENCE_FILE"])
     tool_to_num_split, detect_time, priam_time = determine_num_to_split(parameter_values["SEQUENCE_FILE"])
 
-    customize_catfam(architect_location, parameter_values, project_name, current_working_directory, tool_to_num_split["CatFam"])
-    customize_detect(architect_location, parameter_values, project_name, current_working_directory, detect_time)
-    customize_eficaz(architect_location, parameter_values, project_name, current_working_directory, tool_to_num_split["EFICAz"])
-    customize_enzdp(architect_location, parameter_values, project_name, current_working_directory, tool_to_num_split["EnzDP"])
-    customize_priam(architect_location, parameter_values, project_name, current_working_directory, priam_time)
+    customize_catfam(architect_location, parameter_values, project_name, output_dir, tool_to_num_split["CatFam"])
+    customize_detect(architect_location, parameter_values, project_name, output_dir, detect_time)
+    customize_eficaz(architect_location, parameter_values, project_name, output_dir, tool_to_num_split["EFICAz"])
+    customize_enzdp(architect_location, parameter_values, project_name, output_dir, tool_to_num_split["EnzDP"])
+    customize_priam(architect_location, parameter_values, project_name, output_dir, priam_time)

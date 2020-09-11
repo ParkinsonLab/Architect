@@ -11,6 +11,7 @@ ENZDP_TOOL=${HOME}/EnzDP/EnzDP_src/enzdp.py
 folder=EnzDP
 local_path=/dev/EnzDP
 
+mkdir -p ${folder}/Results
 mkdir -p ${local_path}
 
 for file in `ls ${folder}/Project/*`; do
