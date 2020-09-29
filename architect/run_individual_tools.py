@@ -14,6 +14,11 @@ def get_tools_to_run_from_status_file(status_file):
         if line.startswith("\tTool_of_interest:"):
             tool = line.strip().split(":")[1]
             tools_to_run.append(tool)
+        if line.startswith("Termination:"):
+            exit()
+        #TODO: standardize this a bit.
+        if "User has specified that they already have results from individual tools so these will not be run de novo" in line:
+            exit()
     open_file.close()
     return tools_to_run
 
@@ -68,7 +73,7 @@ if __name__ == '__main__':
 
     status_file = output_dir + "/" + args.project_name + "/architect_status.out"
     tools_to_run = get_tools_to_run_from_status_file(status_file)
-    print(tools_to_run)
+    # print(tools_to_run)
 
     submit_file_script = output_dir + "/" + args.project_name + "/submit_tools.sh"
     at_least_one = set_up_submit_script(submit_file_script, tools_to_run)

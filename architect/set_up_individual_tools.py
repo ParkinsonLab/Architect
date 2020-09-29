@@ -32,7 +32,7 @@ def check_parameters_loaded(parameter_values):
             raise Exception("Architect: Invalid parameter values specified. Please verify parameters defined in sample_run.tsv.")
 
 
-def determine_num_to_split(sequence_file):
+def determine_num_to_split(sequence_file, status_writer):
 
     exclude_tools = []
     tool_to_num_split = {}
@@ -55,6 +55,9 @@ def determine_num_to_split(sequence_file):
                     "Customizations to be made separately by user. Press enter to continue, or [x] to exclude this tool.\n")
             if answer.strip().upper() == "X":
                 exclude_tools.append(tool_name)
+            if answer.strip().upper() == "Q":
+                status_writer.write("Termination:" + str(datetime.datetime.now()) + ": User wants to quit so Architect will exit now.\n")
+                exit()
             continue
 
         # Check user input only for CatFam, EFICAz and EnzDP.
@@ -68,6 +71,9 @@ def determine_num_to_split(sequence_file):
             if answer == "X":
                 exclude_tools.append(tool_name)
                 break
+            if answer == "Q":
+                status_writer.write("Termination:" + str(datetime.datetime.now()) + ": User wants to quit so Architect will exit now.\n")
+                exit()
         if answer == "X":
             continue
         
@@ -99,6 +105,9 @@ def determine_num_to_split(sequence_file):
                 elif answer == "X":
                     exclude_tools.append(tool_name)
                     break
+                elif answer == "Q":
+                    status_writer.write("Termination:" + str(datetime.datetime.now()) + ": User wants to quit so Architect will exit now.\n")
+                    exit()
 
             if answer == "X":
                 continue
@@ -369,24 +378,39 @@ if __name__ == '__main__':
     project_name = args.project_name
     architect_location = args.architect_path
 
+    status_writer = open(output_dir + "/" + args.project_name + "/architect_status.out", "w")
+    print("Welcome to Architect!\nNOTE: Type [q] at any point to exit.\nFirst, we will try to procur results from individual enzyme annotation tools.")
+    answer = ""
+    while answer not in ["N", "Y", "Q"]:
+        answer = input("Architect: Do you need to run any individual enzyme annotation tools? Reply 'n' if you already have the results in the required format. [y/n]")
+        answer = answer.strip().upper()
+    if answer == "N":
+        status_writer.write("Step1/2:" + str(datetime.datetime.now()) + ": User has specified that they already have results from individual tools so these will not be run de novo.\n")
+        status_writer.close()
+        exit()
+    if answer == "Q":
+        status_writer.write("Termination:" + str(datetime.datetime.now()) + ": User wants to quit so Architect will exit now.\n")
+        status_writer.close()
+        exit()
+
     # If the folder already exists, throw an exception.
     if os.path.isdir(output_dir + "/" + args.project_name):
         answer = ""
         while answer != "Y":
             answer = input("Architect: Directory already exists. \n" + \
-                "Type [y] to continue; existing subdirectories in directory may be modified (not recommended)." + \
-                    "\nType [q] to quit. ")
+                "Type [y] to continue; existing subdirectories in directory may be modified (not recommended). ")
             answer = answer.strip().upper()
             if answer == "Q":
+                status_writer.write("Termination:" + str(datetime.datetime.now()) + ": User wants to quit so Architect will exit now.\n")
+                status_writer.close()
                 exit()
     else:
         os.mkdir(output_dir + "/" + args.project_name)
 
     parameter_values = read_parameter_values(arguments_file)
     parameter_values["SEQUENCE_FILE"] = get_shell_to_python_readable_location(parameter_values["SEQUENCE_FILE"])
-    tool_to_num_split, detect_time, priam_time, exclude_tools = determine_num_to_split(parameter_values["SEQUENCE_FILE"])
+    tool_to_num_split, detect_time, priam_time, exclude_tools = determine_num_to_split(parameter_values["SEQUENCE_FILE"], status_writer)
 
-    status_writer = open(output_dir + "/" + args.project_name + "/architect_status.out", "w")
     num_tools = str(5 - len(exclude_tools))
     status_writer.write("Step_1:" + str(datetime.datetime.now()) + ": Architect started setting up scripts for running the following " + num_tools + " individual enzyme annotation tools.\n")
     if "CatFam" not in exclude_tools:
