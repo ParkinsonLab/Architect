@@ -7,6 +7,7 @@
 EFICAz25_PATH=${HOME}/EFICAz2.5.1
 export EFICAz25_PATH
 
+module load NiaEnv/2018a;
 module load anaconda2
 
 # Go to directory with sequences
@@ -15,7 +16,7 @@ cd EFICAz
 mkdir -p Results
 
 # Customize path to RAMDISK.
-local_path=/dev/EFICAz
+local_path=/dev/shm/${USER}/EFICAz
 (mkdir -p $local_path/SEQUENCE_FILENAME_X1; cat Split_seqs/SEQUENCE_FILENAME_X1 > $local_path/SEQUENCE_FILENAME_X1/SEQUENCE_FILENAME_X1; cd $local_path/SEQUENCE_FILENAME_X1; python $EFICAz25_PATH/bin/EFICAz_latest.py SEQUENCE_FILENAME_X1) &
 
 (mkdir -p $local_path/SEQUENCE_FILENAME_X2; cat Split_seqs/SEQUENCE_FILENAME_X2 > $local_path/SEQUENCE_FILENAME_X2/SEQUENCE_FILENAME_X2; cd $local_path/SEQUENCE_FILENAME_X2; python $EFICAz25_PATH/bin/EFICAz_latest.py SEQUENCE_FILENAME_X2) &
@@ -188,7 +189,7 @@ function save_results {
 }
 
 function cleanup_ramdisk {
-    echo "Cleaning up ramdisk directory"
+    echo "Cleaning up ramdisk directory /dev/shm/${USER}/EFICAz"
     rm -rf $local_path
     echo "done"
 }

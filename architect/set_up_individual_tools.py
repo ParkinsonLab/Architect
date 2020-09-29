@@ -4,6 +4,7 @@ from argparse import ArgumentParser
 import sys, os
 import subprocess
 import shutil
+import datetime
 
 def read_parameter_values(file_name):
 
@@ -33,6 +34,7 @@ def check_parameters_loaded(parameter_values):
 
 def determine_num_to_split(sequence_file):
 
+    exclude_tools = []
     tool_to_num_split = {}
     k_to_split = {}
     num_seqs = count_num_of_seqs(sequence_file)
@@ -44,13 +46,15 @@ def determine_num_to_split(sequence_file):
     for tool_name in ["CatFam", "DETECT", "EFICAz", "EnzDP", "PRIAM"]:
         rec_num_split = rec_tool_to_num_split[tool_name]
         rec_num_files = rec_num_split * 40
-        rec_max_seq = rec_tool_to_max_seqs[tool_name]
+        rec_max_seq = int(rec_tool_to_max_seqs[tool_name])
         rec_time = rec_tool_to_time[tool_name]
 
         if tool_name in ["DETECT", "PRIAM"]:
-            input ("Architect: for " + tool_name + ", sequences will not be split and job will run for maximum " + \
+            answer = input ("Architect: for " + tool_name + ", sequences will not be split and job will run for maximum " + \
                 str(rec_time) + " hours.\n" +\
-                    "Customizations to be made separately by user. Press enter to continue.")
+                    "Customizations to be made separately by user. Press enter to continue, or [x] to exclude this tool.\n")
+            if answer.strip().upper() == "X":
+                exclude_tools.append(tool_name)
             continue
 
         # Check user input only for CatFam, EFICAz and EnzDP.
@@ -59,8 +63,14 @@ def determine_num_to_split(sequence_file):
         while answer not in ["Y", "N"]:
             answer = input("Architect: Recommends that for " + tool_name + ", split sequences into " + str(rec_num_files) + \
                 " files with at most " + str(rec_max_seq) + " sequences, for maximum running time of " + str(rec_time) + " hours." +\
-                    "\nAccept? [y/n]: ")
+                    "\nAccept? [y/n].  Alternately, enter [x] to exclude this tool:\n")
             answer = answer.strip().upper()
+            if answer == "X":
+                exclude_tools.append(tool_name)
+                break
+        if answer == "X":
+            continue
+        
         accept = (answer == "Y")
 
         if accept:
@@ -74,17 +84,24 @@ def determine_num_to_split(sequence_file):
                     k += 1
                     continue
                 num_files = 40 * k
-                suggested = math.ceil(num_seqs/(num_files))
+                suggested = int(math.ceil(num_seqs/(num_files * 1.0)))
                 if ((num_files + 40) > num_seqs):
                     if (num_files <= num_seqs):
                         print ("Architect: Warning: splitting into more than " + str(num_files) + " files may lead to unexpected behaviour.")
                     else:
                         print ("Architect: Warning: splitting into " + str(num_files) + " files may lead to unexpected behaviour.")
                 answer = input("Architect: For " + tool_name + ", split sequences into " + str(num_files) + " files with at most " \
-                    + str(suggested) + " sequences for maximum running time of " + str(rec_time) + " hours? [y/n]: ")
+                    + str(suggested) + " sequences for maximum running time of " + str(rec_time) + " hours? [y/n]. " \
+                        + "Alternately, enter [x] to exclude this tool:\n")
                 answer = answer.strip().upper()
                 if answer == "N":
                     k += 1
+                elif answer == "X":
+                    exclude_tools.append(tool_name)
+                    break
+
+            if answer == "X":
+                continue
 
         if k not in k_to_split:
             current_split = get_num_seqs_per_file(num_seqs, k)
@@ -92,14 +109,14 @@ def determine_num_to_split(sequence_file):
             k_to_split[k] = current_split
         else:
             tool_to_num_split[tool_name] = k_to_split[k]
-    return tool_to_num_split, rec_tool_to_time["DETECT"], rec_tool_to_time["PRIAM"]
+    return tool_to_num_split, rec_tool_to_time["DETECT"], rec_tool_to_time["PRIAM"], exclude_tools
 
 
 def get_recommended_per_tool(num_seqs, max_num_per_file):
 
     k = 1
     num_files = 40 * k
-    num_seqs_per_file = math.ceil(num_seqs/(num_files))
+    num_seqs_per_file = int(math.ceil(num_seqs/(num_files * 1.0)))
     while num_seqs_per_file > max_num_per_file:
         k += 1
         num_files = 40 * k
@@ -230,8 +247,8 @@ def customize_detect(architect_location, parameter_values, project_name, output_
     num_to_new_line[7] = "DETECT_TOOL=" + parameter_values["DETECT_DIR"] + "/detect_2.2.7.py"
     num_to_new_line[10] = "export PATH=" + parameter_values["DETECT_DIR"] + "/:$PATH"
     num_to_new_line[11] = "export PATH=" + parameter_values["EMBOSS_DIR"] + "/:$PATH"
-    num_to_new_line[21] = "cd " + current_folder
-    num_to_new_line[27] = "SEQ_NAME=" + parameter_values["SEQUENCE_FILE"]
+    num_to_new_line[22] = "cd " + current_folder
+    num_to_new_line[28] = "SEQ_NAME=" + parameter_values["SEQUENCE_FILE"]
     copy_and_replace(architect_location + "/scripts/individual_enzyme_annotation/DETECT/run_detect.sh", \
         current_folder + "/run_detect.sh", num_to_new_line)
 
@@ -245,8 +262,8 @@ def customize_eficaz(architect_location, parameter_values, project_name, output_
     num_to_new_line = {}
     num_to_new_line[4] = "#SBATCH --job-name=EFICAz_" + project_name + "_SEQUENCE_FILENAME_X1"
     num_to_new_line[7] = "EFICAz25_PATH=" + parameter_values["EFICAz_DIR"]
-    num_to_new_line[13] = "cd " + current_folder
-    num_to_new_line[104] = "\tmy_scratch=" + current_folder + "/Results"
+    num_to_new_line[14] = "cd " + current_folder
+    num_to_new_line[105] = "\tmy_scratch=" + current_folder + "/Results"
     copy_and_replace(architect_location + "/scripts/individual_enzyme_annotation/EFICAz/TEMPLATE_eficaz.sh", \
         current_folder + "/TEMPLATE_eficaz.sh", num_to_new_line)
 
@@ -261,8 +278,8 @@ def customize_enzdp(architect_location, parameter_values, project_name, output_d
     copy_and_replace(architect_location + "/scripts/individual_enzyme_annotation/EnzDP/individualize_project.sh", current_folder + "/individualize_project.sh", {})
 
     num_to_new_line = {}
-    num_to_new_line[3] = "FASTA_FILE=" + current_folder + "/Split_seqs/SEQ_NAME"
-    num_to_new_line[5] = "OUTPUT_FILE=" + current_folder + "/Results/SEQ_NAME.out"
+    num_to_new_line[3] = "FASTA_FILE='" + current_folder + "/Split_seqs/SEQ_NAME'"
+    num_to_new_line[5] = "OUTPUT_FILE='" + current_folder + "/Results/SEQ_NAME.out'"
     copy_and_replace(architect_location + "/scripts/individual_enzyme_annotation/EnzDP/TEMPLATE_project.py", current_folder + "/TEMPLATE_project.py", num_to_new_line)
     
     num_to_new_line = {}
@@ -357,20 +374,34 @@ if __name__ == '__main__':
         answer = ""
         while answer != "Y":
             answer = input("Architect: Directory already exists. \n" + \
-                "Type 'y' to continue; existing subdirectories in directory may be modified (not recommended)." + \
-                    "\nType 'n' to quit. ")
+                "Type [y] to continue; existing subdirectories in directory may be modified (not recommended)." + \
+                    "\nType [q] to quit. ")
             answer = answer.strip().upper()
-            if answer == "N":
+            if answer == "Q":
                 exit()
     else:
         os.mkdir(output_dir + "/" + args.project_name)
 
     parameter_values = read_parameter_values(arguments_file)
     parameter_values["SEQUENCE_FILE"] = get_shell_to_python_readable_location(parameter_values["SEQUENCE_FILE"])
-    tool_to_num_split, detect_time, priam_time = determine_num_to_split(parameter_values["SEQUENCE_FILE"])
+    tool_to_num_split, detect_time, priam_time, exclude_tools = determine_num_to_split(parameter_values["SEQUENCE_FILE"])
 
-    customize_catfam(architect_location, parameter_values, project_name, output_dir, tool_to_num_split["CatFam"])
-    customize_detect(architect_location, parameter_values, project_name, output_dir, detect_time)
-    customize_eficaz(architect_location, parameter_values, project_name, output_dir, tool_to_num_split["EFICAz"])
-    customize_enzdp(architect_location, parameter_values, project_name, output_dir, tool_to_num_split["EnzDP"])
-    customize_priam(architect_location, parameter_values, project_name, output_dir, priam_time)
+    status_writer = open(output_dir + "/" + args.project_name + "/architect_status.out", "w")
+    num_tools = str(5 - len(exclude_tools))
+    status_writer.write("Step_1:" + str(datetime.datetime.now()) + ": Architect started setting up scripts for running the following " + num_tools + " individual enzyme annotation tools.\n")
+    if "CatFam" not in exclude_tools:
+        customize_catfam(architect_location, parameter_values, project_name, output_dir, tool_to_num_split["CatFam"])
+        status_writer.write("\tTool_of_interest:CatFam\n")
+    if "DETECT" not in exclude_tools:
+        customize_detect(architect_location, parameter_values, project_name, output_dir, detect_time)
+        status_writer.write("\tTool_of_interest:DETECT\n")
+    if "EFICAz" not in exclude_tools:
+        customize_eficaz(architect_location, parameter_values, project_name, output_dir, tool_to_num_split["EFICAz"])
+        status_writer.write("\tTool_of_interest:EFICAz\n")
+    if "EnzDP" not in exclude_tools:
+        customize_enzdp(architect_location, parameter_values, project_name, output_dir, tool_to_num_split["EnzDP"])
+        status_writer.write("\tTool_of_interest:EnzDP\n")
+    if "PRIAM" not in exclude_tools:
+        customize_priam(architect_location, parameter_values, project_name, output_dir, priam_time)
+        status_writer.write("\tTool_of_interest:PRIAM\n")
+    status_writer.close()

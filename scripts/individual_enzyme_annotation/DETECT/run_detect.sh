@@ -10,6 +10,7 @@ DETECT_TOOL=${HOME}/DETECTv2/detect_2.2.7.py
 export PATH=${HOME}/DETECTv2/:$PATH
 export PATH=path/to/EMBOSS/EMBOSS-6.6.0/emboss/:$PATH
 
+module load NiaEnv/2018a;
 module load gcc;
 module load lmdb;
 module load boost;

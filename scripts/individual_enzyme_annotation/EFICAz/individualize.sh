@@ -6,7 +6,7 @@ j=1
 
 for file in `ls Split_seqs`; do
 
-	echo $file
+	#echo $file
 
 	if [ $j -eq 1 ]; then 
 		file1=$file;

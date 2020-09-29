@@ -9,7 +9,7 @@ ENZDP_TOOL=${HOME}/EnzDP/EnzDP_src/enzdp.py
 # Specify full path to working directory (containing Project folder; see README), and path to RAM disk.
 # (EnzDP generates many intermediate files, which may occupy space that the user does not have enough of.)
 folder=EnzDP
-local_path=/dev/EnzDP
+local_path=/dev/shm/${USER}/EnzDP
 
 mkdir -p ${folder}/Results
 mkdir -p ${local_path}
@@ -21,3 +21,5 @@ for file in `ls ${folder}/Project/*`; do
 	python $ENZDP_TOOL ${file} ${local_path}/${just_file_2}; 
 	rm -rf ${local_path}/${just_file_2}) &
 done
+
+wait
