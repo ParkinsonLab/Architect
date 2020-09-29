@@ -49,7 +49,7 @@ def set_up_submit_script(submit_file_script, tools_to_run):
             writer.write("\n")
         if "EnzDP" in tools_to_run:
             writer.write("cd $BASEDIR\n")
-            writer.write("cd EnzDP\nsbatch run_enzdp.sh\n")
+            writer.write("cd EnzDP\nsh individualize_project.sh\nsbatch run_enzdp.sh\n")
             writer.write("\n")
         if "PRIAM" in tools_to_run:
             writer.write("cd $BASEDIR\n")
