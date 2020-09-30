@@ -124,11 +124,11 @@ def determine_num_to_split(sequence_file, status_writer):
 def get_recommended_per_tool(num_seqs, max_num_per_file):
 
     k = 1
-    num_files = 40 * k
+    num_files = 40.0 * k
     num_seqs_per_file = int(math.ceil(num_seqs/(num_files * 1.0)))
     while num_seqs_per_file > max_num_per_file:
         k += 1
-        num_files = 40 * k
+        num_files = 40.0 * k
         num_seqs_per_file = math.ceil(num_seqs/(num_files))
     return k, num_seqs_per_file
 
@@ -378,11 +378,35 @@ if __name__ == '__main__':
     project_name = args.project_name
     architect_location = args.architect_path
 
-    status_writer = open(output_dir + "/" + args.project_name + "/architect_status.out", "w")
     print("Welcome to Architect!\nNOTE: Type [q] at any point to exit.\nFirst, we will try to procur results from individual enzyme annotation tools.")
+    
+    # If the folder already exists, warn the user about it, and make sure they want to continue.
+    if os.path.isdir(output_dir + "/" + args.project_name):
+        status_writer = open(output_dir + "/" + args.project_name + "/architect_status.out", "w")
+        status_writer.write("Begin:" + str(datetime.datetime.now()) + ": Architect has started.\n")
+        status_writer.close()
+
+        answer = ""
+        while answer != "Y":
+            answer = input("Architect: Project directory already exists. \n" + \
+                "Type [y] to continue; existing subdirectories in directory may be modified. ")
+            answer = answer.strip().upper()
+            if answer == "Q":
+                status_writer = open(output_dir + "/" + args.project_name + "/architect_status.out", "a")
+                status_writer.write("Begin:" + str(datetime.datetime.now()) + ": Architect has started.")
+                status_writer.write("Termination:" + str(datetime.datetime.now()) + ": User wants to quit so Architect will exit now.\n")
+                status_writer.close()
+                exit()
+    else:
+        os.mkdir(output_dir + "/" + args.project_name)
+        status_writer = open(output_dir + "/" + args.project_name + "/architect_status.out", "w")
+        status_writer.write("Begin:" + str(datetime.datetime.now()) + ": Architect has started.\n")
+        status_writer.close()
+
+    status_writer = open(output_dir + "/" + args.project_name + "/architect_status.out", "a")
     answer = ""
     while answer not in ["N", "Y", "Q"]:
-        answer = input("Architect: Do you need to run any individual enzyme annotation tools? Reply 'n' if you already have the results in the required format. [y/n]")
+        answer = input("Architect: Do you need to run any individual enzyme annotation tools? Reply 'n' if you already have the results in the required format. [y/n] ")
         answer = answer.strip().upper()
     if answer == "N":
         status_writer.write("Step1/2:" + str(datetime.datetime.now()) + ": User has specified that they already have results from individual tools so these will not be run de novo.\n")
@@ -392,20 +416,6 @@ if __name__ == '__main__':
         status_writer.write("Termination:" + str(datetime.datetime.now()) + ": User wants to quit so Architect will exit now.\n")
         status_writer.close()
         exit()
-
-    # If the folder already exists, throw an exception.
-    if os.path.isdir(output_dir + "/" + args.project_name):
-        answer = ""
-        while answer != "Y":
-            answer = input("Architect: Directory already exists. \n" + \
-                "Type [y] to continue; existing subdirectories in directory may be modified (not recommended). ")
-            answer = answer.strip().upper()
-            if answer == "Q":
-                status_writer.write("Termination:" + str(datetime.datetime.now()) + ": User wants to quit so Architect will exit now.\n")
-                status_writer.close()
-                exit()
-    else:
-        os.mkdir(output_dir + "/" + args.project_name)
 
     parameter_values = read_parameter_values(arguments_file)
     parameter_values["SEQUENCE_FILE"] = get_shell_to_python_readable_location(parameter_values["SEQUENCE_FILE"])
