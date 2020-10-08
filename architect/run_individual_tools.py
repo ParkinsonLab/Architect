@@ -3,9 +3,11 @@ import sys
 from argparse import ArgumentParser
 import datetime
 import subprocess
+import utils
+
 
 def get_tools_to_run_from_status_file(status_file):
-
+    
     tools_to_run = []
     open_file = open(status_file)
     for line in open_file:
@@ -14,10 +16,11 @@ def get_tools_to_run_from_status_file(status_file):
         if line.startswith("\tTool_of_interest:"):
             tool = line.strip().split(":")[1]
             tools_to_run.append(tool)
-        if line.startswith("Termination:"):
+        if utils.TERMINATION in line:
+            open_file.close()
             exit()
-        #TODO: standardize this a bit.
-        if "User has specified that they already have results from individual tools so these will not be run de novo" in line:
+        if utils.ALREADY_RAN_ENZ_TOOL in line:
+            open_file.close()
             exit()
     open_file.close()
     return tools_to_run
@@ -79,7 +82,7 @@ if __name__ == '__main__':
     at_least_one = set_up_submit_script(submit_file_script, tools_to_run)
 
     status_writer = open(status_file, "a")
-    status_writer.write("Step_2:" + str(datetime.datetime.now()) + ": Architect about to run the individual tools specified above.\n")
+    status_writer.write("Step_2:" + str(datetime.datetime.now()) + ": " + utils.ABOUT_TO_RUN_ENZ_TOOL + "\n")
     if at_least_one:
         subprocess.call(['sh', submit_file_script]) 
         status_writer.write("Step_2:" + str(datetime.datetime.now()) + ": Architect has started running the individual tools.\n")

@@ -5,31 +5,7 @@ import sys, os
 import subprocess
 import shutil
 import datetime
-
-def read_parameter_values(file_name):
-
-    parameter_values = {}
-    with open(file_name) as open_file:
-        for i, line in enumerate(open_file):
-            line = line.strip()
-            if (i == 0) or (line == ""):
-                continue
-            parameter = line[:16].strip()
-            value = line[16:].strip()
-            parameter_values[parameter] = value
-
-    check_parameters_loaded(parameter_values)
-    return parameter_values
-
-
-def check_parameters_loaded(parameter_values):
-
-    acceptable_params = ["BLAST_DIR", "CATFAM_DIR", "EMBOSS_DIR", "DETECT_DIR", "EFICAz_DIR", "EnzDP_DIR", "PRIAM_DIR", "SEQUENCE_FILE"]
-    if len(parameter_values) != len(acceptable_params):
-        raise Exception("Architect: Missing parameter values. Please verify all parameters are defined in sample_run.tsv.")
-    for param in acceptable_params:
-        if param not in parameter_values:
-            raise Exception("Architect: Invalid parameter values specified. Please verify parameters defined in sample_run.tsv.")
+import utils
 
 
 def determine_num_to_split(sequence_file, status_writer):
@@ -56,7 +32,7 @@ def determine_num_to_split(sequence_file, status_writer):
             if answer.strip().upper() == "X":
                 exclude_tools.append(tool_name)
             if answer.strip().upper() == "Q":
-                status_writer.write("Termination:" + str(datetime.datetime.now()) + ": User wants to quit so Architect will exit now.\n")
+                status_writer.write("Termination:" + str(datetime.datetime.now()) + ": " + utils.TERMINATION + "\n")
                 exit()
             continue
 
@@ -72,7 +48,7 @@ def determine_num_to_split(sequence_file, status_writer):
                 exclude_tools.append(tool_name)
                 break
             if answer == "Q":
-                status_writer.write("Termination:" + str(datetime.datetime.now()) + ": User wants to quit so Architect will exit now.\n")
+                status_writer.write("Termination:" + str(datetime.datetime.now()) + ": " + utils.TERMINATION + "\n")
                 exit()
         if answer == "X":
             continue
@@ -106,7 +82,7 @@ def determine_num_to_split(sequence_file, status_writer):
                     exclude_tools.append(tool_name)
                     break
                 elif answer == "Q":
-                    status_writer.write("Termination:" + str(datetime.datetime.now()) + ": User wants to quit so Architect will exit now.\n")
+                    status_writer.write("Termination:" + str(datetime.datetime.now()) + ": " + utils.TERMINATION + "\n")
                     exit()
 
             if answer == "X":
@@ -348,14 +324,6 @@ def write_split_seqs(folder_name, i_to_num_split, sequence_file):
             writer.write(line + "\n")
 
 
-def get_shell_to_python_readable_location(shell_variable):
-    """The shell variable needs to be written as in shell."""
-
-    cmd = 'echo ' + shell_variable
-    p = subprocess.Popen(cmd, stdout=subprocess.PIPE, shell=True, executable='/bin/bash')
-    return p.stdout.readlines()[0].strip()
-
-
 if __name__ == '__main__':
 
     current_working_directory = os.getcwd()
@@ -394,7 +362,7 @@ if __name__ == '__main__':
             if answer == "Q":
                 status_writer = open(output_dir + "/" + args.project_name + "/architect_status.out", "a")
                 status_writer.write("Begin:" + str(datetime.datetime.now()) + ": Architect has started.")
-                status_writer.write("Termination:" + str(datetime.datetime.now()) + ": User wants to quit so Architect will exit now.\n")
+                status_writer.write("Termination:" + str(datetime.datetime.now()) + ": " + utils.TERMINATION + "\n")
                 status_writer.close()
                 exit()
     else:
@@ -406,19 +374,19 @@ if __name__ == '__main__':
     status_writer = open(output_dir + "/" + args.project_name + "/architect_status.out", "a")
     answer = ""
     while answer not in ["N", "Y", "Q"]:
-        answer = input("Architect: Do you need to run any individual enzyme annotation tools? Reply 'n' if you already have the results in the required format. [y/n] ")
+        answer = input("Architect: Do you need to run any individual enzyme annotation tools? Reply 'n' if you already have the raw results. [y/n] ")
         answer = answer.strip().upper()
     if answer == "N":
-        status_writer.write("Step1/2:" + str(datetime.datetime.now()) + ": User has specified that they already have results from individual tools so these will not be run de novo.\n")
+        status_writer.write("Step1/2:" + str(datetime.datetime.now()) + ": " + utils.ALREADY_RAN_ENZ_TOOL + "\n")
         status_writer.close()
         exit()
     if answer == "Q":
-        status_writer.write("Termination:" + str(datetime.datetime.now()) + ": User wants to quit so Architect will exit now.\n")
+        status_writer.write("Termination:" + str(datetime.datetime.now()) + ": " + utils.TERMINATION + "\n")
         status_writer.close()
         exit()
 
-    parameter_values = read_parameter_values(arguments_file)
-    parameter_values["SEQUENCE_FILE"] = get_shell_to_python_readable_location(parameter_values["SEQUENCE_FILE"])
+    parameter_values = utils.read_parameter_values(arguments_file)
+    parameter_values["SEQUENCE_FILE"] = utils.get_shell_to_python_readable_location(parameter_values["SEQUENCE_FILE"])
     tool_to_num_split, detect_time, priam_time, exclude_tools = determine_num_to_split(parameter_values["SEQUENCE_FILE"], status_writer)
 
     num_tools = str(5 - len(exclude_tools))
