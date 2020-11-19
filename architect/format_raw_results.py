@@ -95,7 +95,7 @@ if __name__ == '__main__':
             raw_results_command.append(location)
         subprocess.call(raw_results_command)
 
-        status_writer.write("Step_3: " + str(datetime.datetime.now()) + ": Results from individual tools have been concatenated.")
+        status_writer.write("Step_3: " + str(datetime.datetime.now()) + ": Results from individual tools have been concatenated.\n")
 
         for tool in ["CatFam", "DETECT", "EFICAz", "EnzDP", "PRIAM"]:
             tool_to_location[tool] = prepend_folder_name + "/" + tool + "/CONCATENATED_" + tool + ".out"
@@ -113,7 +113,7 @@ if __name__ == '__main__':
         format_raw_command.append(location)
     os.mkdir(main_folder_with_results + "/Formatted_results")
     subprocess.call(format_raw_command)
-    status_writer.write("Step_3: " + str(datetime.datetime.now()) + ": Results from individual tools have been made into the same format.")
+    status_writer.write("Step_3: " + str(datetime.datetime.now()) + ": Results from individual tools have been made into the same format.\n")
 
     get_readable_command = ["python", "scripts/ensemble_enzyme_annotation/0_get_readable_results.py"]
     get_readable_command.append("-i")

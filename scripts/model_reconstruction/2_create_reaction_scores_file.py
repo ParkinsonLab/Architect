@@ -177,7 +177,7 @@ if __name__ == '__main__':
     ec_to_score = read_ec_to_score(ec_preds_file)
     low_conf_ec_to_score = get_low_conf(ec_to_score)
 
-    ec_to_reactions = get_map_from_file(database + "/kegg_reaction_to_ec_no_spont_non_enz_reax.out", False)
+    ec_to_reactions = get_map_from_file(database + "/reaction_to_ec_no_spont_non_enz_reax.out", False)
     reaction_to_reaction_name_in_model = get_reaction_to_reaction_name_in_model(database + "/SIMULATION_universe_rxn.out")
 
     gapfill_candidates = read_reactions_from_file(output_folder + "/SIMULATION_augmented_gapfill_candidates.out")

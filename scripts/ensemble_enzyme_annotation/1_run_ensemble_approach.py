@@ -29,7 +29,7 @@ if __name__ == '__main__':
                          "EC_specific": "all",
                          "NB": "bernouilli/all",
                          "Regression": "not_balanced",
-                         "RF": "generic/not_balanced"}
+                         "RF": "ec_specific/not_balanced"}
 
     method_to_options = {"Majority": [ ["1", "2", "3", "1.5", "3.5"], ["high", "low"] ],
                          "EC_specific": [ ["all", "high"] ],

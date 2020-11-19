@@ -24,13 +24,13 @@ def get_most_support(ec_tools, argument, ec_to_predictable_tools, max_num_tools=
 
     most_supported_labels = {}
     if scheme == 1:
-        for ec, tools in ec_tools.iteritems():
+        for ec, tools in ec_tools.items():
             if len(tools) < math.ceil(float(max_num_tools) / 2.0):
                 continue
             most_supported_labels[ec] = len(tools)
     elif scheme == 2:
         freq_to_ec = {}
-        for ec, tools in ec_tools.iteritems():
+        for ec, tools in ec_tools.items():
             freq = len(tools)
             if freq not in freq_to_ec:
                 freq_to_ec[freq] = []
@@ -39,17 +39,17 @@ def get_most_support(ec_tools, argument, ec_to_predictable_tools, max_num_tools=
         for ec in freq_to_ec[max_freq]:
             most_supported_labels[ec] = max_freq
     elif scheme == 3:
-        for ec, tools in ec_tools.iteritems():
+        for ec, tools in ec_tools.items():
             if len(tools) == max_num_tools:
                 most_supported_labels[ec] = max_num_tools
     elif scheme == 1.5:
-        for ec, tools in ec_tools.iteritems():
+        for ec, tools in ec_tools.items():
             num_of_pred_tools = len(ec_to_predictable_tools[ec]) * 1.0
             if len(tools) < math.ceil(num_of_pred_tools / 2.0):
                 continue
             most_supported_labels[ec] = len(tools)
     elif scheme == 3.5:
-        for ec, tools in ec_tools.iteritems():
+        for ec, tools in ec_tools.items():
             num_of_pred_tools = len(ec_to_predictable_tools[ec])
             if len(tools) == num_of_pred_tools:
                 most_supported_labels[ec] = len(tools)
@@ -85,8 +85,9 @@ def load_pickled_classifier(folder_name, no_fp_file, no_tp_file):
 
         if file_name.find(".pkl") == -1:
             continue
-        ec = file_name.split("\\")[-1].split(".pkl")[0]
-        # print file_name
+        ec = ""
+        string_split = file_name.split(".pkl")[0].split(".")
+        ec = ".".join([string_split[-4][-1], string_split[-3], string_split[-2], string_split[-1]])
         input = open(file_name, 'rb')
         ec_to_pickled_classifiers[ec] = cPickle.load(input)
         input.close()
@@ -160,8 +161,8 @@ def convert_to_sequence_to_ec_tools(indiv_predictions):
     {seq: {ec: (tool: score) } }'''
 
     seq_to_ec_tools = {}
-    for ec, protein_to_tool in indiv_predictions.iteritems():
-        for protein, tools in protein_to_tool.iteritems():
+    for ec, protein_to_tool in indiv_predictions.items():
+        for protein, tools in protein_to_tool.items():
             if protein not in seq_to_ec_tools:
                 seq_to_ec_tools[protein] = {ec: tools}
             else:
@@ -261,9 +262,9 @@ def get_ensemble_preds(indiv_predictions, trained_models, method, method_argumen
     # The 'score' returned here is actually the number of tools predicting the EC.
     if method == "Majority":
         seq_to_ec_tool = convert_to_sequence_to_ec_tools(indiv_predictions)
-        for seq, ec_tools in seq_to_ec_tool.iteritems():
+        for seq, ec_tools in seq_to_ec_tool.items():
             most_supported_labels = get_most_support(ec_tools, method_arguments, trained_models)
-            for ec, num_support in most_supported_labels.iteritems():
+            for ec, num_support in most_supported_labels.items():
                 add_ensemble_predictions_to_dict(ensemble_predictions, seq, ec, num_support)
         return ensemble_predictions
 
@@ -271,8 +272,8 @@ def get_ensemble_preds(indiv_predictions, trained_models, method, method_argumen
     if method == "EC_specific":
         ec_to_best_tools = trained_models
         seq_to_ec_tool = convert_to_sequence_to_ec_tools(indiv_predictions)
-        for seq, ec_to_tools in seq_to_ec_tool.iteritems():
-            for ec, predicted_tools in ec_to_tools.iteritems():
+        for seq, ec_to_tools in seq_to_ec_tool.items():
+            for ec, predicted_tools in ec_to_tools.items():
                 if ec not in ec_to_best_tools:
                     continue
                 best_tools = ec_to_best_tools[ec]
@@ -284,7 +285,7 @@ def get_ensemble_preds(indiv_predictions, trained_models, method, method_argumen
 
     # Use pickled classifier for the following methods: Naive Bayes, Regression, Random forest.
     ec_to_pickled_classifiers = trained_models
-    for ec, prot_to_tool in indiv_predictions.iteritems():
+    for ec, prot_to_tool in indiv_predictions.items():
 
         # Only negative examples.
         if ec in absent_ecs:
@@ -295,19 +296,18 @@ def get_ensemble_preds(indiv_predictions, trained_models, method, method_argumen
         # no negative examples found while training for this EC.
         if ec in no_fp_ec_to_tool:
             curr_tools_for_ec = no_fp_ec_to_tool[ec]
-            for prot, tools_for_prot in prot_to_tool.iteritems():
+            for prot, tools_for_prot in prot_to_tool.items():
                 if not is_subset(curr_tools_for_ec, tools_for_prot):
                     continue
                 add_ensemble_predictions_to_dict(ensemble_predictions, prot, ec, 1.0)
             continue
-
         # no classifier for this EC and not the special case where no negative example was found for this EC.
         if ec not in ec_to_pickled_classifiers:
             continue
         classifier = ec_to_pickled_classifiers[ec]
         feature_vectors = []
         proteins = []
-        for prot, tools in prot_to_tool.iteritems():
+        for prot, tools in prot_to_tool.items():
             proteins.append(prot)
             feature_vector = get_feature_vector(order_of_labels, tools, method)
             feature_vectors.append(feature_vector)
@@ -341,19 +341,19 @@ def write_out_predictions(ensemble_predictions, no_fp_ec_to_tool, absent_ecs, ou
         ec1 [TAB] protein2 [TAB] score [TAB] No true positive examples while training for this EC'''
 
     with open(output_file, "w") as outfile:
-        for ec, protein_to_score in ensemble_predictions.iteritems():
+        for ec, protein_to_score in ensemble_predictions.items():
 
             if ec in no_fp_ec_to_tool:
-                for protein, score in protein_to_score.iteritems():
+                for protein, score in protein_to_score.items():
                     line = "\t".join([ec, protein, str(score), "No false positives while training for this EC"])
                     outfile.write(line + "\n")
 
             elif ec in absent_ecs:
-                for protein, score in protein_to_score.iteritems():
+                for protein, score in protein_to_score.items():
                     line = "\t".join([ec, protein, str(score), "No true positive examples while training for this EC"])
                     outfile.write(line + "\n")
 
             else:
-                for protein, score in protein_to_score.iteritems():
+                for protein, score in protein_to_score.items():
                     line = "\t".join([ec, protein, str(score)])
                     outfile.write(line + "\n")

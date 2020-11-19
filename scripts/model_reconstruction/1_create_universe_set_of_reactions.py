@@ -133,7 +133,7 @@ if __name__ == '__main__':
     output_candidates_with_exchange_reactions = output_folder + "/SIMULATION_augmented_gapfill_candidates.out"
     output_only_candidates = output_folder + "/SIMULATION_only_gapfill_candidates.out"
     file_with_content_to_ignore = database + "/SIMULATION_metabolites_with_default_exchanges.out"
-    problematic_reactions_with_missing_info = database + "/WARNING_reactions_with_formulaless_cpds_25_novembre_2019.out"
+    problematic_reactions_with_missing_info = database + "/WARNING_reactions_with_formulaless_cpds.out"
 
     # Load the various model info.
     # (1) For the candidate reactions to gapfill, exclude those reactions that are already found in the high-confidence set of reactions.

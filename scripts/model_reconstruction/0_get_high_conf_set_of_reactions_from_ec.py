@@ -235,8 +235,8 @@ if __name__ == '__main__':
     high_confidence_ecs, high_and_low_confidence_ecs = read_and_split_conf_preds(ec_preds_file, HIGH_CUTOFF, LOW_CUTOFF)
     high_confidence_ecs, high_and_low_confidence_ecs, ecs_supplemented = \
         supplement_from_additional_preds(additional_preds_file, min_num_high_conf, high_confidence_ecs, high_and_low_confidence_ecs)
-    ec_to_reactions = get_map_from_file(database + "/kegg_reaction_to_ec_no_spont_non_enz_reax.out", False)
-    reactions_with_warnings = read_column_from_file(database + "/WARNING_reactions_with_formulaless_cpds_25_novembre_2019.out");
+    ec_to_reactions = get_map_from_file(database + "/reaction_to_ec_no_spont_non_enz_reax.out", False)
+    reactions_with_warnings = read_column_from_file(database + "/WARNING_reactions_with_formulaless_cpds.out");
     reaction_to_info, warning_rxn_to_info = \
         get_reaction_to_equation_info(database + "/SIMULATION_universe_rxn.out", reactions_with_warnings)
 

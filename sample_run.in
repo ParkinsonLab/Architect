@@ -7,3 +7,4 @@ EFICAz_DIR      path/to/EFICAz2.5.1
 EnzDP_DIR       path/to/EnzDP/EnzDP_src/enzdp.py
 PRIAM_DIR       path/to/PRIAM/PRIAM_search_2018.jar
 SEQUENCE_FILE   fasta_file.fa
+DATABASE		path/to/Database

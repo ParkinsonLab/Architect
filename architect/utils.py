@@ -44,7 +44,7 @@ def read_parameter_values(file_name):
 
 def check_parameters_loaded(parameter_values):
 
-    acceptable_params = ["BLAST_DIR", "CATFAM_DIR", "EMBOSS_DIR", "DETECT_DIR", "EFICAz_DIR", "EnzDP_DIR", "PRIAM_DIR", "SEQUENCE_FILE"]
+    acceptable_params = ["BLAST_DIR", "CATFAM_DIR", "EMBOSS_DIR", "DETECT_DIR", "EFICAz_DIR", "EnzDP_DIR", "PRIAM_DIR", "DATABASE", "SEQUENCE_FILE"]
     if len(parameter_values) != len(acceptable_params):
         raise Exception("Architect: Missing parameter values. Please verify all parameters are defined in sample_run.tsv.")
     for param in acceptable_params:

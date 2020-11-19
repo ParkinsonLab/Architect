@@ -82,7 +82,7 @@ if __name__ == '__main__':
                          "EC_specific": "all",
                          "NB": "bernouilli/all",
                          "Regression": "not_balanced",
-                         "RF": "generic/not_balanced"}
+                         "RF": "ec_specific/not_balanced"}
 
     method_to_options = {"Majority": [ ["1", "2", "3"], ["high", "low"] ],
                          "EC_specific": [ ["all", "high"] ],
@@ -112,7 +112,7 @@ if __name__ == '__main__':
     tool_to_cutoff_for_high_conf = utils.get_tool_to_cutoff(training_data + "/CUTOFF")
 
     if method == "Majority":
-        print "Majority rule specified: no ECs left out."
+        #print ("Majority rule specified: no ECs left out.")
         exit()
 
     # One thing I could do is have a reduced version of load_data that only gets the ECs applicable to the data,

@@ -158,7 +158,7 @@ if __name__ == '__main__':
     active_reactions, found_essential_reactions = find_active_and_essential_reactions(model, 0.5, NON_ZERO_MIN)
     write_only_reactions_of_interest(active_reactions, file_for_FVA, candidate_reduced_output_file)
     
-    essential_rxn_output = output_folder + "/ESSENTIAL_gap_fillers.out"
+    essential_rxn_output = output_folder + "/ESSENTIAL_reactions.out"
     write_only_reactions_of_interest(found_essential_reactions, file_for_FVA, essential_rxn_output)
     
     print ("Essential_reactions:", len(found_essential_reactions))
