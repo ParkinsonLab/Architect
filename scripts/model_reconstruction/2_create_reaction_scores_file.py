@@ -60,25 +60,7 @@ def get_map_from_file(file_name, first_elem_is_key=True, need_values_in_set=True
     return key_value
 
 
-def get_reaction_to_reaction_name_in_model(file_name):
-
-    reaction_to_reaction_name_in_model = {}
-    with open(file_name) as input:
-        for line in input:
-
-            line = line.strip()
-            if line == "":
-                continue
-
-            split = line.split("\t")
-            reaction_abbrev = split[0].strip()[:-1]
-            reaction_to_reaction_name_in_model[reaction_abbrev.split("_")[0]] = reaction_abbrev
-
-    return reaction_to_reaction_name_in_model
-
-
-def get_reaction_to_max_score(low_conf_ec_to_score, ec_to_reactions, reaction_to_reaction_name_in_model,
-                              gapfilling_candidates):
+def get_reaction_to_max_score(low_conf_ec_to_score, ec_to_reactions, gapfilling_candidates):
 
     reaction_to_score = {}
     for ec, score in low_conf_ec_to_score.items():
@@ -88,17 +70,13 @@ def get_reaction_to_max_score(low_conf_ec_to_score, ec_to_reactions, reaction_to
         kegg_reactions = ec_to_reactions[ec]
 
         for rxn in kegg_reactions:
-            # Get the name of those reactions in the model way.
-            if rxn not in reaction_to_reaction_name_in_model:
-                continue
-            rxn_name_in_model = reaction_to_reaction_name_in_model[rxn]
 
             # Is this reaction not a gap-filling candidate?  If not, ignore!
-            if rxn_name_in_model not in gapfilling_candidates:
+            if rxn not in gapfilling_candidates:
                 continue
             # I have to use this function in the case that this reaction was already entered in the model because it
             # is associated with another EC.
-            add_to_score_dict(reaction_to_score, rxn_name_in_model, float(score))
+            add_to_score_dict(reaction_to_score, rxn, float(score))
 
     for reaction in gapfilling_candidates:
         if reaction in reaction_to_score:
@@ -178,12 +156,10 @@ if __name__ == '__main__':
     low_conf_ec_to_score = get_low_conf(ec_to_score)
 
     ec_to_reactions = get_map_from_file(database + "/reaction_to_ec_no_spont_non_enz_reax.out", False)
-    reaction_to_reaction_name_in_model = get_reaction_to_reaction_name_in_model(database + "/SIMULATION_universe_rxn.out")
 
     gapfill_candidates = read_reactions_from_file(output_folder + "/SIMULATION_augmented_gapfill_candidates.out")
 
-    reaction_to_score = get_reaction_to_max_score(low_conf_ec_to_score, ec_to_reactions,
-                                                  reaction_to_reaction_name_in_model, gapfill_candidates)
+    reaction_to_score = get_reaction_to_max_score(low_conf_ec_to_score, ec_to_reactions, gapfill_candidates)
 
     reaction_to_normalized_score = get_normalized_score(reaction_to_score)
 

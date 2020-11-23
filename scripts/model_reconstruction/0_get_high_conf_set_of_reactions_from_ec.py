@@ -38,8 +38,7 @@ def get_map_from_file(file_name, first_elem_is_key=True, need_values_in_set=True
     return key_value
 
 
-def write_out_subset_reactions(ecs_of_interest, ec_to_reactions, reaction_to_info,
-                                        reaction_name_to_modified_name, output_file, reactions_to_exclude=set()):
+def write_out_subset_reactions(ecs_of_interest, ec_to_reactions, reaction_to_info, output_file, reactions_to_exclude=set()):
     """Write out the information available using only information from reaction_to_info. So, if there is information
     that is not available in reaction_to_info."""
 
@@ -56,13 +55,6 @@ def write_out_subset_reactions(ecs_of_interest, ec_to_reactions, reaction_to_inf
             for rxn in curr_reactions:
 
                 if rxn in reactions_to_exclude:
-                    continue
-
-                # Find those reactions that have equations associated with them, captured by the elements found in the
-                # reaction_name_to_modified_name dictionary. Also get alternate name of the reaction if there is one.
-                if rxn in reaction_name_to_modified_name:
-                    rxn = reaction_name_to_modified_name[rxn]
-                else:
                     continue
 
                 # If the reaction is also entered in the list of reactions already added, don't write it again
@@ -192,7 +184,7 @@ def supplement_from_additional_preds(additional_preds_file, min_num_high_conf, h
     return high_confidence_ecs, high_and_low_confidence_ecs, ecs_supplemented
 
 
-def write_out_ec_mapping(high_confidence_rxns, ec_to_reactions, high_confidence_ecs, ecs_supplemented, reaction_name_to_modified_name, output_file):
+def write_out_ec_mapping(high_confidence_rxns, ec_to_reactions, high_confidence_ecs, ecs_supplemented, output_file):
 
     with open(output_file, "w") as writer:
         for ec in high_confidence_ecs:
@@ -200,9 +192,6 @@ def write_out_ec_mapping(high_confidence_rxns, ec_to_reactions, high_confidence_
                 continue
             reactions = ec_to_reactions[ec]
             for reaction in reactions:
-                if reaction not in reaction_name_to_modified_name:
-                    continue
-                reaction = reaction_name_to_modified_name[reaction]
                 if reaction not in high_confidence_rxns:
                     continue
 
@@ -240,15 +229,14 @@ if __name__ == '__main__':
     reaction_to_info, warning_rxn_to_info = \
         get_reaction_to_equation_info(database + "/SIMULATION_universe_rxn.out", reactions_with_warnings)
 
-    reaction_name_to_modified_name, modified_name_to_reaction_name = get_reaction_name_to_modified_name(reaction_to_info)
-    warning_reaction_name_to_modified_name, _ = get_reaction_name_to_modified_name(warning_rxn_to_info)
+    # reaction_name_to_modified_name, modified_name_to_reaction_name = get_reaction_name_to_modified_name(reaction_to_info)
+    # warning_reaction_name_to_modified_name, _ = get_reaction_name_to_modified_name(warning_rxn_to_info)
 
     # Write the high-confidence reactions and append default reactions and spontaneous reactions.
-    high_confidence_rxns = write_out_subset_reactions(high_confidence_ecs, ec_to_reactions, reaction_to_info,
-                                                               reaction_name_to_modified_name,
-                                                               output_folder + "/SIMULATION_high_confidence_reactions.out")
-    write_out_ec_mapping(high_confidence_rxns, ec_to_reactions, high_confidence_ecs, ecs_supplemented,
-                         reaction_name_to_modified_name, output_folder + "/MAP_high_confidence_reactions.out")
+    high_confidence_rxns = write_out_subset_reactions(high_confidence_ecs, ec_to_reactions, reaction_to_info, \
+        output_folder + "/SIMULATION_high_confidence_reactions.out")
+    write_out_ec_mapping(high_confidence_rxns, ec_to_reactions, high_confidence_ecs, ecs_supplemented, \
+        output_folder + "/MAP_high_confidence_reactions.out")
     utils.append_default_reactions(output_folder + "/SIMULATION_high_confidence_reactions.out",
                              database + "/SIMULATION_default_additional_reactions.out")
     utils.append_default_reactions(output_folder + "/SIMULATION_high_confidence_reactions.out",
@@ -258,21 +246,19 @@ if __name__ == '__main__':
 
     # Write out the high-conf reactions for which we have a warning.
     extra_high_warning_rxns = write_out_subset_reactions(high_confidence_ecs, ec_to_reactions, warning_rxn_to_info,
-                                                    warning_reaction_name_to_modified_name, output_folder + "/EXTRA_high_conf_reactions_for_further_considerations.out")
+                                                    output_folder + "/EXTRA_high_conf_reactions_for_further_considerations.out")
 
     # Also, write out all the confidence reactions and append the default reactions.
     high_and_low_confidence_rxns = write_out_subset_reactions(high_and_low_confidence_ecs, ec_to_reactions, reaction_to_info,
-                                                               reaction_name_to_modified_name,
                                                                output_folder + "/SIMULATION_low_and_high_confidence_reactions.out")
 
     low_confidence_rxns_only = high_and_low_confidence_rxns - high_confidence_rxns
     low_confidence_ecs = high_and_low_confidence_ecs - high_confidence_ecs
     write_out_ec_mapping(low_confidence_rxns_only, ec_to_reactions, low_confidence_ecs, [],
-                         reaction_name_to_modified_name, output_folder + "/MAP_low_confidence_reactions.out")
+                         output_folder + "/MAP_low_confidence_reactions.out")
 
     # Write out the low-confidence reactions for which we have warnings.  Append the default reactions and the spontaneous reactions as well.
     extra_low_warning_rxns = write_out_subset_reactions(low_confidence_ecs, ec_to_reactions, warning_rxn_to_info,
-                                                    warning_reaction_name_to_modified_name,
                                                     output_folder + "/EXTRA_low_conf_reactions_for_further_considerations.out",
                                                         extra_high_warning_rxns)
 
