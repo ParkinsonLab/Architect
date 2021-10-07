@@ -57,6 +57,8 @@ If you are not using a supercomputer, please consider doing the following:
 	- running the individual EC annotation tools using the template scripts in scripts/individual_enzyme_annotation, then running Architect separately.
 	- Only commenting out line 1 of TEMPLATE_run_reconstruction.sh.
 	
+Results from individual enzyme annotation tools can be separately specified for use by Architect.  For this, please concatenate the main results from each tool into a single file, while ensuring that you remove any headers from the files.
+	
 _Running Architect_
 
 To run Architect, you first need to modify architect.sh and sample_run.in in this folder.
