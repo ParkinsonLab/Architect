@@ -1,8 +1,6 @@
 To run EnzDP, please download the code and additional datasets from the project's repository.
 This file contains details of specific modifications to be made to use EnzDP as part of Architect. 
 
-Additional datasets required for running the tool can be downloaded from the project's repository.
-
 Please refer to http://biogpu.ddns.comp.nus.edu.sg/~nguyennn/wwwEnzDP/ for more details.
 
 *Modifications
