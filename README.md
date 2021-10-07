@@ -27,7 +27,7 @@ For more information, please contact nnursimulu@cs.toronto.edu
 
 # Other specific instructions
 
-_Set-up_
+## Set-up
 
 In order to run Architect, please make sure that you have the following tools installed (in brackets the version is indicated).  Installation of all enzyme annotations is recommended.
 
@@ -59,7 +59,7 @@ If you are not using a supercomputer, please consider doing the following:
 	
 Results from individual enzyme annotation tools can be separately specified for use by Architect.  For this, please concatenate the main results from each tool into a single file, while ensuring that you remove any headers from the files.
 	
-_Running Architect_
+## Running Architect
 
 To run Architect, you first need to modify architect.sh and sample_run.in in this folder.
 
@@ -77,7 +77,7 @@ For sample_run.in, please specify the values as directed in the file.  In partic
 	
 The first 10 keys concern enzyme annotation specific scripts, and the remainder model reconstruction.  If model reconstruction is not to be performed, please put a non-empty string value for these last keys.
 
-_Output and location_
+## Output and location
 
 The output from your run of Architect can be found at the location defined by $OUTPUT_DIR/$PROJECT in architect.sh.  
 Results from individual tools will be formatted within $OUTPUT_DIR/$PROJECT/Ensemble_annotation_files/Formatted_results.  
