@@ -3,7 +3,7 @@ This file contains details of specific modifications to be made to use EnzDP as 
 
 Please refer to http://biogpu.ddns.comp.nus.edu.sg/~nguyennn/wwwEnzDP/ for more details.
 
-*Modifications
+# List of Modifications
 
 In enzdp.py:
 - Modify the run function of the EnzDP class to have the following conditions:
