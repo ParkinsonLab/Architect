@@ -1,0 +1,8 @@
+# Please remove the lines starting with "#" before using this file.
+# Here you have additional reactions you need to specify to run Architect.
+# Definition of a single objective is required, and is denoted by the string "#True" at the end of the line.
+# Other reactions should end with "#False".
+# Specify the lower (x) and upper (y) bounds by "[x, y]".
+
+R_growth:	A + B + C -->	[0, 1000]	#True
+Additional_rxn_of_int:	A --> Q	[0, 5]	#False
