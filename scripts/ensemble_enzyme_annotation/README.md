@@ -97,6 +97,10 @@ Currently using python v2, but being migrated to v3.
 	Separates those ECs	based on the level of confidence with which they are predicted.  
 	This is as per the cutoffs used for the random forest classifier.  
 	This is an optional script, but recommended for model reconstruction. 				
+	
+* _x_set_up_classifiers.py_:
+
+	Sets up the ensemble classifiers using information from Architect's database.
   
 * _different_ensemble_approaches.py_: 
 
