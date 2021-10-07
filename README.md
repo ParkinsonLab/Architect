@@ -30,6 +30,7 @@ For more information, please contact nnursimulu@cs.toronto.edu
 _Set-up_
 
 In order to run Architect, please make sure that you have the following tools installed (in brackets the version is indicated).  Installation of all enzyme annotations is recommended.
+
 	* BLAST (v2.2.26)
 	* EMBOSS (v6.6.0)
 	* CatFam
@@ -45,10 +46,14 @@ In addition, to run Architect as an end-to-end tool, we require that you have bo
 Please make sure that you have downloaded the Architect-specific database available at http://compsysbio.org/projects/Architect/Database/.  Following the first run of Architect, this folder and its contents will be modified; please be mindful of possible complications due to size requirements when you decide where to store this folder. (I have found this database to end up taking up a little over 1 GB of space following the first run of Architect.)
 
 In addition, when Architect was built, it was in many ways optimized for use by a supercomputer.  This, in particular, concerns the scripts used for running the individual tools and model reconstruction.  Architect was tested using the Niagara supercomputer based at the University of Toronto.  If this is not your use case but you are using another supercomputer which uses the SLURM job scheduler, please make any necessary modifications to the following that are specific to your system:
+
 	- template scripts under each folder under scripts/individual_enzyme_annotation
 	- TEMPLATE_run_reconstruction.sh under scripts/model_reconstruction
+	
 Please ensure to not change the line numbers on which each remaining line of code appears as line number is sensitive to Architect's code.
+
 If you are not using a supercomputer, please consider doing the following:
+
 	- running the individual EC annotation tools using the template scripts in scripts/individual_enzyme_annotation, then running Architect separately.
 	- Only commenting out line 1 of TEMPLATE_run_reconstruction.sh.
 	
