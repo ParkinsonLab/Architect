@@ -1,5 +1,5 @@
 Within architect_carveme/scripts:
-	-gapfill (gapfill_with_scores_NN_30_aout_2019)
+	-gapfill
 	
 Within architect_carveme/carveme/reconstruction (I think I am done with this folder):
 	-gapfilling.py was modified.
