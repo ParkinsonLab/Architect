@@ -59,16 +59,20 @@ If you are not using a supercomputer, please consider doing the following:
 	
 _Running Architect_
 
-To run Architect, you simply need to modify architect.sh and sample_run.in in this folder.
+To run Architect, you first need to modify architect.sh and sample_run.in in this folder.
+
 For architect.sh, specify the project name (PROJECT), the output folder where you want Architect to output files (OUTPUT_DIR), an input file specifying various parameters (INPUT_FILE--takes the format of sample_run.in), and the path to the Architect folder (ARCHITECT).
+
 For sample_run.in, please specify the values as directed in the file.  In particular:
+
 	- PRIAM_db is the file containing various enzyme profiles required for PRIAM's run.  
 	- SEQUENCE_FILE denotes the fasta file of protein sequences you want to annotate with ECs.  \
 	- DATABASE denotes the path to the Architect-specific database that can be downloaded at http://compsysbio.org/projects/Architect/Database/
-	- USER_def_reax denotes user-defined reactions for model reconstruction.  Please consult sample_run_user_defined.txt for an example file.
+	- USER_def_reax denotes user-defined reactions for model reconstruction.  To create this file, please consult sample_run_user_defined.txt for an example file.
 	- WARNING_mets contains a list of metabolites whose reactions are thought can be be considered for model reconstruction; this concerns models reconstructed using the KEGG database.  Note that not all reactions downloaded from KEGG will be considered for reconstruction.  In particular, refer to the file at http://compsysbio.org/projects/Architect/Database/model_reconstruction/KEGG_universe/WARNING_reactions_with_formulaless_cpds.out
 	If you want reactions concerning any of these metabolites, please list them line by line in this file.  (This may concern metabolites that are acceptor/donor pairs for instance.)
 	Otherwise, please refer to a blank file here.
+	
 The first 10 keys concern enzyme annotation specific scripts, and the remainder model reconstruction.  If model reconstruction is not to be performed, please put a non-empty string value for these last keys.
 
 _Output and location_
