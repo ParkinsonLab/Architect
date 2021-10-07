@@ -8,8 +8,8 @@ KEY_UB = 'reaction.ub'
 DEFAULT_LB = -1000
 DEFAULT_UB = 1000
 
-DEADEND_HIGH_CONF = "DEADEND_HIGH_"
-DEADEND_LOW_CONF_ONLY = "DEADEND_LOW_ONLY_"
+DEADEND_HIGH_CONF = "DEADEND_HIGH_import_"
+DEADEND_LOW_CONF_ONLY = "DEADEND_LOW_ONLY_import_"
 
 
 def get_deadend_metabolites(rxn_to_info, metabolite_to_rxn):
@@ -83,7 +83,7 @@ def get_exchange_reactions(high_conf_deadend_mets, low_and_high_conf_deadend_met
     i = 0
     # High-confidence deadend metabolites.
     for metabolite in high_conf_deadend_mets:
-        reaction_name = deadend_high_conf + str(i)
+        reaction_name = deadend_high_conf + metabolite
         equation = metabolite + ' <->'
         new_reactions_to_info[reaction_name] = {KEY_EQUATION: equation, KEY_LB: lb, KEY_UB: ub}
         i += 1
@@ -93,7 +93,7 @@ def get_exchange_reactions(high_conf_deadend_mets, low_and_high_conf_deadend_met
     for metabolite in low_and_high_conf_deadend_mets:
         if metabolite in high_conf_deadend_mets:
             continue
-        reaction_name = deadend_low_conf_only + str(i)
+        reaction_name = deadend_low_conf_only + metabolite
         equation = metabolite + ' <->'
         new_reactions_to_info[reaction_name] = {KEY_EQUATION: equation, KEY_LB: lb, KEY_UB: ub}
         i += 1
@@ -115,15 +115,40 @@ def read_column_from_file(file_name, column_n=1, delim="\t"):
     return liste
 
 
+def get_reactions_from_warning_file(warning_file, metabolites_to_include):
+
+    warning_rxns = set()
+    with open(warning_file) as open_file:
+        for line in open_file:
+            line = line.strip()
+            if line == "":
+                continue
+            rxn = line.split()[0]
+            found_met_to_include = False
+            curr_mets = line.split(":")[-1].strip().split(";")
+            for curr_met in curr_mets:
+                # If and only if all metabolites are indicated that they should be included, then, do so.
+                if curr_met in metabolites_to_include:
+                    found_met_to_include = True
+                else:
+                    found_met_to_include = False
+                    break
+            if not found_met_to_include:
+                warning_rxns.add(rxn)
+    return warning_rxns
+
+    
 if __name__ == '__main__':
 
     parser = ArgumentParser(description="Contains functions for getting core reaction model and potential gap-filling"
                                         "reactions to add in.")
+    parser.add_argument("--warning_mets_to_include_file", type=str, default="", help="File containing generic metabolites that the user agrees to include.")
     parser.add_argument("--database", type=str, help="Folder containing various information.")
     parser.add_argument("--output_folder", type=str, help="Folder to contain the output from this script (ie, a set "
                                                           "of reactions that can be picked for gap-filling)")
 
     args = parser.parse_args()
+    warning_mets_to_include_file = args.warning_mets_to_include_file
     database = args.database
     output_folder = args.output_folder
 
@@ -140,7 +165,11 @@ if __name__ == '__main__':
     #     Also, exclude any warning reactions from consideration, when reading from the universe set.
     high_conf_model_rxn_to_info, high_conf_model_met_to_rxn = utils.read_model_file(input_high_conf_model_file)
     low_and_high_conf_model_rxn_to_info, low_and_high_conf_model_met_to_rxn = utils.read_model_file(input_low_and_high_conf_model_file)
-    warning_rxns = read_column_from_file(problematic_reactions_with_missing_info)
+    if warning_mets_to_include_file == "":
+        warning_metabolites_to_include = set()
+    else:
+        warning_metabolites_to_include = read_column_from_file(warning_mets_to_include_file)
+    warning_rxns = get_reactions_from_warning_file(problematic_reactions_with_missing_info, warning_metabolites_to_include)
     candidate_rxn_to_info, candidate_met_to_rxn = utils.read_model_file(input_universe_without_exchange_reactions,
                                                                   warning_rxns.union(set(high_conf_model_rxn_to_info.keys())) )
 

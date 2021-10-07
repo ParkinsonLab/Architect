@@ -17,6 +17,8 @@ def check_options_are_complete(list_of_list_of_options, specified_arguments):
     the user should specify exactly one element from each of the inner lists.'''
 
     new_specified_arguments = ""
+    specified_arguments = specified_arguments.strip().split("/")
+    
 
     # If too few or more arguments than needed have been specified, then something is wrong with the user's
     # specifications.
@@ -76,15 +78,41 @@ def read_cutoffs(file_name):
     return ec_to_cutoff
 
 
-def get_order_of_labels(method, method_arguments=""):
+def get_actual_rf_setting_for_ec(setting_str):
+
+    setting_dict = {}
+    params = ["NUMTREES", "MAXDEPTH", "MAXFEATURES", "CURR_CRITERION"]
+    for param in params:
+        value = setting_str.split(param + ":")[1].split(";")[0]
+        if param != "CURR_CRITERION":
+            value = int(value)
+        setting_dict[param] = value
+    return setting_dict
+
+
+def load_optimal_rf_settings(file_name):
+
+    ec_to_best_setting = {}
+    with open(file_name) as open_file:
+        for line in open_file:
+            line = line.strip()
+            if (line == "") or (line[0] == "#"):
+                continue
+            ec, setting = line.split()[0], get_actual_rf_setting_for_ec(line.split()[1])
+            ec_to_best_setting[ec] = setting
+        open_file.close()
+    return ec_to_best_setting
+
+
+def get_order_of_labels(method, ec_to_predictable_tools):
 
     if method == "NB":
-        return ["CatFam", "DETECT", "EFICAz", "EnzDP", "PRIAM"]
+        order_of_labels = ["CatFam", "DETECT", "EFICAz", "EnzDP", "PRIAM"]
     elif method == "Regression":
-        return ["CatFam", "DETECT_low", "DETECT_high", "EFICAz_low", "EFICAz_high", "EnzDP_low", "EnzDP_high",
+        order_of_labels = ["CatFam", "DETECT_low", "DETECT_high", "EFICAz_low", "EFICAz_high", "EnzDP_low", "EnzDP_high",
                        "PRIAM_low", "PRIAM_high"]
     elif method == "RF":
-        return {"CatFam": [0, 2],
+        order_of_labels = {"CatFam": [0, 2],
                        "DETECT_low": [1, 1],
                        "DETECT_high": [1, 2],
                        "EFICAz_low": [2, 1],
@@ -93,6 +121,44 @@ def get_order_of_labels(method, method_arguments=""):
                        "EnzDP_high": [3, 2],
                        "PRIAM_low": [4, 1],
                        "PRIAM_high": [4, 2]}
+
+    ec_to_order_of_labels = {}
+    for ec, predictable_tools in ec_to_predictable_tools.items():
+        if method == "RF":
+            # For RF: maybe will experiment with changing feature vector sizes in future.
+            # Not expecting a big difference here, given the ensemble classifier.
+            ec_to_order_of_labels[ec] = order_of_labels
+        elif method in ["NB", "Regression"]:
+            ec_to_order_of_labels[ec] = get_order_of_labels_for_ec(method, order_of_labels, predictable_tools)
+    return ec_to_order_of_labels
+
+
+def get_order_of_labels_for_ec(method, order_of_labels, predictable_tools):
+
+    if method in ["NB", "Regression"]:
+        curr_order = []
+        for label in order_of_labels:
+            strictly_tool_for_label = label.split("_")[0]
+            if strictly_tool_for_label not in predictable_tools:
+                continue
+            curr_order.append(label)
+        return curr_order
+
+    elif method == "RF":
+        predictable_tools = sorted(list(predictable_tools))
+        tool_to_index = {}
+        for i, tool in enumerate(predictable_tools):
+            tool_to_index[tool] = i
+
+        curr_order = {}
+        for label in order_of_labels:
+            strictly_tool_for_label = label.split("_")[0]
+            if strictly_tool_for_label not in predictable_tools:
+                continue
+            first_value = tool_to_index[strictly_tool_for_label]
+            second_value = order_of_labels[label][1]
+            curr_order[label] = [first_value, second_value]
+        return curr_order
 
 
 def get_modified_tool_name(method, tool_to_cutoff_for_high_conf, tool, ec, score):
@@ -162,3 +228,32 @@ def read_ec_to_predictable_tools(file_name):
                 ec_to_predictable_tools[ec] = curr_set
 
     return ec_to_predictable_tools
+
+
+def read_actual_annotations(file_name):
+
+    ec_to_actual_prots = {}
+    with open(file_name) as open_file:
+        for line in open_file:
+            line = line.strip()
+            if line == "":
+                continue
+            split = line.split("\t")
+            ec, protein = split[0], split[1]
+            add_to_dict(ec_to_actual_prots, ec, protein)
+    return ec_to_actual_prots
+
+
+def load_regression_param_info(file_name):
+
+    arg_to_cvalue = {}
+    with open(file_name) as open_file:
+        for line in open_file:
+            line = line.strip()
+            if (line == "") or (line[0] == "#"):
+                continue
+            split = line.split("\t")
+            arg = split[0]
+            cvalue = float(split[1])
+            arg_to_cvalue[arg] = cvalue
+    return arg_to_cvalue

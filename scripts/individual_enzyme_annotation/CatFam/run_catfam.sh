@@ -11,7 +11,7 @@ cd CatFam
 
 # Customize path to CatFam.
 CATFAM_DIR=path/to/Catfam
-CATFAM_TOOL=${CATFAM_DIR}/source/catsearch_original.pl
+CATFAM_TOOL=${CATFAM_DIR}/source/catsearch.pl
 CATFAM_DB=${CATFAM_DIR}/CatFamDB/CatFam_v2.0/CatFam4D99R
 
 # Results will be found in folder Results.

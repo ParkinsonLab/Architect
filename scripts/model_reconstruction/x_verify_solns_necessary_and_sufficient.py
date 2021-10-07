@@ -6,20 +6,6 @@ from framed import io
 
 NON_ZERO_MIN = 0.00000001
 
-def read_gap_filling_solns(user_defined_file):
-
-    solnID_to_reactions = {}
-    with open(user_defined_file) as reader:
-        for line in reader:
-            line = line.strip()
-            if line == "":
-                continue
-            split = line.split()
-            solnID = split[0]
-            reactions = set(split[1:])
-            utils.add_to_dict(solnID_to_reactions, solnID, reactions, False)
-    return solnID_to_reactions
-
 
 def load_high_conf_and_candidate_reactions(high_confidence_file, reduced_gap_filling_file, gap_filling_solns, objective_function, temp_output):
 
@@ -39,9 +25,10 @@ def load_high_conf_and_candidate_reactions(high_confidence_file, reduced_gap_fil
     return model, high_conf_rxns
 
     
-def check_sufficiency_and_essentiality_of_gap_fillers(model, gap_filling_solns, high_conf_rxns):
+def check_sufficiency_and_essentiality_of_gap_fillers(model, gap_filling_solns, high_conf_rxns, output_check):
 
-    print("Solution\tIs_Functional\tAll_reactions_essential")
+    writer = open(output_check, "w")
+    writer.write("Solution\tIs_Functional\tAll_reactions_essential\n")
     for sol, curr_soln in gap_filling_solns.items():
         new_model = model.copy()
         utils.set_up_model_with_gap_filled_sol(new_model, curr_soln, high_conf_rxns)
@@ -57,7 +44,8 @@ def check_sufficiency_and_essentiality_of_gap_fillers(model, gap_filling_solns, 
         else:
             all_essential = "No"
 
-        print("\t".join([sol, is_functional, all_essential]))
+        writer.write("\t".join([sol, is_functional, all_essential]) + "\n")
+    writer.close()
 
 
 if __name__ == '__main__':
@@ -76,11 +64,13 @@ if __name__ == '__main__':
     reduced_gap_filling_file = output_folder + "/SIMULATED_reduced_universe_with_fva.out"
 
     # Returns solution ID to reactions involved.
-    gap_filling_solns = read_gap_filling_solns(gap_filling_sol_file)
+    gap_filling_solns = utils.read_gap_filling_solns(gap_filling_sol_file)
 
     # What is the objective function (as defined by the user)?
     objective_function = utils.find_objective(user_defined_file)
 
     # Make mega-network with high-confidence network, and all reactions in candidate gap-filling set.
-    model, high_conf_rxns = load_high_conf_and_candidate_reactions(high_confidence_file, reduced_gap_filling_file, gap_filling_solns, objective_function, "temp/model_test_ess_and_suff.out")
-    check_sufficiency_and_essentiality_of_gap_fillers(model, gap_filling_solns, high_conf_rxns)
+    output_check = gap_filling_sol_file.split(".out")[0] + "_check_nec_and_suff.out"
+    model, high_conf_rxns = load_high_conf_and_candidate_reactions(high_confidence_file, reduced_gap_filling_file, gap_filling_solns, objective_function, \
+        output_folder + "/checks/model_test_ess_and_suff.out")
+    check_sufficiency_and_essentiality_of_gap_fillers(model, gap_filling_solns, high_conf_rxns, output_check)

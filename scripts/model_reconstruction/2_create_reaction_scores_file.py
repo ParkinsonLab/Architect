@@ -6,6 +6,9 @@ LOW_CUTOFF = 0.0001
 
 CUTOFF = 0.5
 
+DEADEND_HIGH_CONF = "DEADEND_HIGH_import_"
+DEADEND_LOW_CONF_ONLY = "DEADEND_LOW_ONLY_import_"
+
 
 def add_to_score_dict(key_to_score, key, score):
 
@@ -86,13 +89,18 @@ def get_reaction_to_max_score(low_conf_ec_to_score, ec_to_reactions, gapfilling_
     return reaction_to_score
 
 
-def write_out_reaction_to_score(reaction_to_score, reaction_to_normalized_score, reaction_score_file):
+def write_out_reaction_to_score(reaction_to_score, reaction_to_normalized_score, penalty_exchange, reaction_score_file):
+
+    deadend_score = 1/(1.0 * penalty_exchange) - 1
 
     with open(reaction_score_file, "w") as writer:
         writer.write("\t".join(["reaction", "normalized_score", "original_score"]) + "\n")
         for reaction in sorted(reaction_to_score.keys()):
             score = reaction_to_score[reaction]
-            normalized_score = reaction_to_normalized_score[reaction]
+            if (reaction.startswith(DEADEND_HIGH_CONF) or reaction.startswith(DEADEND_LOW_CONF_ONLY)):
+                normalized_score = deadend_score
+            else:
+                normalized_score = reaction_to_normalized_score[reaction]
             writer.write("\t".join([reaction, str(normalized_score), str(score)]) + "\n")
 
 
@@ -141,12 +149,14 @@ if __name__ == '__main__':
     parser = ArgumentParser(description="Contains functions for getting core reaction model and potential gap-filling"
                                         "reactions to add in.")
     parser.add_argument("--ec_preds_file", type=str, help="File containing predictions from pipeline.")
+    parser.add_argument("--penalty_exchange", type=float, help="Penalty for adding exchange reactions for deadend metabolites.", default=1.0)
     parser.add_argument("--database", type=str, help="Folder containing various information.")
     parser.add_argument("--output_folder", type=str,
                         help="Folder to contain the output from this script (ie, high-confidence reactions)")
 
     args = parser.parse_args()
     ec_preds_file = args.ec_preds_file
+    penalty_exchange = args.penalty_exchange
     database = args.database
     output_folder = args.output_folder
 
@@ -163,4 +173,4 @@ if __name__ == '__main__':
 
     reaction_to_normalized_score = get_normalized_score(reaction_to_score)
 
-    write_out_reaction_to_score(reaction_to_score, reaction_to_normalized_score, reaction_score_file)
+    write_out_reaction_to_score(reaction_to_score, reaction_to_normalized_score, penalty_exchange, reaction_score_file)

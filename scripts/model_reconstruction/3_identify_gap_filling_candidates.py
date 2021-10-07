@@ -3,7 +3,6 @@ from framed import io
 from framed import save_sbml_model
 from framed import load_cbmodel
 from framed import FBA, FVA
-from framed import save_sbml_model
 from framed import essential_reactions
 import utils
 
@@ -49,7 +48,7 @@ def write_split_objective(reaction_equation, bounds, writer):
     for elem in metabolite_parts.split():
         if elem == "+" or utils.is_num(elem):
             continue
-        rxn_name = "R_import_" + elem
+        rxn_name = "R_arch_nec_import_" + elem
         temp_objective = "TEMP_obj_" + elem
         temp_objectives.append(temp_objective)
         added_string = "\t".join([temp_objective + ":", elem + " -->", "[0, 1000]"])
@@ -118,13 +117,6 @@ def write_only_reactions_of_interest(reactions_of_interest, input_file, output_f
                 if curr_rxn not in reactions_of_interest:
                     continue
                 writer.write(line + "\n")
-    
-
-
-def convert_to_sbml_model(input_file, output_xml_file, objective_function=""):
-
-    model = utils.read_model_for_simulation(input_file, objective_function)
-    save_sbml_model(model, output_xml_file)	
 
 
 if __name__ == '__main__':
@@ -148,12 +140,13 @@ if __name__ == '__main__':
     file_for_FVA = all_conf_and_candidate_file
     if not utils.is_functional_model(model):
 
-        print("Model is not functional")
+        print("Model is not functional with gap-filling candidates; transporters need to be added.")
         # Find biomass metabolites that cannot be produced.
-        model = augmented_with_metabolites_not_produced(all_conf_and_candidate_file, objective_function, "temp/SIMULATION_augmented_with_transporters.out", "temp/SIMULATION_individual_metabolite_biomass.out")
-        file_for_FVA = "temp/SIMULATION_augmented_with_transporters.out"
+        file_for_FVA = output_folder + "/checks/SIMULATION_augmented_with_transporters.out"
+        model = augmented_with_metabolites_not_produced(all_conf_and_candidate_file, objective_function, \
+            file_for_FVA, output_folder + "/checks/SIMULATION_individual_metabolite_biomass.out")
     else:
-        print("Model is functional")
+        print("Model is functional with gap-filling candidates.")
     # Now, carry on, perform FVA to reduce the number of gap-filling candidates.
     active_reactions, found_essential_reactions = find_active_and_essential_reactions(model, 0.5, NON_ZERO_MIN)
     write_only_reactions_of_interest(active_reactions, file_for_FVA, candidate_reduced_output_file)
@@ -166,5 +159,5 @@ if __name__ == '__main__':
     write_only_reactions_of_interest(found_essential_reactions, file_for_FVA, augmented_high_conf_with_essential)
     utils.append_default_reactions(augmented_high_conf_with_essential, output_folder + "/SIMULATION_high_confidence_reactions.out")
 	
-    convert_to_sbml_model(candidate_reduced_output_file, output_folder + "/SIMULATED_reduced_universe_with_fva.xml")
-    convert_to_sbml_model(augmented_high_conf_with_essential, output_folder + "/SIMULATION_high_confidence_reactions_plus_essentials.xml", objective_function)
+    utils.convert_to_sbml_model(candidate_reduced_output_file, output_folder + "/SIMULATED_reduced_universe_with_fva.xml")
+    utils.convert_to_sbml_model(augmented_high_conf_with_essential, output_folder + "/SIMULATION_high_confidence_reactions_plus_essentials.xml", objective_function)

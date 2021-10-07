@@ -1,0 +1,116 @@
+#!/usr/bin/env python
+# Nirvana Nursimulu modified this file for Architect's specific usage.
+
+from __future__ import print_function
+from carveme import config, project_dir
+from carveme.reconstruction.gapfilling import multiGapFill
+from carveme.reconstruction.utils import load_media_db, load_reaction_scores, write_gap_filling_solutions
+from framed import load_cbmodel, save_cbmodel
+import argparse
+import os
+
+
+def main(inputfile, score_db, media, mediadb=None, universe=None, universe_file=None, pool_size=0, pool_gap=None, outputfile=None, flavor=None,
+         exchange_format=None, int_constr=0.00000001, verbose=False):
+
+    if verbose:
+        print('Loading model...')
+
+    try:
+        model = load_cbmodel(inputfile, flavor=flavor)
+    except IOError:
+        raise IOError('Failed to load model:' + inputfile)
+
+    if verbose:
+        print('Loading reaction universe...')
+
+    if not universe_file:
+        if universe:
+            universe_file = "{}{}universe_{}.xml".format(project_dir, config.get('generated', 'folder'), universe)
+        else:
+            universe_file = project_dir + config.get('generated', 'default_universe')
+
+    try:
+        universe_model = load_cbmodel(universe_file)
+    except IOError:
+        if universe:
+            raise IOError('Failed to load universe "{0}". Please run build_universe.py --{0}.'.format(universe))
+        else:
+            raise IOError('Failed to load universe model:' + universe_file)
+
+    if verbose:
+        print('Loading media...')
+
+    if not mediadb:
+        mediadb = project_dir + config.get('input', 'media_library')
+
+    try:
+        media_db = load_media_db(mediadb)
+    except IOError:
+        raise IOError('Failed to load media database:' + mediadb)
+
+    if verbose:
+        m1, n1 = len(model.metabolites), len(model.reactions)
+        print('Gap filling for {}...'.format(', '.join(media)))
+
+    max_uptake = config.getint('gapfill', 'max_uptake')
+    scores = load_reaction_scores(score_db)
+    list_of_added_reactions = multiGapFill(model, universe_model, media, media_db, max_uptake=max_uptake, inplace=False, scores=scores,
+                 exchange_format=exchange_format, pool_size=pool_size, pool_gap=pool_gap, int_constr=int_constr)
+    write_gap_filling_solutions(outputfile, list_of_added_reactions)
+
+    if verbose:
+        print('Done.')
+
+
+if __name__ == '__main__':
+    parser = argparse.ArgumentParser(description="GapFill a metabolic model for a given set of media")
+
+    parser.add_argument('input', metavar='INPUTFILE',
+                        help="SBML input file")
+
+    parser.add_argument('--scoredb', help="Score database file")						
+						
+    parser.add_argument('-m', '--media', dest='media', required=True, help="List of media (comma-separated)")
+    parser.add_argument('--mediadb', help="Media database file")
+
+    univ = parser.add_mutually_exclusive_group()
+    univ.add_argument('-u', '--universe', dest='universe', help="Pre-built universe model (default: bacteria)")
+    univ.add_argument('--universe-file', dest='universe_file', help="Reaction universe file (SBML format)")
+
+    parser.add_argument('-s', '--pool-size', dest='pool_size', type=int, help="solution pool of a given size", default=0)
+    parser.add_argument('-g', '--pool-gap', dest='pool_gap', type=float, help="maximum relative gap for solutions in pool")
+	
+    parser.add_argument('-o', '--output', dest='output', type=str, help="SBML output file")
+
+    parser.add_argument('-v', '--verbose', action='store_true', dest='verbose', help="Switch to verbose mode")
+
+    sbml = parser.add_mutually_exclusive_group()
+    sbml.add_argument('--cobra', action='store_true', help="Input SBML in old cobra format")
+    sbml.add_argument('--fbc2', action='store_true', help="Input SBML in sbml-fbc2 format")
+
+    parser.add_argument('--exchange-format', dest='exchange_format', help=argparse.SUPPRESS)
+    parser.add_argument('--integrality-constraint', dest='int_constr', type=float, default=0.00000001, help="The integrality constraint for gap-filling")
+
+    args = parser.parse_args()
+
+    if args.fbc2:
+        flavor = 'fbc2'
+    elif args.cobra:
+        flavor = 'cobra'
+    else:
+        flavor = None
+
+    main(inputfile=args.input, 
+         score_db=args.scoredb,
+         media=args.media.split(','),
+         mediadb=args.mediadb,
+         universe=args.universe,
+         universe_file=args.universe_file,
+         pool_size=args.pool_size,
+         pool_gap=args.pool_gap,
+         outputfile=args.output,
+         flavor=flavor,
+         exchange_format=args.exchange_format,
+         int_constr=args.int_constr,
+         verbose=args.verbose)

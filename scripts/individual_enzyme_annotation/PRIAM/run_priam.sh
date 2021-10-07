@@ -7,6 +7,7 @@
 my_WORKDIR=PRIAM
 TEST=sequences.fa
 PRIAM_SEARCH=$HOME/PRIAM/PRIAM_search_2018.jar
+PRIAM_profiles_library=$HOME/PRIAM/PRIAM_JAN18
 
 module load java;
 module load gcc;
@@ -19,4 +20,4 @@ cd ${my_WORKDIR};
 
 # Customize path to BLAST.
 BLAST_BIN=${HOME}/blast-2.2.26/bin
-java -jar ${PRIAM_SEARCH} -n "test" -i $TEST -p ${HOME}/Enzyme_Annotation/PRIAM/PRIAM_JAN18 -o "PRIAM_Results" --pt 0 --mp 60 --cc T --bd $BLAST_BIN --np 40
+java -jar ${PRIAM_SEARCH} -n "test" -i $TEST -p $PRIAM_profiles_library -o "PRIAM_Results" --pt 0 --mp 60 --cc T --bd $BLAST_BIN --np 40

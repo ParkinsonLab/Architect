@@ -64,4 +64,6 @@ if __name__ == '__main__':
     for tool, results in \
             zip(["CatFam", "DETECT", "EFICAz", "EnzDP", "PRIAM"], \
                 [catfam_results, detect_results, eficaz_results, enzdp_results, priam_results]):
+        if results is None:
+            continue
         concatenate_results(results, output_folder + "/" + tool + "/CONCATENATED_" + tool + ".out", tool)

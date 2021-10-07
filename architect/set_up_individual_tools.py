@@ -69,9 +69,9 @@ def determine_num_to_split(sequence_file, status_writer):
                 suggested = int(math.ceil(num_seqs/(num_files * 1.0)))
                 if ((num_files + 40) > num_seqs):
                     if (num_files <= num_seqs):
-                        print ("Architect: Warning: splitting into more than " + str(num_files) + " files may lead to unexpected behaviour.")
+                        utils.print_warning ("Architect: Warning: splitting into more than " + str(num_files) + " files may lead to unexpected behaviour.")
                     else:
-                        print ("Architect: Warning: splitting into " + str(num_files) + " files may lead to unexpected behaviour.")
+                        utils.print_warning ("Architect: Warning: splitting into " + str(num_files) + " files may lead to unexpected behaviour.")
                 answer = input("Architect: For " + tool_name + ", split sequences into " + str(num_files) + " files with at most " \
                     + str(suggested) + " sequences for maximum running time of " + str(rec_time) + " hours? [y/n]. " \
                         + "Alternately, enter [x] to exclude this tool:\n")
@@ -215,7 +215,7 @@ def customize_catfam(architect_location, parameter_values, project_name, output_
     num_to_new_line[7] = "PATH=$PATH:" + parameter_values["BLAST_DIR"]
     num_to_new_line[10] = "cd " + current_folder
     num_to_new_line[13] = "CATFAM_DIR=" + parameter_values["CATFAM_DIR"]
-    copy_and_replace(architect_location + "/scripts/individual_enzyme_annotation/CatFam/run_catfam.sh", \
+    utils.copy_and_replace(architect_location + "/scripts/individual_enzyme_annotation/CatFam/run_catfam.sh", \
         current_folder + "/run_catfam.sh", num_to_new_line)
 
     mkdir_if_not_exists(current_folder + "/Split_seqs", True)
@@ -234,7 +234,7 @@ def customize_detect(architect_location, parameter_values, project_name, output_
     num_to_new_line[11] = "export PATH=" + parameter_values["EMBOSS_DIR"] + "/:$PATH"
     num_to_new_line[22] = "cd " + current_folder
     num_to_new_line[28] = "SEQ_NAME=" + parameter_values["SEQUENCE_FILE"]
-    copy_and_replace(architect_location + "/scripts/individual_enzyme_annotation/DETECT/run_detect.sh", \
+    utils.copy_and_replace(architect_location + "/scripts/individual_enzyme_annotation/DETECT/run_detect.sh", \
         current_folder + "/run_detect.sh", num_to_new_line)
 
 
@@ -242,14 +242,14 @@ def customize_eficaz(architect_location, parameter_values, project_name, output_
 
     current_folder = output_dir + "/" + project_name + "/EFICAz"
     mkdir_if_not_exists(current_folder)
-    copy_and_replace(architect_location + "/scripts/individual_enzyme_annotation/EFICAz/individualize.sh", current_folder + "/individualize.sh", {})
+    utils.copy_and_replace(architect_location + "/scripts/individual_enzyme_annotation/EFICAz/individualize.sh", current_folder + "/individualize.sh", {})
 
     num_to_new_line = {}
     num_to_new_line[4] = "#SBATCH --job-name=EFICAz_" + project_name + "_SEQUENCE_FILENAME_X1"
     num_to_new_line[7] = "EFICAz25_PATH=" + parameter_values["EFICAz_DIR"]
     num_to_new_line[14] = "cd " + current_folder
     num_to_new_line[105] = "\tmy_scratch=" + current_folder + "/Results"
-    copy_and_replace(architect_location + "/scripts/individual_enzyme_annotation/EFICAz/TEMPLATE_eficaz.sh", \
+    utils.copy_and_replace(architect_location + "/scripts/individual_enzyme_annotation/EFICAz/TEMPLATE_eficaz.sh", \
         current_folder + "/TEMPLATE_eficaz.sh", num_to_new_line)
 
     mkdir_if_not_exists(current_folder + "/Split_seqs", True)
@@ -260,18 +260,18 @@ def customize_enzdp(architect_location, parameter_values, project_name, output_d
 
     current_folder = output_dir + "/" + project_name + "/EnzDP"
     mkdir_if_not_exists(current_folder)
-    copy_and_replace(architect_location + "/scripts/individual_enzyme_annotation/EnzDP/individualize_project.sh", current_folder + "/individualize_project.sh", {})
+    utils.copy_and_replace(architect_location + "/scripts/individual_enzyme_annotation/EnzDP/individualize_project.sh", current_folder + "/individualize_project.sh", {})
 
     num_to_new_line = {}
     num_to_new_line[3] = "FASTA_FILE='" + current_folder + "/Split_seqs/SEQ_NAME'"
     num_to_new_line[5] = "OUTPUT_FILE='" + current_folder + "/Results/SEQ_NAME.out'"
-    copy_and_replace(architect_location + "/scripts/individual_enzyme_annotation/EnzDP/TEMPLATE_project.py", current_folder + "/TEMPLATE_project.py", num_to_new_line)
+    utils.copy_and_replace(architect_location + "/scripts/individual_enzyme_annotation/EnzDP/TEMPLATE_project.py", current_folder + "/TEMPLATE_project.py", num_to_new_line)
     
     num_to_new_line = {}
     num_to_new_line[4] = "#SBATCH --job-name=EnzDP_" + project_name
     num_to_new_line[7] = "ENZDP_TOOL=" + parameter_values["EnzDP_DIR"]
     num_to_new_line[11] = "folder=" + current_folder
-    copy_and_replace(architect_location + "/scripts/individual_enzyme_annotation/EnzDP/run_enzdp.sh", current_folder + "/run_enzdp.sh", num_to_new_line)
+    utils.copy_and_replace(architect_location + "/scripts/individual_enzyme_annotation/EnzDP/run_enzdp.sh", current_folder + "/run_enzdp.sh", num_to_new_line)
 
     mkdir_if_not_exists(current_folder + "/Split_seqs", True)
     write_split_seqs(current_folder + "/Split_seqs", i_to_num_split, parameter_values["SEQUENCE_FILE"])
@@ -288,20 +288,9 @@ def customize_priam(architect_location, parameter_values, project_name, output_d
     num_to_new_line[7] = "my_WORKDIR=" + current_folder
     num_to_new_line[8] = "TEST=" + parameter_values["SEQUENCE_FILE"]
     num_to_new_line[9] = "PRIAM_SEARCH=" + parameter_values["PRIAM_DIR"]
-    num_to_new_line[21] = "BLAST_BIN=" + parameter_values["BLAST_DIR"]
-    copy_and_replace(architect_location + "/scripts/individual_enzyme_annotation/PRIAM/run_priam.sh", current_folder + "/run_priam.sh", num_to_new_line)
-
-
-def copy_and_replace(original_file_name, new_file_name, line_to_new_text):
-
-    with open(original_file_name) as input_file:
-        with open(new_file_name, "w") as writer:
-            for i, line in enumerate(input_file):
-                if (i+1) in line_to_new_text:
-                    new_text = line_to_new_text[i+1]
-                    writer.write(new_text + "\n")
-                else:
-                    writer.write(line)
+    num_to_new_line[10] = "PRIAM_profiles_library=" + parameter_values["PRIAM_db"]
+    num_to_new_line[22] = "BLAST_BIN=" + parameter_values["BLAST_DIR"]
+    utils.copy_and_replace(architect_location + "/scripts/individual_enzyme_annotation/PRIAM/run_priam.sh", current_folder + "/run_priam.sh", num_to_new_line)
 
 
 def write_split_seqs(folder_name, i_to_num_split, sequence_file):
@@ -346,7 +335,12 @@ if __name__ == '__main__':
     project_name = args.project_name
     architect_location = args.architect_path
 
-    print("Welcome to Architect!\nNOTE: Type [q] at any point to exit.\nFirst, we will try to procur results from individual enzyme annotation tools.")
+    parameter_values = utils.read_parameter_values(arguments_file)
+
+    utils.print_with_colours("Welcome to Architect! It's a beautiful day for metabolic model reconstruction!")
+    utils.print_with_colours("Friendly note: Enter [q] at any point where user input is required to exit Architect.")
+
+    utils.print_with_colours("Architect: Now, we will try to procure results from individual enzyme annotation tools.")
     
     # If the folder already exists, warn the user about it, and make sure they want to continue.
     if os.path.isdir(output_dir + "/" + args.project_name):
@@ -372,6 +366,35 @@ if __name__ == '__main__':
         status_writer.close()
 
     status_writer = open(output_dir + "/" + args.project_name + "/architect_status.out", "a")
+
+    # Have the classifiers already been set up?  If not, ask the user if they want to proceed.
+    enzyme_annotation_db_folder = utils.get_shell_to_python_readable_location(parameter_values["DATABASE"]) + "/enzyme_annotation"
+    classifier_set_up_status_file = enzyme_annotation_db_folder + "/classifier_set_up.out"
+    if not utils.check_info_set_up(classifier_set_up_status_file, "Successfully set up all classifiers"):
+        answer = ""
+        while answer != "Y":
+            answer = input("Architect: We have detected that the classifiers have yet to be set up.  \
+                \nArchitect: This is an essential step for running Architect. Enter [y] to proceed. Otherwise, quit by entering [n]: ")
+            answer = answer.strip().upper()
+
+            if answer in ["Q", "N"]:
+                status_writer.write("Termination:" + str(datetime.datetime.now()) + ": " + utils.TERMINATION + "\n")
+                status_writer.close()
+                utils.print_with_colours("Architect will now exit.")
+                exit()
+
+        status_writer.write("Set up:" + str(datetime.datetime.now()) + ": Classifiers about to be set up.\n")
+        utils.print_with_colours("Architect: Classifiers will now be set up.  This will take some time.")
+
+        set_up_command = ["python", architect_location + "/scripts/ensemble_enzyme_annotation/x_set_up_classifiers.py"]
+        set_up_command.append("-t")
+        set_up_command.append(enzyme_annotation_db_folder)
+        set_up_command.append("-s")
+        set_up_command.append(classifier_set_up_status_file)
+        subprocess.call(set_up_command)
+        status_writer.write("Set up:" + str(datetime.datetime.now()) + ": Classifier set up is complete.\n")
+        utils.print_with_colours("Architect: Classifier set up complete.")
+
     answer = ""
     while answer not in ["N", "Y", "Q"]:
         answer = input("Architect: Do you need to run any individual enzyme annotation tools? Reply 'n' if you already have the raw results. [y/n] ")
@@ -385,7 +408,6 @@ if __name__ == '__main__':
         status_writer.close()
         exit()
 
-    parameter_values = utils.read_parameter_values(arguments_file)
     parameter_values["SEQUENCE_FILE"] = utils.get_shell_to_python_readable_location(parameter_values["SEQUENCE_FILE"])
     tool_to_num_split, detect_time, priam_time, exclude_tools = determine_num_to_split(parameter_values["SEQUENCE_FILE"], status_writer)
 

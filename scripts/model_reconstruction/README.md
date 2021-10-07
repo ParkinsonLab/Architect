@@ -20,7 +20,7 @@ Uses python v3.
 
 * _3_identify_gap_filling_candidates.py_:
 
-	Runs CarveMe-based gap-filling procedure.
+	Identifies potential gap-fillers to be then used in CarveMe-based gap-filler.
 
 * _x_verify_solns_necessary_and_sufficient.py_:
 
@@ -28,6 +28,14 @@ Uses python v3.
 	Solutions are expected to be so; however, when trying to get alternate solutions in one run, this is not necessarily the case.
 	Under investigation.
 
+* _x_output_models_from_gapfill_soln.py_:
+
+	Following gap-filling, this program outputs an SBML and Excel file of the gap-filled model. 
+
 * _utils.py_:
 
 	Various functions that are used in different scripts.
+	
+* TEMPLATE_run_reconstruction.sh:
+
+	Template script for running model reconstruction.
