@@ -51,7 +51,7 @@ if __name__ == '__main__':
     # Ask the user if they want to provide the location of the results, or proceed with the default location of results.
     answer = ""
     while answer not in ["Y", "N"]:
-        answer = input("Architect: Do you wish to proceed with the default location of results? [y/n] ")
+        answer = utils.input_with_colours("Architect: Do you wish to proceed with the default location of results? [y/n] ")
         answer = answer.strip().upper()
         if answer == "Q":
             status_writer.write("Termination:" + str(datetime.datetime.now()) + ": " + utils.TERMINATION + "\n")
@@ -64,7 +64,7 @@ if __name__ == '__main__':
         utils.print_with_colours ("Architect: Please provide the absolute location of the concatenated results for each of the following tools.\n" + \
             "Architect: Leave blank if not available (not recommended).\n")
         for tool in sorted(tool_to_location.keys()):
-            answer = input(tool + ": ")
+            answer = utils.input_with_colours(tool + ": ")
             answer = answer.strip()
             if answer.upper() == "Q":
                 status_writer.write("Termination:" + str(datetime.datetime.now()) + ": " + utils.TERMINATION + "\n")
@@ -73,7 +73,7 @@ if __name__ == '__main__':
             if answer != "":
                 # Verify that file exists.
                 while not (os.path.isfile(utils.get_shell_to_python_readable_location(answer.strip()) ) ):
-                    answer = input("Architect: No file found. Please enter absolute location again or leave blank to exclude tool.\n" + tool + ": ")
+                    answer = utils.input_with_colours("Architect: No file found. Please enter absolute location again or leave blank to exclude tool.\n" + tool + ": ")
                     if answer == "":
                         continue
                 tool_to_location[tool] = utils.get_shell_to_python_readable_location(answer.strip())

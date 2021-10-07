@@ -44,7 +44,7 @@ if __name__ == '__main__':
     if os.path.isdir(main_folder_with_results + "/Ensemble_results"):
         answer = ""
         while answer not in ["Y", "N"]:
-            answer = input("Architect: We have detected that you have run an ensemble method already.\nDo you wish to run another ensemble method? [y/n] ")
+            answer = utils.input_with_colours("Architect: We have detected that you have run an ensemble method already.\nDo you wish to run another ensemble method? [y/n] ")
             answer = answer.strip().upper()
             if answer == "Q":
                 status_writer.write("Termination:" + str(datetime.datetime.now()) + ": " + utils.TERMINATION + "\n")
@@ -59,7 +59,7 @@ if __name__ == '__main__':
     # Ask the user if they want to run the default ensemble method.
     answer = ""
     while answer not in ["Y", "N"]:
-        answer = input("Architect: Do you wish to run the default ensemble method (HIGHLY RECOMMENDED)? [y/n] ")
+        answer = utils.input_with_colours("Architect: Do you wish to run the default ensemble method (HIGHLY RECOMMENDED)? [y/n] ")
         answer = answer.strip().upper()
         if answer == "Q":
             status_writer.write("Termination:" + str(datetime.datetime.now()) + ": " + utils.TERMINATION + "\n")
@@ -72,14 +72,14 @@ if __name__ == '__main__':
         status_writer.write("Step_4: " + str(datetime.datetime.now()) + ": User wishes to use the default method and parameters.\n")
     else:
         while method not in ["Majority", "EC_specific", "NB", "Regression", "RF"]:
-            method = input("Architect: Please specify the method to run ensemble approach with.\n" + \
+            method = utils.input_with_colours("Architect: Please specify the method to run ensemble approach with.\n" + \
                 "Choose between: Majority, EC_specific, NB, Regression, RF. (case-sensitive):\n")
             if method.strip().upper() == "Q":
                 status_writer.write("Termination:" + str(datetime.datetime.now()) + ": " + utils.TERMINATION + "\n")
                 status_writer.close()
                 exit()
             status_writer.write("Step_4: " + str(datetime.datetime.now()) + ": User wishes to use:\n Method_of_choice:  " + method + ".\n")
-        parameters = input("Architect: Please specify the parameters to run ensemble approach with.\n" + \
+        parameters = utils.input_with_colours("Architect: Please specify the parameters to run ensemble approach with.\n" + \
             "Leave blank to use default for " + method + "\n")
         if parameters.strip().upper() == "Q":
             status_writer.write("Termination:" + str(datetime.datetime.now()) + ": " + utils.TERMINATION + "\n")
@@ -115,7 +115,7 @@ if __name__ == '__main__':
             break
         except Exception as e:
             status_writer.write("Step_4: " + str(datetime.datetime.now()) + ": Architect has found user's parameters to be incorrect.\n")
-            parameters = input("Architect: Please specify the _correct_ parameters to run ensemble approach with.\n" + \
+            parameters = utils.input_with_colours("Architect: Please specify the _correct_ parameters to run ensemble approach with.\n" + \
                 "Leave blank to use default for " + method + "\n")
             status_writer.write("Step_4: " + str(datetime.datetime.now()) + ": User wishes to use the following parameters\n: Parameters: " + parameters + "\n")
 
@@ -138,3 +138,4 @@ if __name__ == '__main__':
     subprocess.call(additional_method_command)
     status_writer.write("Step_4: " + str(datetime.datetime.now()) + ": Architect finished running the chosen method.\n")
     status_writer.close()
+    utils.print_with_colours("Architect: Enzyme annotation by ensemble approach done! Find your results under: " + main_folder_with_results + "/Ensemble_results")

@@ -14,6 +14,17 @@ class bcolors:
     ENDC = '\033[0m'
 
 
+def input_with_colours(string):
+
+    try:
+        input = raw_input
+    except NameError:
+        pass
+    print_with_colours(string, bcolors.BLUE)
+    answer = input()
+    return answer
+
+
 def print_with_colours(string, colour=bcolors.HEADER):
 
     print(colour + string + bcolors.ENDC)

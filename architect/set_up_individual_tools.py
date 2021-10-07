@@ -26,7 +26,7 @@ def determine_num_to_split(sequence_file, status_writer):
         rec_time = rec_tool_to_time[tool_name]
 
         if tool_name in ["DETECT", "PRIAM"]:
-            answer = input ("Architect: for " + tool_name + ", sequences will not be split and job will run for maximum " + \
+            answer = utils.input_with_colours("Architect: for " + tool_name + ", sequences will not be split and job will run for maximum " + \
                 str(rec_time) + " hours.\n" +\
                     "Customizations to be made separately by user. Press enter to continue, or [x] to exclude this tool.\n")
             if answer.strip().upper() == "X":
@@ -40,7 +40,7 @@ def determine_num_to_split(sequence_file, status_writer):
         accept = False
         answer = ""
         while answer not in ["Y", "N"]:
-            answer = input("Architect: Recommends that for " + tool_name + ", split sequences into " + str(rec_num_files) + \
+            answer = utils.input_with_colours("Architect: Recommends that for " + tool_name + ", split sequences into " + str(rec_num_files) + \
                 " files with at most " + str(rec_max_seq) + " sequences, for maximum running time of " + str(rec_time) + " hours." +\
                     "\nAccept? [y/n].  Alternately, enter [x] to exclude this tool:\n")
             answer = answer.strip().upper()
@@ -72,7 +72,7 @@ def determine_num_to_split(sequence_file, status_writer):
                         utils.print_warning ("Architect: Warning: splitting into more than " + str(num_files) + " files may lead to unexpected behaviour.")
                     else:
                         utils.print_warning ("Architect: Warning: splitting into " + str(num_files) + " files may lead to unexpected behaviour.")
-                answer = input("Architect: For " + tool_name + ", split sequences into " + str(num_files) + " files with at most " \
+                answer = utils.input_with_colours("Architect: For " + tool_name + ", split sequences into " + str(num_files) + " files with at most " \
                     + str(suggested) + " sequences for maximum running time of " + str(rec_time) + " hours? [y/n]. " \
                         + "Alternately, enter [x] to exclude this tool:\n")
                 answer = answer.strip().upper()
@@ -350,7 +350,7 @@ if __name__ == '__main__':
 
         answer = ""
         while answer != "Y":
-            answer = input("Architect: Project directory already exists. \n" + \
+            answer = utils.input_with_colours("Architect: Project directory already exists. \n" + \
                 "Type [y] to continue; existing subdirectories in directory may be modified. ")
             answer = answer.strip().upper()
             if answer == "Q":
@@ -373,7 +373,7 @@ if __name__ == '__main__':
     if not utils.check_info_set_up(classifier_set_up_status_file, "Successfully set up all classifiers"):
         answer = ""
         while answer != "Y":
-            answer = input("Architect: We have detected that the classifiers have yet to be set up.  \
+            answer = utils.input_with_colours("Architect: We have detected that the classifiers have yet to be set up.  \
                 \nArchitect: This is an essential step for running Architect. Enter [y] to proceed. Otherwise, quit by entering [n]: ")
             answer = answer.strip().upper()
 
@@ -397,7 +397,7 @@ if __name__ == '__main__':
 
     answer = ""
     while answer not in ["N", "Y", "Q"]:
-        answer = input("Architect: Do you need to run any individual enzyme annotation tools? Reply 'n' if you already have the raw results. [y/n] ")
+        answer = utils.input_with_colours("Architect: Do you need to run any individual enzyme annotation tools? Reply 'n' if you already have the raw results. [y/n] ")
         answer = answer.strip().upper()
     if answer == "N":
         status_writer.write("Step1/2:" + str(datetime.datetime.now()) + ": " + utils.ALREADY_RAN_ENZ_TOOL + "\n")

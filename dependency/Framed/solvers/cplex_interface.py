@@ -380,7 +380,7 @@ class CplexSolver(Solver):
             problem.parameters.mip.tolerances.integrality.set(int_constr)
 
             problem.populate_solution_pool()
-            print (problem.solution.get_status())
+            # print (problem.solution.get_status())
             #print (problem.solution.get_objective_value())
             status = self.status_mapping.get(problem.solution.get_status(), Status.UNKNOWN)
             if status == Status.OPTIMAL or status == Status.ALL_OPTIM_SOLNS_ENUMERATED:

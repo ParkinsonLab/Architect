@@ -57,7 +57,7 @@ if __name__ == '__main__':
     # Ask the user if they want to run model reconstruction; otherwise quit.
     answer = ""
     while answer not in ["Y", "N"]:
-        answer = input("Architect: Do you wish to perform model reconstruction? Otherwise Architect will exit. [y/n] ")
+        answer = utils.input_with_colours("Architect: Do you wish to perform model reconstruction? Otherwise Architect will exit. [y/n] ")
         answer = answer.strip().upper()
         if answer == "N":
             status_writer.write("Termination:" + str(datetime.datetime.now()) + ": " + utils.TERMINATION + "\n")
@@ -70,7 +70,7 @@ if __name__ == '__main__':
     if not utils.check_info_set_up(model_reconstruction_status_file, "Successfully set up all databases."):
         answer = ""
         while answer != "Y":
-            answer = input("Architect: We have detected that the reaction databases have yet to be set up.  \
+            answer = utils.input_with_colours("Architect: We have detected that the reaction databases have yet to be set up.  \
                 \nArchitect: This is an essential step for running Architect's model reconstruction function.\n\
                 Enter [y] to proceed. Otherwise, quit by entering [n]: ")
             answer = answer.strip().upper()
@@ -150,7 +150,7 @@ if __name__ == '__main__':
             file_identifiers.append(str(i))
         file_id = -1
         while (file_id not in file_identifiers):
-            file_id = input("Enter the ID you wish [0-" + str(len(file_identifiers) - 1) + "]: ")
+            file_id = utils.input_with_colours("Enter the ID you wish [0-" + str(len(file_identifiers) - 1) + "]: ")
             file_id = file_id.strip()
             if file_id == "Q":
                 status_writer.write("Termination:" + str(datetime.datetime.now()) + ": " + utils.TERMINATION + "\n")
@@ -167,7 +167,7 @@ if __name__ == '__main__':
     min_num_high_conf = ""
     answer = ""
     while answer not in ["Y", "N"]:
-        answer = input("Architect: For ECs not predictable by Architect, include (default) high-confidence prediction by PRIAM? [y/n] ")
+        answer = utils.input_with_colours("Architect: For ECs not predictable by Architect, include (default) high-confidence prediction by PRIAM? (HIGHLY RECOMMENDED) [y/n] ")
         answer = answer.strip().upper()
         if answer == "Q":
             status_writer.write("Termination:" + str(datetime.datetime.now()) + ": " + utils.TERMINATION + "\n")
@@ -175,7 +175,7 @@ if __name__ == '__main__':
             exit()
     if answer == "N":
         while min_num_high_conf not in ["1", "2", "3", "4", "5"]:
-            min_num_high_conf = input("Architect: you wish to include high-confidence predictions by at least how many tools? [1-5]: ")
+            min_num_high_conf = utils.input_with_colours("Architect: you wish to include high-confidence predictions by at least how many tools? [1-5]: ")
         status_writer.write("Step 5: " + str(datetime.datetime.now()) + \
             ": User wishes to include high-confidence predictions by at least " + min_num_high_conf + " tools.\n")
         min_num_high_conf = int(min_num_high_conf)
@@ -192,7 +192,7 @@ if __name__ == '__main__':
     utils.print_with_colours("- use a penalty of 1.0 for the addition of transport reactions for deadend metabolites")
 
     while answer not in ["Y", "N"]:
-        answer = input("Use default? [y/n] ")
+        answer = utils.input_with_colours("Use default? (HIGHLY RECOMMENDED) [y/n] ")
         answer = answer.strip().upper()
         if answer == "Q":
             status_writer.write("Termination:" + str(datetime.datetime.now()) + ": " + utils.TERMINATION + "\n")
@@ -206,7 +206,7 @@ if __name__ == '__main__':
     if answer == "N":
         answer_1 = ""
         while answer_1 not in ["Y", "N"]:
-            answer_1 = input("Architect: change number of gap-filling solutions from 1? [y/n] ")
+            answer_1 = utils.input_with_colours("Architect: change number of gap-filling solutions from 1? [y/n] ")
             answer_1 = answer_1.strip().upper()
             if answer_1 == "Q":
                 status_writer.write("Termination:" + str(datetime.datetime.now()) + ": " + utils.TERMINATION + "\n")
@@ -215,14 +215,14 @@ if __name__ == '__main__':
         if answer_1 == "Y":
             num_solns = ""
             while (not utils.is_int(num_solns)) or (int(num_solns) < 2):
-                num_solns = input("Enter a number greater than 1 for the number of gap-filling solutions: ")
+                num_solns = utils.input_with_colours("Enter a number greater than 1 for the number of gap-filling solutions: ")
             num_solns = int(num_solns)
             status_writer.write("Step 5: " + str(datetime.datetime.now()) + \
                 ": User wishes to change the number of solutions to " + str(num_solns) + ".\n")
 
         answer_2 = ""
         while answer_2 not in ["Y", "N"]:
-            answer_2 = input("Architect: change size of gap pool from 0.1? [y/n] ")
+            answer_2 = utils.input_with_colours("Architect: change size of gap pool from 0.1? [y/n] ")
             answer_2 = answer_2.strip().upper()
             if answer_2 == "Q":
                 status_writer.write("Termination:" + str(datetime.datetime.now()) + ": " + utils.TERMINATION + "\n")
@@ -231,14 +231,14 @@ if __name__ == '__main__':
         if answer_2 == "Y":
             pool_gap = ""
             while (not utils.is_float(pool_gap)) or (float(pool_gap) > 1) or (float(pool_gap) <= 0):
-                pool_gap = input("Enter a number between 0 and 1 for the gap pool: ")
+                pool_gap = utils.input_with_colours("Enter a number between 0 and 1 for the gap pool: ")
             pool_gap = float(pool_gap)
             status_writer.write("Step 5: " + str(datetime.datetime.now()) + \
                 ": User wishes to change the gap pool to " + str(pool_gap) + ".\n")
 
         answer_3 = ""
         while answer_3 not in ["Y", "N"]:
-            answer_3 = input("Architect: change size integrality constraint from 10E-8? [y/n] ")
+            answer_3 = utils.input_with_colours("Architect: change size integrality constraint from 10E-8? [y/n] ")
             answer_3 = answer_3.strip().upper()
             if answer_3 == "Q":
                 status_writer.write("Termination:" + str(datetime.datetime.now()) + ": " + utils.TERMINATION + "\n")
@@ -247,14 +247,14 @@ if __name__ == '__main__':
         if answer_3 == "Y":
             integrality_constraint = ""
             while (not utils.is_float(integrality_constraint)) or (float(integrality_constraint) >= 1) or (float(integrality_constraint) <= 0):
-                integrality_constraint = input("Enter a number between 0 and 1 for the integrality constraint: ")
+                integrality_constraint = utils.input_with_colours("Enter a number between 0 and 1 for the integrality constraint: ")
             integrality_constraint = float(integrality_constraint)
             status_writer.write("Step 5: " + str(datetime.datetime.now()) + \
                 ": User wishes to change the integrality constraint to " + str(integrality_constraint) + ".\n")
 
         answer_4 = ""
         while answer_4 not in ["Y", "N"]:
-            answer_4 = input("Architect: change penalty for transporting deadend metabolites from 1.0? [y/n] ")
+            answer_4 = utils.input_with_colours("Architect: change penalty for transporting deadend metabolites from 1.0? [y/n] ")
             answer_4 = answer_4.strip().upper()
             if answer_4 == "Q":
                 status_writer.write("Termination:" + str(datetime.datetime.now()) + ": " + utils.TERMINATION + "\n")
@@ -263,7 +263,7 @@ if __name__ == '__main__':
         if answer_4 == "Y":
             penalty_deadend = ""
             while (not utils.is_float(penalty_deadend)):
-                penalty_deadend = input("Enter a number for the penalty (greater than 1 penalizes more): ")
+                penalty_deadend = utils.input_with_colours("Enter a number for the penalty (greater than 1 penalizes more): ")
             penalty_deadend = float(penalty_deadend)
             status_writer.write("Step 5: " + str(datetime.datetime.now()) + \
                 ": User wishes to change the penalty to " + str(penalty_deadend) + ".\n")
@@ -282,7 +282,7 @@ if __name__ == '__main__':
         for idd in sorted(id_to_universe.keys()):
             universe = id_to_universe[idd]
             utils.print_with_colours(idd + "\t" + universe)
-        universe_id = input("Enter the ID you wish [1-6]: ")
+        universe_id = utils.input_with_colours("Enter the ID you wish [1-6]: ")
         universe_id = universe_id.strip()
         if universe_id.upper() == "Q":
             status_writer.write("Termination:" + str(datetime.datetime.now()) + ": " + utils.TERMINATION + "\n")
@@ -297,7 +297,7 @@ if __name__ == '__main__':
         utils.print_with_colours("Architect: which e-value for BlastP would you like to use to include non-EC related reactions?")
         answer_evalue = ""
         while answer_evalue not in ["Y", "N", "Q"]:
-            answer_evalue = input("Use default of E-20? [y/n]: ")
+            answer_evalue = utils.input_with_colours("Use default of E-20? (HIGHLY RECOMMENDED) [y/n]: ")
             answer_evalue = answer_evalue.strip().upper()
         if answer_evalue == "Q":
             status_writer.write("Termination:" + str(datetime.datetime.now()) + ": " + utils.TERMINATION + "\n")
@@ -307,7 +307,7 @@ if __name__ == '__main__':
             evalue_blastp = 10**(-20)
         else:
             while (not utils.is_float(evalue_blastp)) or (float(evalue_blastp) < 0):
-                evalue_blastp = input("Enter a positive number for the E-value: ")
+                evalue_blastp = utils.input_with_colours("Enter a positive number for the E-value: ")
             evalue_blastp = float(evalue_blastp)
         status_writer.write("Step 5: " + str(datetime.datetime.now()) + ": User wishes to use the E-value of " + str(evalue_blastp) + " for blastp.\n")
 
@@ -318,7 +318,7 @@ if __name__ == '__main__':
         utils.print_with_colours("Architect: How many output models do you wish?")
         num_output_models = ""
         while (not utils.is_int(num_output_models)) or (int(num_output_models) < 1) or (int(num_output_models) > num_solns):
-            num_output_models = input("Please specify a number between 1 and " + str(num_solns) + ". ")
+            num_output_models = utils.input_with_colours("Please specify a number between 1 and " + str(num_solns) + ". ")
             num_output_models = num_output_models.strip().upper()
             if num_output_models == "Q":
                 status_writer.write("Termination:" + str(datetime.datetime.now()) + ": " + utils.TERMINATION + "\n")
@@ -388,3 +388,4 @@ if __name__ == '__main__':
     status_writer.write("Step 5: " + str(datetime.datetime.now()) + ": Gap-filling done.\n")
 
     status_writer.close()
+    utils.print_with_colours("Architect: Thank you for using our tool today! Reconstruction is now done. Find your results under: " + final_output_folder)
