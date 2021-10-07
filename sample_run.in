@@ -8,9 +8,9 @@ EnzDP_DIR       path/to/EnzDP/EnzDP_src/enzdp.py
 PRIAM_DIR       path/to/PRIAM/PRIAM_search_2018.jar
 PRIAM_db        path/to/PRIAM/PRIAM_JAN18
 SEQUENCE_FILE   path/to/fasta_file.fa
-DATABASE		path/to/Database
+DATABASE        path/to/Database
 USER_def_reax   path/to/USER_defined_reactions.out
 WARNING_mets    path/to/WARNING_mets_to_allow.out
 CPLEX_PATH      path/to/cplex
-FRAMED_PATH     path/to/framed_package
-CARVEME_PATH    path/to/carveme_package
+FRAMED_PATH     path/to/Architect/dependency/framed
+CARVEME_PATH    path/to/Architect/dependency/CarveMe
