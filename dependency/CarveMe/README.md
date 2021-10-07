@@ -10,5 +10,5 @@ D. Machado et al, "Fast automated reconstruction of genome-scale metabolic model
 
 DOI: https://doi.org/10.1093/nar/gky537
 
-Developed at the European Molecular Biology Laboratory (2017-2018). Released under an Apache License.
+CarveMe has been developed at the European Molecular Biology Laboratory (2017-2018), and is released under an Apache License (included here).
 
