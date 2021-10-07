@@ -36,6 +36,18 @@ Uses python v3.
 
 	Various functions that are used in different scripts.
 	
+* _utils_sbml.py_:
+
+	Various functions focussed on creating the SBML output.
+	
 * TEMPLATE_run_reconstruction.sh:
 
 	Template script for running model reconstruction.
+	
+* x_set_up_kegg_db.py:
+
+	This script is run the first time Architect's model reconstruction module is run to set up the KEGG database.  Using KEGG's API, various pieces of information are downloaded and modified as per instructions in Architect's database folder.
+	
+* x_set_up_metanetx_dblinks.py:
+
+	This script is run the first time Architect's model reconstruction module is run to download database links from KEGG and BiGG identifiers to other database.  These database links are taken from the MetaNetX database.
