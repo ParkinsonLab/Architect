@@ -66,7 +66,7 @@ Results from individual enzyme annotation tools can be separately specified for 
 
 To run Architect, you first need to modify architect.sh and sample_run.in in this folder.
 
-For architect.sh, specify the project name (PROJECT), the output folder where you want Architect to output files (OUTPUT_DIR), an input file specifying various parameters (INPUT_FILE--takes the format of sample_run.in), and the path to the Architect folder (ARCHITECT).
+For architect.sh, specify the project name ($PROJECT), the output folder where you want Architect to output files ($OUTPUT_DIR), an input file specifying various parameters ($INPUT_FILE--takes the format of sample_run.in), and the path to the Architect folder ($ARCHITECT).
 
 For sample_run.in, please specify the values as directed in the file.  In particular:
 
