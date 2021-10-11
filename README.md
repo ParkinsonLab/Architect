@@ -4,17 +4,17 @@ Architect is a pipeline for automatic metabolic model reconstruction.  Given the
 
 ## Overview
 
-This README details the steps going from protein sequence to gap-filled model, as present in sample_run.sh.
+This README details the steps going from protein sequence to gap-filled model.  Several parameters need to be defined in sample_run.in and a few more in sample_run.sh (more details below; note that either of these two files can be renamed).  Users only need to run the shell script sample_run.sh which goes through the following sequence of steps.
 
-(1)	First run your protein sequences through the different enzyme annotation tools (CatFam, DETECT, EFICAz, EnzDP, PRIAM).  Details are given in the folder scripts/individual_enzyme_annotation.  One of the tools used—EnzDP—is slightly modified form its original version.  Modifications of EnzDP required for use by Architect are listed in dependency/EnzDP.  
-Please note that once these tools have started running, Architect will exit and you will need to monitor the progression of these tasks. 
+(1)	First, Architect runs your protein sequences through the different enzyme annotation tools (CatFam, DETECT, EFICAz, EnzDP, PRIAM).  Alternately, these can be run by the user independently using details given in the folder scripts/individual_enzyme_annotation (also further details are given below).  One of the tools used—EnzDP—is slightly modified form its original version.  Modifications of EnzDP required for use by Architect are listed in dependency/EnzDP.  
+Please note that once these tools have started running using Architect, Architect will exit and you will need to independently monitor the progression of these tasks. 
 
 (2)	The results are then formatted then run through an ensemble approach (default: naïve Bayes) as given in the folder scripts/ensemble_enzyme_annotation.
 
-(3)	Given the EC predictions and corresponding confidence scores, a draft metabolic network is constructed then gap-filled.  This is performed using scripts found in scripts/model_reconstruction.  This uses a modified version of CarveMe, scripts can be found in dependency/CarveMe.
+(3)	Given the EC predictions with their corresponding likelihood scores and user-specified parameters in sample_run.in, a draft metabolic network is constructed then gap-filled.  This is performed using scripts found in scripts/model_reconstruction.  This uses a modified version of CarveMe, with scripts that can be found in dependency/CarveMe.  The framed package--modified from its original published form--is also required (in dependency/framed).
 The final output comes in the form of a simple Excel file, as well as an SBML file annotated with links from KEGG/BiGG identifiers to other databases.
 
-Database files are available on the Parkinson lab’s website at http://compsysbio.org/projects/Architect. 
+Users need to download certain database files, available on the Parkinson lab’s website at http://compsysbio.org/projects/Architect. 
 
 The manuscript for Architect is currently in preparation.  Please cite the tools that Architect uses when using our approach:
 
