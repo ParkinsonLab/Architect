@@ -72,7 +72,8 @@ For sample_run.in, please specify the values as directed in the file.  In partic
 
 	- PRIAM_db is the file containing various enzyme profiles required for PRIAM's run.  
 	- SEQUENCE_FILE denotes the fasta file of protein sequences you want to annotate with ECs.
-	- DATABASE denotes the path to the Architect-specific database that can be downloaded at http://compsysbio.org/projects/Architect/Database/
+	- DATABASE denotes the path to the Architect-specific database that can be downloaded [here]
+	(http://compsysbio.org/projects/Architect/Database/)
 	- USER_def_reax denotes user-defined reactions for model reconstruction.  
 	To create this file, please consult sample_run_user_defined.txt for an example file.
 	- WARNING_mets contains a list of metabolites whose reactions are thought can be be considered
