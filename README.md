@@ -49,8 +49,8 @@ Please make sure that you have downloaded the Architect-specific database availa
 
 In addition, when Architect was built, it was in many ways optimized for use by a supercomputer.  This, in particular, concerns the scripts used for running the individual tools and model reconstruction.  Architect was tested using the Niagara supercomputer based at the University of Toronto.  If this is not your use case but you are using another supercomputer which uses the SLURM job scheduler, please make any necessary modifications that are specific to your system to the following:
 
-	- Template scripts for each tool under scripts/individual_enzyme_annotation
-	- TEMPLATE_run_reconstruction.sh under scripts/model_reconstruction
+- Template scripts for each tool under scripts/individual_enzyme_annotation
+- TEMPLATE_run_reconstruction.sh under scripts/model_reconstruction
 	
 Please do not change the line numbers on which each remaining line of code appears as line number is important to Architect's functionality.
 
