@@ -1,11 +1,10 @@
 Within architect_carveme/scripts:
 	-gapfill
-	
-Within architect_carveme/carveme/reconstruction (I think I am done with this folder):
+Within architect_carveme/carveme/reconstruction:
 	-gapfilling.py was modified.
 	-gapfilling_original.py is a copy of the original file.
 	-utils.py
-carveme/data/generated: deleted folder and files within.  Not required.
+carveme/data/generated: deleted folder and files within.  Files not required.
 carveme/data/input: deleted most files in this folder except for media_db.tsv.
 docs: deleted.
 tests: deleted
