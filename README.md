@@ -27,7 +27,7 @@ The manuscript for Architect is currently in preparation.  Please cite the tools
 
 For more information, please contact nnursimulu@cs.toronto.edu
 
-# Other specific instructions
+# Specific instructions
 
 ## Set-up
 
