@@ -31,7 +31,7 @@ For more information, please contact nnursimulu@cs.toronto.edu
 
 ## Set-up
 
-In order to run Architect, please make sure that you have the following tools installed (in brackets the version is indicated).  Installation of all enzyme annotations is recommended.
+In order to run Architect, please make sure that you have the following tools installed (in brackets the version is indicated).  Installation of all enzyme annotation tools is recommended.
 
 	* BLAST (v2.2.26)
 	* EMBOSS (v6.6.0)
