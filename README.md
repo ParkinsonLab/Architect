@@ -33,15 +33,15 @@ For more information, please contact nnursimulu@cs.toronto.edu
 
 In order to run Architect, please make sure that you have the following tools installed (in brackets the version is indicated).  Installation of all enzyme annotation tools is recommended.
 
-	* BLAST (v2.2.26)
-	* EMBOSS (v6.6.0)
-	* CatFam
-	* DETECT (v2)
-	* EFICAz (v2.5.1)
-	* EnzDP
-	* PRIAM (vJAN18)
-	* Cplex
-	* diamond (v0.9.23.124)
+* BLAST (v2.2.26)
+* EMBOSS (v6.6.0)
+* CatFam
+* DETECT (v2)
+* EFICAz (v2.5.1)
+* EnzDP
+* PRIAM (vJAN18)
+* Cplex
+* Diamond (v0.9.23.124)
 
 In addition, to run Architect as an end-to-end tool, we require that you have both v2 and v3 of Python installed (Architect has been tested on v2.7.16 and v3.7.1). In particular, we require that you have the conda2 and anaconda3 packages installed.  (This requirement may be changed in a future iteration of Architect. If you only need to perform enzyme annotation, conda2 suffices.)  
 
@@ -56,9 +56,8 @@ Please do not change the line numbers on which each remaining line of code appea
 
 If you are not using a supercomputer, please consider doing the following:
 
-	- Running the individual EC annotation tools using the template scripts in
-	scripts/individual_enzyme_annotation, then running Architect separately.
-	- Only commenting out line 1 of TEMPLATE_run_reconstruction.sh.
+- Running the individual EC annotation tools using the template scripts in scripts/individual_enzyme_annotation, then running Architect separately.
+- Only commenting out line 1 of TEMPLATE_run_reconstruction.sh.
 	
 Results from individual enzyme annotation tools can be separately specified for use by Architect.  For this, please concatenate the main results from each tool into a single file, while ensuring that you remove any headers from the files.
 	
@@ -70,19 +69,12 @@ For architect.sh, specify the project name ($PROJECT), the output folder where y
 
 For sample_run.in, please specify the values as directed in the file.  In particular:
 
-	- PRIAM_db is the file containing various enzyme profiles required for PRIAM's run.  
-	- SEQUENCE_FILE denotes the fasta file of protein sequences you want to annotate with ECs.
-	- DATABASE denotes the path to the Architect-specific database that can be downloaded 
-	at **http://compsysbio.org/projects/Architect/Database/**
-	- USER_def_reax denotes user-defined reactions for model reconstruction.  
-	To create this file, please consult sample_run_user_defined.txt for an example file.
-	- WARNING_mets contains a list of metabolites whose reactions are thought can be be considered
-	for model reconstruction; this concerns models reconstructed using the KEGG database.  Note that
-	not all reactions downloaded from KEGG will be considered for reconstruction.  In particular,
-	refer to the file at	http://compsysbio.org/projects/Architect/Database/model_reconstruction/KEGG_universe/WARNING_reactions_with_formulaless_cpds.out
-	If you want reactions concerning any of these metabolites, please list them line by line in this
-	file.  (This may concern metabolites that are acceptor/donor pairs for instance.)
-	Otherwise, please refer to a blank file here.
+- PRIAM_db is the file containing various enzyme profiles required for PRIAM's run.  
+- SEQUENCE_FILE denotes the fasta file of protein sequences you want to annotate with ECs.
+- DATABASE denotes the path to the Architect-specific database that can be downloaded [here]( http://compsysbio.org/projects/Architect/Database/)
+- USER_def_reax denotes user-defined reactions for model reconstruction.  To create this file, please consult sample_run_user_defined.txt for an example file.
+- WARNING_mets contains a list of metabolites whose reactions are thought can be be considered for model reconstruction; this concerns models reconstructed using the KEGG database.  Note that not all reactions downloaded from KEGG will be considered for reconstruction.  In particular, refer to the file [here](http://compsysbio.org/projects/Architect/Database/model_reconstruction/KEGG_universe/WARNING_reactions_with_formulaless_cpds.out)
+	- If you want reactions concerning any of these metabolites, please list them line by line in this file.  (This may concern metabolites that are acceptor/donor pairs for instance.) Otherwise, please refer to a blank file here.
 	
 The first 10 keys concern enzyme annotation specific scripts, and the remainder model reconstruction.  If model reconstruction is not to be performed, please put a non-empty string value for these last keys.
 
