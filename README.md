@@ -1,6 +1,6 @@
 # Architect
 
-Architect is a pipeline for automatic metabolic model reconstruction.  Given the protein sequences of an organism, enzyme annotation is first performed through ensemble approaches, followed by gap-filling.  This repository is currently in construction.
+Architect is a pipeline for automatic metabolic model reconstruction.  Given the protein sequences of an organism, enzyme annotation is first performed through ensemble approaches, followed by gap-filling.
 
 This README details the steps going from protein sequence to gap-filled model, as present in sample_run.sh.
 
