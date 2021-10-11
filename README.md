@@ -9,7 +9,7 @@ This README details the steps going from protein sequence to gap-filled model.  
 (1)	First, Architect runs your protein sequences through the different enzyme annotation tools (CatFam, DETECT, EFICAz, EnzDP, PRIAM).  Alternately, these can be run by the user independently using details given in the folder scripts/individual_enzyme_annotation (also further details are given below).  One of the tools used—EnzDP—is slightly modified form its original version.  Modifications of EnzDP required for its use by Architect are listed in dependency/EnzDP.  
 Please note that once these tools have started running using Architect, Architect will exit and you will need to independently monitor the progression of these tasks. 
 
-(2)	The results are then formatted then run through an ensemble approach (default: naïve Bayes) as given in the folder scripts/ensemble_enzyme_annotation.
+(2)	The results are then formatted and run through an ensemble approach (default: naïve Bayes) as given in the folder scripts/ensemble_enzyme_annotation.
 
 (3)	Given the EC predictions with their corresponding likelihood scores and user-specified parameters in sample_run.in, a draft metabolic network is constructed then gap-filled.  This is performed using scripts found in scripts/model_reconstruction.  This uses a modified version of CarveMe, with scripts that can be found in dependency/CarveMe.  The framed package--modified from its original published form--is also required (in dependency/framed).
 The final output comes in the form of a simple Excel file, as well as an SBML file annotated with links from KEGG/BiGG identifiers to other databases.
