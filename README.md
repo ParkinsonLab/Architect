@@ -2,6 +2,8 @@
 
 Architect is a pipeline for automatic metabolic model reconstruction.  Given the protein sequences of an organism, enzyme annotation is first performed through ensemble approaches, followed by gap-filling.
 
+## Overview
+
 This README details the steps going from protein sequence to gap-filled model, as present in sample_run.sh.
 
 (1)	First run your protein sequences through the different enzyme annotation tools (CatFam, DETECT, EFICAz, EnzDP, PRIAM).  Details are given in the folder scripts/individual_enzyme_annotation.  One of the tools used—EnzDP—is slightly modified form its original version.  Modifications of EnzDP required for use by Architect are listed in dependency/EnzDP.  
