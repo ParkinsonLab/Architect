@@ -57,7 +57,6 @@ Please do not change the line numbers on which each remaining line of code appea
 If you are not using a supercomputer, please consider doing the following:
 
 	- Running the individual EC annotation tools using the template scripts in
-
 	scripts/individual_enzyme_annotation, then running Architect separately.
 	- Only commenting out line 1 of TEMPLATE_run_reconstruction.sh.
 	
