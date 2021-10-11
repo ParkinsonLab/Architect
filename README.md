@@ -71,12 +71,13 @@ For architect.sh, specify the project name ($PROJECT), the output folder where y
 
 For sample_run.in, please specify the values as directed in the file.  In particular:
 
-- PRIAM_db is the file containing various enzyme profiles required for PRIAM's run.  
-- SEQUENCE_FILE denotes the fasta file of protein sequences you want to annotate with ECs.
-- DATABASE denotes the path to the Architect-specific database that can be downloaded [here]( http://compsysbio.org/projects/Architect/Database/)
-- USER_def_reax denotes user-defined reactions for model reconstruction.  To create this file, please consult sample_run_user_defined.txt for an example file.
-- WARNING_mets contains a list of metabolites whose reactions are thought can be be considered for model reconstruction; this concerns models reconstructed using the KEGG database.  Note that not all reactions downloaded from KEGG will be considered for reconstruction.  In particular, refer to the file [here](http://compsysbio.org/projects/Architect/Database/model_reconstruction/KEGG_universe/WARNING_reactions_with_formulaless_cpds.out)
-	- If you want reactions concerning any of these metabolites, please list them line by line in this file.  (This may concern metabolites that are acceptor/donor pairs for instance.) Otherwise, please refer to a blank file here.
+- PRIAM_db (*recommended*) is the file containing various enzyme profiles required for PRIAM's run.  
+- SEQUENCE_FILE (*required*) denotes the fasta file of protein sequences you want to annotate with ECs.
+- DATABASE (*required*) denotes the path to the Architect-specific database that can be downloaded [here]( http://compsysbio.org/projects/Architect/Database/)
+- USER_def_reax (may be *required*) denotes user-defined reactions for model reconstruction.  To create this file, please consult sample_run_user_defined.txt for an example file.
+- WARNING_mets (*optional*) is meant to override a set of reactions (concerning particular metabolites) that Architect automatically does not consider for model reconstruction; this only concerns models reconstructed using the KEGG database.  In particular, refer to the file [here](http://compsysbio.org/projects/Architect/Database/model_reconstruction/KEGG_universe/WARNING_reactions_with_formulaless_cpds.out)
+	- If you want reactions concerning any of these metabolites to be considered for model reconstruction, please list them line by line in this file.  (This may, for example, concern metabolites that are acceptor/donor pairs but which are being excluded as no formula was found for them.) 
+	- Otherwise, if you wish to use default settings or will use BiGG reactions for model reconstruction, please refer to a blank file here.
 	
 The first 10 keys concern enzyme annotation specific scripts, and the remainder model reconstruction.  If model reconstruction is not to be performed, please put a non-empty string value for these last keys.
 
