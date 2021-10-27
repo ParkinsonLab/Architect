@@ -97,6 +97,10 @@ The first 10 keys concern enzyme annotation specific scripts, and the remainder 
 	- Intermediate results are written (and overwritten in the case of multiple runs) in a temp subfolder.  These files may be of interest for the modeller interested in looking at alternate solutions.
 - The final output comes in the format of SBML or Excel files.  SBML files with the word "annotated" contain rich information such as mapping of identifiers from KEGG/BiGG to other databases.
 
+# Advanced parameter settings
+
+TODO: more information here.
+
 # References
 
 Yu, C., et al., Genome-wide enzyme annotation with precision control: catalytic families (CatFam) databases. Proteins, 2009. 74(2): p. 449-60.
