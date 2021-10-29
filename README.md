@@ -99,7 +99,7 @@ The first 10 keys concern enzyme annotation specific scripts, and the remainder 
 
 # Advanced parameter settings
 
-At specific timepoints while running Architect, you will have the option to choose between a default setting or specify settings more appropriate for your purposes.  In general, we highly recommended that the default setting is used.  However, depending on your specific situation, you may prefer to choose a setting other than the default.  Details about these alternate settings are given below.
+At specific timepoints while running Architect, you will have the option to either choose a default setting or specify other settings more appropriate for your purposes.  In general, we highly recommended that the default setting be used.  However, depending on your specific situation, you may prefer to specify a setting other than the default.  Details about these alternate settings are given below.
 
 TODO
 
