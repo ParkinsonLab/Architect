@@ -84,11 +84,11 @@ Currently using python v2, but being migrated to v3.
 						- RF 
 										
 		--arguments, -a     (optional): Additional parameters to override default ones (*) for ensemble methods. 
-						- Majority: [1, 2*, 3], [high*, low] 
+						- Majority: [1, 2*, 3, 1.5, 3.5], [high*, low] 
 						- EC_specific: [all*, high] 
-						- NB: [bernouilli*, binomial], [all*, high] 
-						- Regression: [balanced, not_balanced*] 
-						- RF: [ec_specific, generic*], [balanced, not_balanced*, balanced_subsample] 
+						- NB: [bernouilli*], [all*, high] 
+						- Regression: [balanced, not_balanced*], [l1*, l2] 
+						- RF: [ec_specific*], [balanced, not_balanced*, balanced_subsample] 
 					
 * _x_list_ecs_left_out_by_RF_classifier.py_: 
 
