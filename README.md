@@ -101,6 +101,8 @@ The first 10 keys concern enzyme annotation specific scripts, and the remainder 
 
 At specific timepoints while running Architect, you will have the option to choose between a default setting or specify settings more appropriate for your purposes.  In general, we highly recommended that the default setting is used.  However, depending on your specific situation, you may prefer to choose a setting other than the default.  Details about these alternate settings are given below.
 
+TODO
+
 # References
 
 Yu, C., et al., Genome-wide enzyme annotation with precision control: catalytic families (CatFam) databases. Proteins, 2009. 74(2): p. 449-60.
