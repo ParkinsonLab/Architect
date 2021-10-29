@@ -103,7 +103,7 @@ At specific timepoints while running Architect, you will have the option to eith
 
 ## 1.	Ensemble classifier for enzyme annotation
 
-The default ensemble classifier is the naïve Bayes classifier trained on high-confidence predictions by individual tools.  Other options TODO. 
+The default ensemble classifier is the naïve Bayes classifier trained on high-confidence predictions by individual tools.  Other options TODO.
 
 ## 2.	Inclusion of ECs not predicted by the ensemble classifier for model reconstruction
 
