@@ -63,9 +63,9 @@ Currently using python v2, but being migrated to v3.
 		
 		--output_file, -o  (required): file with the readable predictions for the next steps. 
 	
-* _run_ensemble_approach.py_: 
+* _1_run_ensemble_approach.py_: 
 
-	Runs ensemble approach of choosing given the formatted results put in readable format. 
+	Runs ensemble approach of choice given the formatted results put in readable format. 
 	
 	Arguments: 
 	
@@ -90,12 +90,11 @@ Currently using python v2, but being migrated to v3.
 						- Regression: [balanced, not_balanced*], [l1*, l2] 
 						- RF: [ec_specific*], [balanced, not_balanced*, balanced_subsample] 
 					
-* _x_list_ecs_left_out_by_RF_classifier.py_: 
+* _x_list_ecs_left_out_by_trained_classifier.py_: 
 
 	Lists the ECs predicted by each tool 
-	for which there is no trained random forest classifier (default settings).   
-	Separates those ECs	based on the level of confidence with which they are predicted.  
-	This is as per the cutoffs used for the random forest classifier.  
+	for which there is no trained classifier (default settings).   
+	Separates those ECs	based on the level of confidence with which they are predicted.   
 	This is an optional script, but recommended for model reconstruction. 				
 	
 * _x_set_up_classifiers.py_:
@@ -111,3 +110,7 @@ Currently using python v2, but being migrated to v3.
 	File containing functions that can be used for processing input from 
 	the user, as well as other functions that involve simple processing that can 
 	be used in different scripts. 
+	
+* _main.sh_:
+
+	Sample script that situates how all the above scripts work together.  Parts of this script may be useful where the user wishes to independently run each enzyme annotation tool.
