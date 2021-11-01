@@ -135,7 +135,7 @@ By default, Architect will take high-confidence EC predictions by PRIAM.  Otherw
 
 ## 3.	Inclusion of non-EC related reactions (when performing reconstructions using BiGG definitions)
 
-When performing model reconstructions using reactions as defined by BiGG, non-EC related reactions will be added based on sequence similarity. The E-value from these results is used to determine which of these reactions should be included in the model (prior to gap-filling), the default being set at E-20.  The user may opt to use a different E-value as per their requirements.
+When performing model reconstructions using reactions as defined by BiGG, non-EC related reactions will be added to the high-confidence model (that is, prior to gap-filling) based on sequence similarity. The E-value from these results is used to determine which of these reactions should be included in the model, the default being set at E-20.  The user may opt to use a different E-value as per their requirements.
 
 ## 4.	Settings for gap-filling
 
