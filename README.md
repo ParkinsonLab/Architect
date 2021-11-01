@@ -99,11 +99,15 @@ The first 10 keys concern enzyme annotation specific scripts, and the remainder 
 
 # Advanced parameter settings
 
-At specific timepoints while running Architect, you will have the option to either choose a default setting or specify other settings more appropriate for your purposes.  In general, we highly recommended that the default setting be used.  However, depending on your specific situation, you may prefer to specify a setting other than the default.  Details about these alternate settings are given below.
+At specific timepoints while running Architect, you will have the option to either choose a default setting or specify other settings more appropriate for your purposes.  In general, we highly recommend that the default setting be used.  However, depending on your specific situation, you may prefer to specify a setting other than the default.  Details about these alternate settings are given below.
 
 ## 1.	Ensemble classifier for enzyme annotation
 
-The default ensemble classifier is the naïve Bayes classifier trained on high-confidence predictions by individual tools.  Other options TODO.
+The default ensemble classifier is the naïve Bayes classifier trained on high-confidence predictions by individual tools.  Other methods of ensemble classification may alternately be used as detailed below.  For each of these methods, additional parameters need to be specified; here, as well, the user has the option to use a default set of additional parameters.
+
+| Method | Default additional parameter | Other possible additional parameters |
+| ------ | ---------------------------- | ------------------------------------ |
+| A      | B                            | C                                    |
 
 ## 2.	Inclusion of ECs not predicted by the ensemble classifier for model reconstruction
 
