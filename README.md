@@ -133,9 +133,17 @@ If you used any method other than any of the majority/voting rules for enzyme cl
 
 By default, Architect will take high-confidence EC predictions by PRIAM.  Otherwise, the user has the option to choose those predictions made with high-confidence by at least x tools, where x ranges from 1 to 5.
 
-## 3.	Settings for gap-filling
+## 3.	Inclusion of non-EC related reactions (when performing reconstructions using BiGG definitions)
 
-TODO
+When performing model reconstructions using reactions as defined by BiGG, non-EC related reactions will be added based on sequence similarity. The E-value from these results is used to determine which of these reactions should be included in the model (prior to gap-filling), the default being set at E-20.  The user may opt to use a different E-value as per their requirements.
+
+## 4.	Settings for gap-filling
+
+When performing model reconstruction, the following are the default settings:
+- A single gap-filling solution is output.
+- In the case where multiple solutions are output, a pool gap of 0.1 is utilized.
+- An integrality constraint of 10E-8 is used.
+- A penalty of 1.0 is used for the addition of transport reactions for deadend metabolites.
 
 # References
 
