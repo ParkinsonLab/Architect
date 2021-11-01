@@ -107,7 +107,7 @@ The default ensemble classifier is the naïve Bayes classifier trained on high-c
 
 | Method      | Brief description     | Default additional parameter | Other possible additional parameters |
 | ----------- | ----------------------|----------------------------- | ------------------------------------ |
-| Majority    | Majority rule         | 2/high                       | [1,1.5,2,3,3.5]/[high,low]           |
+| Majority    | Majority rule         | 2/high                       | [1, 1.5, 2, 3, 3.5]/[high, low]      |
 | EC_specific | EC-specific best tool |                              |                                      |
 | NB          | Naïve Bayes           |                              |                                      |
 | Regression  | Logistic regression   |                              |                                      |
