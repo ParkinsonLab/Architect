@@ -108,10 +108,10 @@ The default ensemble classifier is the naïve Bayes classifier trained on high-c
 | Method      | Brief description     | Default additional parameter | Other possible additional parameters |
 | ----------- | ---------------------------------------------------- | ------------------------------------ |
 | Majority    | Majority rule         | B                            | C                                    |
-| EC_specific | EC-specific best tool |                              | |
-| NB          | Naïve Bayes           | | |
-| Regression  | Logistic regression   | | |
-| RF          | Random forest         | | |
+| EC_specific | EC-specific best tool |                              |                                      |
+| NB          | Naïve Bayes           |                              |                                      |
+| Regression  | Logistic regression   |                              |                                      |
+| RF          | Random forest         |                              |                                      |
 
 ## 2.	Inclusion of ECs not predicted by the ensemble classifier for model reconstruction
 
