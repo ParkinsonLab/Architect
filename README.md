@@ -115,7 +115,17 @@ The default ensemble classifier is the naïve Bayes classifier trained on high-c
 
 Here, the value in the "Method" column should be specified to Architect, and if the additional parameters are not taken as the default, they can be specified by providing a value in each of the lists, delimited by "/" (just as the default additional parameters are specified above).
 
-Additional descriptions for the majority rule and the EC-specific best tool are given in the following table. 
+In the case of majority rule, the first parameter determines the kind of voting rule to be used (detailed below), and "high" and "low" indicate whether only high-confidence predictions or all predictions by individual tools should be considered. 
+
+| Voting rule | Explanation                                                                 |
+|-------------|-----------------------------------------------------------------------------|
+|1            |EC is assigned if predicted by at least 3 tools.                             |
+|1.5          |EC is assigned if predicted by at least 1/2 of tools that can predict the EC.|
+|2            |EC is assigned when predicted by most tools.                                 |
+|3            |EC is assigned when predicted by all 5 tools                                 |
+|3.5          |EC is assigned when predicted by all tools that cna predict the EC.          |
+
+Additional descriptions for the EC-specific best tool are given in the following table. 
 
 TODO
 
