@@ -105,9 +105,13 @@ At specific timepoints while running Architect, you will have the option to eith
 
 The default ensemble classifier is the naïve Bayes classifier trained on high-confidence predictions by individual tools.  Other methods of ensemble classification may alternately be used as detailed below.  For each of these methods, additional parameters need to be specified; here, as well, the user has the option to use a default set of additional parameters.
 
-| Method | Default additional parameter | Other possible additional parameters |
-| ------ | ---------------------------- | ------------------------------------ |
-| A      | B                            | C                                    |
+| Method      | Brief description     | Default additional parameter | Other possible additional parameters |
+| ----------- | ---------------------------------------------------- | ------------------------------------ |
+| Majority    | Majority rule         | B                            | C                                    |
+| EC_specific | EC-specific best tool |                              | |
+| NB          | Naïve Bayes           | | |
+| Regression  | Logistic regression   | | |
+| RF          | Random forest         | | |
 
 ## 2.	Inclusion of ECs not predicted by the ensemble classifier for model reconstruction
 
