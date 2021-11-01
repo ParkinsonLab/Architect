@@ -113,7 +113,7 @@ The default ensemble classifier is the naïve Bayes classifier trained on high-c
 | Regression  | Logistic regression   | not_balanced/l1              | [balanced, not_balanced], [l1, l2]   |
 | RF          | Random forest         | ec_specific/not_balanced     | [ec_specific]/[balanced, not_balanced, balanced_subsample]|
 
-Here, the value in the "Method" column should be specified to Architect, and if the additional parameters are not taken as the default, they can be specified by providing a value in each of the lists, delimited by "/" (just as the default additional parameters are specified above).
+Here, the value in the "Method" column should be specified to Architect, and if the additional parameters are not taken as the default, they can be specified by concatenating values from each of the lists (as given by the square brackets), delimiting each value by "/" (in a similar fashion to how the default additional parameters are specified above).
 
 In the case of majority rule, the first parameter determines the kind of voting rule to be used (detailed below), and "high" and "low" indicate whether only high-confidence predictions or all predictions by individual tools are considered. 
 
