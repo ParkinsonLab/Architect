@@ -108,12 +108,16 @@ The default ensemble classifier is the naïve Bayes classifier trained on high-c
 | Method      | Brief description     | Default additional parameter | Other possible additional parameters |
 | ----------- | ----------------------|----------------------------- | ------------------------------------ |
 | Majority    | Majority rule         | 2/high                       | [1, 1.5, 2, 3, 3.5]/[high, low]      |
-| EC_specific | EC-specific best tool | all                          | all/high                             |
+| EC_specific | EC-specific best tool | all                          | [all/high]                             |
 | NB          | Naïve Bayes           | bernouilli/all               | [bernouilli]/[all, high]             |
 | Regression  | Logistic regression   | not_balanced/l1              | [balanced, not_balanced], [l1, l2]   |
 | RF          | Random forest         | ec_specific/not_balanced     | [ec_specific]/[balanced, not_balanced, balanced_subsample]|
 
+Here, the value in the "Method" column should be specified to Architect, and if the additional parameters are not taken as the default, they can be specified by providing a value in each of the lists, delimited by "/" (just as the default additional parameters are specified above).
 
+Additional descriptions for the majority rule and the EC-specific best tool are given in the following table. 
+
+TODO
 
 ## 2.	Inclusion of ECs not predicted by the ensemble classifier for model reconstruction
 
