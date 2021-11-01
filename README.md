@@ -123,13 +123,15 @@ In the case of majority rule, the first parameter determines the kind of voting 
 |1.5          |EC is assigned if predicted by at least 1/2 of tools that can predict the EC.|
 |2            |EC is assigned when predicted by most tools.                                 |
 |3            |EC is assigned when predicted by all 5 tools.                                |
-|3.5          |EC is assigned when predicted by all tools that cna predict the EC.          |
+|3.5          |EC is assigned when predicted by all tools that can predict the EC.          |
 
 In the case of the EC-specific best tool, a final EC is output if it is made by the top-performing tool(s) for that EC as found in training.  The difference between "high" and "all" settings lies in the section of the training data where these top-performers are identified.  More specifically, "high" refers to those tools found to be top-performers across all subsections of the training data, whereas "all" refers to those tools giving high performance in at least one subsection of the training data (but not necessarily on all subsections).
 
 ## 2.	Inclusion of ECs not predicted by the ensemble classifier for model reconstruction
 
-TODO
+If you used any method other than any of the majority/voting rules for enzyme classification, there are EC predictions by individual tools that Architect will not necessarily be considering either due to the EC not figuring in the training data or due to the absence of a classifier for this EC. Given that this may impact model reconstruction, Architect will consider additional EC predictions by individual tools for this step. 
+
+By default, Architect will take high-confidence EC predictions by PRIAM.  Otherwise, the user has the option to choose those predictions made with high-confidence by at least x tools, where x ranges from 1 and 5.
 
 ## 3.	Settings for gap-filling
 
