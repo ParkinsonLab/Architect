@@ -143,16 +143,16 @@ When performing model reconstruction, the following is the set of (highly recomm
 
 1.	A single gap-filling solution is output.
 2.	In the case where multiple solutions are output, a pool gap of 0.1 is utilized.
-3.	An integrality constraint of E-8 is used.
+3.	An integrality tolerance of E-8 is used.
 4.	A penalty of 1.0 is used for the addition of transport reactions for deadend metabolites.
 
 Here, we provide some details about each of these parameter settings as well as any modifications that may be made as per the user's requirements (the setting number follows the one used above).
 
 | Setting | Alternate option |
 |---------|------------------|
-| 1       | More than 1 gap-filling solution may be output by the user. At this time, we unfortunately cannot guarantee the optimality of these alternate solutions given that the time complexity of the gap-filling step.|
-| 2       | This option is only applicable if the user wants to output multiple gap-filling solutions. The default option indicates that any solutions worse than 10% of the optimal will not be returned; please note that the value of a gap-filling solution is given by the sum of the penalties attributed to each of the reactions being used for gap-filling.  Setting this number lower will tighten the quality of solutions being returned, and the converse loosen these restrictions. |
-| 3       ||
+| 1       | More than 1 gap-filling solution may be output by the user. At this time, we unfortunately cannot guarantee the optimality of these alternate solutions given the time complexity of the gap-filling step.|
+| 2       | This option is only applicable if the user wants to output multiple gap-filling solutions. The default option indicates that any solutions worse than 10% of the optimal will not be returned; please note that the value of a gap-filling solution is given by the sum of the penalties attributed to each of the gap-filling reactions in question.  Setting this number lower will tighten the quality of solutions of interest, and the converse loosen these restrictions. |
+| 3       | When performing gap-filling, an integer variable is assigned to each candidate gap-filling reaction, such that, in theory, a value of 1 is ascribed to the ith candidate gap-filling reaction if this reaction is part of the gap-filling solution being returned (and 0 otherwise). In practice however, the solver will not necessarily return integral variables. The integrality tolerance indicates how far from 0 or 1 a value can be and still be considered "integral".  If you find that gap-filling is taking more time than desirable (for example, in my experience, gap-filling that takes longer than an hour and finishes on SciNet at the very least is rare), you may set this tolerance higher, for example, starting with E-7, then E-6 and so on.|
 | 4       ||
 
 # References
