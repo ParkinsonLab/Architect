@@ -157,7 +157,14 @@ Here, we provide some details about each of these parameter settings as well as 
 
 ## 5.	Number of output models
 
-If you specify to Architect to output more than one gap-filling solution, you will have the option to output as many models as you wish in Excel and SBML formats.  To be more specific, gap-filling solutions are, here, lists of reactions that can be used to obtain a model that is able to produce a minimum amount of the user-specified objective.  Gap-filled models are lists of reactions, complete with meta-data such as reaction name and metabolite name, that are ready to be used for constraints-based modeling.  The reason we separate these two kinds of outputs is that the SBML model outputs can be very large, and thus we leave it at the discretion of the user to determine the number of output models that is sensible to output.
+If you specify to Architect to output more than one gap-filling solution, you will have the option to output as many models as you wish in Excel and SBML formats.  To be more specific, two sets of output can be obtained from Architect after running its model reconstruction module.
+
+-	Gap-filling solutions are, here, lists of reactions that can be used to obtain a model that is able to produce a minimum amount of the user-specified objective.  
+-	Gap-filled models are lists of reactions, complete with meta-data such as reaction name and metabolite name, that are ready to be used for constraints-based modeling. They are found in the final  
+
+The reason we separate these two kinds of outputs is that the SBML model outputs can be very large, and thus we leave it at the discretion of the user to determine the number of output models that is sensible to output.
+
+You may find the .
 
 # References
 
