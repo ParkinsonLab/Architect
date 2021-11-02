@@ -140,6 +140,7 @@ When performing model reconstructions using reactions as defined by BiGG, non-EC
 ## 4.	Settings for gap-filling
 
 When performing model reconstruction, the following is the set of (highly recommended) default settings:
+
 a.	A single gap-filling solution is output.
 b.	In the case where multiple solutions are output, a pool gap of 0.1 is utilized.
 c.	An integrality constraint of E-8 is used.
