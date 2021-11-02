@@ -141,13 +141,10 @@ When performing model reconstructions using reactions as defined by BiGG, non-EC
 
 When performing model reconstruction, the following is the set of (highly recommended) default settings:
 
-a.	A single gap-filling solution is output.
-
-b.	In the case where multiple solutions are output, a pool gap of 0.1 is utilized.
-
-c.	An integrality constraint of E-8 is used.
-
-d.	A penalty of 1.0 is used for the addition of transport reactions for deadend metabolites.
+1.	A single gap-filling solution is output.
+2.	In the case where multiple solutions are output, a pool gap of 0.1 is utilized.
+3.	An integrality constraint of E-8 is used.
+4.	A penalty of 1.0 is used for the addition of transport reactions for deadend metabolites.
 
 Here, we provide some details about each of these parameter settings as well as any modifications that may be made as per the user's requirements.
 
