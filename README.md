@@ -92,7 +92,7 @@ The first 10 keys concern enzyme annotation specific scripts, and the remainder 
 	
 	Results with a score of at least 0.5 in files of format output_METHOD_OF_INTEREST.out are considered of high-confidence.
 	- Additional predictions of ECs that are not predictable by Architect will be output in output_preds_missed_out_METHOD_OF_INTEREST.out.  If you used a method that only considers high-confidence predictions from each tool, only left-out high-confidence predictions will be listed here. We recommend taking all supplementary high-confidence PRIAM predictions for enzyme annotation.
-- Results from model reconstruction will be at $OUTPUT_DIR/$PROJECT/model_reconstruction.  Final results will be in a subfolder called Final.  
+- Results from model reconstruction will be at $OUTPUT_DIR/$PROJECT/Model_reconstruction.  Final results will be in a subfolder called Final.  
 	- If you run Architect multiple times, you will have multiple folders called Final_x (where x is a positive integer), the most recent results where x is highest.  
 	- Intermediate results are written (and overwritten in the case of multiple runs) in a temp subfolder.  These files may be of interest for the modeller interested in looking at alternate solutions.
 - The final output comes in the format of SBML or Excel files.  SBML files with the word "annotated" contain rich information such as mapping of identifiers from KEGG/BiGG to other databases.
@@ -157,14 +157,12 @@ Here, we provide some details about each of these parameter settings as well as 
 
 ## 5.	Number of output models
 
-If you specify to Architect to output more than one gap-filling solution, you will have the option to output as many models as you wish in Excel and SBML formats.  To be more specific, two sets of output can be obtained from Architect after running its model reconstruction module.
+If you specify to Architect to output more than one gap-filling solution (say n solutions), you will have the option to output as many models ready for simulations (between 1 and n).  To be more specific, two sets of output can be obtained from Architect after running its model reconstruction module.
 
--	Gap-filling solutions are, here, lists of reactions that can be used to obtain a model that is able to produce a minimum amount of the user-specified objective.  
--	Gap-filled models are lists of reactions, complete with meta-data such as reaction name and metabolite name, that are ready to be used for constraints-based modeling. They are found in the final  
+-	Gap-filling solutions are, here, lists of reactions that can be used to obtain a model that is able to produce a minimum amount of the user-specified objective.  These results can be found in $OUTPUT_DIR/$PROJECT/Model_reconstruction/temp.  Please note that these results are overwritten whenever Architect's model reconstruction module is re-run in the same output folder.
+-	Gap-filled models are lists of reactions, complete with meta-data such as reaction name and metabolite name, that are ready to be used for constraints-based modeling. They are found in the Final_* folder under $OUTPUT_DIR/$PROJECT/Model_reconstruction and are available in Excel and SBML models.
 
-The reason we separate these two kinds of outputs is that the SBML model outputs can be very large, and thus we leave it at the discretion of the user to determine the number of output models that is sensible to output.
-
-You may find the .
+The reason I separate these two kinds of outputs is that, in my experience, the SBML model output can be very large, and thus we leave it at the discretion of the user to determine the number of output models that is sensible to output.
 
 # References
 
