@@ -159,8 +159,11 @@ Here, we provide some details about each of these parameter settings as well as 
 
 If you specify to Architect to output more than one gap-filling solution (say n solutions), you will have the option to output as many models ready for simulations (between 1 and n).  To be more specific, two sets of output can be obtained from Architect after running its model reconstruction module.
 
--	Gap-filling solutions are, here, lists of reactions that can be used to obtain a model that is able to produce a minimum amount of the user-specified objective.  These results can be found in $OUTPUT_DIR/$PROJECT/Model_reconstruction/temp.  Please note that these results are overwritten whenever Architect's model reconstruction module is re-run in the same output folder.
--	Gap-filled models are lists of reactions, complete with meta-data such as reaction name and metabolite name, that are ready to be used for constraints-based modeling. They are found in the Final_* folder under $OUTPUT_DIR/$PROJECT/Model_reconstruction and are available in Excel and SBML models.
+1.	Gap-filling solutions are, here, lists of reactions that can be used to obtain a model that is able to produce a minimum amount of the user-specified objective.  
+	-	The output here is used to actually create the final SBML and Excel outputs. 
+	-	These results can be found in $OUTPUT_DIR/$PROJECT/Model_reconstruction/temp.  Please note that these results are overwritten whenever Architect's model reconstruction module is re-run in the same output folder.
+2.	Gap-filled models are lists of reactions, complete with meta-data such as reaction name and metabolite name, that are ready to be used for constraints-based modeling. 
+	- They are found in the Final_* folder under $OUTPUT_DIR/$PROJECT/Model_reconstruction and are available in Excel and SBML models.
 
 The reason I separate these two kinds of outputs is that, in my experience, the SBML model output can be very large, and thus we leave it at the discretion of the user to determine the number of output models that is sensible to output.
 
