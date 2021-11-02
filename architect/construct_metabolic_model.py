@@ -188,7 +188,7 @@ if __name__ == '__main__':
     utils.print_with_colours("Architect will use the following parameters for model reconstruction (default):")
     utils.print_with_colours("- output a single gap-filling solution")
     utils.print_with_colours("- use a pool gap of 0.1")
-    utils.print_with_colours("- use an integrality constraint of 10E-8")
+    utils.print_with_colours("- use an integrality tolerance of 10E-8")
     utils.print_with_colours("- use a penalty of 1.0 for the addition of transport reactions for deadend metabolites")
 
     while answer not in ["Y", "N"]:
@@ -201,7 +201,7 @@ if __name__ == '__main__':
 
     num_solns = 0
     pool_gap = 0.1
-    integrality_constraint = ""
+    integrality_tolerance = ""
     penalty_deadend = ""
     if answer == "N":
         answer_1 = ""
@@ -245,12 +245,12 @@ if __name__ == '__main__':
                 status_writer.close()
                 exit()
         if answer_3 == "Y":
-            integrality_constraint = ""
-            while (not utils.is_float(integrality_constraint)) or (float(integrality_constraint) >= 1) or (float(integrality_constraint) <= 0):
-                integrality_constraint = utils.input_with_colours("Enter a number between 0 and 1 for the integrality constraint: ")
-            integrality_constraint = float(integrality_constraint)
+            integrality_tolerance = ""
+            while (not utils.is_float(integrality_tolerance)) or (float(integrality_tolerance) >= 1) or (float(integrality_tolerance) <= 0):
+                integrality_tolerance = utils.input_with_colours("Enter a number between 0 and 1 for the integrality constraint: ")
+            integrality_tolerance = float(integrality_tolerance)
             status_writer.write("Step 5: " + str(datetime.datetime.now()) + \
-                ": User wishes to change the integrality constraint to " + str(integrality_constraint) + ".\n")
+                ": User wishes to change the integrality constraint to " + str(integrality_tolerance) + ".\n")
 
         answer_4 = ""
         while answer_4 not in ["Y", "N"]:
@@ -377,8 +377,8 @@ if __name__ == '__main__':
                 temp_folder + "/SIMULATION_reaction_scores.out " + \
                 "--universe-file " + temp_folder + "/SIMULATED_reduced_universe_with_fva.xml " + \
                     "--pool-size ${NUM_SOLNS} --pool-gap " + str(pool_gap)
-    if integrality_constraint != "":
-        perform_gap_fill_command = perform_gap_fill_command + " --integrality-constraint " + str(integrality_constraint)
+    if integrality_tolerance != "":
+        perform_gap_fill_command = perform_gap_fill_command + " --integrality-tolerance " + str(integrality_tolerance)
     line_to_new_text[49] = perform_gap_fill_command
     template_file = architect_path + "/scripts/model_reconstruction/TEMPLATE_run_reconstruction.sh"
     file_to_run = main_folder_with_recon_results + "/make_reconstruction.sh"

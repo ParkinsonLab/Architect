@@ -90,7 +90,7 @@ if __name__ == '__main__':
     sbml.add_argument('--fbc2', action='store_true', help="Input SBML in sbml-fbc2 format")
 
     parser.add_argument('--exchange-format', dest='exchange_format', help=argparse.SUPPRESS)
-    parser.add_argument('--integrality-constraint', dest='int_constr', type=float, default=0.00000001, help="The integrality constraint for gap-filling")
+    parser.add_argument('--integrality-tolerance', dest='int_constr', type=float, default=0.00000001, help="The integrality tolerance for gap-filling")
 
     args = parser.parse_args()
 
