@@ -146,7 +146,14 @@ When performing model reconstruction, the following is the set of (highly recomm
 3.	An integrality constraint of E-8 is used.
 4.	A penalty of 1.0 is used for the addition of transport reactions for deadend metabolites.
 
-Here, we provide some details about each of these parameter settings as well as any modifications that may be made as per the user's requirements.
+Here, we provide some details about each of these parameter settings as well as any modifications that may be made as per the user's requirements (the setting number follows the one used above).
+
+| Setting | Alternate option |
+|---------|------------------|
+| 1       | More than 1 gap-filling solution may be output by the user. At this time, we unfortunately cannot guarantee the optimality of these alternate solutions given that the time complexity of the gap-filling step.|
+| 2       | This option is only applicable if the user wants to output multiple gap-filling solutions. The default option indicates that any solutions worse than 10% of the optimal will not be returned; please note that the value of a gap-filling solution is given by the sum of the penalties attributed to each of the reactions being used for gap-filling.  Setting this number lower will tighten the quality of solutions being returned, and the converse loosen these restrictions. |
+| 3       ||
+| 4       ||
 
 # References
 
