@@ -117,15 +117,16 @@ if __name__ == '__main__':
     # Default is under where Architect has been downloaded and in its dependency folder.
     # Otherwise, create a new folder where all this will be downloaded (if it doesn't exist yet).
     user_proceed = ""
-    path_for_tools = "tools"
     if outside_docker:
+        path_for_tools = "tools"
         while user_proceed not in ["Y", "N"]:
-            user_proceed = architect.utils.input_with_colours("Architect_tools_set_up: By default, download will be in this directory under /tools. Proceed with default? (y/n)")
+            user_proceed = architect.utils.input_with_colours("Architect_tools_set_up: By default, download will be in this directory under 'tools'. Proceed with default? (y/n)")
             user_proceed = user_proceed.strip().upper()
         if user_proceed == "N":
             path_for_tools = architect.utils.input_with_colours("Architect_tools_set_up: Please enter the complete path where you wish the download to happen.")
     else:
-        architect.utils.print_warning("Architect_tools_set_up: Tools will be downloaded in this directory under /tools.")
+        path_for_tools = "/tools"
+        architect.utils.print_warning("Architect_tools_set_up: Tools will be downloaded in the specified directory under 'tools'.")
     if not os.path.exists(path_for_tools):
         os.makedirs(path_for_tools)
 
