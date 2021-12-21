@@ -173,7 +173,7 @@ if __name__ == '__main__':
         path_of_search_tool = path_for_tools + "/PRIAM/PRIAM_search.jar"
         path_for_priam_db = path_for_tools + "/PRIAM/PRIAM_JAN18"
         
-        path_for_blast_bin = "/tools/BLAST_legacy"
+        path_for_blast_bin = "/tools/BLAST_legacy/bin"
         if outside_docker:
             path_for_blast_bin = architect.utils.input_with_colours("Please enter complete path to blast bin folder.  See Architect's README for more information.")
 
