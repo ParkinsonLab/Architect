@@ -50,6 +50,8 @@ Keep in mind that running enzyme annotation tools (as part of Architect's first 
 
 ### For using Architect on a single machine and without using Docker
 
+TODO
+
 ### For using Architect on a supercomputer/cluster
 
 TODO: details about how to download Architect, and running downloader_of_tools.py.
