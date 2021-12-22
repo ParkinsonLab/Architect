@@ -99,7 +99,7 @@ Whether you are using Docker or not, you will need a CPLEX license to perform me
 
 ### Architect prerequisites
 
-The following tools (version indicated in brackets) have been used to run Architect.  Installation of all enzyme annotation tools is recommended.
+The following tools (version indicated in brackets) have been used to run Architect.  Installation of all enzyme annotation tools is recommended, and can be effectuated by `downloader_of_tools.py`.
 
 * BLAST+
 * BLAST (v2.2.26)
