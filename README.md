@@ -41,7 +41,7 @@ If you intend to run Architect on a laptop or computer, you may use our Docker i
 3. If you do not intend to perform model reconstruction, ignore this step.  Otherwise, download the CPLEX optimizer as per the instructions given [below](#user-content-downloading-cplex-required-if-performing-model-reconstruction).  At the end, you will have a file called cplex_installer.bin.  Move this file to the folder containing the file called Dockerfile.
 4. Go to command line, navigate to the folder containing the Dockerfile, and run the following command in command line.
 
-	docker build -t local_architect . 
+	`docker build -t local_architect . `
 
 Keep in mind that running enzyme annotation tools (as part of Architect's first step) on a single machine will likely take hours, if not, days, partly because the tools will be run consecutively rather than in parallel.  To deal with this, you may choose to limit the number of tools you wish to run, or run these tools separately (as outlined below).
 
