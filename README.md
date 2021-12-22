@@ -62,7 +62,7 @@ In the absence of Docker, Architect can be run as an end-to-end tool, only if ce
 
 	`python downloader_of_tools.py --i yes` 
 
-Installation of all enzyme annotation tools is recommended. The section entitled [Architect prerequisites](#Architect-prerequisites) outlines some of the details of the tools used, and from where the enzyme annotation tools may be manually downloaded.
+Installation of all enzyme annotation tools is recommended. The section entitled [Architect prerequisites](#Architect-prerequisites) outlines some of the details of the tools used, in particular from where the enzyme annotation tools may be otherwise manually downloaded.
 
 ### For using Architect on a supercomputer/cluster
 
