@@ -56,11 +56,11 @@ In the absence of Docker, Architect can be run as an end-to-end tool, only if ce
 
 2. Next, get a copy of the code for Architect.  For example, you may use:
 
-`git clone https://github.com/parkinsonlab/architect`
+	`git clone https://github.com/parkinsonlab/architect`
 
 3. Then, a number of additional tools are required.  To install these tools, navigate to the directory where you downloaded the code for Architect, and run the following command (using python v2).  (Note that this requires user input.)
 
-`python downloader_of_tools.py --i yes` 
+	`python downloader_of_tools.py --i yes` 
 
 Installation of all enzyme annotation tools is recommended. The section entitled Architect prerequisites outlines some of the details of the tools used, and from where the enzyme annotation tools may be manually downloaded.
 
