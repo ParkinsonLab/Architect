@@ -58,7 +58,9 @@ In the absence of Docker, Architect can be run as an end-to-end tool, only if ce
 
 	`git clone https://github.com/parkinsonlab/architect`
 
-3. Then, a number of additional tools are required.  To install these tools, navigate to the directory where you downloaded the code for Architect, and run the following command (using python v2).  (Note that this requires user input.)
+3. If you do not intend to perform model reconstruction, ignore this step.  Otherwise, download the CPLEX optimizer as per the instructions given [below](#user-content-downloading-cplex-required-if-performing-model-reconstruction).  At the end, you will have a file called cplex_installer.bin.  Move this file to the folder containing the file called Dockerfile.
+
+4. Now, a number of additional tools may need to be installed.  To install these tools, navigate to the directory where you downloaded the code for Architect, and run the following command (using python v2).  (Note that this requires user input.)
 
 	`python downloader_of_tools.py --i yes` 
 
