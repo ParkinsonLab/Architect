@@ -42,6 +42,9 @@ If you intend to run Architect on a laptop or computer, you may use our Docker i
 4. Go to command line, navigate to the folder containing the Dockerfile, and run the following command in command line.
 
 	`docker build -t local_architect . `
+5. Next, run the following command to download the enzyme annotation tools used by Architect to a pre-existing folder (called `<local-dir>` below).  Make sure that `local-dir` is the complete path to the folder of interest.
+
+	`docker run -v <local-dir>:/indiv_tools -it local_architect python2 Architect/downloader_of_tools.py`
 
 Keep in mind that running enzyme annotation tools (as part of Architect's first step) on a single machine will likely take hours, if not, days, partly because the tools will be run consecutively rather than in parallel.  To deal with this, you may choose to limit the number of tools you wish to run, or run these tools separately (as outlined below).
 
