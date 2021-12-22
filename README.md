@@ -62,7 +62,7 @@ In the absence of Docker, Architect can be run as an end-to-end tool, only if ce
 
 	`python downloader_of_tools.py --i yes` 
 
-Installation of all enzyme annotation tools is recommended. The section entitled Architect prerequisites outlines some of the details of the tools used, and from where the enzyme annotation tools may be manually downloaded.
+Installation of all enzyme annotation tools is recommended. The section entitled [Architect prerequisites](#Architect-prerequisites) outlines some of the details of the tools used, and from where the enzyme annotation tools may be manually downloaded.
 
 ### For using Architect on a supercomputer/cluster
 
@@ -99,7 +99,7 @@ Whether you are using Docker or not, you will need a CPLEX license to perform me
 
 ### Architect prerequisites
 
-The following tools (version indicated in brackets) have been used to run Architect.  Installation of all enzyme annotation tools is recommended, and can be effectuated by `downloader_of_tools.py`.
+The following tools (version indicated in brackets) have been used to run Architect.  Installation of all enzyme annotation tools is recommended, and can be effectuated by running `downloader_of_tools.py`.
 
 * BLAST+
 * BLAST (v2.2.26)
