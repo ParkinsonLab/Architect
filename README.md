@@ -31,6 +31,18 @@ For more information, please contact nnursimulu@cs.toronto.edu
 
 ## Set-up
 
+### For using Architect on a single machine
+
+If you intend to run Architect on a laptop or computer, you may use our Docker image.  For this, you only need to install Docker (using [this link](https://www.docker.com/products/docker-desktop)) and follow the following instructions.
+
+TODO.
+
+Keep in mind that running enzyme annotation tools (as part of Architect's first step) on a single machine will likely take hours, if not, days, partly because the tools will be run consecutively rather than in parallel.  To deal with this, you may choose to limit the number of tools you wish to run, or run these tools separately (as outlined below).
+
+### For using Architect on a supercomputer/cluster
+
+TODO: details about how to download Architect, and running downloader_of_tools.py.
+
 In order to run Architect, please make sure that you have the following tools installed (in brackets the version is indicated).  Installation of all enzyme annotation tools is recommended.
 
 * BLAST (v2.2.26)
