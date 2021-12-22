@@ -58,7 +58,7 @@ In the absence of Docker, Architect can be run as an end-to-end tool, only if ce
 
 	`git clone https://github.com/parkinsonlab/architect`
 
-3. If you do not intend to perform model reconstruction, ignore this step.  Otherwise, download the CPLEX optimizer as per the instructions given [below](#user-content-downloading-cplex-required-if-performing-model-reconstruction).  At the end, you will have a file called cplex_installer.bin.  Move this file to the folder containing the file called Dockerfile.
+3. If you do not intend to perform model reconstruction, ignore this step.  Otherwise, download the CPLEX optimizer as per the instructions given [below](#user-content-downloading-cplex-required-if-performing-model-reconstruction) and install CPLEX on your machine.
 
 4. Now, a number of additional tools may need to be installed.  To install these tools, navigate to the directory where you downloaded the code for Architect, and run the following command (using python v2).  (Note that this requires user input.)
 
@@ -96,8 +96,9 @@ Whether you are using Docker or not, you will need a CPLEX license to perform me
 2.	Once you have logged in, go to https://www.ibm.com/academic/topic/data-science
 3.	Scroll down and choose “Software” from the menu on the left.
 4.	Choose “ILOG CPLEX Optimization Studio”.  Choose “Download” in the window that appears.
-5.	Select IBM ILOG CPLEX Optimization Studio 20.10 for Linux x86-64 (CC8ATML), scroll down and agree to the terms and conditions.  You will need the Download Director for installing the bin file.  Note that instructions will appear for installing the Download Director if you do not already have it installed.
-6.	Rename the bin file as cplex_installer.bin. 
+5.	If using Docker to run Architect, select IBM ILOG CPLEX Optimization Studio 20.10 for Linux x86-64 (CC8ATML), scroll down and agree to the terms and conditions.  You will need the Download Director for installing the bin file.  Note that instructions will appear for installing the Download Director if you do not already have it installed.
+* If not using Docker, run the version of CPLEX appropriate for your system and run the installer.
+6.	If you intend to use Docker to run Architect, rename the bin file as cplex_installer.bin.
 
 ### Architect prerequisites
 
