@@ -31,13 +31,17 @@ For more information, please contact nnursimulu@cs.toronto.edu
 
 ## Set-up
 
-There are various modes of running Architect as outlined below.
+When Architect was built, it was in many ways optimized for use by a supercomputer.  This, in particular, concerns the scripts used for running the individual tools.  Architect was tested using the Niagara supercomputer based at the University of Toronto.  For convenience, we provide alternative methods for running Architect with different set-up instructions as outlined below.
 
 ### For using Architect on a single machine and using Docker
 
-If you intend to run Architect on a laptop or computer, you may use our Docker image.  For this, you only need to install Docker (using [this link](https://www.docker.com/products/docker-desktop)) and follow the following instructions.
+If you intend to run Architect on a laptop or computer, you may use our Docker image.  Please follow the following instructions.
+1. First, install Docker on your machine ([Windows instructions](https://docs.docker.com/desktop/windows/install/) and [Mac instructions](https://docs.docker.com/desktop/mac/install/)).  Please make sure that your machine satisfies the system requirements listed.
+2. Set up a folder [with the contents of the folder Dockerfile](https://github.com/ParkinsonLab/Architect/tree/master/Dockerfile), respecting the directory structure and the names of the files. 
+3. If you do not intend to perform model reconstruction, ignore this step.  Otherwise, download the CPLEX optimizer as per the instructions given below.  At the end, you will have a file called cplex_installer.bin.  Move this file to the folder containing the file called Dockerfile.
+4. Go to command line, navigate to the folder containing the Dockerfile, and run the following command in command line.
 
-TODO.
+	docker build -t local_architect . 
 
 Keep in mind that running enzyme annotation tools (as part of Architect's first step) on a single machine will likely take hours, if not, days, partly because the tools will be run consecutively rather than in parallel.  To deal with this, you may choose to limit the number of tools you wish to run, or run these tools separately (as outlined below).
 
@@ -74,17 +78,6 @@ In addition, to run Architect as an end-to-end tool, we require that you have bo
 
 Please make sure that you have downloaded the Architect-specific database available at http://compsysbio.org/projects/Architect/Database/.  Following the first run of Architect, this folder and its contents will be modified; please be mindful of possible complications due to size requirements when you decide where to store this folder. (I have found this database to end up taking up a little over 1 GB of space following the first run of Architect.)
 
-### Downloading CPLEX (required if performing model reconstruction)
-
-Whether you are using Docker or not, you will need a CPLEX license to perform metabolic model recnstruction.  Free academic licenses can be obtained on the IBM website.  Here are some instructions for getting started:
-
-1.	First make sure you have registered for an IBMId and password on the [IBM website](https://login.ibm.com/authsvc/mtfim/sps/authsvc?PolicyId=urn:ibm:security:authentication:asf:basicldapuser&Target=https%3A%2F%2Flogin.ibm.com%2Foidc%2Fendpoint%2Fdefault%2Fauthorize%3FqsId%3Dfc767dc5-9bb8-42b4-ab8f-3a48153c48a2%26client_id%3DMyIBMDallasProdCI).
-2.	Once you have logged in, go to https://www.ibm.com/academic/topic/data-science
-3.	Scroll down and choose “Software” from the menu on the left.
-4.	Choose “ILOG CPLEX Optimization Studio”.  Choose “Download” in the window that appears.
-5.	Select IBM ILOG CPLEX Optimization Studio 20.10 for Linux x86-64 (CC8ATML), scroll down and agree to the terms and conditions.  You will need the Download Director for installing the bin file.  Note that instructions will appear for installing the Download Director if you do not already have it installed.
-
-
 ### On which system do you intend to run Architect?
 
 When Architect was built, it was in many ways optimized for use by a supercomputer.  This, in particular, concerns the scripts used for running the individual tools and model reconstruction.  Architect was tested using the Niagara supercomputer based at the University of Toronto.  If this is not your use case but you are using another supercomputer which uses the SLURM job scheduler, please make any necessary modifications that are specific to your system to the following:
@@ -101,6 +94,17 @@ If you are not using a supercomputer, please consider doing the following:
 	
 Results from individual enzyme annotation tools can be separately specified for use by Architect.  For this, please concatenate the main results from each tool into a single file, while ensuring that you remove any headers from the files.
 	
+### Downloading CPLEX (required if performing model reconstruction)
+
+Whether you are using Docker or not, you will need a CPLEX license to perform metabolic model reconstruction.  Free academic licenses can be obtained on the IBM website.  Here are some instructions for getting started:
+
+1.	First make sure you have registered for an IBMId and password on the [IBM website](https://login.ibm.com/authsvc/mtfim/sps/authsvc?PolicyId=urn:ibm:security:authentication:asf:basicldapuser&Target=https%3A%2F%2Flogin.ibm.com%2Foidc%2Fendpoint%2Fdefault%2Fauthorize%3FqsId%3Dfc767dc5-9bb8-42b4-ab8f-3a48153c48a2%26client_id%3DMyIBMDallasProdCI).
+2.	Once you have logged in, go to https://www.ibm.com/academic/topic/data-science
+3.	Scroll down and choose “Software” from the menu on the left.
+4.	Choose “ILOG CPLEX Optimization Studio”.  Choose “Download” in the window that appears.
+5.	Select IBM ILOG CPLEX Optimization Studio 20.10 for Linux x86-64 (CC8ATML), scroll down and agree to the terms and conditions.  You will need the Download Director for installing the bin file.  Note that instructions will appear for installing the Download Director if you do not already have it installed.
+6.	Rename the bin file as cplex_installer.bin. 
+
 ## Running Architect
 
 To run Architect, you first need to modify architect.sh and sample_run.in in this folder.
