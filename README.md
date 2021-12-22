@@ -48,38 +48,25 @@ If you intend to run Architect on a laptop or computer, you may use our Docker i
 
 Keep in mind that running enzyme annotation tools (as part of Architect's first step) on a single machine will likely take hours, if not, days, partly because the tools will be run consecutively rather than in parallel.  To deal with this, you may choose to limit the number of tools you wish to run, or run these tools separately (as outlined below).
 
-### For using Architect on a single machine and without using Docker
+### For using Architect without using Docker
 
-TODO
+In the absence of Docker, Architect can be run as an end-to-end tool, only if certain specifications are met on the machine/cluster being used. 
+
+1. First, we require that you have both v2 and v3 of Python installed (Architect has been tested on v2.7.16 and v3.7.1). In particular, we require that you have the conda2 and anaconda3 packages installed.  (This requirement may be changed in a future iteration of Architect. If you only need to perform enzyme annotation, conda2 suffices.)
+
+2. Next, get a copy of the code for Architect.  For example, you may use:
+
+`git clone https://github.com/parkinsonlab/architect`
+
+3. Then, a number of additional tools are required.  To install these tools, navigate to the directory where you downloaded the code for Architect, and run the following command (using python v2).  (Note that this requires user input.)
+
+`python downloader_of_tools.py --i yes` 
+
+Installation of all enzyme annotation tools is recommended. The section entitled Architect prerequisites outlines some of the details of the tools used, and from where the enzyme annotation tools may be manually downloaded.
 
 ### For using Architect on a supercomputer/cluster
 
 TODO: details about how to download Architect, and running downloader_of_tools.py.
-
-In order to run Architect, please make sure that you have the following tools installed (in brackets the version is indicated).  Installation of all enzyme annotation tools is recommended.
-
-* BLAST (v2.2.26)
-* EMBOSS (v6.6.0)
-* CatFam
-* DETECT (v2)
-* EFICAz (v2.5.1)
-* EnzDP
-* PRIAM (vJAN18)
-* Cplex
-* Diamond (v0.9.23.124)
-
-The following table lists from where the enzyme annotation tools can be downloaded.
-
-
-|Tool          | Location  |
-|--------------|-----------|
-|CatFam        | [Link](http://www.bhsai.org/downloads/catfam.tar.gz)|
-|DETECT (v2)   | [Link](https://compsysbio.org/projects/DETECTv2/DETECTv2.tar.gz)|
-|EFICAz (v2.5) | [Link](http://cssb2.biology.gatech.edu/4176ef47-d63a-4dd8-81df-98226e28579e/EFICAz2.5.1.tar.gz)|
-|EnzDP         | TBC |
-|PRIAM (v2018) | [Database](http://priam.prabi.fr/REL_JAN18/Distribution.zip) and [search tool](http://priam.prabi.fr/utilities/PRIAM_search.jar) |
-
-In addition, to run Architect as an end-to-end tool, we require that you have both v2 and v3 of Python installed (Architect has been tested on v2.7.16 and v3.7.1). In particular, we require that you have the conda2 and anaconda3 packages installed.  (This requirement may be changed in a future iteration of Architect. If you only need to perform enzyme annotation, conda2 suffices.)  
 
 Please make sure that you have downloaded the Architect-specific database available at http://compsysbio.org/projects/Architect/Database/.  Following the first run of Architect, this folder and its contents will be modified; please be mindful of possible complications due to size requirements when you decide where to store this folder. (I have found this database to end up taking up a little over 1 GB of space following the first run of Architect.)
 
@@ -109,6 +96,32 @@ Whether you are using Docker or not, you will need a CPLEX license to perform me
 4.	Choose “ILOG CPLEX Optimization Studio”.  Choose “Download” in the window that appears.
 5.	Select IBM ILOG CPLEX Optimization Studio 20.10 for Linux x86-64 (CC8ATML), scroll down and agree to the terms and conditions.  You will need the Download Director for installing the bin file.  Note that instructions will appear for installing the Download Director if you do not already have it installed.
 6.	Rename the bin file as cplex_installer.bin. 
+
+### Architect prerequisites
+
+The following tools (version indicated in brackets) have been used to run Architect.  Installation of all enzyme annotation tools is recommended.
+
+* BLAST+
+* BLAST (v2.2.26)
+* EMBOSS (v6.6.0)
+* CatFam
+* DETECT (v2)
+* EFICAz (v2.5.1)
+* EnzDP
+* PRIAM (vJAN18)
+* Cplex
+* Diamond (v0.9.23.124)
+
+The following table lists from where the enzyme annotation tools can be manually downloaded.
+
+
+|Tool          | Location  |
+|--------------|-----------|
+|CatFam        | [Link](http://www.bhsai.org/downloads/catfam.tar.gz)|
+|DETECT (v2)   | [Link](https://compsysbio.org/projects/DETECTv2/DETECTv2.tar.gz)|
+|EFICAz (v2.5) | [Link](http://cssb2.biology.gatech.edu/4176ef47-d63a-4dd8-81df-98226e28579e/EFICAz2.5.1.tar.gz)|
+|EnzDP         | TBC |
+|PRIAM (v2018) | [Database](http://priam.prabi.fr/REL_JAN18/Distribution.zip) and [search tool](http://priam.prabi.fr/utilities/PRIAM_search.jar) |
 
 ## Running Architect
 
