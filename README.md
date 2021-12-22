@@ -31,13 +31,17 @@ For more information, please contact nnursimulu@cs.toronto.edu
 
 ## Set-up
 
-### For using Architect on a single machine
+There are various modes of running Architect as outlined below.
+
+### For using Architect on a single machine and using Docker
 
 If you intend to run Architect on a laptop or computer, you may use our Docker image.  For this, you only need to install Docker (using [this link](https://www.docker.com/products/docker-desktop)) and follow the following instructions.
 
 TODO.
 
 Keep in mind that running enzyme annotation tools (as part of Architect's first step) on a single machine will likely take hours, if not, days, partly because the tools will be run consecutively rather than in parallel.  To deal with this, you may choose to limit the number of tools you wish to run, or run these tools separately (as outlined below).
+
+### For using Architect on a single machine and without using Docker
 
 ### For using Architect on a supercomputer/cluster
 
@@ -69,6 +73,17 @@ The following table lists from where the enzyme annotation tools can be download
 In addition, to run Architect as an end-to-end tool, we require that you have both v2 and v3 of Python installed (Architect has been tested on v2.7.16 and v3.7.1). In particular, we require that you have the conda2 and anaconda3 packages installed.  (This requirement may be changed in a future iteration of Architect. If you only need to perform enzyme annotation, conda2 suffices.)  
 
 Please make sure that you have downloaded the Architect-specific database available at http://compsysbio.org/projects/Architect/Database/.  Following the first run of Architect, this folder and its contents will be modified; please be mindful of possible complications due to size requirements when you decide where to store this folder. (I have found this database to end up taking up a little over 1 GB of space following the first run of Architect.)
+
+### Downloading CPLEX (required if performing model reconstruction)
+
+Whether you are using Docker or not, you will need a CPLEX license to perform metabolic model recnstruction.  Free academic licenses can be obtained on the IBM website.  Here are some instructions for getting started:
+
+1.	First make sure you have registered for an IBMId and password on the [IBM website](https://login.ibm.com/authsvc/mtfim/sps/authsvc?PolicyId=urn:ibm:security:authentication:asf:basicldapuser&Target=https%3A%2F%2Flogin.ibm.com%2Foidc%2Fendpoint%2Fdefault%2Fauthorize%3FqsId%3Dfc767dc5-9bb8-42b4-ab8f-3a48153c48a2%26client_id%3DMyIBMDallasProdCI).
+2.	Once you have logged in, go to https://www.ibm.com/academic/topic/data-science
+3.	Scroll down and choose “Software” from the menu on the left.
+4.	Choose “ILOG CPLEX Optimization Studio”.  Choose “Download” in the window that appears.
+5.	Select IBM ILOG CPLEX Optimization Studio 20.10 for Linux x86-64 (CC8ATML), scroll down and agree to the terms and conditions.  You will need the Download Director for installing the bin file.  Note that instructions will appear for installing the Download Director if you do not already have it installed.
+
 
 ### On which system do you intend to run Architect?
 
