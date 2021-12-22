@@ -4,7 +4,7 @@
 #SBATCH --job-name=DETECT
 
 # Customize path to DETECT.
-DETECT_TOOL=${HOME}/DETECTv2/detect_2.2.7.py
+DETECT_TOOL=${HOME}/DETECTv2/detect.py
 
 # Customize path to EMBOSS, and DETECT directory.
 export PATH=${HOME}/DETECTv2/:$PATH
@@ -16,15 +16,15 @@ module load lmdb;
 module load boost;
 module load gmp;
 module load blast+;
-module load anaconda3;
+#module load anaconda3; # This version runs on python2. May change later.
 
 # Go to directory with sequences
 cd DETECT
 
-DUMP_DIR=$PWD/dump
-mkdir -p $DUMP_DIR
+#DUMP_DIR=$PWD/dump # unnecessary line.
+#mkdir -p $DUMP_DIR # unnecessary line.
 
 # Customize sequence file name.
 SEQ_NAME=sequences.fa
 
-python $DETECT_TOOL ${SEQ_NAME} --output_file output_40.out --dump_dir $DUMP_DIR --n_count 40
+python $DETECT_TOOL ${SEQ_NAME} --output_file output_40.out --num_threads 40
