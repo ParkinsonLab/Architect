@@ -71,11 +71,13 @@ In the absence of Docker, Architect can be run as an end-to-end tool, only if ce
 
 In the case of EMBOSS, if you have a linux shell, you may run the following (for wish you need the `cmake` package):
 
-```wget ftp://emboss.open-bio.org/pub/EMBOSS/EMBOSS-6.6.0.tar.gz
+```
+wget ftp://emboss.open-bio.org/pub/EMBOSS/EMBOSS-6.6.0.tar.gz
 tar -xzvf EMBOSS-6.6.0.tar.gz
 cd EMBOSS-6.6.0
 sh configure
-make```
+make
+```
 
 5. Now, a number of enzyme annotation tools need to be installed.  To install these tools, navigate to the directory where you downloaded the code for Architect, and run the following command (using python v2).  (Note that this requires user input.)
 
