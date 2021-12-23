@@ -64,10 +64,10 @@ In the absence of Docker, Architect can be run as an end-to-end tool, only if ce
 
 | Tool                        | Location  |
 |-----------------------------|-----------|
-|BLAST+                       |[Link](http://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/2.7.1)|
-|BLAST (legacy version 2.2.26)|[Link](https://ftp.ncbi.nlm.nih.gov/blast/executables/legacy.NOTSUPPORTED/2.2.26/)|
-|DIAMOND                      |[Link](https://github.com/bbuchfink/diamond/releases/)|
-|EMBOSS                       |You may follow instructions such as [these](http://emboss.open-bio.org/html/adm/ch01s01.html). alternatively on a linux shell run the following `wget ftp://emboss.open-bio.org/pub/EMBOSS/EMBOSS-6.6.0.tar.gz` |
+|BLAST+                       |Download from [here](http://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/2.7.1)|
+|BLAST (legacy version 2.2.26)|Download from [here](https://ftp.ncbi.nlm.nih.gov/blast/executables/legacy.NOTSUPPORTED/2.2.26/)|
+|DIAMOND                      |Download from [here](https://github.com/bbuchfink/diamond/releases/)|
+|EMBOSS                       |You may follow instructions such as [these](http://emboss.open-bio.org/html/adm/ch01s01.html).|
 
 In the case of EMBOSS, if you have a linux shell, you may run the following (for wish you need the `cmake` package):
 
