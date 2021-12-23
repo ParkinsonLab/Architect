@@ -60,7 +60,16 @@ In the absence of Docker, Architect can be run as an end-to-end tool, only if ce
 
 3. If you do not intend to perform model reconstruction, ignore this step.  Otherwise, download the CPLEX optimizer as per the instructions given [below](#user-content-downloading-cplex-required-if-performing-model-reconstruction) and install CPLEX on your machine.
 
-4. Now, a number of additional tools may need to be installed.  To install these tools, navigate to the directory where you downloaded the code for Architect, and run the following command (using python v2).  (Note that this requires user input.)
+4. Next, the following tools should be installed.  Please follow the links and choose the files/installers specific to your system.
+
+| Tool                        | Location  |
+|-----------------------------|-----------|
+|BLAST+                       |[Link](http://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/2.7.1)|
+|BLAST (legacy version 2.2.26)|[Link](https://ftp.ncbi.nlm.nih.gov/blast/executables/legacy.NOTSUPPORTED/2.2.26/)|
+|DIAMOND                      |[Link](https://github.com/bbuchfink/diamond/releases/)|
+|EMBOSS                       |[Link](ftp://emboss.open-bio.org/pub/EMBOSS/EMBOSS-6.6.0.tar.gz)|
+
+5. Now, a number of enzyme annotation tools need to be installed.  To install these tools, navigate to the directory where you downloaded the code for Architect, and run the following command (using python v2).  (Note that this requires user input.)
 
 	`python downloader_of_tools.py --i yes` 
 
