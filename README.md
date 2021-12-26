@@ -1,3 +1,5 @@
+Currently, things on this page are being reshuffled and this repository is being updated.  We appreciate your patience in the meantime.
+
 # Architect
 
 Architect is a pipeline for automatic metabolic model reconstruction.  Given the protein sequences of an organism, enzyme annotation is first performed through ensemble approaches, followed by gap-filling.  Architect is designed to be an interactive tool for model reconstruction.
@@ -60,14 +62,16 @@ In the absence of Docker, Architect can be run as an end-to-end tool, only if ce
 
 3. Download the Database folder required for running Architect.  This file is present on the Parkinson lab's website [in a readable format](http://compsysbio.org/projects/Architect/Database/) and as [a tarred file](http://compsysbio.org/projects/Architect/Database.tar.gz).  On command line, you may use:
 
-	`wget http://compsysbio.org/projects/Architect/Database.tar.gz`
-	`tar -xzvf Database.tar.gz`
+	```
+	wget http://compsysbio.org/projects/Architect/Database.tar.gz
+	tar -xzvf Database.tar.gz
+	```
 
-Note: Following the first run of Architect, this folder and its contents will be modified; please be mindful of possible complications due to size requirements when you decide where to store this folder. (I have found this database to end up taking up a little over 1 GB of space following the first run of Architect.)
+	Note: Following the first run of Architect, this folder and its contents will be modified; please be mindful of possible complications due to size requirements when you decide where to store this folder. (I have found this database to end up taking up a little over 1 GB of space following the first run of Architect.)
 
-3. If you do not intend to perform model reconstruction, ignore this step.  Otherwise, download the CPLEX optimizer as per the instructions given [below](#user-content-downloading-cplex-required-if-performing-model-reconstruction) and install CPLEX on your machine.
+4. If you do not intend to perform model reconstruction, ignore this step.  Otherwise, download the CPLEX optimizer as per the instructions given [below](#user-content-downloading-cplex-required-if-performing-model-reconstruction) and install CPLEX on your machine.
 
-4. Next, the following tools should be installed.  Please follow the instructions below and choose the files specific to your system.  Please unpack the files for BLAST+, legacy BLAST and DIAMOND (for example using `tar -xzvf <file.tar.gz>`).
+5. Next, the following tools should be installed.  Please follow the instructions below and choose the files specific to your system.  Please unpack the files for BLAST+, legacy BLAST and DIAMOND (for example using `tar -xzvf <file.tar.gz>`).
 
 	| Tool                        | Location  |
 	|-----------------------------|-----------|
@@ -86,7 +90,7 @@ Note: Following the first run of Architect, this folder and its contents will be
 	make
 	```
 
-5. Now, a number of enzyme annotation tools need to be installed.  To install these tools, navigate to the directory where you downloaded the code for Architect, and run the following command (using python v2).  (Note that this requires user input.)
+6. Now, a number of enzyme annotation tools need to be installed.  To install these tools, navigate to the directory where you downloaded the code for Architect, and run the following command (using python v2).  (Note that this requires user input.)
 
 	`python downloader_of_tools.py --i yes` 
 
@@ -96,7 +100,6 @@ Installation of all enzyme annotation tools is recommended. The section entitled
 
 TODO: details about how to download Architect, and running downloader_of_tools.py.
 
-Please make sure that you have downloaded the Architect-specific database available at http://compsysbio.org/projects/Architect/Database/.  Following the first run of Architect, this folder and its contents will be modified; please be mindful of possible complications due to size requirements when you decide where to store this folder. (I have found this database to end up taking up a little over 1 GB of space following the first run of Architect.)
 
 ### On which system do you intend to run Architect?
 
