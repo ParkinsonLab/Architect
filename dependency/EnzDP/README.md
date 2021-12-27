@@ -1,7 +1,6 @@
-To run EnzDP, please download the code and additional datasets from the project's repository.
-This file contains details of specific modifications to be made to use EnzDP as part of Architect. 
+This README contains details of some of the specific modifications made to use EnzDP as part of Architect.  The original code can be found at https://bitbucket.org/ninhnn/enzdp/src/master/.  
 
-Please refer to http://biogpu.ddns.comp.nus.edu.sg/~nguyennn/wwwEnzDP/ for more details.
+The file `summary_of_modifications.out` contains modifications to be read programmatically by the script `perform_modifications.py` which performs some of the modifications listed below to the code found at https://bitbucket.org/ninhnn/enzdp/src/master/.  These modifications are required for running Architect.
 
 # List of Modifications
 

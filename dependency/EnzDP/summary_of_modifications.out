@@ -1,0 +1,329 @@
+# /source/run/2-EnzPro.add.pl
+135:		# Nirvana Nursimulu made this modification on January 18th, 2021.
+136:		if ($myRelGA < $zero){
+137:			$myProbability = $zero;
+138:		}
+139:		elsif ($myRelGA <1.0){
+140:			$coef = 1.2 + log(1/$myRelGA);
+141:			$myProbability = $myProbability / $coef;
+142:		};
+143:		#$myProbability = calcProb($myBScore);
+145:		#chomp($myProbability);
+146:
+147:		$myProbability 	= sprintf("%.3f",$myProbability);
+148:
+149:		print OUTPUT $mySgr ."\t". $myORF ."\t". $myPrecision ."\t". $myProbability. "\t". $myRelOpt. "\t". $PreOpt{$sgr}. "\t". $myRelGA ."\t". $PreGA{$sgr}. "\t". $myRelnoFP. "\t". $PrenoFP{$sgr} ."\t". $myRelnoFN. "\t". $PrenoFN{$sgr} ;
+150:		print OUTPUT "\t". $myEVal ."\t". $myBScore; 
+151:		print OUTPUT "\t". $_ for (@remains);
+152:		print OUTPUT "\n";
+153:	}	
+154:}
+155:close(OUTPUT);
+157:system("sort -k2,2 -k17,17nr -k12,12nr -k11,11nr -k10,10nr -k9,9nr $outFile.tmp > $outFile");
+158:unlink("$outFile.tmp");
+159:#print "OutFile is $outFile\n";
+161:##################################################
+162:##################################################
+163:##################################################
+164:
+165:sub countHit{
+166:	my $a = shift;
+167:	my @Arr = split(/\|/,$a);
+168:	my $ECCnt = 0;
+169:	my $AllCnt = 0;
+170:	foreach (@Arr){
+171:		my ($ecCnt, $allCnt) = split;
+172:		$ECCnt += $ecCnt;
+173:		$AllCnt += $allCnt;	
+174:	};
+175:
+176:	return "$ECCnt/$AllCnt";
+177:};
+178:
+179:sub sortStandard{	
+180:	my $a = shift;
+181:	#print $a ."HAHAHA\n";
+182:	my @Arr = split(/\|/,$a);
+183:	@Arr = sort @Arr;
+184:	my $Res = "";
+185:	$Res = $Res.$_."|"	foreach(@Arr);
+186:	return $Res;
+187:};
+188:
+189:
+190:sub calcProb{
+191:	my $bs = shift;
+192:	my $trainFile = "train.dat";
+193:	my $testFile = "test.dat";
+194:	$here = `pwd`;
+195:	chdir("../../progs/");
+196:	open(TMPFILE, ">$trainFile");
+197:	foreach $score(@HitBScores){
+198:		my $label = "1";
+199:		$label = "2" if ($KnownLabelOf{$score} !~ /N/);
+200:		print TMPFILE $label ." 0:1 1:". log($score)."\n";
+201:	};
+202:	close(TMPFILE);
+203:	open(TMPFILE,">$testFile");
+204:	print TMPFILE "20 0:1 1:".log($bs);
+205:	close(TMPFILE);
+206:
+207:	system("$logisticProg $trainFile $testFile > result.txt 2>null");
+208:
+209:	$result =`cat result.txt`;
+210:	
+211:	chdir($here);
+212:	return $result;
+213:};#sub
+214:
+215:#=============================
+216:sub calcPrecision{
+217:	my $bscore = shift;
+218:	my $res = 0;
+219:	my $next = $HitBScores[$#HitBScores] * 0.00;
+220:	my $prev = $HitBScores[0] * 1.10;
+221:	
+222:	my $nextPrec = $HitPrecisions[$#HitPrecisions] * 0.00;
+223:	my $prevPrec = $HitPrecisions[0] * 1.10;
+224:	my $adjust = -1;	
+225:	my $i = 0;
+226:	foreach(@HitBScores){
+227:		if ($KnownLabelOf{$_} eq "g"){
+228:			$i++;
+229:			next;		
+230:		}
+231:		if ($bscore == $_){
+232:			$adjust = 0 if ($KnownLabelOf{$bscore} =~ /N/);
+233:			$adjust = 1 if ($KnownLabelOf{$bscore} !~ /N/);
+234:		};
+235:		if ($bscore >= $_){ $next = $_; $nextPrec = $HitPrecisions[$i]; last;}
+236:		else{ $prev = $_; $prevPrec = $HitPrecisions[$i]};
+237:		$i++;
+238:	}
+239:
+240:	if ($next == $prev){ $res = $nextPrec;}
+241:	else{
+242:		$res = $nextPrec + ($prevPrec - $nextPrec)* ($bscore - $next)/($prev - $next);
+243:	}
+244:	$res = $nextPrec if ($res < 0);
+245:	$res = $res/100;
+246:
+247:	$res = 1.0 if ($res >1.0);
+248:
+249:
+250:	#$res = ($res + 1*$adjust)/2 if ($adjust ==1);
+251:	#$res = ($res + 0.25*$adjust)/1.25 if ($adjust ==0);
+252:	
+253:	if ($adjust == -1){	# not met
+254:		if ($sgr =~ /\Q1.1.1.103.sgr1\E/){
+255:			#print $lSE ."\t". $hN."\n";		
+256:		};
+257:		if ( ($nN>=10) and ($lSE > $hN) and ($myRelGA < 1.0) ){
+258:			#$coef = 1.2 + log($lSE/$hN);
+259:	#		$res = $res / $coef;
+260:			#print $sgr."\t".$coef."\n";
+261:		}
+262:	};
+263:
+264:	return sprintf("%.3f",$res);
+265:}
+266:
+
+# /source/run/3-EnzPro.filter.pl
+128:	my $orf = shift; #Nirvana Nursimulu
+129:	my @LINES = split(/\n/,$lines);
+130:	$nLine = $#LINES;
+131:
+132:	my $maxBS = 0;
+133:	my $minBS = 1e15;
+134:
+135:	my @AoA = ();
+136:	my @Good = ();
+137:
+138:	foreach my $line (@LINES){
+139:		my @TMP = split(/\s/,$line);	# $TMP[16] = best domain BS
+140:		#$maxBS = $TMP[$domId] if ($maxBS < $TMP[$domId]);
+141:		$maxBS = max($maxBS,$TMP[$domId]);
+142:		#$minBS = $TMP[$domId] if ($minBS > $TMP[$domId]);
+143:		$minBS = min($minBS,$TMP[$domId]);
+144:		push @AoA, [@TMP];
+145:		push @Good, 1;
+146:	};
+147:
+148:	my $binSize = ($maxBS-$minBS)/10;
+149:	$gBinSize = $binSize;
+150:	return if ($binSize == 0.0);
+151:
+152:#Sorting: by bin first, then by RelGA
+153:	@AoA = sort{
+154:		if ( int($a->[$domId]/$binSize) == int($b->[$domId]/$binSize)) {	# same bin:
+155:			return ($b->[$relGAId]  <=> $a->[$relGAId]); # $TMP[$relGAId] = relGA
+156:		}
+157:		else{	#different bins:
+158:			return ($b->[$domId] <=> $a->[$domId]);
+159:		}
+160:	} @AoA;
+161:
+162:	
+163:#find best domain alignment start and end:
+164:	for $i (0 .. $nLine){
+165:		$iSt = 1; $iEd = 2;
+166:		for $k ( ($domId+1) .. (scalar $AoA[$i])){
+167:		next if (!exists $AoA[$i][$k]);
+168:		next if (!exists $AoA[$i][$domId]);
+169:		if ($AoA[$i][$k] == $AoA[$i][$domId]){
+170:			$iSt = $AoA[$i][$k+3];
+171:			$iEd = $AoA[$i][$k+4];
+172:			last;
+173:		}};
+174:		$St[$i] = $iSt;
+175:		$Ed[$i] = $iEd;
+176:	};# for i=0..nLine
+177:
+178:# Check each line:
+179:	for $i (1 .. $#AoA){
+180:		$subSetFlag = 0;
+181:		for $j (0 .. ($i-1)){
+182:			next if ($Good[$j] <1);
+183:			my $iSgr = $AoA[$i][0];
+184:			my $jSgr = $AoA[$j][0];
+185:			if ((isSubSet($iSgr, $jSgr)==1) or (isSubSet($jSgr, $iSgr)==1)){;	# subset 
+186:				$subSetFlag = 1;
+187:				last;
+188:			};
+189:		};# for j first
+190:		next if ($subSetFlag == 1);
+191:
+192:		for $j (0 .. ($i-1)){
+193:			next if ($Good[$j] <1);		# Added 12-Apr
+194:			my $iSgr = $AoA[$i][0]; #NNursimulu
+195:			my $thisEC = $ECsOfECID{$ECIDOfSgr{$iSgr}}; #NNursimulu
+196:			if (overlap($St[$j], $Ed[$j], $St[$i], $Ed[$i], $orf, $thisEC) == 1){ #NNursimulu
+197:				next if ($AoA[$i][$preId] > 2*$AoA[$j][$preId]);	# precision of j is too bad compared too current i one.
+198:				$Good[$i] = 0;
+199:				#print "Line ".($i+2)." is bad because of ".($j+2)."\n\n\n";
+200:				last;
+201:			};
+202:		}; # for j second.
+203:
+204:	};
+205:
+206:	my @Res = ();
+207:	for my $i (0 .. $#AoA){		
+208:		my $str = "";
+209:		my @tmpArr = @{$AoA[$i]};
+210:		$str = $str .$_ ."\t" foreach(@tmpArr);
+211:		
+212:		next if ($Good[$i] <1);
+213:		$str = "BAD ". $str if ($Good[$i] < 1);
+215:		push(@Res,$str."\n");
+216:	};
+218:	return @Res;
+219:};# sub
+220:
+221:
+222:sub isSubSet{
+223:	my $a = shift;
+224:	my $b = shift;
+225:	
+226:	$aEC = $ECsOfECID{$ECIDOfSgr{$a}};
+227:	$bEC = $ECsOfECID{$ECIDOfSgr{$b}};
+228:
+229:	@ECArr = split(/\|/,$aEC);
+230:	foreach my $ec (@ECArr){
+231:		my $replacements = $ec =~ s/\.-//g;
+232:		my $tmpEC = "|$ec";
+233:		$tmpEC = "|$ec." if ($replacements >0);
+234:		$tmpEC = "|$ec|" if ($replacements <1);
+235:		return 0 if (index("|$bEC|",$tmpEC)<0)
+236:	};
+237:	#print "		SUB-SET!\n";
+238:	return 1;
+239:};
+240:
+241:sub overlap{
+242:	my $a = shift;
+243:	my $b = shift;
+244:	my $c = shift;
+245:	my $d = shift;
+246:	my $orf = shift; # NNursimulu
+247:	my $thisEC = shift; #NNursimulu
+248:	
+249:	my $st = max($a,$c); 	
+250:	my $ed = min($b,$d);
+251:
+252:	my $distAB = $b - $a;
+253:	my $distCD = $d - $c;
+254:	my $distOV = $ed - $st;
+255:	my $minDist = min($distAB, $distCD);
+256:	
+257:	print "[NNursimulu]: Overlap fix for $thisEC predicted for $orf. One of the sites is one amino acid long (domain intervals [$a $b] and [$c $d])." if ($minDist == 0); # Nirvana Nursimulu
+258:	return 1 if ($minDist == 0 && $distOV == 0); # Added by Nirvana Nursimulu on January 20th 2020.
+259:	return 0 if ($minDist == 0); # Added by Nirvana Nursimulu on January 15th 2020.
+260:	
+261:	my $overlapRatio = 0.0+ $distOV / $minDist;
+262:
+263:	#print "[$a $b] and [$c $d]:";
+264:	#print " have overlap [$st $ed] = $overlapRatio" if ($overlapRatio > 0.5);
+265:	#print "\n\n";
+266:	return 1 if ($overlapRatio > 0.5);
+267:	return 0;
+268:};
+
+# /source/run/EnzPro.pl
+15:if ($nARGV>4){
+16:    $nCPU = 0+$ARGV[4];
+19:$resDir = "$ARGV[3]/RES";
+
+# enzdp.py
+19:        pass
+20:
+21:    def run(self, RES_directory=None):
+22:        logging.info("Started.")
+23:        subPID = ""
+24:        try:
+25:            # NN added the following line on Dec 11th 2018.
+26:            if RES_directory is None:
+27:                cwd = os.getcwd()
+28:                RES_directory = cwd
+29:            os.chdir(ENZPRO_WD) 
+30:            # NN added the 4th argument on Dec 11th 2018.			
+31:            command = ["perl" , self.EnzProPerlScript, self.cfg['FASTA_FILE'], str(self.cfg['THRESHOLD']), self.cfg['OUTPUT_FILE'], RES_directory] 
+32:            popen = subprocess.Popen(command, bufsize=0, stdout=subprocess.PIPE, stdin=subprocess.PIPE, preexec_fn=os.setsid)
+33:            subPID = popen.pid
+34:            logging.info("Called perl with pid: [%s]" % subPID)
+35:            logging.info("Command: %s" % command)
+36:            lines_out = iter(popen.stdout.readline, '')
+37:            for line in lines_out:
+38:                if line.strip():
+39:                    logging.info(line.rstrip())
+40:        except:
+41:            logging.critical("Running failed:\n"+traceback.format_exc())
+47:
+48:if __name__ == "__main__":
+49:    if len(sys.argv)<2:
+50:        print "Usage: python %s full_path_proj_file" % sys.argv[0]
+51:        print "Example: python %s %s/sample_proj.py" % (sys.argv[0], ENZDP_ROOT)
+52:        exit(1)
+53:
+54:    PROJ_FILE = sys.argv[1]
+55:    if len(sys.argv) == 3:
+56:        RES_directory = sys.argv[2]
+57:    else:
+58:        RES_directory = None
+59:    initLog(PROJ_FILE+".log")
+60:    #initLog(ENZDP_ROOT+"%s.log"%(datetime.datetime.now().strftime("%Y%m%d")))
+61:    #initLog("/home/entri/aaa.log")
+62:    if not os.path.isfile(PROJ_FILE):
+63:        logging.critical("project file is not a file [%s]"%PROJ_FILE)
+64:        sys.stderr.write("ERROR: project file is not a file [%s]\n"%PROJ_FILE)
+65:        exit(1)
+66:    else:
+67:        logging.info("found project file")
+68:
+69:    cfg = getConfig(PROJ_FILE)
+70:
+71:    with EnzDP(cfg) as enzdpRunner:
+72:        enzdpRunner.run(RES_directory)
+73:
+
