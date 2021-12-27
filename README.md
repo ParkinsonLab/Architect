@@ -151,7 +151,7 @@ The following table lists from where the enzyme annotation tools can be manually
 |CatFam        | [Link](http://www.bhsai.org/downloads/catfam.tar.gz)|
 |DETECT (v2)   | [Link](https://compsysbio.org/projects/DETECTv2/DETECTv2.tar.gz)|
 |EFICAz (v2.5) | [Link](http://cssb2.biology.gatech.edu/4176ef47-d63a-4dd8-81df-98226e28579e/EFICAz2.5.1.tar.gz)|
-|EnzDP         | TBC |
+|EnzDP         | [Link](https://bitbucket.org/ninhnn/enzdp/src/master/) |
 |PRIAM (v2018) | [Database](http://priam.prabi.fr/REL_JAN18/Distribution.zip) and [search tool](http://priam.prabi.fr/utilities/PRIAM_search.jar) |
 
 ## Running Architect
