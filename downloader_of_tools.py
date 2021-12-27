@@ -39,6 +39,10 @@ def download_to_directory(url_address, output_folder):
     subprocess.call(["wget", url_address, "-O", output_folder])
 
 
+def clone_to_directory(url_address, output_folder):
+
+    subprocess.call(["git", "clone", url_address, output_folder])
+
 def untar_file(tarred_file, output_folder):
 
     subprocess.call(["tar", "-xzvf", tarred_file, "-C", output_folder])
@@ -57,6 +61,11 @@ def delete_file(file_name):
 def delete_folder_recursively(folder_name):
 
     shutil.rmtree(folder_name)
+
+
+def move_files(original_path, new_path):
+
+    shutil.move(original_path, new_path)
 
 
 def set_up_eficaz(eficaz_folder):
@@ -161,8 +170,20 @@ if __name__ == '__main__':
         delete_file(path_of_tarred)
         set_up_eficaz(path_for_tools + "/EFICAz2.5.1")
 
-    # Step 5: TODO: Download EnzDP.
-    # download_tool = verify_if_tool_to_be_downloaded("EnzDP", path_for_tools)
+    # Step 5: Download EnzDP.
+    download_tool = verify_if_tool_to_be_downloaded("EnzDP", path_for_tools, False)
+    if download_tool:
+        enzdp_folder = path_for_tools + "/EnzDP"
+        path_of_cloned = path_for_tools + "/tmp_EnzDP"
+        os.makedirs(path_of_cloned)
+        enzdp_url = "https://bitbucket.org/ninhnn/enzdp/src/master/"
+        
+        clone_to_directory(enzdp_url, path_of_cloned)
+        delete_file(path_of_cloned + "/EnzDP_src.zip")
+        move_files(path_of_cloned + "/trunk", enzdp_folder)
+        delete_folder_recursively(path_of_cloned)
+        unzip_file(enzdp_folder + "/HMMs.zip", enzdp_folder)
+        delete_file(enzdp_folder + "/HMMs.zip")
 
     # Step 6: Download PRIAM.
     download_tool = verify_if_tool_to_be_downloaded("PRIAM", path_for_tools)
