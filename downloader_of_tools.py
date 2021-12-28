@@ -185,6 +185,10 @@ if __name__ == '__main__':
         unzip_file(enzdp_folder + "/HMMs.zip", enzdp_folder)
         delete_file(enzdp_folder + "/HMMs.zip")
 
+        modify_enzdp = "dependency/EnzDP/perform_modifications.py"
+        architect_directory = os.path.dirname(os.path.abspath(__file__))
+        subprocess.call(["python", modify_enzdp, "--enzdp_path", enzdp_folder, "--architect_path", architect_directory])
+
     # Step 6: Download PRIAM.
     download_tool = verify_if_tool_to_be_downloaded("PRIAM", path_for_tools)
     if download_tool:
