@@ -68,7 +68,12 @@ def move_files(original_path, new_path):
     shutil.move(original_path, new_path)
 
 
-def set_up_eficaz(eficaz_folder):
+def copy_files(original_file, new_file):
+
+    shutil.copy(original_file, new_file)
+
+
+def set_up_eficaz(eficaz_folder, blast_bin_location):
 
     writer = open("set_up_eficaz.sh", "w")
     writer.write("cd " + eficaz_folder + "/bin\n")
@@ -77,6 +82,15 @@ def set_up_eficaz(eficaz_folder):
     subprocess.call(["sh", "set_up_eficaz.sh"])
 
     delete_file("set_up_eficaz.sh")
+
+    # Have files for x64. 
+    # Start by renaming old files.
+    move_files(eficaz_folder + "/bin/blastpgp", eficaz_folder + "/bin/old_blastpgp")
+    move_files(eficaz_folder + "/bin/fastacmd", eficaz_folder + "/bin/old_fastacmd")
+
+    # Make transfer from bin for BLAST.
+    copy_files(blast_bin_location + "/blastpgp", eficaz_folder + "/bin/blastpgp")
+    copy_files(blast_bin_location + "/fastacmd", eficaz_folder + "/bin/fastacmd")
 
 
 def set_up_priam(path_for_db, path_for_search_tool, blast_bin_location):
@@ -121,6 +135,9 @@ if __name__ == '__main__':
         exit()
 
     architect.utils.print_warning("\nYou have now entered Architect's downloader.")
+
+    # If user will set up EFICAz and PRIAM and is outside Docker.
+    got_path_for_blast_bin_outside_docker = False
 
     # Step 1: Set up the folder where files are going to be downloaded. 
     # Default is under where Architect has been downloaded and in its dependency folder.
@@ -168,7 +185,12 @@ if __name__ == '__main__':
         download_to_directory(eficaz_url, path_of_tarred)
         untar_file(path_of_tarred, path_for_tools)
         delete_file(path_of_tarred)
-        set_up_eficaz(path_for_tools + "/EFICAz2.5.1")
+
+        path_for_blast_bin = "/tools/BLAST_legacy/bin"
+        if outside_docker:
+            path_for_blast_bin = architect.utils.input_with_colours("Please enter complete path to blast (v2.2.6) bin folder.  See Architect's README for more information.")
+            got_path_for_blast_bin_outside_docker = True
+        set_up_eficaz(path_for_tools + "/EFICAz2.5.1", path_for_blast_bin)
 
     # Step 5: Download EnzDP.
     download_tool = verify_if_tool_to_be_downloaded("EnzDP", path_for_tools, False)
@@ -198,9 +220,11 @@ if __name__ == '__main__':
         path_of_search_tool = path_for_tools + "/PRIAM/PRIAM_search.jar"
         path_for_priam_db = path_for_tools + "/PRIAM/PRIAM_JAN18"
         
-        path_for_blast_bin = "/tools/BLAST_legacy/bin"
         if outside_docker:
-            path_for_blast_bin = architect.utils.input_with_colours("Please enter complete path to blast bin folder.  See Architect's README for more information.")
+            if not got_path_for_blast_bin_outside_docker:
+                path_for_blast_bin = architect.utils.input_with_colours("Please enter complete path to blast (v2.2.6) bin folder.  See Architect's README for more information.")
+        else:
+            path_for_blast_bin = "/tools/BLAST_legacy/bin"
 
         download_to_directory(priam_url, path_of_zipped)
         unzip_file(path_of_zipped, path_for_tools + "/PRIAM")
