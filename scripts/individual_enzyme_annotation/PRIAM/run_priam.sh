@@ -6,7 +6,7 @@
 # Customize work directory, path to sequences, and priam search jar file.
 my_WORKDIR=PRIAM
 TEST=sequences.fa
-PRIAM_SEARCH=$HOME/PRIAM/PRIAM_search_2018.jar
+PRIAM_SEARCH=$HOME/PRIAM/PRIAM_search.jar
 PRIAM_profiles_library=$HOME/PRIAM/PRIAM_JAN18
 
 module load java;
