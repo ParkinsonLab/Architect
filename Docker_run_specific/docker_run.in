@@ -1,0 +1,16 @@
+*KEY            *VALUE
+BLAST_DIR       /tools/BLAST_legacy/bin
+CATFAM_DIR      /indiv_tools/CatFam
+EMBOSS_DIR      /tools/EMBOSS-6.6.0/emboss
+DETECT_DIR      /indiv_tools/DETECTv2
+EFICAz_DIR      /indiv_tools/EFICAz2.5.1
+EnzDP_DIR       /indiv_tools/EnzDP/enzdp.py
+PRIAM_DIR       /indiv_tools/PRIAM/PRIAM_search.jar
+PRIAM_db        /indiv_tools/PRIAM/PRIAM_JAN18
+SEQUENCE_FILE   /architect_run/fasta_file.fa
+DATABASE        /tools/Architect/Database
+USER_def_reax   /architect_run/USER_defined_reactions.out
+WARNING_mets    /architect_run/WARNING_mets_to_allow.out
+CPLEX_PATH      /usr/local/lib/python3.7/dist-packages
+FRAMED_PATH     /tools/Architect/dependency/framed
+CARVEME_PATH    /tools/Architect/dependency/CarveMe

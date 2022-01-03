@@ -4,8 +4,8 @@ CATFAM_DIR      path/to/catfam
 EMBOSS_DIR      path/to/EMBOSS/EMBOSS-6.6.0/emboss
 DETECT_DIR      path/to/DETECTv2
 EFICAz_DIR      path/to/EFICAz2.5.1
-EnzDP_DIR       path/to/EnzDP/EnzDP_src/enzdp.py
-PRIAM_DIR       path/to/PRIAM/PRIAM_search_2018.jar
+EnzDP_DIR       path/to/EnzDP/enzdp.py
+PRIAM_DIR       path/to/PRIAM/PRIAM_search.jar
 PRIAM_db        path/to/PRIAM/PRIAM_JAN18
 SEQUENCE_FILE   path/to/fasta_file.fa
 DATABASE        path/to/Database
