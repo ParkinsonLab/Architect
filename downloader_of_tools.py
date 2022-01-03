@@ -119,7 +119,7 @@ if __name__ == '__main__':
 
     parser = ArgumentParser("Runs enzyme annotation tools used by Architect interactively.")
     parser.add_argument("--i", type=str, help="Specifies if running outside of Docker if and only if True.", \
-        choices=["yes", "no"], default="No")
+        choices=["yes", "no"], default="no")
 
     args = parser.parse_args()
     outside_docker = (args.i == "yes")

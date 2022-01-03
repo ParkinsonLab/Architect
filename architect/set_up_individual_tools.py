@@ -8,6 +8,25 @@ import datetime
 import utils
 
 
+def determine_tools_to_run_docker(status_writer):
+
+    tools_to_run = []
+    exclude_tools = []
+    for tool_name in ["CatFam", "DETECT", "EFICAz", "EnzDP", "PRIAM"]:
+        answer = ""
+        while answer not in ["Y", "N", "Q"]:
+            answer = utils.input_with_colours("Architect: Run " + tool_name + "? [y/n] ")
+            answer = answer.strip().upper()
+        if answer == "Y":
+            tools_to_run.append(tool_name)
+        elif answer == "N":
+            exclude_tools.append(tool_name)
+        elif answer == "Q":
+            status_writer.write("Termination:" + str(datetime.datetime.now()) + ": " + utils.TERMINATION + "\n")
+            exit()
+    return tools_to_run, exclude_tools
+
+
 def determine_num_to_split(sequence_file, status_writer):
 
     exclude_tools = []
@@ -328,12 +347,15 @@ if __name__ == '__main__':
     parser.add_argument("--project_name", type=str, help="Name of the project (eg: organism name).", required=True)
     parser.add_argument("--output_dir", type=str, help="Location of project directory (default: current working directory).", required=False, default=current_working_directory)
     parser.add_argument("--architect_path", type=str, help="Location of Architect project directory", required=True)
+    parser.add_argument("--i", type=str, help="Specifies if running outside of Docker if and only if True.", \
+        choices=["yes", "no"], default="yes")
 
     args = parser.parse_args()
     arguments_file = args.arguments_file
     output_dir = args.output_dir
     project_name = args.project_name
     architect_location = args.architect_path
+    within_docker = (args.i == "no")
 
     parameter_values = utils.read_parameter_values(arguments_file)
 
@@ -409,23 +431,31 @@ if __name__ == '__main__':
         exit()
 
     parameter_values["SEQUENCE_FILE"] = utils.get_shell_to_python_readable_location(parameter_values["SEQUENCE_FILE"])
-    tool_to_num_split, detect_time, priam_time, exclude_tools = determine_num_to_split(parameter_values["SEQUENCE_FILE"], status_writer)
+    if not within_docker:
+        tool_to_num_split, detect_time, priam_time, exclude_tools = determine_num_to_split(parameter_values["SEQUENCE_FILE"], status_writer)
+    else:
+        tools_to_run, exclude_tools = determine_tools_to_run_docker(status_writer)
 
     num_tools = str(5 - len(exclude_tools))
     status_writer.write("Step_1:" + str(datetime.datetime.now()) + ": Architect started setting up scripts for running the following " + num_tools + " individual enzyme annotation tools.\n")
-    if "CatFam" not in exclude_tools:
-        customize_catfam(architect_location, parameter_values, project_name, output_dir, tool_to_num_split["CatFam"])
-        status_writer.write("\tTool_of_interest:CatFam\n")
-    if "DETECT" not in exclude_tools:
-        customize_detect(architect_location, parameter_values, project_name, output_dir, detect_time)
-        status_writer.write("\tTool_of_interest:DETECT\n")
-    if "EFICAz" not in exclude_tools:
-        customize_eficaz(architect_location, parameter_values, project_name, output_dir, tool_to_num_split["EFICAz"])
-        status_writer.write("\tTool_of_interest:EFICAz\n")
-    if "EnzDP" not in exclude_tools:
-        customize_enzdp(architect_location, parameter_values, project_name, output_dir, tool_to_num_split["EnzDP"])
-        status_writer.write("\tTool_of_interest:EnzDP\n")
-    if "PRIAM" not in exclude_tools:
-        customize_priam(architect_location, parameter_values, project_name, output_dir, priam_time)
-        status_writer.write("\tTool_of_interest:PRIAM\n")
+    if not within_docker:
+        if "CatFam" not in exclude_tools:
+            customize_catfam(architect_location, parameter_values, project_name, output_dir, tool_to_num_split["CatFam"])
+            status_writer.write("\tTool_of_interest:CatFam\n")
+        if "DETECT" not in exclude_tools:
+            customize_detect(architect_location, parameter_values, project_name, output_dir, detect_time)
+            status_writer.write("\tTool_of_interest:DETECT\n")
+        if "EFICAz" not in exclude_tools:
+            customize_eficaz(architect_location, parameter_values, project_name, output_dir, tool_to_num_split["EFICAz"])
+            status_writer.write("\tTool_of_interest:EFICAz\n")
+        if "EnzDP" not in exclude_tools:
+            customize_enzdp(architect_location, parameter_values, project_name, output_dir, tool_to_num_split["EnzDP"])
+            status_writer.write("\tTool_of_interest:EnzDP\n")
+        if "PRIAM" not in exclude_tools:
+            customize_priam(architect_location, parameter_values, project_name, output_dir, priam_time)
+            status_writer.write("\tTool_of_interest:PRIAM\n")
+    else:
+        for tool_of_int in tools_to_run:
+            customize_docker_run(tool_of_int) #TODO
+            status_writer.write("\tTool_of_interest:" + tool_of_int + "\n")
     status_writer.close()
