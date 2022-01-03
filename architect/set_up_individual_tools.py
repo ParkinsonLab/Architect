@@ -27,6 +27,11 @@ def determine_tools_to_run_docker(status_writer):
     return tools_to_run, exclude_tools
 
 
+def customize_docker_run(tool_of_int):
+
+    utils.copy_files("/tools/Architect/scripts/individual_enz_annot_docker/" + tool_of_int, "/architect_run/" + tool_of_int)
+
+
 def determine_num_to_split(sequence_file, status_writer):
 
     exclude_tools = []
@@ -456,6 +461,6 @@ if __name__ == '__main__':
             status_writer.write("\tTool_of_interest:PRIAM\n")
     else:
         for tool_of_int in tools_to_run:
-            customize_docker_run(tool_of_int) #TODO
+            customize_docker_run(tool_of_int)
             status_writer.write("\tTool_of_interest:" + tool_of_int + "\n")
     status_writer.close()

@@ -68,24 +68,39 @@ if __name__ == '__main__':
 
     parser = ArgumentParser(description="Runs the scripts for the individual enzyme annotation tools.")
     parser.add_argument("--project_name", type=str, help="Name of the project (eg: organism name).", required=True)
-    parser.add_argument("--output_dir", type=str, help="Location of project directory (default: current working directory).", required=False, default=current_working_directory)
+    parser.add_argument("--output_dir", type=str, help="Location of project directory (default: current working directory).", \
+        required=False, default=current_working_directory)
+    parser.add_argument("--i", type=str, help="Specifies if running outside of Docker if and only if True.", \
+        choices=["yes", "no"], default="yes")
 
     args = parser.parse_args()
     output_dir = args.output_dir
     project_name = args.project_name
+    within_docker = (args.i == "no")
 
     status_file = output_dir + "/" + args.project_name + "/architect_status.out"
     tools_to_run = get_tools_to_run_from_status_file(status_file)
     # print(tools_to_run)
 
-    submit_file_script = output_dir + "/" + args.project_name + "/submit_tools.sh"
-    at_least_one = set_up_submit_script(submit_file_script, tools_to_run)
-
     status_writer = open(status_file, "a")
     status_writer.write("Step_2:" + str(datetime.datetime.now()) + ": " + utils.ABOUT_TO_RUN_ENZ_TOOL + "\n")
-    if at_least_one:
-        subprocess.call(['sh', submit_file_script]) 
-        status_writer.write("Step_2:" + str(datetime.datetime.now()) + ": Architect has started running the individual tools.\n")
+
+    if not within_docker:
+        submit_file_script = output_dir + "/" + args.project_name + "/submit_tools.sh"
+        at_least_one = set_up_submit_script(submit_file_script, tools_to_run)
+
+        if at_least_one:
+            subprocess.call(['sh', submit_file_script]) 
+            status_writer.write("Step_2:" + str(datetime.datetime.now()) + ": Architect has started running the individual tools.\n")
+        else:
+            status_writer.write("Step_2:" + str(datetime.datetime.now()) + ": Architect was not given any tools to run.\n")
     else:
-        status_writer.write("Step_2:" + str(datetime.datetime.now()) + ": Architect was not given any tools to run.\n")
+        if len(tools_to_run) == 0:
+            status_writer.write("Step_2:" + str(datetime.datetime.now()) + ": Architect was not given any tools to run.\n")
+        else:
+            status_writer.write("Step_2:" + str(datetime.datetime.now()) + ": Architect has started running the individual tools.\n")
+        for tool in tools_to_run:
+            utils.print_with_colours("Architect: Now running " + tool + ". This may take some time.")
+            subprocess.call(['sh', '/architect_run/run_' + tool.lower() + '.sh'])
+
     status_writer.close()

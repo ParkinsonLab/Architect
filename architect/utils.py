@@ -1,5 +1,6 @@
 import subprocess
 import os
+import shutil
 
 # Some key messages to be written to the status file
 ABOUT_TO_RUN_ENZ_TOOL="Architect about to run the individual tools specified above."
@@ -141,3 +142,8 @@ def check_info_set_up(filename, message):
             if message in line:
                 answer = True
     return answer
+
+
+def copy_files(original_file, new_file):
+
+    shutil.copy(original_file, new_file)
