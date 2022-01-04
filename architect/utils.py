@@ -149,6 +149,11 @@ def copy_files(original_file, new_file):
     shutil.copy(original_file, new_file)
 
 
+def copy_files_recursively(original_file, new_file):
+
+    subprocess.call(["cp", "-r", original_file, new_file])
+
+
 def download_to_directory(url_address, output_folder):
 
     subprocess.call(["wget", url_address, "-O", output_folder])
