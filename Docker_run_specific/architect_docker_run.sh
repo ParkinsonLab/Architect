@@ -1,6 +1,6 @@
 PROJECT=organism
 OUTPUT_DIR=/architect_run
-INPUT_FILE=/architect_run/docker_run.in
+INPUT_FILE=/tools/Architect/Docker_run_specific/docker_run.in
 ARCHITECT=/tools/Architect
 
 python ${ARCHITECT}/architect/set_up_individual_tools.py --arguments_file $INPUT_FILE --project_name $PROJECT --output_dir $OUTPUT_DIR --architect_path $ARCHITECT --i no
