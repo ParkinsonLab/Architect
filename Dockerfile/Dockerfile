@@ -19,10 +19,11 @@ fi
 
 RUN git clone https://github.com/ParkinsonLab/Architect
 
-RUN cd Architect \
-&& wget http://compsysbio.org/projects/Architect/Database.tar.gz \
-&& tar -xzvf Database.tar.gz \
-&& rm -rf Database.tar.gz
+# This is done at runtime.
+#RUN cd Architect \
+#&& wget http://compsysbio.org/projects/Architect/Database.tar.gz \
+#&& tar -xzvf Database.tar.gz \
+#&& rm -rf Database.tar.gz
 
 RUN mkdir /indiv_tools
 

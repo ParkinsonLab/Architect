@@ -147,3 +147,23 @@ def check_info_set_up(filename, message):
 def copy_files(original_file, new_file):
 
     shutil.copy(original_file, new_file)
+
+
+def download_to_directory(url_address, output_folder):
+
+    subprocess.call(["wget", url_address, "-O", output_folder])
+
+
+def untar_file(tarred_file, output_folder):
+
+    subprocess.call(["tar", "-xzvf", tarred_file, "-C", output_folder])
+
+
+def delete_file(file_name):
+
+    os.remove(file_name)
+
+
+def delete_folder_recursively(folder_name):
+
+    shutil.rmtree(folder_name)

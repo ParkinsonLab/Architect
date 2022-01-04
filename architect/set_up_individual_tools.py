@@ -413,6 +413,12 @@ if __name__ == '__main__':
         status_writer.write("Set up:" + str(datetime.datetime.now()) + ": Classifiers about to be set up.\n")
         utils.print_with_colours("Architect: Classifiers will now be set up.  This will take some time.")
 
+        # Only if using Docker do we download the Database here.
+        if within_docker:
+            utils.download_to_directory("http://compsysbio.org/projects/Architect/Database.tar.gz", "/tools/Architect")
+            utils.untar_file("/tools/Architect/Database.tar.gz", "/tools/Architect")
+            utils.delete_file("/tools/Architect/Database.tar.gz")
+
         set_up_command = ["python", architect_location + "/scripts/ensemble_enzyme_annotation/x_set_up_classifiers.py"]
         set_up_command.append("-t")
         set_up_command.append(enzyme_annotation_db_folder)
