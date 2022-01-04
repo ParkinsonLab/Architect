@@ -101,6 +101,6 @@ if __name__ == '__main__':
             status_writer.write("Step_2:" + str(datetime.datetime.now()) + ": Architect has started running the individual tools.\n")
         for tool in tools_to_run:
             utils.print_with_colours("Architect: Now running " + tool + ". This may take some time.")
-            subprocess.call(['sh', '/architect_run/' + tool + '/run_' + tool.lower() + '.sh'])
+            subprocess.call(['sh', '/architect_run/organism/' + tool + '/run_' + tool.lower() + '.sh'])
 
     status_writer.close()
