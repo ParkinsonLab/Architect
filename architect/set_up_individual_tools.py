@@ -29,7 +29,7 @@ def determine_tools_to_run_docker(status_writer):
 
 def customize_docker_run(tool_of_int):
 
-    utils.copy_files_recursively("/tools/Architect/scripts/individual_enz_annot_docker/" + tool_of_int, "/architect_run/" + tool_of_int)
+    utils.copy_files_recursively("/tools/Architect/scripts/individual_enz_annot_docker/" + tool_of_int, "/architect_run/organism/" + tool_of_int)
 
 
 def determine_num_to_split(sequence_file, status_writer):
