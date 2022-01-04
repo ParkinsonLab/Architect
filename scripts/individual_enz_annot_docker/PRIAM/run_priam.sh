@@ -1,6 +1,6 @@
 # Customize work directory, path to sequences, and priam search jar file.
 my_WORKDIR=/architect_run/organism/PRIAM
-TEST=/architect_run/organism/sequence.fa
+TEST=/architect_run/sequence.fa
 PRIAM_SEARCH=/indiv_tools/PRIAM/PRIAM_search.jar
 
 cd ${my_WORKDIR};

@@ -3,6 +3,6 @@ export EFICAz25_PATH
 
 cd /architect_run/organism/EFICAz
 
-cp ../sequence.fa sequence.fa
+cp ../../sequence.fa sequence.fa
 
 python $EFICAz25_PATH/bin/EFICAz_latest.py sequence.fa > output.out
