@@ -25,7 +25,7 @@ def reformat_detect_results(input_file, output_file, sequence_names):
         with open(output_file, "w") as writer:
             for line in reader:
                 line = line.strip()
-                if line == "":
+                if (line == "") or (line.startswith("ID\tEC")):
                     continue
                 split = line.split("\t")
                 seq, ec, score = split[0], split[1], split[2]
@@ -70,7 +70,7 @@ def reformat_enzdp_results(input_file, output_file, sequence_names):
         with open(output_file, "w") as writer:
             for line in reader:
                 line = line.strip()
-                if line == "":
+                if (line == "") or (line[0] == ">"):
                     continue
                 split = line.split()
                 seq, ec, score = split[0], split[1], split[2]

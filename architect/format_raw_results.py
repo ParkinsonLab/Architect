@@ -5,6 +5,22 @@ import datetime
 import subprocess
 import utils
 
+def get_location_results_docker(tool):
+
+    prefix_location = "/architect_run/organism"
+    tool_to_location = {}
+    tool_to_location["CatFam"] = prefix_location + "/CatFam/sequence.output"
+    tool_to_location["DETECT"] = prefix_location + "/DETECT/output_40.out"
+    tool_to_location["EFICAz"] = prefix_location + "/EFICAz/sequence.fa.ecpred"
+    tool_to_location["EnzDP"] = prefix_location + "/EnzDP/output.out"
+    tool_to_location["PRIAM"] = prefix_location + "/PRIAM/PRIAM_Results/PRIAM_test/ANNOTATION/sequenceECs.txt"
+    ran_tools = os.path.isdir(prefix_location + "/" + tool)
+    if ran_tools:
+        return tool_to_location[tool]
+    else:
+        return None
+
+
 if __name__ == '__main__':
 
     current_working_directory = os.getcwd()
@@ -20,12 +36,15 @@ if __name__ == '__main__':
     parser.add_argument("--output_dir", type=str, help="Location of project directory (default: current working directory).", required=False, default=current_working_directory)
     parser.add_argument("--arguments_file", type=str, help="File with the values of the parameters.", required=True)
     parser.add_argument("--architect_path", type=str, help="Location of Architect project directory", required=True)
+    parser.add_argument("--i", type=str, help="Specifies if running outside of Docker if and only if True.", \
+        choices=["yes", "no"], default="yes")
 
     args = parser.parse_args()
     output_dir = args.output_dir
     project_name = args.project_name
     arguments_file = args.arguments_file
     architect_path = args.architect_path
+    within_docker = (args.i == "no")
 
     parameter_values = utils.read_parameter_values(arguments_file)
     parameter_values["SEQUENCE_FILE"] = utils.get_shell_to_python_readable_location(parameter_values["SEQUENCE_FILE"])
@@ -48,8 +67,10 @@ if __name__ == '__main__':
         status_writer.close()
         exit()
 
-    # Ask the user if they want to provide the location of the results, or proceed with the default location of results.
+    # Ask the user if they want to provide the location of the results, or proceed with the default location of results. If within docker, make customizations.
     answer = ""
+    if within_docker:
+        answer = "N"
     while answer not in ["Y", "N"]:
         answer = utils.input_with_colours("Architect: Do you wish to proceed with the default location of results? [y/n] ")
         answer = answer.strip().upper()
@@ -61,23 +82,31 @@ if __name__ == '__main__':
     tool_to_location = {"CatFam": None, "DETECT": None, "EFICAz": None, "EnzDP": None, "PRIAM": None}
 
     if answer == "N":
-        utils.print_with_colours ("Architect: Please provide the absolute location of the concatenated results for each of the following tools.\n" + \
-            "Architect: Leave blank if not available (not recommended).\n")
-        for tool in sorted(tool_to_location.keys()):
-            answer = utils.input_with_colours(tool + ": ")
-            answer = answer.strip()
-            if answer.upper() == "Q":
-                status_writer.write("Termination:" + str(datetime.datetime.now()) + ": " + utils.TERMINATION + "\n")
-                status_writer.close()
-                exit()
-            if answer != "":
-                # Verify that file exists.
-                while not (os.path.isfile(utils.get_shell_to_python_readable_location(answer.strip()) ) ):
-                    answer = utils.input_with_colours("Architect: No file found. Please enter absolute location again or leave blank to exclude tool.\n" + tool + ": ")
-                    if answer == "":
-                        continue
-                tool_to_location[tool] = utils.get_shell_to_python_readable_location(answer.strip())
-                status_writer.write("Step_3: " + str(datetime.datetime.now()) + ": User has specified " + tool + "'s results in " + answer + ".\n")
+        if within_docker:
+            # If using docker, use default location of results.
+            for tool in sorted(tool_to_location.keys()):
+                location = get_location_results_docker(tool)
+                tool_to_location[tool] = location
+                if location is not None:
+                    status_writer.write("Step_3: " + str(datetime.datetime.now()) + ": " + tool + " results will be formatted automatically.")
+        else:
+            utils.print_with_colours ("Architect: Please provide the absolute location of the concatenated results for each of the following tools.\n" + \
+                "Architect: Leave blank if not available (not recommended).\n")
+            for tool in sorted(tool_to_location.keys()):
+                answer = utils.input_with_colours(tool + ": ")
+                answer = answer.strip()
+                if answer.upper() == "Q":
+                    status_writer.write("Termination:" + str(datetime.datetime.now()) + ": " + utils.TERMINATION + "\n")
+                    status_writer.close()
+                    exit()
+                if answer != "":
+                    # Verify that file exists.
+                    while not (os.path.isfile(utils.get_shell_to_python_readable_location(answer.strip()) ) ):
+                        answer = utils.input_with_colours("Architect: No file found. Please enter absolute location again or leave blank to exclude tool.\n" + tool + ": ")
+                        if answer == "":
+                            continue
+                    tool_to_location[tool] = utils.get_shell_to_python_readable_location(answer.strip())
+                    status_writer.write("Step_3: " + str(datetime.datetime.now()) + ": User has specified " + tool + "'s results in " + answer + ".\n")
     else:
         # Get the default location of the results and populate tool_to_location.
         prepend_folder_name = output_dir + "/" + project_name
