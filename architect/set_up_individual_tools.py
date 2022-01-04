@@ -415,9 +415,7 @@ if __name__ == '__main__':
 
         # Only if using Docker do we download the Database here.
         if within_docker:
-            utils.download_to_directory("http://compsysbio.org/projects/Architect/Database.tar.gz", "/tools/Architect")
-            utils.untar_file("/tools/Architect/Database.tar.gz", "/tools/Architect")
-            utils.delete_file("/tools/Architect/Database.tar.gz")
+            subprocess.call(["sh", "/tools/Architect/Docker_run_specific/set_up_architect_db.sh"])
 
         set_up_command = ["python", architect_location + "/scripts/ensemble_enzyme_annotation/x_set_up_classifiers.py"]
         set_up_command.append("-t")
