@@ -88,7 +88,7 @@ if __name__ == '__main__':
                 location = get_location_results_docker(tool)
                 tool_to_location[tool] = location
                 if location is not None:
-                    status_writer.write("Step_3: " + str(datetime.datetime.now()) + ": " + tool + " results will be formatted automatically.")
+                    status_writer.write("Step_3: " + str(datetime.datetime.now()) + ": " + tool + " results will be formatted automatically.\n")
         else:
             utils.print_with_colours ("Architect: Please provide the absolute location of the concatenated results for each of the following tools.\n" + \
                 "Architect: Leave blank if not available (not recommended).\n")
