@@ -20,12 +20,15 @@ if __name__ == '__main__':
     parser.add_argument("--project_name", type=str, help="Name of the project (eg: organism name).", required=True)
     parser.add_argument("--output_dir", type=str, help="Location of project directory (default: current working directory).", required=False, default=current_working_directory)
     parser.add_argument("--architect_path", type=str, help="Location of Architect project directory", required=True)
+    parser.add_argument("--i", type=str, help="Specifies if running outside of Docker if and only if True.", \
+        choices=["yes", "no"], default="yes")
 
     args = parser.parse_args()
     output_dir = args.output_dir
     project_name = args.project_name
     arguments_file = args.arguments_file
     architect_path = args.architect_path
+    within_docker = (args.i == "no")
 
     parameter_values = utils.read_parameter_values(arguments_file)
 
@@ -138,4 +141,7 @@ if __name__ == '__main__':
     subprocess.call(additional_method_command)
     status_writer.write("Step_4: " + str(datetime.datetime.now()) + ": Architect finished running the chosen method.\n")
     status_writer.close()
-    utils.print_with_colours("Architect: Enzyme annotation by ensemble approach done! Find your results under: " + main_folder_with_results + "/Ensemble_results")
+    if not within_docker:
+        utils.print_with_colours("Architect: Enzyme annotation by ensemble approach done! Find your results under: " + main_folder_with_results + "/Ensemble_results")
+    else:
+        utils.print_with_colours("Architect: Enzyme annotation by ensemble approach done!")
