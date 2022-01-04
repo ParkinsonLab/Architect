@@ -25,3 +25,5 @@ RUN cd Architect \
 && rm -rf Database.tar.gz
 
 RUN mkdir /indiv_tools
+
+RUN mkdir /architect_run
