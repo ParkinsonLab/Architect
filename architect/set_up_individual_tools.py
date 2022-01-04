@@ -24,10 +24,6 @@ def determine_tools_to_run_docker(status_writer):
         elif answer == "Q":
             status_writer.write("Termination:" + str(datetime.datetime.now()) + ": " + utils.TERMINATION + "\n")
             exit()
-        print (answer)
-        print (tools_to_run)
-        print(exclude_tools)
-        print ("--")
     return tools_to_run, exclude_tools
 
 
@@ -448,6 +444,11 @@ if __name__ == '__main__':
         tool_to_num_split, detect_time, priam_time, exclude_tools = determine_num_to_split(parameter_values["SEQUENCE_FILE"], status_writer)
     else:
         tools_to_run, exclude_tools = determine_tools_to_run_docker(status_writer)
+        print (tools_to_run)
+        print (exclude_tools)
+
+    print (tools_to_run)
+    print (exclude_tools)
 
     num_tools = str(5 - len(exclude_tools))
     status_writer.write("Step_1:" + str(datetime.datetime.now()) + ": Architect started setting up scripts for running the following " + num_tools + " individual enzyme annotation tools.\n")
