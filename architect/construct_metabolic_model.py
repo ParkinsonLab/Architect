@@ -361,7 +361,7 @@ if __name__ == '__main__':
     line_to_new_text[33] = "NUM_SOLNS=" + str(num_solns)
     line_to_new_text[34] = "NUM_OUTPUT_MODELS=" + str(num_output_models)
 
-    get_high_conf_command = "python3 ${MODEL_RECONSTRUCTION_PATH}/0_get_high_conf_set_of_reactions_from_ec.py " + \
+    get_high_conf_command = "python3.7 ${MODEL_RECONSTRUCTION_PATH}/0_get_high_conf_set_of_reactions_from_ec.py " + \
         "--ec_preds_file ${ENZ_ANNOTATION_results} --additional_preds_file ${ADDITIONAL_ENZ_results}" + \
             " --user_defined_file ${USER_DEFINED_reactions} --database ${DATABASE} --output_folder ${OUTPUT_FOLDER}" + \
                 " --fasta_file " + parameter_values["SEQUENCE_FILE"]
@@ -372,17 +372,17 @@ if __name__ == '__main__':
     get_high_conf_command = get_high_conf_command + " --warning_mets_to_include_file " + parameter_values["WARNING_mets"]
     line_to_new_text[40] = get_high_conf_command
 
-    create_universe_set_rxns = "python3 ${MODEL_RECONSTRUCTION_PATH}/1_create_universe_set_of_reactions.py " + \
+    create_universe_set_rxns = "python3.7 ${MODEL_RECONSTRUCTION_PATH}/1_create_universe_set_of_reactions.py " + \
         "--database ${DATABASE} --output_folder ${OUTPUT_FOLDER} --warning_mets_to_include_file " + parameter_values["WARNING_mets"]
     line_to_new_text[42] = create_universe_set_rxns
 
     if penalty_deadend != "":
-        new_create_scores_command = "python3 ${MODEL_RECONSTRUCTION_PATH}/2_create_reaction_scores_file.py " + \
+        new_create_scores_command = "python3.7 ${MODEL_RECONSTRUCTION_PATH}/2_create_reaction_scores_file.py " + \
             "--ec_preds_file ${ENZ_ANNOTATION_results} --database ${DATABASE} --output_folder ${OUTPUT_FOLDER} " +\
                 "--penalty_exchange " + str(penalty_deadend)
         line_to_new_text[44] = new_create_scores_command
 
-    perform_gap_fill_command = "python3 " + gapfill_script + " " + \
+    perform_gap_fill_command = "python3.7 " + gapfill_script + " " + \
         temp_folder + "/SIMULATION_high_confidence_reactions_plus_essentials.xml -m M9 -o " + \
             temp_folder + "/model_gapfilled_multi_" + str(num_solns) + ".lst --scoredb " + \
                 temp_folder + "/SIMULATION_reaction_scores.out " + \
