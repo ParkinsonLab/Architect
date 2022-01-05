@@ -8,8 +8,8 @@ module load anaconda3
 
 # Need CPLEX optimizer, and FRAMED, and CarveMe.
 CPLEX_PATH=path/to/cplex
-FRAMED_PATH=path/to/framed
-CARVEME_PATH=path/to/carveme
+FRAMED_PATH=path/to/Architect/dependency
+CARVEME_PATH=path/to/Architect/dependency
 export PYTHONPATH=${PATH}:${CPLEX_PATH}:${FRAMED_PATH}:${CARVEME_PATH}
 
 # Path to Architect info: to be defined.
