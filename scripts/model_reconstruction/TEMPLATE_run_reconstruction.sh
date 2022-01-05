@@ -1,9 +1,9 @@
 module load NiaEnv/2018a # Needed for Niagara users.
 
-# Need diamond
+# Need diamond; may be specific to Niagara users.
 module load diamond
 
-# Need Pandas
+# Need Pandas; may be specific to Niagara users.
 module load anaconda3
 
 # Need CPLEX optimizer, and FRAMED, and CarveMe.
@@ -37,19 +37,19 @@ NUM_OUTPUT_MODELS=number_of_output_models
 cd ${OUTPUT_FOLDER}
 
 # This command is overwritten directly.
-python ${MODEL_RECONSTRUCTION_PATH}/0_get_high_conf_set_of_reactions_from_ec.py --ec_preds_file ${ENZ_ANNOTATION_results} --additional_preds_file ${ADDITIONAL_ENZ_results} --user_defined_file ${USER_DEFINED_reactions} --database ${DATABASE} --output_folder ${OUTPUT_FOLDER}
+python3 ${MODEL_RECONSTRUCTION_PATH}/0_get_high_conf_set_of_reactions_from_ec.py --ec_preds_file ${ENZ_ANNOTATION_results} --additional_preds_file ${ADDITIONAL_ENZ_results} --user_defined_file ${USER_DEFINED_reactions} --database ${DATABASE} --output_folder ${OUTPUT_FOLDER}
 
-python ${MODEL_RECONSTRUCTION_PATH}/1_create_universe_set_of_reactions.py --database ${DATABASE} --output_folder ${OUTPUT_FOLDER}
+python3 ${MODEL_RECONSTRUCTION_PATH}/1_create_universe_set_of_reactions.py --database ${DATABASE} --output_folder ${OUTPUT_FOLDER}
 
-python ${MODEL_RECONSTRUCTION_PATH}/2_create_reaction_scores_file.py --ec_preds_file ${ENZ_ANNOTATION_results} --database ${DATABASE} --output_folder ${OUTPUT_FOLDER}
+python3 ${MODEL_RECONSTRUCTION_PATH}/2_create_reaction_scores_file.py --ec_preds_file ${ENZ_ANNOTATION_results} --database ${DATABASE} --output_folder ${OUTPUT_FOLDER}
 
-python ${MODEL_RECONSTRUCTION_PATH}/3_identify_gap_filling_candidates.py --output_folder ${OUTPUT_FOLDER} --user_defined_file ${USER_DEFINED_reactions}
+python3 ${MODEL_RECONSTRUCTION_PATH}/3_identify_gap_filling_candidates.py --output_folder ${OUTPUT_FOLDER} --user_defined_file ${USER_DEFINED_reactions}
 
 # This command is overwritten.
 $gapfill_script ${OUTPUT_FOLDER}/SIMULATION_high_confidence_reactions_plus_essentials.xml -m M9 -o ${OUTPUT_GAP_FILL} --scoredb ${OUTPUT_FOLDER}/SIMULATION_reaction_scores.out --universe-file ${OUTPUT_FOLDER}/SIMULATED_reduced_universe_with_fva.xml --pool-size ${NUM_SOLNS} --pool-gap POOL_GAP
 
 # This command is unnecessary but is performed as a way of computing the necessity and sufficiency of gap-filling solutions.
-python ${MODEL_RECONSTRUCTION_PATH}/x_verify_solns_necessary_and_sufficient.py --output_folder ${OUTPUT_FOLDER} --user_defined_file ${USER_DEFINED_reactions} --gap_filling_sol_file ${OUTPUT_GAP_FILL}
+python3 ${MODEL_RECONSTRUCTION_PATH}/x_verify_solns_necessary_and_sufficient.py --output_folder ${OUTPUT_FOLDER} --user_defined_file ${USER_DEFINED_reactions} --gap_filling_sol_file ${OUTPUT_GAP_FILL}
 
 # This command outputs model from gap-filling solutions.
-python ${MODEL_RECONSTRUCTION_PATH}/x_output_models_from_gapfill_soln.py --output_folder ${OUTPUT_FOLDER} --user_defined_file ${USER_DEFINED_reactions} --gap_filling_sol_file ${OUTPUT_GAP_FILL} --num_output_models ${NUM_OUTPUT_MODELS} --final_output_folder ${FINAL_OUTPUT_FOLDER} --database ${DATABASE}
+python3 ${MODEL_RECONSTRUCTION_PATH}/x_output_models_from_gapfill_soln.py --output_folder ${OUTPUT_FOLDER} --user_defined_file ${USER_DEFINED_reactions} --gap_filling_sol_file ${OUTPUT_GAP_FILL} --num_output_models ${NUM_OUTPUT_MODELS} --final_output_folder ${FINAL_OUTPUT_FOLDER} --database ${DATABASE}
