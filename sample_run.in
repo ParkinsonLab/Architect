@@ -13,4 +13,4 @@ USER_def_reax   path/to/USER_defined_reactions.out
 WARNING_mets    path/to/WARNING_mets_to_allow.out
 CPLEX_PATH      path/to/cplex
 FRAMED_PATH     path/to/Architect/dependency
-CARVEME_PATH    path/to/Architect/dependency
+CARVEME_PATH    path/to/Architect/dependency/CarveMe
