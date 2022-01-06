@@ -11,6 +11,6 @@ SEQUENCE_FILE   /architect_run/sequence.fa
 DATABASE        /tools/Architect/Database
 USER_def_reax   /architect_run/USER_defined_reactions.out
 WARNING_mets    /architect_run/WARNING_mets_to_allow.out
-CPLEX_PATH      /usr/local/lib/python3.7/dist-packages
+CPLEX_PATH      /usr/local/lib/python3.6/dist-packages
 FRAMED_PATH     /tools/Architect/dependency
 CARVEME_PATH    /tools/Architect/dependency/CarveMe
