@@ -121,11 +121,12 @@ Results from individual enzyme annotation tools can be separately specified for 
 
 Whether you are using Docker or not, you will need a CPLEX license to perform metabolic model reconstruction.  Free academic licenses can be obtained on the IBM website.  Here are some instructions for getting started:
 
-1.	First make sure you have registered for an IBMId and password on the [IBM website](https://login.ibm.com/authsvc/mtfim/sps/authsvc?PolicyId=urn:ibm:security:authentication:asf:basicldapuser&Target=https%3A%2F%2Flogin.ibm.com%2Foidc%2Fendpoint%2Fdefault%2Fauthorize%3FqsId%3Dfc767dc5-9bb8-42b4-ab8f-3a48153c48a2%26client_id%3DMyIBMDallasProdCI).
+1.	First make sure you have registered for an IBMId and password on the [IBM website](https://login.ibm.com/).
 2.	Once you have logged in, go to https://www.ibm.com/academic/topic/data-science
 3.	Scroll down and choose “Software” from the menu on the left.
 4.	Choose “ILOG CPLEX Optimization Studio”.  Choose “Download” in the window that appears.
-5.	If using Docker to run Architect, select IBM ILOG CPLEX Optimization Studio 20.10 for Linux x86-64 (CC8ATML), scroll down and agree to the terms and conditions.  If not using Docker, download the version of CPLEX appropriate for your system and run the installer.  You will need the Download Director for downloading the installer.  Instructions will appear for installing the Download Director if you do not already have it installed.
+5.	If using Docker to run Architect, enter "CJ2IKML" in the field "Part numbers".  Select "IBM ILOG CPLEX Optimization Studio 12.8 for Linux x86-64 Multilingual (CNN06ML)", scroll down and agree to the terms and conditions.  You will need the Download Director for downloading the installer.  Instructions will appear for installing the Download Director if you do not already have it installed.  Press "Details" in the window for the DownloadDirector to find where the file is present.  
+*	If not using Docker, download the version of CPLEX appropriate for your system and run the installer.
 6.	If you intend to use Docker to run Architect, rename the bin file as cplex_installer.bin.
 
 ### Architect prerequisites
