@@ -1,5 +1,3 @@
-# Nirvana Nursimulu modified this file and renamed the io folder to _io.
-
 __version__ = '0.5.2'
 
 from .cobra.deletion import reaction_deletion, gene_deletion
@@ -11,8 +9,8 @@ from .cobra.variability import FVA, blocked_reactions, flux_envelope, production
 from .cobra.simulation import FBA, pFBA, MOMA, lMOMA, ROOM
 from .cobra.thermodynamics import TFA, TVA, looplessFBA, NET
 
-from ._io.plaintext import read_model_from_file, read_cbmodel_from_file, write_model_to_file
-from ._io.sbml import load_sbml_model, load_cbmodel, load_odemodel, save_cbmodel, save_sbml_model
+from .io.plaintext import read_model_from_file, read_cbmodel_from_file, write_model_to_file
+from .io.sbml import load_sbml_model, load_cbmodel, load_odemodel, save_cbmodel, save_sbml_model
 
 from .kinetic.fitting import fit_from_metabolomics
 from .kinetic.plotting import plot_timecourse, plot_flux_sampling
