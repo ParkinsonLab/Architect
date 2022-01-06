@@ -125,8 +125,8 @@ Whether you are using Docker or not, you will need a CPLEX license to perform me
 2.	Once you have logged in, go to https://www.ibm.com/academic/topic/data-science
 3.	Scroll down and choose “Software” from the menu on the left.
 4.	Choose “ILOG CPLEX Optimization Studio”.  Choose “Download” in the window that appears.
-5.	If using Docker to run Architect, enter "CJ2IKML" in the field "Part numbers".  Select "IBM ILOG CPLEX Optimization Studio 12.8 for Linux x86-64 Multilingual (CNN06ML)", scroll down and agree to the terms and conditions.  You will need the Download Director for downloading the installer.  Instructions will appear for installing the Download Director if you do not already have it installed.  Press "Details" in the window for the DownloadDirector to find where the file is present.  
-*	If not using Docker, download the version of CPLEX appropriate for your system and run the installer.
+5.	If using Docker to run Architect, enter "CJ2IKML" in the field "Part numbers".  Select "IBM ILOG CPLEX Optimization Studio 12.8 for Linux x86-64 Multilingual (CNN06ML)", scroll down and agree to the terms and conditions.  You will need the Download Director for downloading the installer.  Instructions will appear for installing the Download Director if you do not already have it installed.  Press "Details" in the window for the Download Director to find where the file is present.  
+*	Note: If not using Docker, download the version of CPLEX appropriate for your system and run the installer.
 6.	If you intend to use Docker to run Architect, rename the bin file as cplex_installer.bin.
 
 ### Architect prerequisites
