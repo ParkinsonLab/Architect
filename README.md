@@ -213,9 +213,9 @@ In the simplest case, running Architect using Docker requires the following step
 3. Only if performing model reconstruction, create a file containing any user-defined reactions (named ``USER_defined_reactions.out``) and another with any ''warning metabolites'' (named ``WARNING_mets_to_allow.out``).  More details about these are given [below](Modifications-to-sample_run-in) when defining ``USER_def_reax`` and ``WARNING_mets`` respectively.
 4. Enter the following command in your shell, substituting ``<db-dir>``, ``<architect-run>`` and ``<local-dir>`` with the corresponding path (the latter having been defined when you built the Docker image you will be using to run Architect).
 
-```
-docker run -v <local-dir>:/indiv_tools -v <architect_run>:/architect_run -v <db-dir>:/tools/Architect/Database -it local_architect sh /tools/Architect/Docker_run_specific/architect_docker_run.sh
-```
+	```
+	docker run -v <local-dir>:/indiv_tools -v <architect_run>:/architect_run -v <db-dir>:/tools/Architect/Database -it local_architect sh /tools/Architect/Docker_run_specific/architect_docker_run.sh
+	```
 
 ### Running Architect by providing results from individual enzyme annotation tools
 
