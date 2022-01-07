@@ -139,24 +139,23 @@ $DIR/bin/conda install -y -c SBMLTeam python-libsbml
 ### Modification of specific scripts
 
 When Architect was built, it was in many ways optimized for use by a supercomputer.  This, in particular, concerns the scripts used for running the individual enzyme annotation tools.  
-*	If you are using a supercomputer (other than Niagara) which uses the SLURM job scheduler, please make any necessary modifications that are specific to your system to the following:
+*	If you are using a supercomputer (other than Niagara) which uses the SLURM job scheduler, please make any necessary modifications that are specific to your system to the following. (Please do not change the line numbers on which each remaining line of code appears as line number is important to Architect's functionality.)
 
 	- Template scripts for each tool under scripts/individual_enzyme_annotation
 	- TEMPLATE_run_reconstruction.sh under scripts/model_reconstruction
 	
-Please do not change the line numbers on which each remaining line of code appears as line number is important to Architect's functionality.
 
 * If you are using a supercomputer which does not use the SLURM job scheduler, please also follow the above instructions.  In addition, while ensuring not to change the line numbers on which each remaining line of code appears: 
 	- Modify the header for your specific system.  
 	- Modify the lines starting with ``module load`` as per your system.
 
-* If you are not using a supercomputer, please consider doing the following:
+* If you are not using a supercomputer, please do the following:
 
-	- Running the individual EC annotation tools then providing the results to Architect (You may use as an example the template scripts in scripts/individual_enzyme_annotation or even under scripts/individual_enz_annot_docker).
+	- Run the individual EC annotation tools then provide the results to Architect (You may use as an example the template scripts in scripts/individual_enzyme_annotation or even under scripts/individual_enz_annot_docker). More instructions are provided below for how this can be done.
 	- Comment out line 1 of TEMPLATE_run_reconstruction.sh.
 	- Comment out other lines starting with ``module load``.  Instead add the corresponding package to the PATH variable.  Make sure as you are doing so that you are not changing the line number where any remaining piece of code appears.
 	
-Results from individual enzyme annotation tools can be separately specified for use by Architect.  For this, please concatenate the main results from each tool into a single file.  (There is no need to do any special formatting to the raw results, such as removing headers.)  More instructions are provided below (TODO) for how this option can be used.
+TODO: MOVE THIS SECTION ELSEWHERE AS IT CAN BE USED FOR DOCKER. Results from individual enzyme annotation tools can be separately specified for use by Architect.  For this, please concatenate the main results from each tool into a single file.  (There is no need to do any special formatting to the raw results, such as removing headers.)  More instructions are provided below (TODO) for how this option can be used.
 	
 ## d. Downloading CPLEX (required if performing model reconstruction)
 
