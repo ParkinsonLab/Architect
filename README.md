@@ -9,22 +9,24 @@ Architect is designed to be an interactive tool for model reconstruction.  Archi
 For more information, please contact nnursimulu@cs.toronto.edu.
 
 ## Table of contents
-1. Overview  
-2. Set-up instructions   
-    a. For using Architect using Docker (on a single machine)  
-    b. For using Architect without using docker and on Niagara or a Niagara-like system  
-    c. Setting up Architect on an alternate system  
-    d. Downloading CPLEX (required if performing model reconstruction)  
-    e. Architect prerequisites  
-3. Instructions for running Architect  
-4. Output location  
-5. Advanced parameter settings  
-    a. Ensemble classifier for enzyme annotation  
-    b. Inclusion of ECs not predicted by the ensemble classifier for model reconstruction  
-    c. Inclusion of non-EC related reactions (when performing reconstructions using BiGG definitions)  
-    d. Settings for gap-filling  
-    e. Number of output models  
-6. References  
+1. [Overview](1-Overview)  
+2. [Set-up instructions](2-Set-up-instructions)   
+    a. [For using Architect using Docker (on a single machine)](a-For-using-Architect-using-Docker-on-a-single-machine)  
+    b. [Setting up Architect for use without Docker (on a computer cluster or otherwise)](b-Setting-up-Architect-for-use-without-Docker-on-a-computer-cluster-or-otherwise)  
+    c. [Downloading CPLEX (required if performing model reconstruction)](c-Downloading-CPLEX-required-if-performing-model-reconstruction)  
+    d. [Architect prerequisites](d-Architect-prerequisites)  
+3. [Instructions for running Architect](3-Instructions-for-running-Architect)  
+    a. [Running Architect using Docker](a-Running-Architect-using-Docker)
+    b. [Running Architect when not using Docker](b-Running-Architect-when-not-using-Docker)
+    c. [Performing model reconstruction using results from independently run individual enzyme annotation tools](c-Performing-model-reconstruction-using-results-from-independently-run-individual-enzyme-annotation-tools)
+4. [Output location](4-Output-location)  
+5. [Advanced parameter settings](5-Advanced-parameter-settings)  
+    a. [Ensemble classifier for enzyme annotation](a-Ensemble-classifier-for-enzyme-annotation)  
+    b. [Inclusion of ECs not predicted by the ensemble classifier for model reconstruction](b-Inclusion-of-ECs-not-predicted-by-the-ensemble-classifier-for-model-reconstruction)  
+    c. [Inclusion of non-EC related reactions (when performing reconstructions using BiGG definitions)](c-Inclusion-of-non-EC-related-reactions-when-performing-reconstructions-using-BiGG-definitions)  
+    d. [Settings for gap-filling](d-Settings-for-gap-filling)  
+    e. [Number of output models](e-Number-of-output-models)  
+6. [References](6-References)  
 
 # 1. Overview
 
@@ -157,7 +159,7 @@ Now, when Architect was built, it was in many ways optimized for use by a comput
 
 Installation of all enzyme annotation tools is recommended. The section entitled [Architect prerequisites](#e-Architect-prerequisites) outlines some of the details of the tools used, in particular from where the enzyme annotation tools may be otherwise manually downloaded.
 
-## d. Downloading CPLEX (required if performing model reconstruction)
+## c. Downloading CPLEX (required if performing model reconstruction)
 
 Whether you are using Docker or not, you will need the CPLEX solver to perform metabolic model reconstruction.  For academic users, the solver can be obtained for free on the IBM website; commercial users may need other options to get the solver.  Here are some instructions for getting started, customized for academic users:
 
@@ -169,7 +171,7 @@ Whether you are using Docker or not, you will need the CPLEX solver to perform m
 	*	Note: If not using Docker, download the installer for version 12.9 of CPLEX appropriate for your system (using "CJ4Z5ML" in the field "Part numbers") and run the installer.
 6.	(Ignore this step if you are not using Docker)  Rename the bin file as cplex_installer.bin.  Do not run the installer by yourself.  This is done automatically when building the Docker image for your computer.
 
-## e. Architect prerequisites
+## d. Architect prerequisites
 
 The following tools (version indicated in brackets) have been used to run Architect.  Installation of all enzyme annotation tools is recommended, and can be effectuated by running `downloader_of_tools.py`.
 
