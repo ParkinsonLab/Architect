@@ -115,7 +115,7 @@ Now, when Architect was built, it was in many ways optimized for use by a comput
 
 * If you are not using a supercomputer, please do the following:
 
-	- Run the individual EC annotation tools then provide the results to Architect (You may use as an example the template scripts in scripts/individual_enzyme_annotation or even under scripts/individual_enz_annot_docker). Details for how results from individual enzyme annotation tools can be provided to Architect are given [below](TODO).
+	- Run the individual EC annotation tools then provide the results to Architect (You may use as an example the template scripts in scripts/individual_enzyme_annotation or even under scripts/individual_enz_annot_docker). Details for how results from individual enzyme annotation tools can be provided to Architect are given [below](#c-Performing-model-reconstruction-using-results-from-independently-run-individual-enzyme-annotation-tools).
 	- Comment out line 1 of TEMPLATE_run_reconstruction.sh.
 	- Comment out other lines starting with ``module load``.  Instead add the corresponding package to the PATH variable.  Make sure as you are doing so that you are not changing the line number where any remaining piece of code appears.
 	
