@@ -138,7 +138,7 @@ $DIR/bin/conda install -y -c SBMLTeam python-libsbml
 
 ### Modification of specific scripts
 
-When Architect was built, it was in many ways optimized for use by a supercomputer.  This, in particular, concerns the scripts used for running the individual enzyme annotation tools.  
+When Architect was built, it was in many ways optimized for use by a supercomputer.  This, in particular, concerns the scripts used for running the individual enzyme annotation tools, although smaller modifications are required for model reconstruction.  
 *	If you are using a supercomputer (other than Niagara) which uses the SLURM job scheduler, please make any necessary modifications that are specific to your system to the following. (Please do not change the line numbers on which each remaining line of code appears as line number is important to Architect's functionality.)
 
 	- Template scripts for each tool under scripts/individual_enzyme_annotation
