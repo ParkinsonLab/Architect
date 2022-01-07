@@ -126,8 +126,8 @@ Installation of all enzyme annotation tools is recommended. The section entitled
 For using Architect without Docker and outside of Niagara, we require that you have both v2 and v3 of Python installed (Architect has been tested on v2.7.16 and v3.7.1). In particular, it is easiest if you have the conda2 and anaconda3 packages installed.  (If you only need to perform enzyme annotation, conda2 suffices.)
 
 Then, ensure the following two sets of dependencies are fulfilled.  (You can check this by entering ``import <package>`` in your python shell).  
-	*	In your python2 distribution, make sure you have the following packages: ``argparse``, ``numpy``, ``sklearn``, and ``biopython``.  
-	*	In your python3 distribution, make sure you have the following packages: ``argparse``, ``numpy``, ``biopython`` and ``libsbml``.
+*	In your python2 distribution, make sure you have the following packages: ``argparse``, ``numpy``, ``sklearn``, and ``biopython``.  
+*	In your python3 distribution, make sure you have the following packages: ``argparse``, ``numpy``, ``biopython`` and ``libsbml``.
 	
 Otherwise, given the directory DIR where anaconda3/conda2 is installed, you may enter the following command in your shell window for installing biopython and libsbml for example:
 
