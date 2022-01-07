@@ -5,23 +5,23 @@ Currently, things on this page are being reshuffled and this repository is being
 Architect is a pipeline for automatic metabolic model reconstruction.  Given the protein sequences of an organism, enzyme annotation is first performed through ensemble approaches, followed by gap-filling.  Architect is designed to be an interactive tool for model reconstruction.  Architect can either be run using Docker on a simple computer, or on a computer cluster such as Niagara.  In specific instances, users not using Docker will have to ensure certain dependencies are fulfilled and that certain specific modifications are made.  TODO. 
 
 ## Table of contents
-1.	Overview
-2.	Specific instructions
-	a. Set-up
-		i. For using Architect using Docker (on a single machine)
-		ii. For using Architect without using docker
-		iii. Setting up Architect on an alternate system
-		iv. Downloading CPLEX (required if performing model reconstruction)
-		v. Architect prerequisites
-	b. Running Architect
-	c. Output location
-	d. Advanced parameter settings
-		i.	Ensemble classifier for enzyme annotation
-		ii.	Inclusion of ECs not predicted by the ensemble classifier for model reconstruction
-		iii.	Inclusion of non-EC related reactions (when performing reconstructions using BiGG definitions)
-		iv.	Settings for gap-filling
-		v.	Number of output models
-3.	References
+1.	Overview  
+2.	Specific instructions  
+	a. Set-up  
+		i. For using Architect using Docker (on a single machine)  
+		ii. For using Architect without using docker  
+		iii. Setting up Architect on an alternate system  
+		iv. Downloading CPLEX (required if performing model reconstruction)  
+		v. Architect prerequisites  
+	b. Running Architect  
+	c. Output location  
+	d. Advanced parameter settings  
+		i.	Ensemble classifier for enzyme annotation  
+		ii.	Inclusion of ECs not predicted by the ensemble classifier for model reconstruction  
+		iii.	Inclusion of non-EC related reactions (when performing reconstructions using BiGG definitions)  
+		iv.	Settings for gap-filling  
+		v.	Number of output models  
+3.	References  
 
 # 1. Overview
 
