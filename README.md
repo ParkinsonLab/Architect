@@ -67,20 +67,59 @@ If you intend to run Architect on a laptop or computer, you may use our Docker i
 5. Next, run the following command to download the enzyme annotation tools used by Architect to a pre-existing folder (called `<local-dir>` below).  Make sure that `local-dir` is the complete path to the folder of interest.  Note that this command will demand input from you.
 
 	`docker run -v <local-dir>:/indiv_tools -it local_architect python2 Architect/downloader_of_tools.py`
+	
+Please keep note of the folder ``<local-dir>`` as it will be re-used whenever you run Architect.  Do not delete any of the files in this folder.
 
-Keep in mind that running enzyme annotation tools (as part of Architect's first step) on a single machine will likely take hours, if not, days, partly because the tools will be run consecutively rather than in parallel.  To deal with this, you may choose to limit the number of tools you wish to run, or run these tools separately (as outlined below).
 
-## b. For using Architect on Niagara
+## b. Setting up Architect for use without Docker (on a computer cluster or otherwise)
 
-Architect can be run as an end-to-end tool independently of Docker.  The following details steps to run Architect on [Niagara](https://docs.scinet.utoronto.ca/index.php/Niagara_Quickstart).
+For those intending to use Architect outside Docker, certain customizations are required.  Scripts currently being distributed via this Architect distribution use as examples for users of the [Niagara supercomputer based at the University of Toronto](https://docs.scinet.utoronto.ca/index.php/Niagara_Quickstart) but can easily be modified for your use case.  For Niagara users, you only need to use step 3 below.
 
-1. Get a copy of the code for Architect.  For example, you may use:
+### Step 1: Python v2 and v3 installations
+
+We require that you have both v2 and v3 of Python available (Architect has been tested on v2.7.16 and v3.7.1). In particular, it is easiest if you have the conda2 and anaconda3 packages installed.  (If you only need to perform enzyme annotation, conda2 suffices.)
+
+Then, ensure the following two sets of dependencies are fulfilled.  (You can check this by entering ``import <package>`` in your python shell).  
+*	In your python2 distribution, make sure you have the following packages: ``argparse``, ``numpy``, ``sklearn``, and ``biopython``.  
+*	In your python3 distribution, make sure you have the following packages: ``argparse``, ``numpy``, ``biopython`` and ``libsbml``.
+	
+Otherwise, given the directory DIR where anaconda3/conda2 is installed, you may enter the following command in your shell window for installing biopython and libsbml for example:
+
+```
+$DIR/bin/conda install -y biopython
+$DIR/bin/conda install -y -c SBMLTeam python-libsbml
+``` 
+
+### Step 2: Customization of specific scripts
+
+First, get a copy of the code for Architect.  For example, you may use:
 
 	```
 	git clone https://github.com/parkinsonlab/architect
 	```
 
-2. Download the Database folder required for running Architect.  This file is present on the Parkinson lab's website [in a readable format](http://compsysbio.org/projects/Architect/Database/) and as [a tarred file](http://compsysbio.org/projects/Architect/Database.tar.gz).  On command line, you may use:
+Now, when Architect was built, it was in many ways optimized for use by a computer cluster.  This, in particular, concerns the scripts used for running the individual enzyme annotation tools.  Please follow the following instructions to customize your copy of Architect for your use case.
+
+*	If you are using a supercomputer which uses the SLURM job scheduler, please make any necessary modifications that are specific to your system to the following. (Please do not change the line numbers on which each remaining line of code appears as line number is important to Architect's functionality.)
+
+	- Template scripts for each tool under scripts/individual_enzyme_annotation.
+	- TEMPLATE_run_reconstruction.sh under scripts/model_reconstruction. 
+	- For either of the above, werify that the lines starting with ``module load`` point towards a package you have in your system.  Otherwise, consider adding the directory with the package to your PATH variable.
+	
+
+* If you are using a supercomputer which does not use the SLURM job scheduler, please also follow the above instructions.  In addition, while ensuring not to change the line numbers on which each remaining line of code appears: 
+	- Modify the header for your specific system.  
+	- Modify the lines starting with ``module load`` as per your system. If the package in question is not available, you may consider adding the corresponding path to your PATH variable.
+
+* If you are not using a supercomputer, please do the following:
+
+	- Run the individual EC annotation tools then provide the results to Architect (You may use as an example the template scripts in scripts/individual_enzyme_annotation or even under scripts/individual_enz_annot_docker). Details for how results from individual enzyme annotation tools can be provided to Architect are given [below](TODO).
+	- Comment out line 1 of TEMPLATE_run_reconstruction.sh.
+	- Comment out other lines starting with ``module load``.  Instead add the corresponding package to the PATH variable.  Make sure as you are doing so that you are not changing the line number where any remaining piece of code appears.
+	
+### Step 3: Complete set-up.
+
+1. Download the Database folder required for running Architect.  This file is present on the Parkinson lab's website [in a readable format](http://compsysbio.org/projects/Architect/Database/) and as [a tarred file](http://compsysbio.org/projects/Architect/Database.tar.gz).  On command line, you may use:
 
 	```
 	wget http://compsysbio.org/projects/Architect/Database.tar.gz
@@ -89,9 +128,9 @@ Architect can be run as an end-to-end tool independently of Docker.  The followi
 
 	Note: Following the first run of Architect, this folder and its contents will be modified; please be mindful of possible complications due to size requirements when you decide where to store this folder. (I have found this database to end up taking up a little over 1 GB of space following the first run of Architect.)
 
-3. (If you do not intend to perform model reconstruction, ignore this step.)  Install the CPLEX optimizer as per the instructions given [below](#user-content-downloading-cplex-required-if-performing-model-reconstruction) and install CPLEX on your machine.
+2. (If you do not intend to perform model reconstruction, ignore this step.)  Install the CPLEX optimizer as per the instructions given [below](#user-content-downloading-cplex-required-if-performing-model-reconstruction) and install CPLEX on your machine.
 
-4. Next, the following tools should be installed.  Please follow the instructions below and choose the files specific to your system.  Please unpack the files for BLAST+, legacy BLAST and DIAMOND (for example using `tar -xzvf <file.tar.gz>`).
+3. Next, the following tools should be installed.  Please follow the instructions below and choose the files specific to your system.  Please unpack the files for BLAST+, legacy BLAST and DIAMOND (for example using `tar -xzvf <file.tar.gz>`).
 
 	| Tool                        | Location  |
 	|-----------------------------|-----------|
@@ -110,7 +149,7 @@ Architect can be run as an end-to-end tool independently of Docker.  The followi
 	make
 	```
 
-5. Now, a number of enzyme annotation tools need to be installed.  To install these tools, navigate to the directory where you downloaded the code for Architect, and run the following command (using python v2).  (Note that this requires user input.)
+4. Now, a number of enzyme annotation tools need to be installed.  To install these tools, navigate to the directory where you downloaded the code for Architect, and run the following command (using python v2).  (Note that this requires user input.)
 
 	```
 	python2 downloader_of_tools.py --i yes
@@ -118,49 +157,6 @@ Architect can be run as an end-to-end tool independently of Docker.  The followi
 
 Installation of all enzyme annotation tools is recommended. The section entitled [Architect prerequisites](#e-Architect-prerequisites) outlines some of the details of the tools used, in particular from where the enzyme annotation tools may be otherwise manually downloaded.
 
-
-## c. Setting up Architect on an alternate system
-
-### Step 1: Python v2 and v3 installations
-
-For using Architect without Docker and outside of Niagara, we require that you have both v2 and v3 of Python installed (Architect has been tested on v2.7.16 and v3.7.1). In particular, it is easiest if you have the conda2 and anaconda3 packages installed.  (If you only need to perform enzyme annotation, conda2 suffices.)
-
-Then, ensure the following two sets of dependencies are fulfilled.  (You can check this by entering ``import <package>`` in your python shell).  
-*	In your python2 distribution, make sure you have the following packages: ``argparse``, ``numpy``, ``sklearn``, and ``biopython``.  
-*	In your python3 distribution, make sure you have the following packages: ``argparse``, ``numpy``, ``biopython`` and ``libsbml``.
-	
-Otherwise, given the directory DIR where anaconda3/conda2 is installed, you may enter the following command in your shell window for installing biopython and libsbml for example:
-
-```
-$DIR/bin/conda install -y biopython
-$DIR/bin/conda install -y -c SBMLTeam python-libsbml
-``` 
-
-### Step 2: Modification of specific scripts
-
-When Architect was built, it was in many ways optimized for use by a supercomputer.  This, in particular, concerns the scripts used for running the individual enzyme annotation tools, although smaller modifications are required for model reconstruction.  Following download of Architect ([same 1st step for using Architect on Niagara](#b-For-using-Architect-on-Niagara)), please follow the following instructions.
-*	If you are using a supercomputer (other than Niagara) which uses the SLURM job scheduler, please make any necessary modifications that are specific to your system to the following. (Please do not change the line numbers on which each remaining line of code appears as line number is important to Architect's functionality.)
-
-	- Template scripts for each tool under scripts/individual_enzyme_annotation
-	- TEMPLATE_run_reconstruction.sh under scripts/model_reconstruction
-	- Verify that the lines starting with ``module load`` point towards a package you have in your system.  Otherwise, consider adding the directory with the package to your PATH variable.
-	
-
-* If you are using a supercomputer which does not use the SLURM job scheduler, please also follow the above instructions.  In addition, while ensuring not to change the line numbers on which each remaining line of code appears: 
-	- Modify the header for your specific system.  
-	- Modify the lines starting with ``module load`` as per your system. If the package in question is not available, you may consider adding the corresponding path to your PATH variable.
-
-* If you are not using a supercomputer, please do the following:
-
-	- Run the individual EC annotation tools then provide the results to Architect (You may use as an example the template scripts in scripts/individual_enzyme_annotation or even under scripts/individual_enz_annot_docker). Details for how results from individual enzyme annotation tools can be provided to Architect are given [below](TODO).
-	- Comment out line 1 of TEMPLATE_run_reconstruction.sh.
-	- Comment out other lines starting with ``module load``.  Instead add the corresponding package to the PATH variable.  Make sure as you are doing so that you are not changing the line number where any remaining piece of code appears.
-	
-### Step 3: Complete set-up.
-
-Follow steps 2 onwards as detailed [above](#b-For-using-Architect-on-Niagara).
-
-	
 ## d. Downloading CPLEX (required if performing model reconstruction)
 
 Whether you are using Docker or not, you will need the CPLEX solver to perform metabolic model reconstruction.  For academic users, the solver can be obtained for free on the IBM website; commercial users may need other options to get the solver.  Here are some instructions for getting started, customized for academic users:
@@ -211,7 +207,7 @@ Different procedures are utilized to run Architect depending on whether you are 
 
 In the simplest case, running Architect using Docker requires the following steps:  
 1. Set up the following directories:  
-	i. A directory to contain an Architect-specific database folder.  (Note that this folder will be augmented the first time Architect is run.)  Call the global path to this directory (including the folder name) ``db-dir``.
+	i. A directory to contain an Architect-specific database folder.  Note that this folder will be augmented the first time Architect is run.  Please re-use the same folder in any subsequent re-runs of Architect and please refrain from modifying any contents of this folder.  Call the global path to this directory (including the folder name) ``db-dir``.
 	ii. A directory to contain the output from Architect.  (Important note: you should not have a folder named ``organism`` already in this folder.)  Call the global path to this directory (including the folder name) ``architect-run``.  
 2. Copy your sequence file to ``architect-run`` and rename it to ``sequence.fa``.
 3. Only if performing model reconstruction, create a file containing any user-defined reactions (named ``USER_defined_reactions.out``) and another with any ''warning metabolites'' (named ``WARNING_mets_to_allow.out``).  More details about these are given [below](Modifications-to-sample_run-in) when defining ``USER_def_reax`` and ``WARNING_mets`` respectively.
