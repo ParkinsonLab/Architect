@@ -3,7 +3,9 @@ Currently, things on this page are being reshuffled and this repository is being
 # Architect
 
 Architect is a pipeline for automatic metabolic model reconstruction.  Given the protein sequences of an organism, enzyme annotation is first performed through ensemble approaches, followed by gap-filling.  
-Architect is designed to be an interactive tool for model reconstruction.  Architect can either be run using Docker on a simple computer, or on a computer cluster such as [Niagara](https://docs.scinet.utoronto.ca/index.php/Niagara_Quickstart).  In specific instances, users not using Docker will have to ensure certain dependencies are fulfilled and that certain specific modifications are made; these are detailed in this document. 
+
+Architect is designed to be an interactive tool for model reconstruction.  Architect can either be run using Docker on a simple computer, or on a computer cluster such as [Niagara](https://docs.scinet.utoronto.ca/index.php/Niagara_Quickstart).  In specific instances, users not using Docker will have to ensure certain dependencies are fulfilled and that certain specific modifications are made; these are detailed in this document.  
+
 For more information, please contact nnursimulu@cs.toronto.edu.
 
 ## Table of contents
