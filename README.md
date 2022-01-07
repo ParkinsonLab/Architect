@@ -7,15 +7,15 @@ Architect is a pipeline for automatic metabolic model reconstruction.  Given the
 ## Table of contents
 1.	Overview  
 2.	Specific instructions  
-	a. Set-up  
-		i. For using Architect using Docker (on a single machine)  
-		ii. For using Architect without using docker  
-		iii. Setting up Architect on an alternate system  
-		iv. Downloading CPLEX (required if performing model reconstruction)  
-		v. Architect prerequisites  
-	b. Running Architect  
-	c. Output location  
-	d. Advanced parameter settings  
+	a.	Set-up  
+		i.	For using Architect using Docker (on a single machine)  
+		ii.	For using Architect without using docker  
+		iii.	Setting up Architect on an alternate system  
+		iv.	Downloading CPLEX (required if performing model reconstruction)  
+		v.	Architect prerequisites  
+	b.	Running Architect  
+	c.	Output location  
+	d.	Advanced parameter settings  
 		i.	Ensemble classifier for enzyme annotation  
 		ii.	Inclusion of ECs not predicted by the ensemble classifier for model reconstruction  
 		iii.	Inclusion of non-EC related reactions (when performing reconstructions using BiGG definitions)  
