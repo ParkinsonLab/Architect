@@ -152,15 +152,13 @@ When Architect was built, it was in many ways optimized for use by a supercomput
 
 * If you are not using a supercomputer, please do the following:
 
-	- Run the individual EC annotation tools then provide the results to Architect (You may use as an example the template scripts in scripts/individual_enzyme_annotation or even under scripts/individual_enz_annot_docker). More instructions are provided below for how this can be done.
+	- Run the individual EC annotation tools then provide the results to Architect (You may use as an example the template scripts in scripts/individual_enzyme_annotation or even under scripts/individual_enz_annot_docker). Details for how results from individual enzyme annotation tools can be provided to Architect are given [below](TODO).
 	- Comment out line 1 of TEMPLATE_run_reconstruction.sh.
 	- Comment out other lines starting with ``module load``.  Instead add the corresponding package to the PATH variable.  Make sure as you are doing so that you are not changing the line number where any remaining piece of code appears.
 	
 ### Step 3: Complete set-up.
 
 Follow steps 2 onwards as detailed [above](#b-For-using-Architect-on-Niagara).
-	
-TODO: MOVE THIS SECTION ELSEWHERE AS IT CAN BE USED FOR DOCKER. Results from individual enzyme annotation tools can be separately specified for use by Architect.  For this, please concatenate the main results from each tool into a single file.  (There is no need to do any special formatting to the raw results, such as removing headers.)  More instructions are provided below (TODO) for how this option can be used.
 
 	
 ## d. Downloading CPLEX (required if performing model reconstruction)
@@ -203,9 +201,44 @@ The following table lists from where the enzyme annotation tools can be manually
 
 # 3. Instructions for running Architect
 
-To run Architect, you first need to modify architect.sh and sample_run.in in this folder.
+In essence two files are used to run Architect: a file similar to ``architect.sh`` in this directory and another taking the form of ``sample_run.in``, again present here. These files indicate the path for various user input and dependencies.  
+
+Different procedures are utilized to run Architect depending on whether you are using Docker, Niagara or any other system. 
+
+## a. Running Architect using Docker
+
+### Running Architect by running individual enzyme annotation tools
+
+In the simplest case, running Architect using Docker requires the following steps:  
+1. Set up the following directories:  
+	i. A directory to contain an Architect-specific database folder.  (Note that this folder will be augmented the first time Architect is run.)  Call the global path to this directory (including the folder name) ``db-dir``.
+	ii. A directory to contain the output from Architect.  Call the global path to this directory (including the folder name) ``architect-run``.  
+2. Copy your sequence file to ``architect-run`` and rename it to ``sequence.fa``.
+3. Only if performing model reconstruction, create a file containing any user-defined reactions (named ``USER_defined_reactions.out``) and another with any ''warning metabolites'' (named ``WARNING_mets_to_allow.out``).  More details about these are given [below](Modifications-to-sample_run-in) when defining ``USER_def_reax`` and ``WARNING_mets`` respectively.
+4. Enter the following command in your shell, substituting ``<db-dir>``, ``<architect-run>`` and ``<local-dir>`` with the corresponding path (the latter having been defined when you built the Docker image you will be using to run Architect).
+
+```
+docker run -v <local-dir>:/indiv_tools -v <architect_run>:/architect_run -v <db-dir>:/tools/Architect/Database -it local_architect sh /tools/Architect/Docker_run_specific/architect_docker_run.sh
+```
+
+### Running Architect by providing results from individual enzyme annotation tools
+
+When using Docker, you have the option of by providing results from any of the tools run independently.  This option is desirable especially if many sequences are being submitted to Architect or if running some of the more time-intensive tools.  
+1. Follow steps 1-3 as listed above.  
+2. Then, follow the instructions from [below](c-Performing-model-reconstruction-using-results-from-independently-run-individual-enzyme-annotation-tools) for how to provide the results to Architect.  
+3. Proceed with step 4 above.  Indicate that you already have results from individual enzyme annotation tools when prompted.
+
+## b. Running Architect when not using Docker
+
+### Overview
+
+To run Architect, in essence you first need to modify ``architect.sh`` and ``sample_run.in`` as given in this folder.  Once this has been done, simply run ``sh architect.sh``.  If running individual enzyme annotation tools (and thus on a computer cluster), Architect will submit jobs for running the tools and exit.  Keep track of your job statuses; following their completion, run ``sh architect.sh`` to perform enzyme annotation using an ensemble approach and model reconstruction.
+
+### Modifications to architect.sh
 
 For architect.sh, specify the project name ($PROJECT), the output folder where you want Architect to output files ($OUTPUT_DIR), an input file specifying various parameters ($INPUT_FILE--takes the format of sample_run.in), and the path to the Architect folder ($ARCHITECT).
+
+### Modifications to sample_run.in
 
 For sample_run.in, please specify the values as directed in the file.  In particular:
 
@@ -218,6 +251,21 @@ For sample_run.in, please specify the values as directed in the file.  In partic
 	- Otherwise, if you wish to use default settings or will use BiGG reactions for model reconstruction, please refer to a blank file here.
 	
 The first 10 keys concern enzyme annotation specific scripts, and the remainder model reconstruction.  If model reconstruction is not to be performed, please put a non-empty string value for these last keys.
+
+## c. Performing model reconstruction using results from independently run individual enzyme annotation tools
+
+Results from individual enzyme annotation tools can be separately specified for use by Architect.  
+
+1. First, please concatenate the main results from each tool into a single file.  (There is no need to do any special formatting to the raw results, such as removing headers.)
+2. Only if using Docker, you must make sure you have the results for any of the tools you have run in the correct directory.  Given the output path ``DIR`` (the same as ``output_dir`` as provided to Docker), make sure to rename the result files as place those in the appropriate location as given below.  
+	* CatFam results: ``$DIR/organism/CatFam/sequence.output``
+	* DETECT results: ``$DIR/organism/DETECT/output_40.out``
+	* EFICAz results: ``$DIR/organism/EFICAz/sequence.fa.ecpred``
+	* EnzDP results: ``$DIR/organism/EnzDP/output.out``
+	* PRIAM results: ``$DIR/organism/PRIAM/PRIAM_Results/PRIAM_test/ANNOTATION/sequenceECs.txt``
+3. When running Architect now, simply indicate that you have already run enzyme annotation.  
+	* Only if you are not using Docker, you have the option to provide the complete path to the results from your run of each of the tools.
+	* If you are using Docker, you will not have the option to provide the path to the results as they will automatically be located in the paths indicated above.  Simply follow the remaining prompts from Architect.
 
 # 4. Output location
 
