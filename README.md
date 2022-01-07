@@ -50,11 +50,14 @@ If you intend to run Architect on a laptop or computer, you may use our Docker i
 
 Keep in mind that running enzyme annotation tools (as part of Architect's first step) on a single machine will likely take hours, if not, days, partly because the tools will be run consecutively rather than in parallel.  To deal with this, you may choose to limit the number of tools you wish to run, or run these tools separately (as outlined below).
 
-### For using Architect without using Docker
+### For using Architect without using docker
 
-In the absence of Docker, Architect can be run as an end-to-end tool, only if certain specifications are met on the machine/cluster being used. 
+In the absence of Docker, Architect can be run as an end-to-end tool, only if certain specifications are met on the machine/cluster being used.  Please note that Architect has not been configured specifically to be run on a regular computer without Docker.  However, modifications can be made as outlined below (TODO) for this use case. 
 
-1. First, we require that you have both v2 and v3 of Python installed (Architect has been tested on v2.7.16 and v3.7.1). In particular, we require that you have the conda2 and anaconda3 packages installed.  (This requirement may be changed in a future iteration of Architect. If you only need to perform enzyme annotation, conda2 suffices.)
+1. First, we require that you have both v2 and v3 of Python installed (Architect has been tested on v2.7.16 and v3.7.1). In particular, we require that you have the conda2 and anaconda3 packages installed.  (If you only need to perform enzyme annotation, conda2 suffices.)
+*	Alternately, if you do not have conda2 or anaconda3, you will have to make additional modifications on your own. Then, ensure the following two sets of dependencies are fulfilled.
+*	In your python2 distribution, make sure you have the following packages: ``ArgumentParser``, ``numpy``, ``sklearn``, and ``biopython``.  
+*	In your python3 distribution, make sure you have the following packages: ``ArgumentParser``, ``numpy``, ``biopython`` and ``libsbml``.
 
 2. Next, get a copy of the code for Architect.  For example, you may use:
 
