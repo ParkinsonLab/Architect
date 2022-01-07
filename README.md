@@ -74,7 +74,7 @@ In the absence of Docker, Architect can be run as an end-to-end tool, only if ce
 
 	Note: Following the first run of Architect, this folder and its contents will be modified; please be mindful of possible complications due to size requirements when you decide where to store this folder. (I have found this database to end up taking up a little over 1 GB of space following the first run of Architect.)
 
-4. If you do not intend to perform model reconstruction, ignore this step.  Otherwise, download the CPLEX optimizer as per the instructions given [below](#user-content-downloading-cplex-required-if-performing-model-reconstruction) and install CPLEX on your machine.
+4. (If you do not intend to perform model reconstruction, ignore this step.)  Download the CPLEX optimizer as per the instructions given [below](#user-content-downloading-cplex-required-if-performing-model-reconstruction) and install CPLEX on your machine.
 
 5. Next, the following tools should be installed.  Please follow the instructions below and choose the files specific to your system.  Please unpack the files for BLAST+, legacy BLAST and DIAMOND (for example using `tar -xzvf <file.tar.gz>`).
 
