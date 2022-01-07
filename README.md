@@ -162,7 +162,6 @@ Follow steps 2 onwards as detailed [above](#b-For-using-Architect-on-Niagara).
 	
 TODO: MOVE THIS SECTION ELSEWHERE AS IT CAN BE USED FOR DOCKER. Results from individual enzyme annotation tools can be separately specified for use by Architect.  For this, please concatenate the main results from each tool into a single file.  (There is no need to do any special formatting to the raw results, such as removing headers.)  More instructions are provided below (TODO) for how this option can be used.
 
-### Step 3: Follow steps 
 	
 ## d. Downloading CPLEX (required if performing model reconstruction)
 
@@ -173,8 +172,8 @@ Whether you are using Docker or not, you will need a CPLEX license to perform me
 3.	Scroll down and choose “Software” from the menu on the left.
 4.	Choose “ILOG CPLEX Optimization Studio”.  Choose “Download” in the window that appears.
 5.	If using Docker to run Architect, enter "CJ4Z5ML" in the field "Part numbers".  Select "IBM ILOG CPLEX Optimization Studio 12.9 for Linux x86-64 Multilingual (CNZM2ML)", scroll down and agree to the terms and conditions.  You will need the Download Director for downloading the installer.  Instructions will appear for installing the Download Director if you do not already have it installed.  Press "Details" in the window for the Download Director to find where the file is present.  
-*	Note: If not using Docker, download the version of CPLEX appropriate for your system and run the installer.
-6.	If you intend to use Docker to run Architect, rename the bin file as cplex_installer.bin.
+	*	Note: If not using Docker, download the installer for version 12.9 of CPLEX appropriate for your system (using "CJ4Z5ML" in the field "Part numbers") and run the installer.
+6.	(Ignore this step if you are not using Docker)  Rename the bin file as cplex_installer.bin.  DO not run the installer by yourself.  This is done automatically when building the Docker image for your computer.
 
 ## e. Architect prerequisites
 
