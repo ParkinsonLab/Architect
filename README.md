@@ -61,7 +61,9 @@ In the absence of Docker, Architect can be run as an end-to-end tool, only if ce
 
 2. Next, get a copy of the code for Architect.  For example, you may use:
 
-	`git clone https://github.com/parkinsonlab/architect`
+	```
+	git clone https://github.com/parkinsonlab/architect
+	```
 
 3. Download the Database folder required for running Architect.  This file is present on the Parkinson lab's website [in a readable format](http://compsysbio.org/projects/Architect/Database/) and as [a tarred file](http://compsysbio.org/projects/Architect/Database.tar.gz).  On command line, you may use:
 
