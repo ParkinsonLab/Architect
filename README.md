@@ -21,11 +21,11 @@ For more information, please contact nnursimulu@cs.toronto.edu.
     c. [Performing model reconstruction using results from independently run individual enzyme annotation tools](#c-Performing-model-reconstruction-using-results-from-independently-run-individual-enzyme-annotation-tools)  
 4. [Output location](#4-Output-location)  
 5. [Advanced parameter settings](#5-Advanced-parameter-settings)  
-    a. [Ensemble classifier for enzyme annotation](#a-Ensemble-classifier-for-enzyme-annotation)  
-    b. [Inclusion of ECs not predicted by the ensemble classifier for model reconstruction](#b-Inclusion-of-ECs-not-predicted-by-the-ensemble-classifier-for-model-reconstruction)  
-    c. [Inclusion of non-EC related reactions (when performing reconstructions using BiGG definitions)](#c-Inclusion-of-non-EC-related-reactions-when-performing-reconstructions-using-BiGG-definitions)  
-    d. [Settings for gap-filling](#d-Settings-for-gap-filling)  
-    e. [Number of output models](#e-Number-of-output-models)  
+    a. [Ensemble classifier for enzyme annotation](#aEnsemble-classifier-for-enzyme-annotation)  
+    b. [Inclusion of ECs not predicted by the ensemble classifier for model reconstruction](#bInclusion-of-ECs-not-predicted-by-the-ensemble-classifier-for-model-reconstruction)  
+    c. [Inclusion of non-EC related reactions (when performing reconstructions using BiGG definitions)](#cInclusion-of-non-EC-related-reactions-when-performing-reconstructions-using-BiGG-definitions)  
+    d. [Settings for gap-filling](#dSettings-for-gap-filling)  
+    e. [Number of output models](#eNumber-of-output-models)  
 6. [References](#6-References)  
 
 # 1. Overview
