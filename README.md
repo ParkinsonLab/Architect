@@ -163,7 +163,7 @@ Follow steps 2 onwards as detailed [above](#b-For-using-Architect-on-Niagara).
 	
 ## d. Downloading CPLEX (required if performing model reconstruction)
 
-Whether you are using Docker or not, you will need a CPLEX license to perform metabolic model reconstruction.  Free academic licenses can be obtained on the IBM website.  Here are some instructions for getting started:
+Whether you are using Docker or not, you will need the CPLEX solver to perform metabolic model reconstruction.  For academic users, the solver can be obtained for free on the IBM website; commercial users may need other options to get the solver.  Here are some instructions for getting started, customized for academic users:
 
 1.	First make sure you have registered for an IBMId and password on the [IBM website](https://login.ibm.com/).
 2.	Once you have logged in, go to https://www.ibm.com/academic/topic/data-science
@@ -171,7 +171,7 @@ Whether you are using Docker or not, you will need a CPLEX license to perform me
 4.	Choose “ILOG CPLEX Optimization Studio”.  Choose “Download” in the window that appears.
 5.	If using Docker to run Architect, enter "CJ4Z5ML" in the field "Part numbers".  Select "IBM ILOG CPLEX Optimization Studio 12.9 for Linux x86-64 Multilingual (CNZM2ML)", scroll down and agree to the terms and conditions.  You will need the Download Director for downloading the installer.  Instructions will appear for installing the Download Director if you do not already have it installed.  Press "Details" in the window for the Download Director to find where the file is present.  
 	*	Note: If not using Docker, download the installer for version 12.9 of CPLEX appropriate for your system (using "CJ4Z5ML" in the field "Part numbers") and run the installer.
-6.	(Ignore this step if you are not using Docker)  Rename the bin file as cplex_installer.bin.  DO not run the installer by yourself.  This is done automatically when building the Docker image for your computer.
+6.	(Ignore this step if you are not using Docker)  Rename the bin file as cplex_installer.bin.  Do not run the installer by yourself.  This is done automatically when building the Docker image for your computer.
 
 ## e. Architect prerequisites
 
