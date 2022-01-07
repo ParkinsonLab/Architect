@@ -121,7 +121,7 @@ Installation of all enzyme annotation tools is recommended. The section entitled
 
 ## c. Setting up Architect on an alternate system
 
-### Python v2 and v3 installations
+### Step 1: Python v2 and v3 installations
 
 For using Architect without Docker and outside of Niagara, we require that you have both v2 and v3 of Python installed (Architect has been tested on v2.7.16 and v3.7.1). In particular, it is easiest if you have the conda2 and anaconda3 packages installed.  (If you only need to perform enzyme annotation, conda2 suffices.)
 
@@ -136,18 +136,19 @@ $DIR/bin/conda install -y biopython
 $DIR/bin/conda install -y -c SBMLTeam python-libsbml
 ``` 
 
-### Modification of specific scripts
+### Step 2: Modification of specific scripts
 
-When Architect was built, it was in many ways optimized for use by a supercomputer.  This, in particular, concerns the scripts used for running the individual enzyme annotation tools, although smaller modifications are required for model reconstruction.  
+When Architect was built, it was in many ways optimized for use by a supercomputer.  This, in particular, concerns the scripts used for running the individual enzyme annotation tools, although smaller modifications are required for model reconstruction.  Following download of Architect ([same 1st step for using Architect on Niagara](#b-For-using-Architect-on-Niagara)), please follow the following instructions.
 *	If you are using a supercomputer (other than Niagara) which uses the SLURM job scheduler, please make any necessary modifications that are specific to your system to the following. (Please do not change the line numbers on which each remaining line of code appears as line number is important to Architect's functionality.)
 
 	- Template scripts for each tool under scripts/individual_enzyme_annotation
 	- TEMPLATE_run_reconstruction.sh under scripts/model_reconstruction
+	- Verify that the lines starting with ``module load`` point towards a package you have in your system.  Otherwise, consider adding the directory with the package to your PATH variable.
 	
 
 * If you are using a supercomputer which does not use the SLURM job scheduler, please also follow the above instructions.  In addition, while ensuring not to change the line numbers on which each remaining line of code appears: 
 	- Modify the header for your specific system.  
-	- Modify the lines starting with ``module load`` as per your system.
+	- Modify the lines starting with ``module load`` as per your system. If the package in question is not available, you may consider adding the corresponding path to your PATH variable.
 
 * If you are not using a supercomputer, please do the following:
 
@@ -155,7 +156,13 @@ When Architect was built, it was in many ways optimized for use by a supercomput
 	- Comment out line 1 of TEMPLATE_run_reconstruction.sh.
 	- Comment out other lines starting with ``module load``.  Instead add the corresponding package to the PATH variable.  Make sure as you are doing so that you are not changing the line number where any remaining piece of code appears.
 	
+### Step 3: Complete set-up.
+
+Follow steps 2 onwards as detailed [above](#b-For-using-Architect-on-Niagara).
+	
 TODO: MOVE THIS SECTION ELSEWHERE AS IT CAN BE USED FOR DOCKER. Results from individual enzyme annotation tools can be separately specified for use by Architect.  For this, please concatenate the main results from each tool into a single file.  (There is no need to do any special formatting to the raw results, such as removing headers.)  More instructions are provided below (TODO) for how this option can be used.
+
+### Step 3: Follow steps 
 	
 ## d. Downloading CPLEX (required if performing model reconstruction)
 
