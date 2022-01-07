@@ -97,7 +97,9 @@ In the absence of Docker, Architect can be run as an end-to-end tool, only if ce
 
 6. Now, a number of enzyme annotation tools need to be installed.  To install these tools, navigate to the directory where you downloaded the code for Architect, and run the following command (using python v2).  (Note that this requires user input.)
 
-	`python downloader_of_tools.py --i yes` 
+	```
+	python downloader_of_tools.py --i yes
+	``` 
 
 Installation of all enzyme annotation tools is recommended. The section entitled [Architect prerequisites](#Architect-prerequisites) outlines some of the details of the tools used, in particular from where the enzyme annotation tools may be otherwise manually downloaded.
 
