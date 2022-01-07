@@ -12,7 +12,7 @@ For more information, please contact nnursimulu@cs.toronto.edu.
 1. Overview  
 2. Set-up instructions   
     a. For using Architect using Docker (on a single machine)  
-    b. For using Architect without using docker  
+    b. For using Architect without using docker and on Niagara or a Niagara-like system  
     c. Setting up Architect on an alternate system  
     d. Downloading CPLEX (required if performing model reconstruction)  
     e. Architect prerequisites  
@@ -70,9 +70,9 @@ If you intend to run Architect on a laptop or computer, you may use our Docker i
 
 Keep in mind that running enzyme annotation tools (as part of Architect's first step) on a single machine will likely take hours, if not, days, partly because the tools will be run consecutively rather than in parallel.  To deal with this, you may choose to limit the number of tools you wish to run, or run these tools separately (as outlined below).
 
-## b. For using Architect without using docker
+## b. For using Architect without using docker and on Niagara or a Niagara-like system
 
-In the absence of Docker, Architect can be run as an end-to-end tool, only if certain specifications are met on the machine/cluster being used.  Please note that Architect has not been configured specifically to be run on a regular computer without Docker.  However, modifications can be made as outlined below (TODO) for this use case. 
+In the absence of Docker, Architect can be run as an end-to-end tool, only if certain specifications are met on the machine/cluster being used.  The following details steps to run Architect on [Niagara] or on a Niagara-like system.  Please note that Architect has not been configured specifically to be run on a regular computer without Docker.  However, modifications can be made as outlined [below](#c-setting-up-architect-on-an-alternate-system) for this use case. 
 
 1. First, we require that you have both v2 and v3 of Python installed (Architect has been tested on v2.7.16 and v3.7.1). In particular, we require that you have the conda2 and anaconda3 packages installed.  (If you only need to perform enzyme annotation, conda2 suffices.)
 *	Alternately, if you do not have conda2 or anaconda3, you will have to make additional modifications on your own. Then, ensure the following two sets of dependencies are fulfilled.
