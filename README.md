@@ -269,6 +269,8 @@ Results from individual enzyme annotation tools can be separately specified for 
 
 # 4. Output location
 
+The following details where the output of Architect is found.  If using Docker to run Architect, substitute $OUTPUT_DIR with ``architect-run`` and $PROJECT with ``organism``.  
+
 - The output from your run of Architect can be found at the location defined by $OUTPUT_DIR/$PROJECT in architect.sh.  
 - Results from individual tools will be formatted within $OUTPUT_DIR/$PROJECT/Ensemble_annotation_files/Formatted_results. 
 - Ensemble results will be found at $OUTPUT_DIR/$PROJECT/Ensemble_annotation_files/Ensemble_results.  
