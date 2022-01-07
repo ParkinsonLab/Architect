@@ -6,22 +6,21 @@ Architect is a pipeline for automatic metabolic model reconstruction.  Given the
 
 ## Table of contents
 1. Overview  
-2. Specific instructions  
-    a. Set-up  
-        i. For using Architect using Docker (on a single machine)  
-        ii. For using Architect without using docker  
-        iii. Setting up Architect on an alternate system  
-        iv. Downloading CPLEX (required if performing model reconstruction)  
-        v. Architect prerequisites  
-    b. Running Architect  
-    c. Output location  
-    d. Advanced parameter settings  
-        i. Ensemble classifier for enzyme annotation  
-        ii. Inclusion of ECs not predicted by the ensemble classifier for model reconstruction  
-        iii. Inclusion of non-EC related reactions (when performing reconstructions using BiGG definitions)  
-        iv. Settings for gap-filling  
-        v. Number of output models  
-3. References  
+2. Set-up instructions   
+    a. For using Architect using Docker (on a single machine)  
+    b. For using Architect without using docker  
+    c. Setting up Architect on an alternate system  
+    d. Downloading CPLEX (required if performing model reconstruction)  
+    e. Architect prerequisites  
+3. Instructions for running Architect  
+4. Output location  
+5. Advanced parameter settings  
+    a. Ensemble classifier for enzyme annotation  
+    b. Inclusion of ECs not predicted by the ensemble classifier for model reconstruction  
+    c. Inclusion of non-EC related reactions (when performing reconstructions using BiGG definitions)  
+    d. Settings for gap-filling  
+    e. Number of output models  
+6. References  
 
 # 1. Overview
 
@@ -49,13 +48,11 @@ The manuscript for Architect is currently in preparation.  Please cite the tools
 
 For more information, please contact nnursimulu@cs.toronto.edu
 
-# 2. Specific instructions
-
-## a. Set-up
+# 2. Set-up instructions
 
 When Architect was built, it was in many ways optimized for use by a supercomputer.  This, in particular, concerns the scripts used for running the individual tools.  Architect was tested using the Niagara supercomputer based at the University of Toronto.  For convenience, we provide alternative methods for running Architect with different set-up instructions as outlined below.
 
-### i. For using Architect using Docker (on a single machine)
+## a. For using Architect using Docker (on a single machine)
 
 If you intend to run Architect on a laptop or computer, you may use our Docker image.  Please follow the following instructions.
 1. First, install Docker on your machine ([Windows instructions](https://docs.docker.com/desktop/windows/install/) and [Mac instructions](https://docs.docker.com/desktop/mac/install/)).  Please make sure that your machine satisfies the system requirements listed.
@@ -70,7 +67,7 @@ If you intend to run Architect on a laptop or computer, you may use our Docker i
 
 Keep in mind that running enzyme annotation tools (as part of Architect's first step) on a single machine will likely take hours, if not, days, partly because the tools will be run consecutively rather than in parallel.  To deal with this, you may choose to limit the number of tools you wish to run, or run these tools separately (as outlined below).
 
-### ii. For using Architect without using docker
+## b. For using Architect without using docker
 
 In the absence of Docker, Architect can be run as an end-to-end tool, only if certain specifications are met on the machine/cluster being used.  Please note that Architect has not been configured specifically to be run on a regular computer without Docker.  However, modifications can be made as outlined below (TODO) for this use case. 
 
@@ -124,7 +121,7 @@ In the absence of Docker, Architect can be run as an end-to-end tool, only if ce
 Installation of all enzyme annotation tools is recommended. The section entitled [Architect prerequisites](#Architect-prerequisites) outlines some of the details of the tools used, in particular from where the enzyme annotation tools may be otherwise manually downloaded.
 
 
-### iii. Setting up Architect on an alternate system
+## c. Setting up Architect on an alternate system
 
 When Architect was built, it was in many ways optimized for use by a supercomputer.  This, in particular, concerns the scripts used for running the individual tools and model reconstruction.  Architect was tested using the Niagara supercomputer based at the University of Toronto.  If this is not your use case but you are using another supercomputer which uses the SLURM job scheduler, please make any necessary modifications that are specific to your system to the following:
 
@@ -140,7 +137,7 @@ If you are not using a supercomputer, please consider doing the following:
 	
 Results from individual enzyme annotation tools can be separately specified for use by Architect.  For this, please concatenate the main results from each tool into a single file.  (There is no need to do any special formatting to the raw results, such as removing headers.)
 	
-### iv. Downloading CPLEX (required if performing model reconstruction)
+## d. Downloading CPLEX (required if performing model reconstruction)
 
 Whether you are using Docker or not, you will need a CPLEX license to perform metabolic model reconstruction.  Free academic licenses can be obtained on the IBM website.  Here are some instructions for getting started:
 
@@ -152,7 +149,7 @@ Whether you are using Docker or not, you will need a CPLEX license to perform me
 *	Note: If not using Docker, download the version of CPLEX appropriate for your system and run the installer.
 6.	If you intend to use Docker to run Architect, rename the bin file as cplex_installer.bin.
 
-### v. Architect prerequisites
+## e. Architect prerequisites
 
 The following tools (version indicated in brackets) have been used to run Architect.  Installation of all enzyme annotation tools is recommended, and can be effectuated by running `downloader_of_tools.py`.
 
@@ -178,7 +175,7 @@ The following table lists from where the enzyme annotation tools can be manually
 |EnzDP         | [Link](https://bitbucket.org/ninhnn/enzdp/src/master/) |
 |PRIAM (v2018) | [Database](http://priam.prabi.fr/REL_JAN18/Distribution.zip) and [search tool](http://priam.prabi.fr/utilities/PRIAM_search.jar) |
 
-# b. Running Architect
+# 3. Instructions for running Architect
 
 To run Architect, you first need to modify architect.sh and sample_run.in in this folder.
 
@@ -196,7 +193,7 @@ For sample_run.in, please specify the values as directed in the file.  In partic
 	
 The first 10 keys concern enzyme annotation specific scripts, and the remainder model reconstruction.  If model reconstruction is not to be performed, please put a non-empty string value for these last keys.
 
-# c. Output location
+# 4. Output location
 
 - The output from your run of Architect can be found at the location defined by $OUTPUT_DIR/$PROJECT in architect.sh.  
 - Results from individual tools will be formatted within $OUTPUT_DIR/$PROJECT/Ensemble_annotation_files/Formatted_results. 
@@ -212,11 +209,11 @@ The first 10 keys concern enzyme annotation specific scripts, and the remainder 
 	- Intermediate results are written (and overwritten in the case of multiple runs) in a temp subfolder.  These files may be of interest for the modeller interested in looking at alternate solutions.
 - The final output comes in the format of SBML or Excel files.  SBML files with the word "annotated" contain rich information such as mapping of identifiers from KEGG/BiGG to other databases.
 
-# d. Advanced parameter settings
+# 5. Advanced parameter settings
 
 At specific timepoints while running Architect, you will have the option to either choose a default setting or specify other settings more appropriate for your purposes.  In general, we highly recommend that the default setting be used.  However, depending on your specific situation, you may prefer to specify a setting other than the default.  Details about these alternate settings are given below.
 
-## i.	Ensemble classifier for enzyme annotation
+## a.	Ensemble classifier for enzyme annotation
 
 The default ensemble classifier is the naïve Bayes classifier trained on high-confidence predictions by individual tools.  Other methods of ensemble classification may alternately be used as detailed below.  For each of these methods, additional parameters need to be specified; here, as well, the user has the option to use a default set of additional parameters.
 
@@ -242,17 +239,17 @@ In the case of majority rule, the first parameter determines the kind of voting 
 
 In the case of the EC-specific best tool, a final EC is output if it is made by the top-performing tool(s) for that EC as found in training.  The difference between "high" and "all" settings lies in the section of the training data where these top-performers are identified.  More specifically, "high" refers to those tools found to be top-performers across all subsections of the training data, whereas "all" refers to those tools giving high performance in at least one subsection of the training data (but not necessarily on all subsections).
 
-## ii.	Inclusion of ECs not predicted by the ensemble classifier for model reconstruction
+## b.	Inclusion of ECs not predicted by the ensemble classifier for model reconstruction
 
 If you used any method other than any of the majority/voting rules for enzyme classification, there are EC predictions by individual tools that Architect will not necessarily be considering either due to the EC not figuring in the training data or due to the absence of a classifier for this EC. Given that this may impact model reconstruction, Architect will consider additional EC predictions by individual tools for this step. 
 
 By default, Architect will take high-confidence EC predictions by PRIAM.  Otherwise, the user has the option to choose those predictions made with high-confidence by at least x tools, where x ranges from 1 to 5.
 
-## iii.	Inclusion of non-EC related reactions (when performing reconstructions using BiGG definitions)
+## c.	Inclusion of non-EC related reactions (when performing reconstructions using BiGG definitions)
 
 When performing model reconstructions using reactions as defined by BiGG, non-EC related reactions will be added to the high-confidence model (that is, prior to gap-filling) based on sequence similarity. The E-value from these results is used to determine which of these reactions should be included in the model, the default being set at E-20.  The user may opt to use a different E-value as per their requirements.
 
-## iv.	Settings for gap-filling
+## d.	Settings for gap-filling
 
 When performing model reconstruction, the following is the set of (highly recommended) default settings:
 
@@ -270,7 +267,7 @@ Here, we provide some details about each of these parameter settings as well as 
 | 3       | When performing gap-filling, an integer variable is assigned to each candidate gap-filling reaction, such that, in theory, a value of 1 is ascribed to the ith candidate gap-filling reaction if this reaction is part of the gap-filling solution being returned (and 0 otherwise). In practice however, the solver will not necessarily return integral variables. The integrality tolerance indicates how far from 0 or 1 a value can be to still be considered "integral".  <br/><br/>If you find that gap-filling is taking more time than desirable (for example, in my experience, gap-filling that takes longer than an hour and finishes on SciNet at the very least is rare), you may set this tolerance higher, for example, starting with E-7, then E-6 and so on.|
 | 4       | By default, gap-filling candidate reactions associated with low-confidence EC predictions are associated with a penalty of addition less than 1. Remaining gap-filling candidate reactions that are part of the reaction database have a penalty of addition of 1.  As for transport reactions for deadend metabolites in the high-confidence network, they are associated with a default penalty of 1.  <br/><br/>If you wish to discourage the addition of such reactions, you can experiment with increasing this penalty. |
 
-## v.	Number of output models
+## e.	Number of output models
 
 If you specify to Architect to output more than one gap-filling solution (say n solutions), you will have the option to output as many models ready for simulations (between 1 and n).  To be more specific, two sets of output can be obtained from Architect after running its model reconstruction module.
 
@@ -287,7 +284,7 @@ If you specify to Architect to output more than one gap-filling solution (say n 
 
 The reason I separate these two kinds of outputs is that, in my experience, the SBML model output can be very large, and thus we leave it at the discretion of the user to determine the number of output models that is sensible to output.
 
-# 3. References
+# 6. References
 
 Yu, C., et al., Genome-wide enzyme annotation with precision control: catalytic families (CatFam) databases. Proteins, 2009. 74(2): p. 449-60.
 
