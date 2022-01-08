@@ -253,7 +253,7 @@ def customize_detect(architect_location, parameter_values, project_name, output_
     num_to_new_line = {}
     num_to_new_line[3] = "#SBATCH --time=" + str(time) + ":00:00"
     num_to_new_line[4] = "#SBATCH --job-name=DETECT_" + project_name
-    num_to_new_line[7] = "DETECT_TOOL=" + parameter_values["DETECT_DIR"] + "/detect_2.2.7.py"
+    num_to_new_line[7] = "DETECT_TOOL=" + parameter_values["DETECT_DIR"] + "/detect.py"
     num_to_new_line[10] = "export PATH=" + parameter_values["DETECT_DIR"] + "/:$PATH"
     num_to_new_line[11] = "export PATH=" + parameter_values["EMBOSS_DIR"] + "/:$PATH"
     num_to_new_line[22] = "cd " + current_folder
