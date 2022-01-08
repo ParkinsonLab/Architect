@@ -40,8 +40,6 @@ This section details the steps going from protein sequence to gap-filled model. 
 3.	Given the EC predictions with their corresponding likelihood scores and user-specified parameters (parameters as specified in such as file as ``sample_run.in``), a draft metabolic network is constructed then gap-filled.  This is performed using scripts found in scripts/model_reconstruction.  This uses a modified version of CarveMe, with scripts that can be found in dependency/CarveMe.  The framed package—modified from its original published form—is also required (in dependency/framed).
 The final output comes in the form of a simple Excel file, as well as an SBML file annotated with links from KEGG/BiGG identifiers to other databases.
 
-If not using Docker, users need to download certain ''database'' files specific to Architect; these are available in the folder Database on the Parkinson lab’s website at http://compsysbio.org/projects/Architect. (Details are given below.)
-
 The manuscript for Architect is currently in preparation.  Please cite the tools that Architect uses when using our approach:
 
 * CatFam (Yu et al, 2009)
