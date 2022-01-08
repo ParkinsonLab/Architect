@@ -1,5 +1,3 @@
-Currently, things on this page are being reshuffled and this repository is being updated.  We appreciate your patience in the meantime.
-
 # Architect
 
 Architect is a pipeline for automatic metabolic model reconstruction.  Given the protein sequences of an organism, enzyme annotation is first performed through ensemble approaches, followed by gap-filling.  
