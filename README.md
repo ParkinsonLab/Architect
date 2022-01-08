@@ -31,8 +31,9 @@ For more information, please contact nnursimulu@cs.toronto.edu.
 This section details the steps going from protein sequence to gap-filled model.  For specific instructions regarding set-up and running Architect, please scroll down to the appropriate section.
 
 1.	First, Architect runs your protein sequences through the different enzyme annotation tools (CatFam, DETECT, EFICAz, EnzDP, PRIAM).  One of the tools used—EnzDP—is slightly modified form its original version.  Modifications of EnzDP required for its use by Architect are listed in dependency/EnzDP.  
-*	If you are using Architect on a computer cluster, these tools will run _in_ _parallel_ with each other, Architect itself will exit and you will need to independently monitor the progression of the corresponding jobs. Once these jobs have finished running, you will need to re-run Architect and specify that you do not need to run any individual enzyme annotation tools.
-*	If using Architect with docker, these tools will run _sequentially_.  This step can be time-consuming.  Modifications for this step will be detailed in this document.
+*	If you are using Architect on a computer cluster, these tools will run _in_ _parallel_ with each other, Architect itself will exit and you will need to independently monitor the progression of the corresponding jobs. Once these jobs have finished running, you will need to re-run Architect and specify that you do not need to run any individual enzyme annotation tools.  
+*	If using Architect with docker, these tools will run _sequentially_.  This step can be time-consuming.  Modifications for this step will be detailed in this document.  
+*	For convenience, users also have the option of running the tools separately and providing the results to Architect.  
 
 2.	The results are then formatted and run through an ensemble approach (default: naïve Bayes) using scripts in the folder scripts/ensemble_enzyme_annotation.
 
@@ -100,16 +101,19 @@ First, get a copy of the code for Architect.  For example, you may use:
 
 Now, when Architect was built, it was in many ways optimized for use by a computer cluster.  This, in particular, concerns the scripts used for running the individual enzyme annotation tools.  Please follow the following instructions to customize your copy of Architect for your use case.
 
-*	If you are using a supercomputer which uses the SLURM job scheduler, please make any necessary modifications that are specific to your system to the following. (Please do not change the line numbers on which each remaining line of code appears as line number is important to Architect's functionality.)
+*	If you are using a supercomputer which uses the SLURM job scheduler, please make any necessary modifications that are specific to your system to the following. (Please do not change the line numbers on which each remaining line of code appears as line number is important to Architect's functionality.)  
 
 	- Template scripts for each tool under scripts/individual_enzyme_annotation.
 	- TEMPLATE_run_reconstruction.sh under scripts/model_reconstruction. 
 	- For either of the above, werify that the lines starting with ``module load`` point towards a package you have in your system.  Otherwise, consider adding the directory with the package to your PATH variable.
 	
 
-* If you are using a supercomputer which does not use the SLURM job scheduler, please also follow the above instructions.  In addition, while ensuring not to change the line numbers on which each remaining line of code appears: 
-	- Modify the header for your specific system.  
-	- Modify the lines starting with ``module load`` as per your system. If the package in question is not available, you may consider adding the corresponding path to your PATH variable.
+* If you are using a supercomputer which does not use the SLURM job scheduler, make the following changes while ensuring that you do not change the line numbers on which each remaining line of code appears:  
+
+	- Modify the header for the template scripts for each tool under scripts/individual_enzyme_annotation so that it matches the one used by your specific job scheduler.  
+	- Comment out line 1 of TEMPLATE_run_reconstruction.sh under scripts/model_reconstruction.  
+	- For each of the above, modify the lines starting with ``module load`` as per your system. For example, you may have to add the path corresponding to the module of interest to your PATH variable.  
+	- Go to architect/run_individual_tools.py and replace the command ``sbatch`` with the one used to submit jobs in your case (refer to lines 40, 44, 51, 55 and 59).  
 
 * If you are not using a supercomputer, please do the following:
 
