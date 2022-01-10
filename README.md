@@ -255,7 +255,7 @@ To run Architect, in essence you first need to modify ``architect.sh`` and ``sam
 
 ### Modifications to architect.sh
 
-For architect.sh, specify the project name ($PROJECT), the output folder where you want Architect to output files ($OUTPUT_DIR), an input file specifying various parameters ($INPUT_FILE--takes the format of sample_run.in), and the path to the Architect folder ($ARCHITECT).
+For architect.sh, specify the project name ($PROJECT), the output folder where you want Architect to output files ($OUTPUT_DIR), an input file specifying various parameters ($INPUT_FILE--takes the format of sample_run.in), and the path to the Architect folder containing its code ($ARCHITECT).
 
 ### Modifications to sample_run.in
 
@@ -263,20 +263,20 @@ For sample_run.in, please specify the values as directed in the file.  In partic
 
 - PRIAM_db (*recommended*) is the file containing various enzyme profiles required for PRIAM's run.  
 - SEQUENCE_FILE (*required*) denotes the fasta file of protein sequences you want to annotate with ECs.
-- DATABASE (*required*) denotes the path to the Architect-specific database that can be downloaded [here]( http://compsysbio.org/projects/Architect/Database/)
+- DATABASE (*required*) denotes the path to the Architect-specific database that can be downloaded [here]( http://compsysbio.org/projects/Architect/Database/).
 - USER_def_reax (may be *required*) denotes user-defined reactions for model reconstruction.  To create this file, please consult sample_run_user_defined.txt for an example file.
-- WARNING_mets (*optional*) is meant to override a set of reactions (concerning particular metabolites) that Architect automatically does not consider for model reconstruction; this only concerns models reconstructed using the KEGG database.  In particular, refer to the file [here](http://compsysbio.org/projects/Architect/Database/model_reconstruction/KEGG_universe/WARNING_reactions_with_formulaless_cpds.out)
+- WARNING_mets (*optional*) is meant to override a set of reactions (concerning particular metabolites) that Architect automatically does not consider for model reconstruction; this only concerns models reconstructed using the KEGG database.  In particular, refer to the file [here](http://compsysbio.org/projects/Architect/Database/model_reconstruction/KEGG_universe/WARNING_reactions_with_formulaless_cpds.out).
 	- If you want reactions concerning any of these metabolites to be considered for model reconstruction, please list them line by line in this file.  (This may, for example, concern metabolites that are acceptor/donor pairs but which are being excluded as no formula was found for them.) 
 	- Otherwise, if you wish to use default settings or will use BiGG reactions for model reconstruction, please refer to a blank file here.
 	
-The first 10 keys concern enzyme annotation specific scripts, and the remainder model reconstruction.  If model reconstruction is not to be performed, please put a non-empty string value for these last keys.
+The first 10 keys concern enzyme annotation specific scripts, and the remainder model reconstruction.  If model reconstruction is not to be performed, please put a non-empty placeholder string value for these last keys.
 
 ## c. Performing model reconstruction using results from independently run individual enzyme annotation tools
 
 Results from individual enzyme annotation tools can be separately specified for use by Architect.  
 
 1. First, please concatenate the main results from each tool into a single file.  (There is no need to do any special formatting to the raw results, such as removing headers.)
-2. Only if using Docker, you must make sure you have the results for any of the tools you have run in the correct directory.  Given the output path ``DIR`` (the same as ``output_dir`` as provided to Docker), make sure to rename the result files as place those in the appropriate location as given below.  
+2. Only if using Docker, you must make sure you have the results for any of the tools you have run in the correct directory.  Given the output path ``DIR`` (the same as ``output_dir`` as provided to Docker), make sure to rename the result files and place those in the appropriate location as given below.  
 	* CatFam results: ``$DIR/organism/CatFam/sequence.output``
 	* DETECT results: ``$DIR/organism/DETECT/output_40.out``
 	* EFICAz results: ``$DIR/organism/EFICAz/sequence.fa.ecpred``
@@ -288,7 +288,7 @@ Results from individual enzyme annotation tools can be separately specified for 
 
 # 4. Output location
 
-The following details where the output of Architect is found.  If using Docker to run Architect, substitute $OUTPUT_DIR with ``architect-run`` and $PROJECT with ``organism``.  
+The following details where the output of Architect is found.  If using Docker to run Architect, substitute $OUTPUT_DIR with ``<architect-run>`` and $PROJECT with ``organism``.  
 
 - The output from your run of Architect can be found at the location defined by $OUTPUT_DIR/$PROJECT in architect.sh.  
 - Results from individual tools will be formatted within $OUTPUT_DIR/$PROJECT/Ensemble_annotation_files/Formatted_results. 
