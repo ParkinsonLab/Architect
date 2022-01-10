@@ -98,7 +98,7 @@ $DIR/bin/conda install -y -c SBMLTeam python-libsbml
 Now, get a copy of the code for Architect (which you will need to modify).  For example, you may use:
 
 ```
-	git clone https://github.com/parkinsonlab/Architect
+git clone https://github.com/parkinsonlab/Architect
 ```
 
 Now, when Architect was built, it was in many ways optimized for use by a computer cluster.  This, in particular, concerns the scripts used for running the individual enzyme annotation tools.  Please follow the following instructions to customize your copy of Architect for your use case.
