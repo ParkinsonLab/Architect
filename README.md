@@ -86,7 +86,7 @@ Then, ensure the following two sets of dependencies are fulfilled.  (You can che
 *	In your python2 distribution, make sure you have the following packages: ``argparse``, ``numpy``, ``sklearn``, and ``biopython``.  
 *	In your python3 distribution, make sure you have the following packages: ``argparse``, ``numpy``, ``biopython`` and ``libsbml``.
 	
-Otherwise, given the directory DIR where anaconda3 or conda2 is installed, you may enter the following command in your shell window for installing biopython and libsbml for example:
+Otherwise, given the directory ``DIR`` where anaconda3 or conda2 is installed, you may enter the following command in your shell window for installing biopython and libsbml for example:
 
 ```
 $DIR/bin/conda install -y biopython
@@ -95,10 +95,10 @@ $DIR/bin/conda install -y -c SBMLTeam python-libsbml
 
 ### Step 2: Customization of specific scripts
 
-First, get a copy of the code for Architect.  For example, you may use:
+Now, get a copy of the code for Architect (which you will need to modify).  For example, you may use:
 
 	```
-	git clone https://github.com/parkinsonlab/architect
+	git clone https://github.com/parkinsonlab/Architect
 	```
 
 Now, when Architect was built, it was in many ways optimized for use by a computer cluster.  This, in particular, concerns the scripts used for running the individual enzyme annotation tools.  Please follow the following instructions to customize your copy of Architect for your use case.
@@ -124,6 +124,12 @@ Now, when Architect was built, it was in many ways optimized for use by a comput
 	- Comment out other lines starting with ``module load``.  Instead add the corresponding package to the PATH variable.  Make sure as you are doing so that you are not changing the line number where any remaining piece of code appears.
 	
 ### Step 3: Complete set-up.
+
+0. If you are a Niagara user, make sure to get a copy of the Architect code, for example, using 	
+
+	```
+	git clone https://github.com/parkinsonlab/Architect
+	```.
 
 1. Download the Database folder required for running Architect.  This file is present on the Parkinson lab's website [in a readable format](http://compsysbio.org/projects/Architect/Database/) and as [a tarred file](http://compsysbio.org/projects/Architect/Database.tar.gz).  On command line, you may use:
 
