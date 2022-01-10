@@ -206,7 +206,7 @@ The following tools (version indicated in brackets) have been used to run Archit
 * EnzDP
 * PRIAM (vJAN18)
 * Cplex
-* Diamond (v0.9.23.124)
+* Diamond (v0.9.19)
 
 The following table lists from where the enzyme annotation tools can be manually downloaded.
 
