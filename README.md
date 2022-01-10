@@ -171,7 +171,7 @@ Now, when Architect was built, it was in many ways optimized for use by a comput
 	python2 downloader_of_tools.py --i yes
 	``` 
 
-Installation of all enzyme annotation tools is recommended. The section entitled [Architect prerequisites](#e-Architect-prerequisites) outlines some of the details of the tools used, in particular from where the enzyme annotation tools may be otherwise manually downloaded.
+Installation of all enzyme annotation tools is recommended. The section entitled [Architect prerequisites](#d-Architect-prerequisites) outlines some of the details of the tools used, in particular from where the enzyme annotation tools may be otherwise manually downloaded.
 
 ## c. Downloading CPLEX (required if performing model reconstruction)
 
