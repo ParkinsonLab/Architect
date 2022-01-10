@@ -168,8 +168,12 @@ Whether you are using Docker or not, you will need the CPLEX solver to perform m
 3.	Scroll down and choose “Software” from the menu on the left.
 4.	Choose “ILOG CPLEX Optimization Studio”.  Choose “Download” in the window that appears.
 5.	If using Docker to run Architect, enter "CJ4Z5ML" in the field "Part numbers".  Select "IBM ILOG CPLEX Optimization Studio 12.9 for Linux x86-64 Multilingual (CNZM2ML)", scroll down and agree to the terms and conditions.  You will need the Download Director for downloading the installer.  Instructions will appear for installing the Download Director if you do not already have it installed.  Press "Details" in the window for the Download Director to find where the file is present.  
-	*	Note: If not using Docker, download the installer for version 12.9 of CPLEX appropriate for your system (using "CJ4Z5ML" in the field "Part numbers") and run the installer.
-6.	(Ignore this step if you are not using Docker)  Rename the bin file as cplex_installer.bin.  Do not run the installer by yourself.  This is done automatically when building the Docker image for your computer.
+	*	Note: If not using Docker, download the installer for version 12.9 of CPLEX appropriate for your system (using "CJ4Z5ML" in the field "Part numbers").
+6.	If using Docker:  
+	*	Rename the bin file as cplex_installer.bin.  Do not run the installer by yourself.  This is done automatically when building the Docker image for your computer.  
+	If not using Docker:  
+	*	Run the installer.  
+	*	Make sure to set up CPLEX for use by Python (v3).  This can be done, for example, by running ``python3.7 setup.py install``, if python3.7 is in your PATH variable.
 
 ## d. Architect prerequisites
 
