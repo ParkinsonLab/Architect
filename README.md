@@ -4,6 +4,8 @@ Architect is a pipeline for automatic metabolic model reconstruction.  Given the
 
 Architect is designed to be an interactive tool for model reconstruction.  Architect can either be run using Docker on a simple computer, or on a computer cluster such as [Niagara](https://docs.scinet.utoronto.ca/index.php/Niagara_Quickstart).  In specific instances, users not using Docker will have to ensure certain dependencies are fulfilled and that certain specific modifications are made; these are detailed in this document.  
 
+Special thanks to Dr Swapna Seshadri, Billy Taj and Dr Xuejian Xiong for help in various aspects of setting up this code.
+
 For more information, please contact nnursimulu@cs.toronto.edu.
 
 ## Table of contents
@@ -332,7 +334,7 @@ In the case of majority rule, the first parameter determines the kind of voting 
 |3            |EC is assigned when predicted by all 5 tools.                                |
 |3.5          |EC is assigned when predicted by all tools that can predict the EC.          |
 
-In the case of the EC-specific best tool, a final EC is output if it is made by the top-performing tool(s) for that EC as found in training.  The difference between "high" and "all" settings lies in the section of the training data where these top-performers are identified.  More specifically, "high" refers to those tools found to be top-performers across all subsections of the training data, whereas "all" refers to those tools giving high performance in at least one subsection of the training data (but not necessarily on all subsections).
+In the case of the EC-specific best tool, a final EC is output if it is made by the top-performing tool(s) for that EC as found in training.  The difference between "high" and "all" settings lies in the section of the training data where these top-performers are identified.  More specifically, "high" refers to those tools found to be top-performers across all subsections of the training data, whereas "all" refers to those tools giving high performance in at least one subsection of the training data (but not necessarily in all subsections).
 
 ## b.	Inclusion of ECs not predicted by the ensemble classifier for model reconstruction
 
@@ -358,13 +360,13 @@ Here, we provide some details about each of these parameter settings as well as 
 | Setting | Alternate option |
 |---------|------------------|
 | 1       | More than 1 gap-filling solution may be output by the user. At this time, we unfortunately cannot guarantee the optimality of these alternate solutions given the time complexity of the gap-filling step. <br/><br/>Note that if you choose to output more than one solution, you will later be asked how many output models you wish Architect to produce—more details [below](#5number-of-output-models).|
-| 2       | This option is only applicable if the user wants to output multiple gap-filling solutions. The default option indicates that any solutions worse than 10% of the optimal will not be returned; please note that the value of a gap-filling solution is given by the sum of the penalties attributed to each of the gap-filling reactions in question.  <br/><br/>Setting this number lower will tighten the quality of solutions of interest, and the converse loosen these restrictions. |
+| 2       | This option is only applicable if the user wants to output multiple gap-filling solutions. The default option indicates that any solutions worse than 10% of the optimal will not be returned; please note that the value of a gap-filling solution is given by the sum of the penalties attributed to each of the gap-filling reactions in question.  <br/><br/>Setting this number lower will tighten the quality of solutions of interest, and the opposite loosen these restrictions. |
 | 3       | When performing gap-filling, an integer variable is assigned to each candidate gap-filling reaction, such that, in theory, a value of 1 is ascribed to the ith candidate gap-filling reaction if this reaction is part of the gap-filling solution being returned (and 0 otherwise). In practice however, the solver will not necessarily return integral variables. The integrality tolerance indicates how far from 0 or 1 a value can be to still be considered "integral".  <br/><br/>If you find that gap-filling is taking more time than desirable (for example, in my experience, gap-filling that takes longer than an hour and finishes on SciNet at the very least is rare), you may set this tolerance higher, for example, starting with E-7, then E-6 and so on.|
 | 4       | By default, gap-filling candidate reactions associated with low-confidence EC predictions are associated with a penalty of addition less than 1. Remaining gap-filling candidate reactions that are part of the reaction database have a penalty of addition of 1.  As for transport reactions for deadend metabolites in the high-confidence network, they are associated with a default penalty of 1.  <br/><br/>If you wish to discourage the addition of such reactions, you can experiment with increasing this penalty. |
 
 ## e.	Number of output models
 
-If you specify to Architect to output more than one gap-filling solution (say n solutions), you will have the option to output as many models ready for simulations (between 1 and n).  To be more specific, two sets of output can be obtained from Architect after running its model reconstruction module.
+If you specify to Architect to output more than one gap-filling solution (say n solutions), you will have the option to output fewer Excel/SBML final models (between 1 and n).  To be more specific, two sets of output can be obtained from Architect after running its model reconstruction module.
 
 1.	Gap-filling solutions are, here, lists of reactions that can be used to obtain a model that is able to produce a minimum amount of the user-specified objective.  
 	-	The output here is used in part to actually create the final SBML and Excel outputs. 
@@ -375,7 +377,7 @@ If you specify to Architect to output more than one gap-filling solution (say n 
 		-	You may consult the file model_gapfilled_multi_x.lst_check_nec_and_suff.out to get a sense of the quality of the solutions being output.  The column "Is_functional" indicates whether the model is functional with this current set of gap-filling reactions, and the column "All_reactions" essential" indicates if all these reactions are indispensable for non-zero flux through the objective function.  Ideally, both conditions will have been met; unfortunately, due to the complexity of the gap-filling problem, these may not be met, and currently we leave it up to the user to look through these alternate solutions.
 	-	Please note that these results are overwritten whenever Architect's model reconstruction module is re-run in the same output folder.
 2.	Gap-filled models are lists of reactions, complete with meta-data such as reaction name and metabolite name, that are ready to be used for constraints-based modeling. 
-	- They are found in the Final_* folder under $OUTPUT_DIR/$PROJECT/Model_reconstruction and are available in Excel and SBML models.
+	- They are found in the Final_* folder under $OUTPUT_DIR/$PROJECT/Model_reconstruction and are available as Excel and SBML models.
 
 The reason I separate these two kinds of outputs is that, in my experience, the SBML model output can be very large, and thus we leave it at the discretion of the user to determine the number of output models that is sensible to output.
 
