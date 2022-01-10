@@ -193,9 +193,9 @@ Whether you are using Docker or not, you will need the CPLEX solver to perform m
 
 ## d. Architect prerequisites
 
-The following tools (version indicated in brackets) have been used to run Architect.  Installation of all enzyme annotation tools is recommended, and can be effectuated by running `downloader_of_tools.py`.
+The following tools (version indicated in brackets) have been used to run Architect.  Installation of all enzyme annotation tools is recommended, and is effectuated by running `downloader_of_tools.py`.
 
-* BLAST+
+* BLAST+ (v2.7.1)
 * BLAST (v2.2.26)
 * EMBOSS (v6.6.0)
 * CatFam
@@ -221,7 +221,7 @@ The following table lists from where the enzyme annotation tools can be manually
 
 In essence two files are used to run Architect: a file similar to ``architect.sh`` in this directory and another taking the form of ``sample_run.in``, again present here. These files indicate the path for various user input and dependencies.  
 
-Different procedures are utilized to run Architect depending on whether you are using Docker, Niagara or any other system. 
+Different procedures are utilized to run Architect depending on whether you are using Docker or not. 
 
 ## a. Running Architect using Docker
 
