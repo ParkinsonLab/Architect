@@ -246,7 +246,7 @@ In the simplest case, running Architect using Docker requires the following step
 
 When using Docker, you have the option of providing results from any of the tools run independently.  This option is desirable especially if many sequences are being submitted to Architect or if running some of the more time-intensive tools.  
 1. Follow steps 1-3 as listed above.  
-2. Then, follow the instructions from [below](c-Performing-model-reconstruction-using-results-from-independently-run-individual-enzyme-annotation-tools) for how to provide the results to Architect.  
+2. Then, follow the instructions from [below](#c-Performing-model-reconstruction-using-results-from-independently-run-individual-enzyme-annotation-tools) for how to provide the results to Architect.  
 3. Proceed with step 4 above.  Indicate that you already have results from individual enzyme annotation tools when prompted.
 
 ## b. Running Architect when not using Docker
