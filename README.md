@@ -121,9 +121,9 @@ Now, when Architect was built, it was in many ways optimized for use by a comput
 
 	- You have two options for running individual EC annotation tools: 
 		*	Option 1: Run the individual EC annotation tools then provide the results to Architect (You may use as an example the template scripts in scripts/individual_enzyme_annotation or even under scripts/individual_enz_annot_docker). Details for how results from individual enzyme annotation tools can be provided to Architect are given [below](#c-Performing-model-reconstruction-using-results-from-independently-run-individual-enzyme-annotation-tools).  
-		*	Option 2: For each of the scripts under scripts/individual_enzyme_annotation, modify the lines starting with ``module load`` by adding the path corresponding to the module of interest to your PATH variable.  Then, go to ``architect/run_individual_tools.py`` and replace the command ``sbatch`` with ``sh`` (lines 40, 44, 51, 55 and 59).  This means that the tools will be run on your computer sequentially, and may take some time.  
+		*	Option 2: For each of the scripts under scripts/individual_enzyme_annotation, modify the lines starting with ``module load`` by adding the path corresponding to the module of interest to your PATH variable.  Please make sure that you are not changing the line number where any remaining piece of code appears.  Then, go to ``architect/run_individual_tools.py`` and replace the command ``sbatch`` with ``sh`` (lines 40, 44, 51, 55 and 59).  This means that the tools will be run on your computer sequentially which may take some time.  
 	- Comment out line 1 of TEMPLATE_run_reconstruction.sh.
-	- Comment out other lines in TEMPLATE_run_reconstruction.sh starting with ``module load``.  Instead add the corresponding package to the PATH variable.  Make sure as you are doing so that you are not changing the line number where any remaining piece of code appears.
+	- Comment out other lines in TEMPLATE_run_reconstruction.sh starting with ``module load``.  Instead add the corresponding package to the PATH variable.  Again, make sure as you are doing so that you are not changing the line number where any remaining piece of code appears.
 	
 ### Step 3: Complete set-up.
 
