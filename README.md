@@ -107,7 +107,7 @@ Now, when Architect was built, it was in many ways optimized for use by a comput
 
 	- Template scripts for each tool under scripts/individual_enzyme_annotation.
 	- TEMPLATE_run_reconstruction.sh under scripts/model_reconstruction. 
-	- For either of the above, werify that the lines starting with ``module load`` point towards a package you have in your system.  Otherwise, consider adding the directory with the package to your PATH variable.
+	- For either of the above, verify that the lines starting with ``module load`` point towards a package you have in your system.  Otherwise, consider adding the directory with the module to your PATH variable.
 	
 
 * If you are using a supercomputer which does not use the SLURM job scheduler, make the following changes while ensuring that you do not change the line numbers on which each remaining line of code appears:  
@@ -115,13 +115,13 @@ Now, when Architect was built, it was in many ways optimized for use by a comput
 	- Modify the header for the template scripts for each tool under scripts/individual_enzyme_annotation so that it matches the one used by your specific job scheduler.  
 	- Comment out line 1 of TEMPLATE_run_reconstruction.sh under scripts/model_reconstruction.  
 	- For each of the above, modify the lines starting with ``module load`` as per your system. For example, you may have to add the path corresponding to the module of interest to your PATH variable.  
-	- Go to architect/run_individual_tools.py and replace the command ``sbatch`` with the one used to submit jobs in your case (refer to lines 40, 44, 51, 55 and 59).  
+	- Go to ``architect/run_individual_tools.py`` and replace the command ``sbatch`` with the one used to submit jobs in your case (lines 40, 44, 51, 55 and 59).  
 
 * If you are not using a supercomputer, please do the following:
 
 	- Run the individual EC annotation tools then provide the results to Architect (You may use as an example the template scripts in scripts/individual_enzyme_annotation or even under scripts/individual_enz_annot_docker). Details for how results from individual enzyme annotation tools can be provided to Architect are given [below](#c-Performing-model-reconstruction-using-results-from-independently-run-individual-enzyme-annotation-tools).
 	- Comment out line 1 of TEMPLATE_run_reconstruction.sh.
-	- Comment out other lines starting with ``module load``.  Instead add the corresponding package to the PATH variable.  Make sure as you are doing so that you are not changing the line number where any remaining piece of code appears.
+	- Comment out other lines in TEMPLATE_run_reconstruction.sh starting with ``module load``.  Instead add the corresponding package to the PATH variable.  Make sure as you are doing so that you are not changing the line number where any remaining piece of code appears.
 	
 ### Step 3: Complete set-up.
 
