@@ -40,7 +40,7 @@ This section details the steps going from protein sequence to gap-filled model. 
 3.	Given the EC predictions with their corresponding likelihood scores and user-specified parameters (parameters as specified in such a file as ``sample_run.in``), a draft metabolic network is constructed then gap-filled.  This is performed using scripts found in scripts/model_reconstruction.  This uses a modified version of CarveMe, with scripts that can be found in dependency/CarveMe.  The framed package—modified from its original published form—is also required (in dependency/framed).
 The final output comes in the form of a simple Excel file, as well as an SBML file annotated with links from KEGG/BiGG identifiers to other databases.
 
-The manuscript for Architect is currently in preparation.  Please cite the tools that Architect uses when using our approach:
+The manuscript for Architect is currently in preparation, and is available of [bioRxiv](https://www.biorxiv.org/content/10.1101/2021.10.12.464133v1).  Please cite the tools that Architect uses when using our approach:
 
 * CatFam (Yu et al, 2009)
 * DETECT (Hung et al, 2010; Nursimulu et al, 2018)
