@@ -225,7 +225,7 @@ Different procedures are utilized to run Architect depending on whether you are 
 
 ## a. Running Architect using Docker
 
-### Running Architect by running individual enzyme annotation tools
+### Running Architect starting with running individual enzyme annotation tools
 
 In the simplest case, running Architect using Docker requires the following steps:  
 1. Set up the following directories:  
