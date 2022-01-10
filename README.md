@@ -76,7 +76,7 @@ Please keep note of the folder ``<local-dir>`` as it will be re-used whenever yo
 
 ## b. Setting up Architect for use without Docker (on a computer cluster or otherwise)
 
-For those intending to use Architect outside Docker, certain customizations are required.  Scripts currently being distributed via this Architect distribution use as examples for users of the [Niagara supercomputer based at the University of Toronto](https://docs.scinet.utoronto.ca/index.php/Niagara_Quickstart) but can easily be modified for your use case.  For Niagara users, you only need to use step 3 below.
+For those intending to use Architect outside Docker, certain customizations are required.  Scripts currently being distributed via this Architect distribution use as example for users of the [Niagara supercomputer based at the University of Toronto](https://docs.scinet.utoronto.ca/index.php/Niagara_Quickstart) but can easily be modified for your use case.  For Niagara users, please skip to step 3 below.
 
 ### Step 1: Python v2 and v3 installations
 
