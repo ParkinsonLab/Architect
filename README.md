@@ -86,7 +86,7 @@ Then, ensure the following two sets of dependencies are fulfilled.  (You can che
 *	In your python2 distribution, make sure you have the following packages: ``argparse``, ``numpy``, ``sklearn``, and ``biopython``.  
 *	In your python3 distribution, make sure you have the following packages: ``argparse``, ``numpy``, ``biopython`` and ``libsbml``.
 	
-Otherwise, given the directory DIR where anaconda3/conda2 is installed, you may enter the following command in your shell window for installing biopython and libsbml for example:
+Otherwise, given the directory DIR where anaconda3 or conda2 is installed, you may enter the following command in your shell window for installing biopython and libsbml for example:
 
 ```
 $DIR/bin/conda install -y biopython
