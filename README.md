@@ -251,7 +251,7 @@ When using Docker, you have the option of providing results from any of the tool
 
 ### Overview
 
-To run Architect, in essence you first need to modify ``architect.sh`` and ``sample_run.in`` as given in this folder.  Once this has been done, simply run ``sh architect.sh``.  If running individual enzyme annotation tools (and thus on a computer cluster), Architect will submit jobs for running the tools and exit.  Keep track of your job statuses; following their completion, run ``sh architect.sh`` to perform enzyme annotation using an ensemble approach and model reconstruction.
+To run Architect, in essence you first need to modify ``architect.sh`` and ``sample_run.in`` as given in this folder.  Once this has been done, simply run ``sh architect.sh``.  If running individual enzyme annotation tools on a computer cluster, Architect will submit jobs for running the tools and exit.  Keep track of your job statuses; following their completion, run ``sh architect.sh`` to perform enzyme annotation using an ensemble approach and model reconstruction.
 
 ### Modifications to architect.sh
 
