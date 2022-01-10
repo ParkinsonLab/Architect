@@ -177,7 +177,7 @@ Whether you are using Docker or not, you will need the CPLEX solver to perform m
 		*	Rename the bin file as cplex_installer.bin.  Do not run the installer by yourself.  This is done automatically when building the Docker image for your computer.  
 	*	If not using Docker:  
 		*	Run the installer.  
-		*	Make sure to set up CPLEX for use by Python (v3).  This can be done, for example, by running ``python3.7 setup.py install``, if python3.7 is in your PATH variable.
+		*	Make sure to set up CPLEX for use by Python (v3).  This can be done, for example, by running ``python3.7 setup.py install`` (assuming python3.7's executable is in your PATH variable).
 
 ## d. Architect prerequisites
 
