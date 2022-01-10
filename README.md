@@ -31,9 +31,9 @@ For more information, please contact nnursimulu@cs.toronto.edu.
 This section details the steps going from protein sequence to gap-filled model.  For specific instructions regarding set-up and running Architect, please scroll down to the appropriate section.
 
 1.	First, Architect runs your protein sequences through the different enzyme annotation tools (CatFam, DETECT, EFICAz, EnzDP, PRIAM).  Code for downloading these tools is included in this version of Architect; please note that small modifications are made to the EnzDP code once downloaded.  
-*	If you are using Architect on a computer cluster, these tools will run _in_ _parallel_ with each other, Architect itself will exit and you will need to independently monitor the progression of the corresponding jobs. Once these jobs have finished running, you will need to re-run Architect and specify that you do not need to run any individual enzyme annotation tools.  
-*	If using Architect with docker, these tools will run _sequentially_.  This step can be time-consuming.  Modifications for this step will be detailed in this document.  
-*	For convenience, users also have the option of running the tools separately and providing the raw results to Architect.  
+	*	If you are using Architect on a computer cluster, these tools will run _in_ _parallel_ with each other, Architect itself will exit and you will need to independently monitor the progression of the corresponding jobs. Once these jobs have finished running, you will need to re-run Architect and specify that you do not need to run any individual enzyme annotation tools.  
+	*	If using Architect with docker, these tools will run _sequentially_.  This step can be time-consuming.  Modifications for this step will be detailed in this document.  
+	*	For convenience, users also have the option of running the tools separately and providing the raw results to Architect.  
 
 2.	The results are then formatted and run through an ensemble approach (default: naïve Bayes) using scripts in the folder scripts/ensemble_enzyme_annotation.
 
