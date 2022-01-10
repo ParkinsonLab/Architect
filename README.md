@@ -142,7 +142,7 @@ Now, when Architect was built, it was in many ways optimized for use by a comput
 
 	Note: Following the first run of Architect, this folder and its contents will be modified; please be mindful of possible complications due to size requirements when you decide where to store this folder. (I have found this database to end up taking up a little over 1 GB of space following the first run of Architect.)
 
-2. (If you do not intend to perform model reconstruction, ignore this step.)  Install the CPLEX optimizer as per the instructions given [below](#user-content-downloading-cplex-required-if-performing-model-reconstruction) and install CPLEX on your machine.
+2. (If you do not intend to perform model reconstruction, ignore this step.)  Download the CPLEX optimizer as per the instructions given [below](#user-content-downloading-cplex-required-if-performing-model-reconstruction) and install CPLEX on your machine.
 
 3. Next, the following tools should be installed.  Please follow the instructions below and choose the files specific to your system.  Please unpack the files for BLAST+, legacy BLAST and DIAMOND (for example using `tar -xzvf <file.tar.gz>`).
 
@@ -153,7 +153,7 @@ Now, when Architect was built, it was in many ways optimized for use by a comput
 	|DIAMOND                      |Download from [here](https://github.com/bbuchfink/diamond/releases/)|
 	|EMBOSS                       |You may follow instructions such as [these](http://emboss.open-bio.org/html/adm/ch01s01.html).|
 
-	In the case of EMBOSS, if you have a linux shell, you may run the following (for wish you need the `cmake` package):
+	In the case of EMBOSS, if you have a linux shell, you may run the following (for which you need the `cmake` package):
 
 	```
 	wget ftp://emboss.open-bio.org/pub/EMBOSS/EMBOSS-6.6.0.tar.gz
