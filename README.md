@@ -150,9 +150,9 @@ Now, when Architect was built, it was in many ways optimized for use by a comput
 
 	| Tool                        | Location  |
 	|-----------------------------|-----------|
-	|BLAST+                       |Download from [here](http://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/2.7.1)|
+	|BLAST+ (v2.7.1)              |Download from [here](http://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/2.7.1)|
 	|BLAST (legacy version 2.2.26)|Download from [here](https://ftp.ncbi.nlm.nih.gov/blast/executables/legacy.NOTSUPPORTED/2.2.26/)|
-	|DIAMOND                      |Download from [here](https://github.com/bbuchfink/diamond/releases/)|
+	|DIAMOND (v0.9.19)            |Download from [here](https://github.com/bbuchfink/diamond/releases/) or for Linux [here](http://github.com/bbuchfink/diamond/releases/download/v0.9.19/diamond-linux64.tar.gz)|
 	|EMBOSS                       |You may follow instructions such as [these](http://emboss.open-bio.org/html/adm/ch01s01.html).|
 
 	In the case of EMBOSS, if you have a linux shell, you may run the following (for which you need the `cmake` package):
