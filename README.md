@@ -129,7 +129,7 @@ Now, when Architect was built, it was in many ways optimized for use by a comput
 
 	```
 	git clone https://github.com/parkinsonlab/Architect
-	```.
+	```
 
 1. Download the Database folder required for running Architect.  This file is present on the Parkinson lab's website [in a readable format](http://compsysbio.org/projects/Architect/Database/) and as [a tarred file](http://compsysbio.org/projects/Architect/Database.tar.gz).  On command line, you may use:
 
