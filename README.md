@@ -233,7 +233,7 @@ In the simplest case, running Architect using Docker requires the following step
 	i.	A directory to contain an Architect-specific database folder.  Note that this folder will be augmented the first time Architect is run.  Please re-use the same folder in any subsequent re-runs of Architect and please refrain from modifying any contents of this folder.  Call the global path to this directory (including the folder name) ``<db-dir>``.  
 	ii.	A directory to contain the output from Architect.  (Important note: you should not have a folder named ``organism`` already in this folder.)  Call the global path to this directory (including the folder name) ``<architect-run>``.  
 2. Copy your sequence file to ``architect-run`` and rename it as ``sequence.fa``.  
-3. Only if performing model reconstruction, create a file containing any user-defined reactions (named ``USER_defined_reactions.out``) and another with any ''warning metabolites'' (named ``WARNING_mets_to_allow.out``).  More details about these are given [below](#Modifications-to-sample_run-in) when defining ``USER_def_reax`` and ``WARNING_mets`` respectively.  
+3. Only if performing model reconstruction, create a file containing any user-defined reactions (named ``USER_defined_reactions.out``) and another with any ''warning metabolites'' (named ``WARNING_mets_to_allow.out``).  More details about these are given [below](#Modifications-to-sample_runin) when defining ``USER_def_reax`` and ``WARNING_mets`` respectively.  
 4. Enter the following command in your shell, substituting ``<db-dir>``, ``<architect-run>`` and ``<local-dir>`` with the corresponding path (the latter having been defined when you built the Docker image you will be using to run Architect).
 
 	```
