@@ -95,7 +95,8 @@ def add_metainfo(original_file, output_file, name_of_model, is_kegg, objective_f
         elif rxn.id in spontaneous_reactions:
             add_confidence_for_rxn(rxn, "Spontaneous reaction")
         else:
-            add_confidence_for_rxn(rxn, "Added due to associated high-confidence EC prediction")
+            if rxn.id in rxn_to_ec:
+                add_confidence_for_rxn(rxn, "Added due to associated high-confidence EC prediction")
 
         # Add attributes.
         if is_kegg:
