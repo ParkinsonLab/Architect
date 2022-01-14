@@ -197,7 +197,7 @@ def add_genes_to_file(rxn_to_gene, rxns_of_interest, output_file):
     # Add all genes in the model.
     array = ["<fbc:listOfGeneProducts>"]
     for gene in new_all_genes:
-        string = '<fbc:geneProduct fbc:id="' + gene + '" metaid="' + gene + '" fbc:label="' + gene + '"/>'
+        string = '<fbc:geneProduct fbc:id="' + gene + '" metaid="' + gene + '" fbc:label="' + gene + '" sboTerm="SBO:0000243"/>'
         array.append(string)
     array.append("</fbc:listOfGeneProducts>")
     add_information_after("</fbc:listOfObjectives>", array, output_file)
@@ -316,7 +316,7 @@ def fix_cpd(file_name, all_metabolite_to_attribute, is_kegg):
 
                 line = find_num_space_before(line) * " " + "<species " + new_elem
                 line = line + ' id="' + cpd_identifier + '" name="' + description + '"'
-                line = line + ' hasOnlySubstanceUnits="true" boundaryCondition="false" constant="false"/>\n'
+                line = line + ' sboTerm="SBO:0000247" hasOnlySubstanceUnits="true" boundaryCondition="false" constant="false"/>\n'
             array.append(line)
     with open(file_name, "w") as writer:
         for elem in array:
@@ -377,7 +377,7 @@ def fix_bounds(output_file, bound_to_id, rxn_to_lb, rxn_to_ub, all_reaction_to_a
                     new_elems.append(curr_elem)
                 new_elems.append('fbc:lowerFluxBound="' + bound_to_id[curr_lb] + '"')  
                 new_elems.append('fbc:upperFluxBound="' + bound_to_id[curr_ub] + '"')  
-                line = " " * find_num_space_before(line) + '<reaction metaid="' + curr_identifier + '" ' + " ".join(new_elems) + ">\n"
+                line = " " * find_num_space_before(line) + '<reaction metaid="' + curr_identifier + '" ' + " ".join(new_elems) + " sboTerm=\"SBO:0000375\">\n"
 
             if line.strip().startswith("<kineticLaw>"):
                 start_kinetic = True
