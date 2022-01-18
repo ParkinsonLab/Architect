@@ -59,7 +59,7 @@ When Architect was built, it was in many ways optimized for use by a supercomput
 ## a. For using Architect using Docker (on a single machine)
 
 If you intend to run Architect on a laptop or computer, you may use our Docker image.  Please follow the following instructions.
-1. First, install Docker on your machine ([Windows instructions](https://docs.docker.com/desktop/windows/install/) and [Mac instructions](https://docs.docker.com/desktop/mac/install/)).  Please make sure that your machine satisfies the system requirements listed.
+1. First, install Docker on your machine ([Windows instructions](https://docs.docker.com/desktop/windows/install/) and [Mac instructions](https://docs.docker.com/desktop/mac/install/)).  Please make sure that your machine satisfies the system requirements listed.  Upon successful installation of Docker, you should be able to access the program via command line; to test this, type in ``docker``.
 2. Set up a folder [with the contents of the folder Dockerfile](https://github.com/ParkinsonLab/Architect/tree/master/Dockerfile), respecting the directory structure of this particular folder and the names and contents of the files. Please note that you can set up this folder anywhere on your computer.
 3. (If you do not intend to perform model reconstruction, ignore this step.)  Download the CPLEX optimizer as per the instructions given [below](#c-downloading-cplex-required-if-performing-model-reconstruction).  At the end, you will have a file called ``cplex_installer.bin``.  Move this file to the folder containing the file called ``Dockerfile``.
 4. Go to command line, navigate to the folder containing the Dockerfile, and run the following command in command line.
