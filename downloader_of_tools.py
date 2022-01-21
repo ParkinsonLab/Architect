@@ -171,7 +171,7 @@ if __name__ == '__main__':
     # Step 3: Download DETECT.
     download_tool = verify_if_tool_to_be_downloaded("DETECTv2", path_for_tools, False)
     if download_tool:
-        detect_url = "http://compsysbio.org/projects/DETECTv2/DETECTv2.tar.gz"
+        detect_url = "https://compsysbio.org/projects/DETECTv2/DETECTv2.tar.gz"
         path_of_tarred = path_for_tools + "/DETECTv2.tar.gz"
         download_to_directory(detect_url, path_of_tarred)
         untar_file(path_of_tarred, path_for_tools)
