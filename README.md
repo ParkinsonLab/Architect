@@ -135,10 +135,10 @@ Now, when Architect was built, it was in many ways optimized for use by a comput
 	git clone https://github.com/parkinsonlab/Architect
 	```
 
-1. Download the Database folder required for running Architect.  This file is present on the Parkinson lab's website [in a readable format](http://compsysbio.org/projects/Architect/Database/) and as [a tarred file](http://compsysbio.org/projects/Architect/Database.tar.gz).  On command line, you may use:
+1. Download the Database folder required for running Architect.  This file is present on the Parkinson lab's website [in a readable format](https://compsysbio.org/projects/Architect/Database/) and as [a tarred file](https://compsysbio.org/projects/Architect/Database.tar.gz).  On command line, you may use:
 
 	```
-	wget http://compsysbio.org/projects/Architect/Database.tar.gz
+	wget https://compsysbio.org/projects/Architect/Database.tar.gz
 	tar -xzvf Database.tar.gz
 	```
 
@@ -265,9 +265,9 @@ For sample_run.in, please specify the values as directed in the file.  In partic
 
 - PRIAM_db (*recommended*) is the file containing various enzyme profiles required for PRIAM's run.  
 - SEQUENCE_FILE (*required*) denotes the fasta file of protein sequences you want to annotate with ECs.
-- DATABASE (*required*) denotes the path to the Architect-specific database that can be downloaded [here]( http://compsysbio.org/projects/Architect/Database/).
+- DATABASE (*required*) denotes the path to the Architect-specific database that can be downloaded [here]( https://compsysbio.org/projects/Architect/Database/).
 - USER_def_reax (may be *required*) denotes user-defined reactions for model reconstruction.  To create this file, please consult sample_run_user_defined.txt for an example file.
-- WARNING_mets (*optional*) is meant to override a set of reactions (concerning particular metabolites) that Architect automatically does not consider for model reconstruction; this only concerns models reconstructed using the KEGG database.  In particular, refer to the file [here](http://compsysbio.org/projects/Architect/Database/model_reconstruction/KEGG_universe/WARNING_reactions_with_formulaless_cpds.out).
+- WARNING_mets (*optional*) is meant to override a set of reactions (concerning particular metabolites) that Architect automatically does not consider for model reconstruction; this only concerns models reconstructed using the KEGG database.  In particular, refer to the file [here](https://compsysbio.org/projects/Architect/Database/model_reconstruction/KEGG_universe/WARNING_reactions_with_formulaless_cpds.out).
 	- If you want reactions concerning any of these metabolites to be considered for model reconstruction, please list them line by line in this file.  (This may, for example, concern metabolites that are acceptor/donor pairs but which are being excluded as no formula was found for them.) 
 	- Otherwise, if you wish to use default settings or will use BiGG reactions for model reconstruction, please refer to a blank file here.
 	
