@@ -4,7 +4,7 @@ Architect is a pipeline for automatic metabolic model reconstruction.  Given the
 
 Architect is designed to be an interactive tool for model reconstruction.  Architect can either be run using Docker on a simple computer, or on a computer cluster such as [Niagara](https://docs.scinet.utoronto.ca/index.php/Niagara_Quickstart).  In specific instances, users not using Docker will have to ensure certain dependencies are fulfilled and that certain specific modifications are made; these are detailed in this document.  
 
-Special thanks to Dr Swapna Seshadri, Billy Taj and Dr Xuejian Xiong for help in various aspects of setting up this code.
+Thanks to Dr Swapna Seshadri, Billy Taj and Dr Xuejian Xiong for help in various aspects of setting up this code.  Special thanks, in particular, to Architect's testers: Andrew Duncan, Shraddha Khirwadkar and Dr Xuejian Xiong.
 
 For more information, please contact nnursimulu@cs.toronto.edu.
 
@@ -183,7 +183,7 @@ Whether you are using Docker or not, you will need the CPLEX solver to perform m
 4.	Choose “ILOG CPLEX Optimization Studio”.  Choose “Download” in the window that appears.
 5.	
 	*	If using Docker to run Architect:  
-		*	Enter "CJ4Z5ML" in the field "Part numbers".  Select "IBM ILOG CPLEX Optimization Studio 12.9 for Linux x86-64 Multilingual (CNZM2ML)", scroll down and agree to the terms and conditions.  You will need the Download Director for downloading the installer.  Instructions will appear for installing the Download Director if you do not already have it installed.  Press "Details" in the window for the Download Director to find where the file is present.  
+		*	Enter "CJ4Z5ML" in the field "Part numbers".  Select "IBM ILOG CPLEX Optimization Studio 12.9 for Linux x86-64 Multilingual (CNZM2ML)", scroll down and agree to the terms and conditions.  At the top of the page, you will have the option to choose between downloading via HTTP or via the Download Director.  We recommend choosing HTTP as, otherwise, you will need to install the Download Director which itself has additional prerequisites (eg: Java 8).  
 	*	If not using Docker:  
 		*	Download the installer for version 12.9 of CPLEX appropriate for your system (using "CJ4Z5ML" in the field "Part numbers").  
 6.	
