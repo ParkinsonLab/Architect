@@ -2,7 +2,7 @@
 
 Architect is a pipeline for automatic metabolic model reconstruction.  Given the protein sequences of an organism, enzyme annotation is first performed through ensemble approaches, followed by gap-filling. Sample simulation-ready SBML model reconstructions of Caenorhabditis elegans, Escherichia coli and Neisseria meningitidis are given in the folder Architect_reconstructions.
 
-Architect is designed to be an interactive tool for model reconstruction.  Architect can either be run using Docker on a simple computer, or on a computer cluster such as [Niagara](https://docs.scinet.utoronto.ca/index.php/Niagara_Quickstart).  In specific instances, users not using Docker will have to ensure certain dependencies are fulfilled and that certain specific modifications are made; these are detailed in this document.  
+Architect is designed to be an interactive tool for model reconstruction.  Architect can either be run using Docker on a simple computer, or on a computer cluster (such as [Niagara](https://docs.scinet.utoronto.ca/index.php/Niagara_Quickstart)).  In specific instances, users not using Docker will have to ensure certain dependencies are fulfilled and that certain specific modifications are made; these are detailed in this document.  
 
 Thanks to Dr Swapna Seshadri, Billy Taj and Dr Xuejian Xiong for help in various aspects of setting up this code.  Special thanks, in particular, to Architect's testers: Andrew Duncan, Shraddha Khirwadkar and Dr Xuejian Xiong.
 
@@ -54,7 +54,7 @@ The manuscript for Architect is currently in preparation, and is available at [b
 
 # 2. Set-up instructions
 
-When Architect was built, it was in many ways optimized for use by a supercomputer.  This, in particular, concerns the scripts used for running the individual tools.  Architect was tested using the Niagara supercomputer based at the University of Toronto.  For convenience, we provide alternative methods for running Architect with different set-up instructions as outlined below.
+When Architect was built, it was in many ways optimized for use by a supercomputer.  This, in particular, concerns the scripts used for running the individual tools.  For convenience, we provide alternative methods for running Architect with different set-up instructions as outlined below.
 
 ## a. For using Architect using Docker (on a single machine)
 
@@ -78,7 +78,7 @@ Please keep note of the folder ``<local-dir>`` as it will be re-used whenever yo
 
 ## b. Setting up Architect for use without Docker (on a computer cluster or otherwise)
 
-For those intending to use Architect outside Docker, certain customizations are required.  Scripts currently being distributed via this Architect distribution use as example for users of the [Niagara supercomputer based at the University of Toronto](https://docs.scinet.utoronto.ca/index.php/Niagara_Quickstart) but can easily be modified for your use case.  For Niagara users, please skip to step 3 below.
+For those intending to use Architect outside Docker, certain customizations are required.  Scripts currently being distributed via this Architect distribution use as example for users of a cluster equipped with 40 CPU cores and using the SLURM job scheduler (an example being the [Niagara supercomputer based at the University of Toronto](https://docs.scinet.utoronto.ca/index.php/Niagara_Quickstart) but can easily be modified for your specific use case.)  
 
 ### Step 1: Python v2 and v3 installations
 
@@ -127,13 +127,7 @@ Now, when Architect was built, it was in many ways optimized for use by a comput
 	- Comment out line 1 of TEMPLATE_run_reconstruction.sh.
 	- Comment out other lines in TEMPLATE_run_reconstruction.sh starting with ``module load``.  Instead add the corresponding package to the PATH variable.  Again, make sure as you are doing so that you are not changing the line number where any remaining piece of code appears.
 	
-### Step 3: Complete set-up.
-
-0. If you are a Niagara user, make sure to get a copy of the Architect code, for example, using 	
-
-	```
-	git clone https://github.com/parkinsonlab/Architect
-	```
+### Step 3: Complete set-up.  
 
 1. Download the Database folder required for running Architect.  This file is present on the Parkinson lab's website [in a readable format](https://compsysbio.org/projects/Architect/Database/) and as [a tarred file](https://compsysbio.org/projects/Architect/Database.tar.gz).  On command line, you may use:
 
