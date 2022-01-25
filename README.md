@@ -78,7 +78,7 @@ Please keep note of the folder ``<local-dir>`` as it will be re-used whenever yo
 
 ## b. Setting up Architect for use without Docker (on a computer cluster or otherwise)
 
-For those intending to use Architect outside Docker, certain customizations are required.  Scripts currently being distributed via this Architect distribution use as example for users of a cluster equipped with 40 CPU cores and using the SLURM job scheduler (an example being the [Niagara supercomputer based at the University of Toronto](https://docs.scinet.utoronto.ca/index.php/Niagara_Quickstart) but can easily be modified for your specific use case.)  
+For those intending to use Architect outside Docker, certain customizations are required.  Scripts currently being distributed via this Architect distribution use as example for users of a cluster equipped with 40 CPU cores and using the SLURM job scheduler (an example being the [Niagara supercomputer based at the University of Toronto](https://docs.scinet.utoronto.ca/index.php/Niagara_Quickstart)) but can easily be modified for your specific use case.  
 
 ### Step 1: Python v2 and v3 installations
 
