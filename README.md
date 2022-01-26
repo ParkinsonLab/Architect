@@ -4,7 +4,7 @@ Architect is a pipeline for automatic metabolic model reconstruction.  Given the
 
 Architect is designed to be an interactive tool for model reconstruction.  Architect can either be run using Docker on a simple computer, or on a computer cluster (such as [Niagara](https://docs.scinet.utoronto.ca/index.php/Niagara_Quickstart)).  In specific instances, users not using Docker will have to ensure certain dependencies are fulfilled and that certain specific modifications are made; these are detailed in this document.  
 
-Thanks to Dr Swapna Seshadri, Billy Taj and Dr Xuejian Xiong for help in various aspects of setting up this code.  Special thanks, in particular, to Architect's testers: Andrew Duncan, Shraddha Khirwadkar and Dr Xuejian Xiong.
+Thanks to Dr Swapna Seshadri, Billy Taj and Dr Xuejian Xiong for help in various aspects of setting up this code.  Special thanks, in particular, to Architect's testers: Andrew Duncan, Shraddha Khirwadkar and Dr Xuejian Xiong; and for feedback on the creation of this manual from Ana Popovic.  
 
 For more information, please contact nnursimulu@cs.toronto.edu.
 
