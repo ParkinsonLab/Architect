@@ -37,7 +37,7 @@ This section summarizes the steps going from protein sequence to gap-filled mode
 	*	If using Architect with docker, these tools will run _sequentially_.  This step can be time-consuming.  Modifications for this step will be detailed in this document.  
 	*	For convenience, users also have the option of running the tools separately and providing the raw results to Architect.  
 
-2.	The results are then formatted and run through an ensemble approach (default: naïve Bayes) using scripts in the folder scripts/ensemble_enzyme_annotation.  The results from the ensemble approach represent Architect's enzyme predictions for your protein sequences and will typically have been assigned likelihood scores based on predictions from individual enzyme annotation tools.
+2.	The results are then formatted and run through an ensemble approach (default: naïve Bayes) using scripts in the folder scripts/ensemble_enzyme_annotation.  The results from the ensemble approach represent Architect's enzyme predictions for your protein sequences and will (given the default ensemble approach) have been assigned likelihood scores based on predictions from individual enzyme annotation tools.
 
 3.	Given the EC predictions with their corresponding likelihood scores and user-specified parameters (parameters as specified in such a file as ``sample_run.in``), a draft metabolic network is constructed then gap-filled.  This is performed using scripts found in scripts/model_reconstruction.  This uses a modified version of ``CarveMe``, with scripts that can be found in dependency/CarveMe.  The ``framed`` package—modified from its original published form—is also required (in dependency/framed).
 
