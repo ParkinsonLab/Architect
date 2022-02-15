@@ -1,6 +1,6 @@
 # Architect
 
-Architect is a pipeline for automatic metabolic model reconstruction.  Given the protein sequences of an organism, enzyme annotation is first performed through ensemble approaches, followed by gap-filling. Sample simulation-ready SBML model reconstructions of Caenorhabditis elegans, Escherichia coli and Neisseria meningitidis are given in the folder Architect_reconstructions.
+Architect is a pipeline for automatic metabolic model reconstruction.  Given the protein sequences of an organism, enzyme annotation is first performed through ensemble approaches (that is, combining predictions from individual enzyme annotation tools), followed by gap-filling. Sample simulation-ready model reconstructions of Caenorhabditis elegans, Escherichia coli and Neisseria meningitidis are given in the Systems Biology Markup Language (SBML) (Keating et al, 2020), within the folder Architect_reconstructions.
 
 Architect is designed to be an interactive tool for model reconstruction.  Architect can either be run using Docker on a simple computer, or on a computer cluster (such as [Niagara](https://docs.scinet.utoronto.ca/index.php/Niagara_Quickstart)).  In specific instances, users not using Docker will have to ensure certain dependencies are fulfilled and that certain specific modifications are made; these are detailed in this document.  
 
@@ -376,6 +376,8 @@ If you specify to Architect to output more than one gap-filling solution (say n 
 The reason I separate these two kinds of outputs is that, in my experience, the SBML model output can be very large, and thus we leave it at the discretion of the user to determine the number of output models that is sensible to output.
 
 # 6. References
+
+Keating, S.M., et al., SBML Level 3: an extensible format for the exchange and reuse of biological models. Mol Syst Biol, 2020. 16(8): e9110.
 
 Yu, C., et al., Genome-wide enzyme annotation with precision control: catalytic families (CatFam) databases. Proteins, 2009. 74(2): p. 449-60.
 
