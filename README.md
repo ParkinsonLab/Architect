@@ -30,7 +30,7 @@ For more information, please contact nnursimulu@cs.toronto.edu.
 
 # 1. Overview
 
-This section details the steps going from protein sequence to gap-filled model.  For specific instructions regarding set-up and running Architect, please scroll down to the appropriate section.
+This section summarizes the steps going from protein sequence to gap-filled model.  For specific instructions regarding set-up and running Architect, please scroll down to the appropriate section.
 
 1.	First, Architect runs your protein sequences through the different enzyme annotation tools (CatFam, DETECT, EFICAz, EnzDP, PRIAM).  Code for downloading these tools is included in this version of Architect; please note that small modifications are made to the EnzDP code once downloaded.  
 	*	If you are using Architect on a computer cluster, these tools will run _in_ _parallel_ with each other, Architect itself will exit and you will need to independently monitor the progression of the corresponding jobs. Once these jobs have finished running, you will need to re-run Architect and specify that you do not need to run any individual enzyme annotation tools.  
