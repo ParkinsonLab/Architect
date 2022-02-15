@@ -43,7 +43,7 @@ This section summarizes the steps going from protein sequence to gap-filled mode
 
 4.	The final output comes in the form of a simple Excel file, as well as an SBML file annotated with links from KEGG/BiGG identifiers to other databases.
 
-The manuscript for Architect is currently in preparation, and is available at [bioRxiv](https://www.biorxiv.org/content/10.1101/2021.10.12.464133v1).  Please cite the tools that Architect uses when using our approach:
+The manuscript for Architect is currently available at [bioRxiv](https://www.biorxiv.org/content/10.1101/2021.10.12.464133v1).  Please cite our manuscript and the tools that Architect uses when using our approach:
 
 * CatFam (Yu et al, 2009)
 * DETECT (Hung et al, 2010; Nursimulu et al, 2018)
@@ -379,6 +379,8 @@ The reason I separate these two kinds of outputs is that, in my experience, the 
 # 6. References
 
 Keating, S.M., et al., SBML Level 3: an extensible format for the exchange and reuse of biological models. Mol Syst Biol, 2020. 16(8): e9110.
+
+Nursimulu, N., Moses A.M. and Parkinson J. Architect: a tool for producing high-quality metabolic models through improved enzyme annotation. BioRxiv doi: 10.1101/2021.10.12.464133. https://www.biorxiv.org/content/10.1101/2021.10.12.464133v1.full
 
 Yu, C., et al., Genome-wide enzyme annotation with precision control: catalytic families (CatFam) databases. Proteins, 2009. 74(2): p. 449-60.
 
