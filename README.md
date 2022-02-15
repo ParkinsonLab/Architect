@@ -32,15 +32,16 @@ For more information, please contact nnursimulu@cs.toronto.edu.
 
 This section summarizes the steps going from protein sequence to gap-filled model.  For specific instructions regarding set-up and running Architect, please scroll down to the appropriate section.
 
-1.	First, Architect runs your protein sequences through the different enzyme annotation tools (CatFam, DETECT, EFICAz, EnzDP, PRIAM).  Code for downloading these tools is included in this version of Architect; please note that small modifications are made to the EnzDP code once downloaded.  
+1.	First, Architect runs your protein sequences through different enzyme annotation tools (CatFam, DETECT, EFICAz, EnzDP, PRIAM).  Code for downloading these tools is included in this version of Architect; please note that small modifications are made to the EnzDP code once downloaded.  
 	*	If you are using Architect on a computer cluster, these tools will run _in_ _parallel_ with each other, Architect itself will exit and you will need to independently monitor the progression of the corresponding jobs. Once these jobs have finished running, you will need to re-run Architect and specify that you do not need to run any individual enzyme annotation tools.  
 	*	If using Architect with docker, these tools will run _sequentially_.  This step can be time-consuming.  Modifications for this step will be detailed in this document.  
 	*	For convenience, users also have the option of running the tools separately and providing the raw results to Architect.  
 
-2.	The results are then formatted and run through an ensemble approach (default: naïve Bayes) using scripts in the folder scripts/ensemble_enzyme_annotation.
+2.	The results are then formatted and run through an ensemble approach (default: naïve Bayes) using scripts in the folder scripts/ensemble_enzyme_annotation.  The results from the ensemble approach represent Architect's enzyme predictions for your protein sequences and will typically have been assigned likelihood scores based on predictions from individual enzyme annotation tools.
 
-3.	Given the EC predictions with their corresponding likelihood scores and user-specified parameters (parameters as specified in such a file as ``sample_run.in``), a draft metabolic network is constructed then gap-filled.  This is performed using scripts found in scripts/model_reconstruction.  This uses a modified version of CarveMe, with scripts that can be found in dependency/CarveMe.  The framed package—modified from its original published form—is also required (in dependency/framed).
-The final output comes in the form of a simple Excel file, as well as an SBML file annotated with links from KEGG/BiGG identifiers to other databases.
+3.	Given the EC predictions with their corresponding likelihood scores and user-specified parameters (parameters as specified in such a file as ``sample_run.in``), a draft metabolic network is constructed then gap-filled.  This is performed using scripts found in scripts/model_reconstruction.  This uses a modified version of ``CarveMe``, with scripts that can be found in dependency/CarveMe.  The ``framed`` package—modified from its original published form—is also required (in dependency/framed).
+
+4.	The final output comes in the form of a simple Excel file, as well as an SBML file annotated with links from KEGG/BiGG identifiers to other databases.
 
 The manuscript for Architect is currently in preparation, and is available at [bioRxiv](https://www.biorxiv.org/content/10.1101/2021.10.12.464133v1).  Please cite the tools that Architect uses when using our approach:
 
