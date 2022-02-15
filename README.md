@@ -97,7 +97,7 @@ $DIR/bin/conda install -y -c SBMLTeam python-libsbml
 
 ### Step 2: Customization of specific scripts
 
-Now, get a copy of the code for Architect (which you will need to modify).  For example, you may use:
+Now, get a copy of the code for Architect (which you will need to modify) using:
 
 ```
 git clone https://github.com/parkinsonlab/Architect
