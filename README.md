@@ -239,7 +239,7 @@ In the simplest case, running Architect using Docker requires the following step
 
 ### Running Architect by providing results from individual enzyme annotation tools
 
-When using Docker, you have the option of providing results from any of the tools run independently.  This option is desirable especially if many sequences are being submitted to Architect or if running some of the more time-intensive tools.  
+When using Docker, you have the option of providing results from any of the tools run independently.  This option is desirable especially if many sequences are being submitted to Architect or if running some of the more time-intensive tools.  (For example, consult Table 2 of Ryu et al, 2019 for an idea of the tools' running times.)  
 1. Follow steps 1-3 as listed above.  
 2. Then, follow the instructions from [below](#c-Performing-model-reconstruction-using-results-from-independently-run-individual-enzyme-annotation-tools) for how to provide the results to Architect.  
 3. Proceed with step 4 above.  Indicate that you already have results from individual enzyme annotation tools when prompted.
@@ -378,26 +378,28 @@ The reason I separate these two kinds of outputs is that, in my experience, the 
 
 # 6. References
 
-Keating, S.M., et al., SBML Level 3: an extensible format for the exchange and reuse of biological models. Mol Syst Biol, 2020. 16(8): e9110.
-
-Nursimulu, N., Moses A.M. and Parkinson J. Architect: a tool for producing high-quality metabolic models through improved enzyme annotation. BioRxiv doi: 10.1101/2021.10.12.464133. https://www.biorxiv.org/content/10.1101/2021.10.12.464133v1.full
-
-Yu, C., et al., Genome-wide enzyme annotation with precision control: catalytic families (CatFam) databases. Proteins, 2009. 74(2): p. 449-60.
-
-Hung, S.S., et al., DETECT--a density estimation tool for enzyme classification and its application to Plasmodium falciparum. Bioinformatics, 2010. 26(14): p. 1690-8.
-
-Nursimulu, N., et al., Improved enzyme annotation with EC-specific cutoffs using DETECT v2. Bioinformatics, 2018. 34(19): p. 3393-3395.
-
-Kumar, N. and J. Skolnick, EFICAz2.5: application of a high-precision enzyme function predictor to 396 proteomes. Bioinformatics, 2012. 28(20): p. 2687-8
-
-Nguyen, N.N., et al., ENZDP: Improved enzyme annotation for metabolic network reconstruction based on domain composition profiles. Journal of Bioinformatics and Computational Biology, 2015. 13(5).
+Buchfink, B. et al., Fast and sensitive protein alignment using DIAMOND.  Nature Methods, 2015. 12(1): p. 59-60.
 
 Claudel-Renard, C., et al., Enzyme-specific profiles for genome annotation: PRIAM. Nucleic Acids Res, 2003. 31(22): p. 6633-9.
 
-Machado, D., et al., Fast automated reconstruction of genome-scale metabolic models for microbial species and communities. Nucleic Acids Res, 2018. 46(15): p. 7542-7553.
-
-Buchfink, B. et al., Fast and sensitive protein alignment using DIAMOND.  Nature Methods, 2015. 12(1): p. 59-60.
-
 CPLEX: available at https://www.ibm.com/analytics/cplex-optimizer
 
+Hung, S.S., et al., DETECT--a density estimation tool for enzyme classification and its application to Plasmodium falciparum. Bioinformatics, 2010. 26(14): p. 1690-8.
+
+Keating, S.M., et al., SBML Level 3: an extensible format for the exchange and reuse of biological models. Mol Syst Biol, 2020. 16(8): e9110.
+
+Kumar, N. and J. Skolnick, EFICAz2.5: application of a high-precision enzyme function predictor to 396 proteomes. Bioinformatics, 2012. 28(20): p. 2687-8
+
+Machado, D., et al., Fast automated reconstruction of genome-scale metabolic models for microbial species and communities. Nucleic Acids Res, 2018. 46(15): p. 7542-7553.
+
+Nguyen, N.N., et al., ENZDP: Improved enzyme annotation for metabolic network reconstruction based on domain composition profiles. Journal of Bioinformatics and Computational Biology, 2015. 13(5).
+
+Nursimulu, N., et al., Improved enzyme annotation with EC-specific cutoffs using DETECT v2. Bioinformatics, 2018. 34(19): p. 3393-3395.
+
+Nursimulu, N., Moses A.M. and Parkinson J. Architect: a tool for producing high-quality metabolic models through improved enzyme annotation. BioRxiv doi: 10.1101/2021.10.12.464133. https://www.biorxiv.org/content/10.1101/2021.10.12.464133v1.full
+
 Ponce, M. et al., Deploying a Top-100 Supercomputer for Large Parallel Workloads: the Niagara Supercomputer. PEARC'19 Proceedings, 2019.
+
+Ryu, J.Y., et al., Deep learning enables high-quality and high-throughput prediction of enzyme commission numbers. PNAS, 2019. 116(28): p. 13996–14001.
+
+Yu, C., et al., Genome-wide enzyme annotation with precision control: catalytic families (CatFam) databases. Proteins, 2009. 74(2): p. 449-60.
