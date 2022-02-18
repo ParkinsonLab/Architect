@@ -14,7 +14,7 @@ For more information, please contact nnursimulu@cs.toronto.edu.
     a. [For using Architect using Docker (on a single machine)](#a-For-using-Architect-using-Docker-on-a-single-machine)  
     b. [Setting up Architect for use without Docker (on a computer cluster or otherwise)](#b-Setting-up-Architect-for-use-without-Docker-on-a-computer-cluster-or-otherwise)  
     c. [Downloading CPLEX (required if performing model reconstruction)](#c-Downloading-CPLEX-required-if-performing-model-reconstruction)  
-    d. [Architect prerequisites](#d-Architect-prerequisites)  
+    d. [General information about tools used within Architect](#d-General-information-about-tools-used-within-Architect)  
 3. [Instructions for running Architect](#3-Instructions-for-running-Architect)  
     a. [Running Architect using Docker](#a-Running-Architect-using-Docker)  
     b. [Running Architect when not using Docker](#b-Running-Architect-when-not-using-Docker)  
@@ -166,7 +166,7 @@ Please follow the following instructions to customize your copy of Architect for
 	python2 downloader_of_tools.py --i yes
 	``` 
 
-Installation of all enzyme annotation tools is recommended. The section entitled [Architect prerequisites](#d-Architect-prerequisites) outlines some of the details of the tools used, in particular from where the enzyme annotation tools may be otherwise manually downloaded.
+Installation of all enzyme annotation tools is recommended. The section entitled [General information about tools used within Architect](#d-General-information-about-tools-used-within-Architect) outlines some of the details of the tools used, in particular from where the enzyme annotation tools may be otherwise manually downloaded.
 
 ## c. Downloading CPLEX (required if performing model reconstruction)
 
@@ -188,7 +188,7 @@ Whether you are using Docker or not, you will need the CPLEX solver to perform m
 		*	Run the installer.  
 		*	Make sure to set up CPLEX for use by Python (v3).  This can be done, for example, by running ``python3.7 setup.py install`` (assuming python3.7's executable is in your PATH variable).
 
-## d. Architect prerequisites
+## d. General information about tools used within Architect
 
 The following tools (version indicated in brackets) have been used to run Architect.  Installation of all enzyme annotation tools is recommended, and is effectuated by running `downloader_of_tools.py`.
 
