@@ -55,7 +55,7 @@ The manuscript for Architect is currently available at [bioRxiv](https://www.bio
 
 # 2. Set-up instructions
 
-When Architect was built, it was in many ways optimized for use by a supercomputer.  This, in particular, concerns the scripts used for running the individual tools.  For convenience, we provide alternative methods for running Architect with different set-up instructions as outlined below.
+When Architect was built, it was in many ways optimized for use by a supercomputer.  This, in particular, concerns the scripts used for running the individual tools.  For convenience, we provide alternative methods for running Architect (such as with Docker) as outlined below.
 
 ## a. For using Architect using Docker (on a single machine)
 
