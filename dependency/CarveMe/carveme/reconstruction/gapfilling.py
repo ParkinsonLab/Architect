@@ -132,10 +132,10 @@ def multiGapFill(model, universe, media, media_db, min_growth=0.1, max_uptake=10
     # For Architect: Needed to fix this so that we use only one medium.  Actual value of media does not matter.
     for medium_name in media:
         if medium_name in media_db:
-            compounds = media_db[medium_name]
-            constraints = medium_to_constraints(merged_model, compounds, max_uptake=max_uptake, inplace=False,
-                                                exchange_format=exchange_format, verbose=False)
-            lists_of_added_reactions = gapFill(model, universe, constraints=constraints, min_growth=min_growth,
+            # compounds = media_db[medium_name]
+            # constraints = medium_to_constraints(merged_model, compounds, max_uptake=max_uptake, inplace=False,
+            #                                     exchange_format=exchange_format, verbose=False)
+            lists_of_added_reactions = gapFill(model, universe, constraints={}, min_growth=min_growth,
                     scores=scores, inplace=True, bigM=bigM, solver=solver, tag=medium_name, pool_size=pool_size, pool_gap=pool_gap, int_constr=int_constr)
             return lists_of_added_reactions
         else:
