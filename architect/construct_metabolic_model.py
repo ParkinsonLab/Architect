@@ -167,6 +167,25 @@ if __name__ == '__main__':
         utils.print_warning ("Architect: missing enzyme annotation files. Architect will now exit.")
         exit()
 
+    # Get user feedback on minimum score cutoff for what is considered a high-confidence EC prediction.
+    high_cutoff = None
+    answer = ""
+    while answer not in ["Y", "N"]:
+        answer = utils.input_with_colours("Architect: For ECs predicted by Architect, take predictions made with greater than 0.5 score as high-confidence? (HIGHLY RECOMMENDED) [y/n] ")
+        answer = answer.strip().upper()
+        if answer == "Q":
+            status_writer.write("Termination:" + str(datetime.datetime.now()) + ": " + utils.TERMINATION + "\n")
+            status_writer.close()
+            exit()
+    if answer == "N":
+        high_cutoff = ""
+        while (not utils.is_float(high_cutoff)) or (float(high_cutoff) > 1) or (float(high_cutoff) <= 0):
+            high_cutoff = utils.input_with_colours("Enter a number between 0 and 1 for the cutoff: ")
+        high_cutoff = float(high_cutoff)
+        status_writer.write("Step 5: " + str(datetime.datetime.now()) + \
+            ": User wishes to change the cutoff for what is considered high-confidence to " + str(high_cutoff) + ".\n")
+
+
     # Get user feedback on how many predictions they wish to use.
     min_num_high_conf = ""
     answer = ""
@@ -370,17 +389,21 @@ if __name__ == '__main__':
     if evalue_blastp is not None:
         get_high_conf_command = get_high_conf_command + " --evalue " + str(evalue_blastp) + " --blastfolder " + main_database_folder + "/model_reconstruction/Common_BiGG_info"
     get_high_conf_command = get_high_conf_command + " --warning_mets_to_include_file " + parameter_values["WARNING_mets"]
+    if high_cutoff is not None:
+        get_high_conf_command = get_high_conf_command + " --high_cutoff " + str(high_cutoff)
     line_to_new_text[40] = get_high_conf_command
 
     create_universe_set_rxns = "python3.7 ${MODEL_RECONSTRUCTION_PATH}/1_create_universe_set_of_reactions.py " + \
         "--database ${DATABASE} --output_folder ${OUTPUT_FOLDER} --warning_mets_to_include_file " + parameter_values["WARNING_mets"]
     line_to_new_text[42] = create_universe_set_rxns
 
+    new_create_scores_command = "python3.7 ${MODEL_RECONSTRUCTION_PATH}/2_create_reaction_scores_file.py " + \
+            "--ec_preds_file ${ENZ_ANNOTATION_results} --database ${DATABASE} --output_folder ${OUTPUT_FOLDER}"
+    if high_cutoff is not None:
+        new_create_scores_command = new_create_scores_command + " --high_cutoff " + str(high_cutoff)
     if penalty_deadend != "":
-        new_create_scores_command = "python3.7 ${MODEL_RECONSTRUCTION_PATH}/2_create_reaction_scores_file.py " + \
-            "--ec_preds_file ${ENZ_ANNOTATION_results} --database ${DATABASE} --output_folder ${OUTPUT_FOLDER} " +\
-                "--penalty_exchange " + str(penalty_deadend)
-        line_to_new_text[44] = new_create_scores_command
+        new_create_scores_command = new_create_scores_command + " --penalty_exchange " + str(penalty_deadend)
+    line_to_new_text[44] = new_create_scores_command
 
     perform_gap_fill_command = "python3.7 " + gapfill_script + " " + \
         temp_folder + "/SIMULATION_high_confidence_reactions_plus_essentials.xml -m M9 -o " + \
