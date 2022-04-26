@@ -153,17 +153,19 @@ if __name__ == '__main__':
     parser.add_argument("--database", type=str, help="Folder containing various information.")
     parser.add_argument("--output_folder", type=str,
                         help="Folder to contain the output from this script (ie, high-confidence reactions)")
+    parser.add_argument("--high_cutoff", type=float, help="Cutoff for what is considered high-confidence", default=HIGH_CUTOFF)
 
     args = parser.parse_args()
     ec_preds_file = args.ec_preds_file
     penalty_exchange = args.penalty_exchange
     database = args.database
     output_folder = args.output_folder
+    high_cutoff = args.high_cutoff
 
     reaction_score_file = output_folder + "/SIMULATION_reaction_scores.out"
 
     ec_to_score = read_ec_to_score(ec_preds_file)
-    low_conf_ec_to_score = get_low_conf(ec_to_score)
+    low_conf_ec_to_score = get_low_conf(ec_to_score, high_cutoff)
 
     ec_to_reactions = get_map_from_file(database + "/reaction_to_ec_no_spont_non_enz_reax.out", False)
 

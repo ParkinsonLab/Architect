@@ -308,6 +308,7 @@ if __name__ == '__main__':
     parser.add_argument("--fasta_file", type=str, help="User provided sequence file for organism.")
     parser.add_argument("--evalue", type=float, help="Evalue for blastp to include additional reactions (if using a BiGG database).")
     parser.add_argument("--blastfolder", type=str, help="Folder containing the database containing the sequences against which to perform blast.")
+    parser.add_argument("--high_cutoff", type=float, help="Cutoff for what is considered high-confidence", default=HIGH_CUTOFF)
 
 
     args = parser.parse_args()
@@ -321,11 +322,12 @@ if __name__ == '__main__':
     fasta_file = args.fasta_file
     evalue = args.evalue
     blastfolder = args.blastfolder
+    high_cutoff = args.high_cutoff
 
     # If user will use one of the databases from BiGG, perform blastp and use output to create high-confidence network.
     perform_blastp = (os.path.split(database)[-1] != "KEGG_universe")
 
-    high_confidence_ecs, high_and_low_confidence_ecs, all_ec_to_gene = read_and_split_conf_preds(ec_preds_file, HIGH_CUTOFF, LOW_CUTOFF)
+    high_confidence_ecs, high_and_low_confidence_ecs, all_ec_to_gene = read_and_split_conf_preds(ec_preds_file, high_cutoff, LOW_CUTOFF)
     high_confidence_ecs, high_and_low_confidence_ecs, ecs_supplemented, all_ec_to_gene = \
         supplement_from_additional_preds(additional_preds_file, min_num_high_conf, high_confidence_ecs, high_and_low_confidence_ecs, all_ec_to_gene)
     ec_to_reactions = get_map_from_file(database + "/reaction_to_ec_no_spont_non_enz_reax.out", False)
