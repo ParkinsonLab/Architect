@@ -54,7 +54,7 @@ def is_num(string):
         return False
 
 
-def append_default_reactions(output_filename, input_file, contains_biomass=False):
+def append_default_reactions(output_filename, input_file, contains_biomass=False, exchange_rxns_of_interest=None):
 
     with open(output_filename, "a") as writer:
         with open(input_file) as reader:
@@ -64,13 +64,25 @@ def append_default_reactions(output_filename, input_file, contains_biomass=False
                     continue
                 if contains_biomass:
                     line = line.split("#")[0].strip()
+                
+                # Do something if there are exchange reactions of interest to look at.
+                if (exchange_rxns_of_interest is not None):
+                    curr_rxn = line.split(":")[0]
+                    if is_exchange_rxn(curr_rxn):
+                        equation = line.split("\t")[1]
+                        first_part_of_line = curr_rxn + ":\t" + equation
+                        if curr_rxn in exchange_rxns_of_interest:
+                            line = first_part_of_line + "\t[-10, 1000]"
+                        else:
+                            line = first_part_of_line + "\t[0, 1000]"
                 writer.write(line + "\n")
                 
                 
-def read_model_file(file_name, rxns_to_ignore=None):
+def read_model_file(file_name, rxns_to_ignore=None, exchange_rxns_of_interest=None):
     '''Return 1. {reaction: {EQUATION: value, LB: value, UB: value}}
               2. {metabolite: set(rxn_1, rxn_2, ...)}
     Ignore those reactions if provided by the user (a set).
+    If exchange reactions are provided, then, constrain the exchange reactions alone to be active.
     '''
 
     rxn_to_info = {}
@@ -100,6 +112,12 @@ def read_model_file(file_name, rxns_to_ignore=None):
             ub = float(bounds_info[1])
         else:
             ub = 0
+
+        if (exchange_rxns_of_interest is not None) and (is_exchange_rxn(reaction_name)):
+            if reaction_name in exchange_rxns_of_interest:
+                lb = -10
+            else:
+                lb = 0
 
         rxn_to_info[reaction_name] = {KEY_EQUATION: equation, KEY_LB: lb, KEY_UB: ub}
         update_metabolite_to_rxn(metabolite_to_rxn, reaction_name, equation)
@@ -701,3 +719,25 @@ def get_new_to_original(sequence_names, num_var):
             second = seq_name.split("|")[1]
             new_to_original[second] = seq_name
         return new_to_original
+
+
+def is_exchange_rxn(reaction_name):
+
+    return reaction_name.startswith("R_EX_")
+
+
+def get_cpd_to_exchange_rxns_for_media(media_path, chosen_media):
+
+    exchange_rxns_of_interest = set()
+    with open(media_path) as open_file:
+        for line in open_file:
+            line = line.strip()
+            if line == "":
+                continue
+            split = line.split("\t")
+            curr_media, cpd = split[0], split[2]
+            if curr_media != chosen_media:
+                continue
+            exchange_rxn = "R_EX_" + cpd + "_e" #eg: R_EX_ac_e
+            exchange_rxns_of_interest.add(exchange_rxn)
+    return exchange_rxns_of_interest

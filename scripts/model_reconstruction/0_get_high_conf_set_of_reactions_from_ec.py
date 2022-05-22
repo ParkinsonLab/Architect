@@ -153,7 +153,7 @@ def get_info_for_one_reaction(elems, index_to_header={1:EQUATION, 2:BOUNDS}, ind
     return info
 
 
-def get_reaction_to_equation_info(file_name, warning_reactions_to_exclude):
+def get_reaction_to_equation_info(file_name, warning_reactions_to_exclude, exchange_rxns_of_int=None):
 
     reaction_to_equation_info = {}
     warning_reactions_info = {}
@@ -167,6 +167,15 @@ def get_reaction_to_equation_info(file_name, warning_reactions_to_exclude):
             split = line.split("\t")
             reaction_abbrev = split[0].strip()[:-1]
             info = get_info_for_one_reaction(split)
+
+            # If exchange reactions are specified, set exchange reactions of interest as active.
+            # Set other exchange reactions as sinks only.
+            if (exchange_rxns_of_int is not None) and utils.is_exchange_rxn(reaction_abbrev):
+                if reaction_abbrev in exchange_rxns_of_int:
+                    info[BOUNDS] = "[-10, 1000]"
+                else:
+                    info[BOUNDS] = "[0, 1000]"
+
             if reaction_abbrev not in warning_reactions_to_exclude:
                 reaction_to_equation_info[reaction_abbrev] = info
             else:
@@ -309,6 +318,8 @@ if __name__ == '__main__':
     parser.add_argument("--evalue", type=float, help="Evalue for blastp to include additional reactions (if using a BiGG database).")
     parser.add_argument("--blastfolder", type=str, help="Folder containing the database containing the sequences against which to perform blast.")
     parser.add_argument("--high_cutoff", type=float, help="Cutoff for what is considered high-confidence", default=HIGH_CUTOFF)
+    parser.add_argument("--chosen_media", type=str, help="Chosen media", default=None)
+    parser.add_argument("--media_path", type=str, help="Path to description of media", default="")
 
 
     args = parser.parse_args()
@@ -323,9 +334,16 @@ if __name__ == '__main__':
     evalue = args.evalue
     blastfolder = args.blastfolder
     high_cutoff = args.high_cutoff
+    chosen_media = args.chosen_media
+    media_path = args.media_path
 
     # If user will use one of the databases from BiGG, perform blastp and use output to create high-confidence network.
     perform_blastp = (os.path.split(database)[-1] != "KEGG_universe")
+
+    # If the media is (well-)defined, then do the reconstruction under these constraints.
+    exchange_rxns_of_interest = None
+    if (chosen_media is not None) and (chosen_media != "complete"):
+        exchange_rxns_of_interest = utils.get_cpd_to_exchange_rxns_for_media(media_path, chosen_media)
 
     high_confidence_ecs, high_and_low_confidence_ecs, all_ec_to_gene = read_and_split_conf_preds(ec_preds_file, high_cutoff, LOW_CUTOFF)
     high_confidence_ecs, high_and_low_confidence_ecs, ecs_supplemented, all_ec_to_gene = \
@@ -337,7 +355,7 @@ if __name__ == '__main__':
         warning_metabolites_to_include = read_column_from_file(warning_mets_to_include_file)
     reactions_with_warnings = get_reactions_from_warning_file(database + "/WARNING_reactions_with_formulaless_cpds.out", warning_metabolites_to_include)
     reaction_to_info, warning_rxn_to_info = \
-        get_reaction_to_equation_info(database + "/SIMULATION_universe_rxn.out", reactions_with_warnings)
+        get_reaction_to_equation_info(database + "/SIMULATION_universe_rxn.out", reactions_with_warnings, exchange_rxns_of_interest)
 
     # reaction_name_to_modified_name, modified_name_to_reaction_name = get_reaction_name_to_modified_name(reaction_to_info)
     # warning_reaction_name_to_modified_name, _ = get_reaction_name_to_modified_name(warning_rxn_to_info)    
@@ -361,7 +379,7 @@ if __name__ == '__main__':
     utils.append_default_reactions(output_folder + "/SIMULATION_high_confidence_reactions.out",
                              database + "/SIMULATION_default_additional_reactions.out")
     utils.append_default_reactions(output_folder + "/SIMULATION_high_confidence_reactions.out",
-                             database + "/SIMULATION_spontaneous_or_non_enzymatic.out")
+                             database + "/SIMULATION_spontaneous_or_non_enzymatic.out", exchange_rxns_of_interest)
     utils.append_default_reactions(output_folder + "/SIMULATION_high_confidence_reactions.out",
                              user_defined_file, True)
 
@@ -386,6 +404,6 @@ if __name__ == '__main__':
     utils.append_default_reactions(output_folder + "/SIMULATION_low_and_high_confidence_reactions.out",
                              database + "/SIMULATION_default_additional_reactions.out")
     utils.append_default_reactions(output_folder + "/SIMULATION_low_and_high_confidence_reactions.out",
-                             database + "/SIMULATION_spontaneous_or_non_enzymatic.out")
+                             database + "/SIMULATION_spontaneous_or_non_enzymatic.out", exchange_rxns_of_interest)
     utils.append_default_reactions(output_folder + "/SIMULATION_low_and_high_confidence_reactions.out",
                              user_defined_file, True)

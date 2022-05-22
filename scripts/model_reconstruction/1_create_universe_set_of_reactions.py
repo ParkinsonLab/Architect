@@ -146,11 +146,15 @@ if __name__ == '__main__':
     parser.add_argument("--database", type=str, help="Folder containing various information.")
     parser.add_argument("--output_folder", type=str, help="Folder to contain the output from this script (ie, a set "
                                                           "of reactions that can be picked for gap-filling)")
+    parser.add_argument("--chosen_media", type=str, help="Chosen media", default=None)
+    parser.add_argument("--media_path", type=str, help="Path to description of media", default="")
 
     args = parser.parse_args()
     warning_mets_to_include_file = args.warning_mets_to_include_file
     database = args.database
     output_folder = args.output_folder
+    chosen_media = args.chosen_media
+    media_path = args.media_path
 
     input_high_conf_model_file = output_folder + "/SIMULATION_high_confidence_reactions.out"
     input_low_and_high_conf_model_file = output_folder + "/SIMULATION_low_and_high_confidence_reactions.out"
@@ -159,6 +163,11 @@ if __name__ == '__main__':
     output_only_candidates = output_folder + "/SIMULATION_only_gapfill_candidates.out"
     file_with_content_to_ignore = database + "/SIMULATION_metabolites_with_default_exchanges.out"
     problematic_reactions_with_missing_info = database + "/WARNING_reactions_with_formulaless_cpds.out"
+
+    # If the media is (well-)defined, then do the reconstruction under these constraints.
+    exchange_rxns_of_interest = None
+    if (chosen_media is not None) and (chosen_media != "complete"):
+        exchange_rxns_of_interest = utils.get_cpd_to_exchange_rxns_for_media(media_path, chosen_media)
 
     # Load the various model info.
     # (1) For the candidate reactions to gapfill, exclude those reactions that are already found in the high-confidence set of reactions.
@@ -171,7 +180,8 @@ if __name__ == '__main__':
         warning_metabolites_to_include = read_column_from_file(warning_mets_to_include_file)
     warning_rxns = get_reactions_from_warning_file(problematic_reactions_with_missing_info, warning_metabolites_to_include)
     candidate_rxn_to_info, candidate_met_to_rxn = utils.read_model_file(input_universe_without_exchange_reactions,
-                                                                  warning_rxns.union(set(high_conf_model_rxn_to_info.keys())) )
+                                                                  warning_rxns.union(set(high_conf_model_rxn_to_info.keys())),\
+                                                                      exchange_rxns_of_interest )
 
     # (2) First, get the deadend metabolites from the high-confidence network.
     metabolites_to_ignore = read_column_from_file(file_with_content_to_ignore)

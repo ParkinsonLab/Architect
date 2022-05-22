@@ -315,7 +315,9 @@ if __name__ == '__main__':
     universe_set_of_reactions = main_database_folder + "/model_reconstruction/" + id_to_universe[universe_id]
 
     # If the user has specified to use one of the BiGG database, ask what E-value they would like to use to include additional reactions.
+    # Also, ask them if they would like to specify the media.  Currently, support for a single media.  May be changed later.
     evalue_blastp = None
+    chosen_media = None
     if universe_id != "1":
         utils.print_with_colours("Architect: which e-value for BlastP would you like to use to include non-EC related reactions?")
         answer_evalue = ""
@@ -333,6 +335,36 @@ if __name__ == '__main__':
                 evalue_blastp = utils.input_with_colours("Enter a positive number for the E-value: ")
             evalue_blastp = float(evalue_blastp)
         status_writer.write("Step 5: " + str(datetime.datetime.now()) + ": User wishes to use the E-value of " + str(evalue_blastp) + " for blastp.\n")
+
+        answer_media = ""
+        while answer_media not in ["Y", "N", "Q"]:
+            answer_media = utils.input_with_colours("Architect: stick with complete media for growth? (HIGHLY RECOMMENDED) [y/n]: ")
+            answer_media = answer_media.strip().upper()
+        if answer_media == "Q":
+            status_writer.write("Termination:" + str(datetime.datetime.now()) + ": " + utils.TERMINATION + "\n")
+            status_writer.close()
+            exit()
+        if answer_media == "Y":
+            chosen_media = "complete"
+        else:
+            media_id = ""
+            id_to_media = {"1": "LB", "2": "LB[-O2]", "3": "M9", "4": "M9[-O2]", "5": "M9[glyc]"}
+            id_to_media_desc = {"1": "Lysogeny broth", "2": "Lysogeny broth (anaerobic)", \
+                "3": "M9 minimal medium", "4": "M9 minimal medium (anaerobic)", "5": "M9 minimal medium (glycerol)"}
+            utils.print_with_colours("Architect: which medium would you like?  Choose the ID from the following:")
+            utils.print_with_colours("ID\tMedium\tDescription")
+            while media_id not in id_to_media.keys():
+                for idd in sorted(id_to_media.keys()):
+                    curr_media = id_to_media[idd]
+                    curr_descrip = id_to_media_desc[idd]
+                    utils.print_with_colours(idd + "\t" + curr_media + "\t" + curr_descrip)
+                media_id = utils.input_with_colours("Enter the ID you wish [1-5]: ")
+                media_id = media_id.strip()
+                if media_id.upper() == "Q":
+                    status_writer.write("Termination:" + str(datetime.datetime.now()) + ": " + utils.TERMINATION + "\n")
+                    status_writer.close()
+                    exit()
+            chosen_media = id_to_media[media_id]
 
 
     # If the user asked for more than one gap-filling solution, ask the user how many gap-filled models they want.
@@ -391,6 +423,9 @@ if __name__ == '__main__':
     get_high_conf_command = get_high_conf_command + " --warning_mets_to_include_file " + parameter_values["WARNING_mets"]
     if high_cutoff is not None:
         get_high_conf_command = get_high_conf_command + " --high_cutoff " + str(high_cutoff)
+    if chosen_media is not None:
+        media_path = parameter_values["CARVEME_PATH"] + "/carveme/data/input/media_db.tsv"
+        get_high_conf_command = get_high_conf_command + " --chosen_media " + str(chosen_media) + " --media_path " + media_path
     line_to_new_text[40] = get_high_conf_command
 
     create_universe_set_rxns = "python3.7 ${MODEL_RECONSTRUCTION_PATH}/1_create_universe_set_of_reactions.py " + \
