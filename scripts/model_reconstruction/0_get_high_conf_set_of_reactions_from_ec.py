@@ -379,9 +379,10 @@ if __name__ == '__main__':
     utils.append_default_reactions(output_folder + "/SIMULATION_high_confidence_reactions.out",
                              database + "/SIMULATION_default_additional_reactions.out")
     utils.append_default_reactions(output_folder + "/SIMULATION_high_confidence_reactions.out",
-                             database + "/SIMULATION_spontaneous_or_non_enzymatic.out", exchange_rxns_of_interest)
+                             database + "/SIMULATION_spontaneous_or_non_enzymatic.out", \
+                                 exchange_rxns_of_interest=exchange_rxns_of_interest)
     utils.append_default_reactions(output_folder + "/SIMULATION_high_confidence_reactions.out",
-                             user_defined_file, True)
+                             user_defined_file, contains_biomass=True)
 
     # Write out the high-conf reactions for which we have a warning.
     extra_high_warning_rxns = write_out_subset_reactions(high_confidence_ecs, ec_to_reactions, warning_rxn_to_info,
@@ -404,6 +405,7 @@ if __name__ == '__main__':
     utils.append_default_reactions(output_folder + "/SIMULATION_low_and_high_confidence_reactions.out",
                              database + "/SIMULATION_default_additional_reactions.out")
     utils.append_default_reactions(output_folder + "/SIMULATION_low_and_high_confidence_reactions.out",
-                             database + "/SIMULATION_spontaneous_or_non_enzymatic.out", exchange_rxns_of_interest)
+                             database + "/SIMULATION_spontaneous_or_non_enzymatic.out", \
+                                 exchange_rxns_of_interest=exchange_rxns_of_interest)
     utils.append_default_reactions(output_folder + "/SIMULATION_low_and_high_confidence_reactions.out",
-                             user_defined_file, True)
+                             user_defined_file, contains_biomass=True)
