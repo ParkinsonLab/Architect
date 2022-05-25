@@ -418,7 +418,7 @@ def read_bounds(file_name):
                         elem = elem.split("=")[1]
                         elem = elem.split("/")[0]
                         elem = elem[1:-1]
-                        curr_bound = int(elem)
+                        curr_bound = float(elem)
                         bounds.add(curr_bound)
                 if ("LOWER_BOUND" in line):
                     reaction_to_lb[curr_rxn] = curr_bound
