@@ -379,7 +379,7 @@ The reason I separate these two kinds of outputs is that, in my experience, the 
 
 ## f.	Definition of a media to be used by a model (BiGG reconstructions)
 
-In the case of BiGG reconstructions, specific media (such as minimal media) can be specified by a user.  These media are borrowed from the definition of different environments by CarveMe (more information given [here] (https://github.com/ParkinsonLab/Architect/blob/master/dependency/CarveMe/carveme/data/input/media_db.tsv)).  We suggest that when specific media is defined that a high penalty (for example 10) is specified for the addition of exchange reactions for deadend metabolites. 
+In the case of BiGG reconstructions, growth in specific media (such as minimal media) can be specified by a user.  Currently, the code does not support the specification of multiple media. These media definitions are borrowed from CarveMe (more information given [here](https://github.com/ParkinsonLab/Architect/blob/master/dependency/CarveMe/carveme/data/input/media_db.tsv)).  We suggest that when specific media is defined that a high penalty (for example 10) is specified for the addition of exchange reactions for deadend metabolites. 
 
 # 6. References
 
