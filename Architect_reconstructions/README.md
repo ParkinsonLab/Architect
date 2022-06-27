@@ -1,2 +1,2 @@
-The models in this folder were made using Architect and the KEGG database.
+The models in the folders here were made using Architect and the corresponding database.  In the case of BiGG reconstructions, the main BiGG database was used for C. elegans, and the gram-negative universe specified for both E. coli and N. meningitidis.
 In each folder, the user-defined set of reactions used is listed.
