@@ -26,6 +26,7 @@ For more information, please contact nnursimulu@cs.toronto.edu.
     c. [Inclusion of non-EC related reactions (when performing reconstructions using BiGG definitions)](#cInclusion-of-non-EC-related-reactions-when-performing-reconstructions-using-BiGG-definitions)  
     d. [Settings for gap-filling](#dSettings-for-gap-filling)  
     e. [Number of output models](#eNumber-of-output-models)  
+    f. [Definition of a media to be used by a model (BiGG reconstructions)](#fDefinition-of-a-media-to-be-used-by-a-model-BiGG-reconstructions)
 6. [References](#6-References)  
 
 # 1. Overview
@@ -357,7 +358,7 @@ Here, we provide some details about each of these parameter settings as well as 
 | 1       | More than 1 gap-filling solution may be output by the user. At this time, we unfortunately cannot guarantee the optimality of these alternate solutions given the time complexity of the gap-filling step. <br/><br/>Note that if you choose to output more than one solution, you will later be asked how many output models you wish Architect to produce—more details [below](#enumber-of-output-models).|
 | 2       | This option is only applicable if the user wants to output multiple gap-filling solutions. The default option indicates that any solutions worse than 10% of the optimal will not be returned; please note that the value of a gap-filling solution is given by the sum of the penalties attributed to each of the gap-filling reactions in question.  <br/><br/>Setting this number lower will tighten the quality of solutions of interest, and the opposite loosen these restrictions. |
 | 3       | When performing gap-filling, an integer variable is assigned to each candidate gap-filling reaction, such that, in theory, a value of 1 is ascribed to the ith candidate gap-filling reaction if this reaction is part of the gap-filling solution being returned (and 0 otherwise). In practice however, the solver will not necessarily return integral variables. The integrality tolerance indicates how far from 0 or 1 a value can be to still be considered "integral".  <br/><br/>If you find that gap-filling is taking more time than desirable (for example, in my experience, gap-filling that takes longer than an hour and finishes on SciNet at the very least is rare), you may set this tolerance higher, for example, starting with E-7, then E-6 and so on.|
-| 4       | By default, gap-filling candidate reactions associated with low-confidence EC predictions are associated with a penalty of addition less than 1. Remaining gap-filling candidate reactions that are part of the reaction database have a penalty of addition of 1.  As for transport reactions for deadend metabolites in the high-confidence network, they are associated with a default penalty of 1.  <br/><br/>If you wish to discourage the addition of such reactions, you can experiment with increasing this penalty. |
+| 4       | By default, gap-filling candidate reactions associated with low-confidence EC predictions are associated with a penalty of addition less than 1. Remaining gap-filling candidate reactions that are part of the reaction database have a penalty of addition of 1.  As for transport reactions for deadend metabolites in the high-confidence network, they are associated with a default penalty of 1.  <br/><br/>If you wish to discourage the addition of such reactions, you can experiment with increasing this penalty. This is in particular relevant if you wish to enforce specific media you have specified to be used by a model.  See [here](#fDefinition-of-a-media-to-be-used-by-a-model-BiGG-reconstructions) for more details with respect to BiGG-based reconstructions.|
 
 ## e.	Number of output models
 
@@ -375,6 +376,10 @@ If you specify to Architect to output more than one gap-filling solution (say n 
 	- They are found in the Final_* folder under $OUTPUT_DIR/$PROJECT/Model_reconstruction and are available as Excel and SBML models.
 
 The reason I separate these two kinds of outputs is that, in my experience, the SBML model output can be very large, and thus we leave it at the discretion of the user to determine the number of output models that is sensible to output.
+
+## f.	Definition of a media to be used by a model (BiGG reconstructions)
+
+In the case of BiGG reconstructions, specific media (such as minimal media) can be specified by a user.  These media are borrowed from the definition of different environments by CarveMe (more information given [here] (https://github.com/ParkinsonLab/Architect/blob/master/dependency/CarveMe/carveme/data/input/media_db.tsv)).  We suggest that when specific media is defined that a high penalty (for example 10) is specified for the addition of exchange reactions for deadend metabolites. 
 
 # 6. References
 
