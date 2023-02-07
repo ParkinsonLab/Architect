@@ -1,0 +1,73 @@
+bigg_id	name
+4abz_e	4-Aminobenzoate
+adn_e	Adenosine
+ala__L_e	L-Alanine
+amp_e	AMP C10H12N5O7P
+arg__L_e	L-Arginine
+aso3_e	Arsenite
+asp__L_e	L-Aspartate
+btn_e	Biotin
+ca2_e	Calcium
+cbl1_e	Cob(I)alamin
+cd2_e	Cadmium
+cl_e	Chloride
+cmp_e	CMP C9H12N3O8P
+cobalt2_e	Co2+
+cro4_e	Chromate
+cu2_e	Copper
+cys__L_e	L-Cysteine
+dad_2_e	Deoxyadenosine
+dcyt_e	Deoxycytidine
+fe2_e	Fe2+ mitochondria
+fe3_e	Iron (Fe3+)
+fol_e	Folate
+glc__D_e	D-Glucose
+glu__L_e	L-Glutamate
+gly_e	Glycine
+glyc_e	Glycerol
+gmp_e	GMP C10H12N5O8P
+gsn_e	Guanosine
+h2o_e	H2O H2O
+h2s_e	Hydrogen sulfide
+h_e	H+
+hg2_e	Mercury  charged 2  Hg
+his__L_e	L-Histidine
+hxan_e	Hypoxanthine
+ile__L_e	L-Isoleucine
+ins_e	Inosine
+k_e	Potassium
+lac__D_e	D-Lactate
+lac__L_e	L-Lactate
+leu__L_e	L-Leucine
+lipoate_e	Lipoate
+lys__L_e	L-Lysine
+met__L_e	L-Methionine
+mg2_e	Magnesium
+mn2_e	Manganese
+mobd_e	Molybdate
+na1_e	Sodium
+nac_e	Nicotinate
+nh4_e	Ammonium
+ni2_e	Nickel
+o2_e	O2 O2
+phe__L_e	L-Phenylalanine
+pheme_e	Protoheme C34H30FeN4O4
+pi_e	Phosphate
+pnto__R_e	(R)-Pantothenate
+pro__L_e	L-Proline
+pydx_e	Pyridoxal
+pydxn_e	Pyridoxine
+ribflv_e	Riboflavin C17H20N4O6
+ser__L_e	L-Serine
+so4_e	Sulfate
+succ_e	Succinate
+thm_e	Thiamin
+thr__L_e	L-Threonine
+thymd_e	Thymidine C10H14N2O5
+trp__L_e	L-Tryptophan
+tyr__L_e	L-Tyrosine
+ump_e	UMP C9H11N2O9P
+ura_e	Uracil
+uri_e	Uridine
+val__L_e	L-Valine
+zn2_e	Zinc

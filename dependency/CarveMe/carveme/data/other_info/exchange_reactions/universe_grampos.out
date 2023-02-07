@@ -1,0 +1,653 @@
+bigg_id	name
+12dgr160_e	1,2-Diacyl-sn-glycerol (dihexadecanoyl, n-C16:0)
+12dgr180_e	1,2-Diacyl-sn-glycerol (dioctadecanoyl, n-C18:0)
+12ppd__R_e	(R)-Propane-1,2-diol
+12ppd__S_e	(S)-Propane-1,2-diol
+13dampp_e	1 3 Diaminopropane C3H12N2
+13ppd_e	1,3-Propanediol
+14glucan_e	1,4-alpha-D-glucan
+15dap_e	1,5-Diaminopentane
+1ag160_e	1 Acyl sn glycerol  hexadecanoate
+1ag180_e	1 Acyl sn glycerol  octadecanoate
+1ag181d9_e	1 Acyl sn glycerol  nC181d9
+1ag182d9d12_e	1 Acyl sn glycerol  nC182d9d12
+23camp_e	2',3'-Cyclic AMP
+23ccmp_e	2',3'-Cyclic CMP
+23cgmp_e	2',3'-Cyclic GMP
+23cump_e	2',3'-Cyclic UMP
+23dappa_e	2,3-diaminopropionate
+23dhbzs3_e	2-3-dihydroxybenzoylserine trimer
+25dkglcn_e	2,5-diketo-D-gluconate
+26dap__M_e	Meso-2,6-Diaminoheptanedioate
+2ameph_e	2-Aminoethylphosphonate
+2ddglcn_e	2-Dehydro-3-deoxy-D-gluconate
+2dhglcn_e	2-Dehydro-D-gluconate
+2h3mb_e	2 hydroxy 3 methyl butanoate
+2h3mp_e	2 hydroxy 3 methyl pentanoate
+2hxmp_e	2  Hydroxymethyl phenol C7H8O2
+2m35mdntha_e	N  2 methyl 3 5 dinitrophenyl  4 methyl 3 5 dinitroaniline
+2mba_e	2 methyl butanoic acid
+2mbald_e	2 methylbutyraldehyde C5H10O
+2mpa_e	2 methylpropanoic acid
+2obut_e	2-Oxobutanoate
+2pg_e	D-Glycerate 2-phosphate
+2pglyc_e	2-Phosphoglycolate
+34dhbz_e	3,4-Dihydroxybenzoate
+34dhcinm_e	3,4-Dihydroxy-trans-cinnamate
+34dhpac_e	3,4-Dihydroxyphenylacetaldehyde
+34dhphe_e	3,4-Dihydroxy-L-phenylalanine
+35dnta_e	N N bis 3 5 dinitrotolyl  amine
+3amp_e	3  AMP C10H12N5O7P
+3cmp_e	3  CMP C9H12N3O8P
+3gmp_e	Guanosine 3  phosphate C10H12N5O8P
+3h4atb_e	3 Hydroxy 4 acetylthiobutanoic acid
+3hcinnm_e	3-hydroxycinnamic acid
+3hoxpac_e	3 Hydroxyphenylacetic acid C8H8O3
+3hpppn_e	3-(3-hydroxy-phenyl)propionate
+3mb_e	3-Methylbutanoic acid
+3mba_e	3 methylbutanoic acid
+3oxoadp_e	3-Oxoadipate
+3pg_e	3-Phospho-D-glycerate
+3ump_e	3  UMP C9H11N2O9P
+4abut_e	4-Aminobutanoate
+4abutn_e	4-Aminobutanal
+4abz_e	4-Aminobenzoate
+4abzglu_e	4-aminobenzoyl-glutamate
+4ahmmp_e	4-Amino-5-hydroxymethyl-2-methylpyrimidine
+4crsol_e	P-Cresol
+4hba_e	4-Hydroxy-benzyl alcohol
+4hbald_e	4-Hydroxybenzaldehyde
+4hbz_e	4-Hydroxybenzoate
+4hoxpac_e	4 Hydroxyphenylacetic acid C8H8O3
+4hoxpacd_e	4-Hydroxyphenylacetaldehyde
+4hphac_e	4-Hydroxyphenylacetate
+4hpro_DC_e	Cis 4 Hydroxy D proline
+4hpro_LT_e	Trans 4 Hydroxy L proline C5H9NO3
+4hptn_e	4 Hydroxypentanoate
+4hthr_e	4-Hydroxy-L-threonine
+4oxptn_e	4 Oxopentanoate
+5aptn_e	5-Aminopentanoate
+5dglcn_e	5-Dehydro-D-gluconate
+5drib_e	5'-deoxyribose
+5g2oxpt_e	2-Oxoarginine
+5mcsn_e	5-Methylcytosine
+5mdru1p_e	5-Methylthio-5-deoxy-D-ribulose 1-phosphate
+5mtr_e	5-Methylthio-D-ribose
+5oxpro_e	5-Oxoproline
+6apa_e	6 Aminopenicillanic acid C8H12N2O3S
+6atha_e	6 acetylthiohexanoic acid
+6hnac_e	6-Hydroxynicotinate
+6pgc_e	6-Phospho-D-gluconate
+LalaDgluMdapDala_e	L-alanine-D-glutamate-meso-2,6-diaminoheptanedioate-D-alanine
+LalaDgluMdap_e	L-alanine-D-glutamate-meso-2,6-diaminoheptanedioate
+LalaDglu_e	L-alanine-D-glutamate
+LalaLglu_e	L-alanine-L-glutamate
+Larab_e	Alpha L Arabinan C15H24O12
+Lcyst_e	L-Cysteate
+Ncbmpts_e	N-Carbamoylputrescine
+R3hdec4e_e	 3 Hydroxy 4Z decenic acid
+R_3h4atba_e	 3 Hydroxy 4 acetylthiobutanoic acid
+R_3h6atha_e	 3 Hydroxy 6acetylthiohexanoic acid
+R_3hcmrs7e_e	 3 hydroxy cis myristol 7 en
+R_3hdcaa_e	 3 hydroxydecanoic acid
+R_3hdd5ea_e	 3 Hydroxydodecanoic 5 en acid
+R_3hdd6e_e	 3 Hydroxydodecanoic 6 en acid
+R_3hdda_e	 3 Hydroxydodecanoic acid
+R_3hhdca_e	 3 Hydroxyhexadecanoic acid
+R_3hhpa_e	 3 hydroxyheptanoic acid
+R_3hhxa_e	 3 hydroxyhexanoic acid
+R_3hnonaa_e	 3 hydroxynonanoic acid
+R_3hocta_e	 3 hydroxyoctanoic acid
+R_3hpba_e	 3 Hydroxyphenylbutanoic acid
+R_3hpdeca_e	 3 Hydroxy 10 phenyldecanoic acid
+R_3hphpa_e	 3 Hydroxy 7 phenylheptanoic acid
+R_3hphxa_e	 3 Hydroxy 6 phenylhexanoic acid
+R_3hpnona_e	 3 Hydroxy 9 phenylnonanoic acid
+R_3hpocta_e	 3 Hydroxy 8 phenyloctanoic acid
+R_3hppta_e	 3 Hydroxy 5 phenylpentanoic acic
+R_3hpt_e	 3 Hydroxypentanoic acid
+R_3htd58e_e	 3 hydroxy  5Z 8Z  tetradecedienic acid
+R_3htd5e_e	 3 hydroxy  5Z  tetradecenic acid
+R_3httdca_e	 3 Hydroxytetradecanoic acid
+T4hcinnm_e	Trans 4 Hydroxycinnamate C9H7O3
+abg4_e	4-aminobenzoate-glutamate
+abt__D_e	D-Arabitol
+abt__L_e	L Arabinitol C5H12O5
+abt_e	L Arabinitol C5H12O5
+ac_e	Acetate
+acac_e	Acetoacetate
+acald_e	Acetaldehyde
+acetone_e	Acetone
+acgal1p_e	N-Acetyl-D-galactosamine 1-phosphate
+acgal_e	N-Acetyl-D-galactosamine
+acgam1p_e	N-Acetyl-D-glucosamine 1-phosphate
+acgam_e	N-Acetyl-D-glucosamine
+acglu_e	N-Acetyl-L-glutamate
+acmana_e	N-Acetyl-D-mannosamine
+acmum_e	N-Acetylmuramate
+acnam_e	N-Acetylneuraminate
+acon_C_e	Cis-Aconitate
+acser_e	O-Acetyl-L-serine
+actn__R_e	 R  Acetoin C4H8O2
+acysbmn_e	Acetyl-cystine-bimane
+ad_e	Acetamide
+ade_e	Adenine
+adn_e	Adenosine
+agm_e	Agmatine
+airs_e	Aminoimidazole-riboside
+akg_e	2-Oxoglutarate
+ala_B_e	Beta-Alanine
+ala_L_asp__L_e	Ala L asp L C7H11N2O5
+ala_L_glu__L_e	Ala L glu L C8H13N2O5
+ala_L_thr__L_e	Ala-L-Thr-L
+ala__D_e	D-Alanine
+ala__L_e	L-Alanine
+ala_gln_e	Ala-Gln
+ala_his_e	Ala-His
+ala_leu_e	Ala-Leu
+alaala_e	D-Alanyl-D-alanine
+alagly_e	L-alanylglycine
+alahis_e	L alaninylhistidine
+alaleu_e	L alaninylleucine
+alathr_e	L alaninylthreonine
+alatrp_e	L alaninyltryptophan
+algac_MG_14_e	Alginate  1 units of acetylated D mannuronate and 4 units ofL guluronate
+algac_MG_23_e	Alginate  2 units of acetylated D mannuronate and 3 units ofL guluronate
+algac_MG_32_e	Alginate  3 units of acetylated D mannuronate and 2 units ofL guluronate
+algac_MG_41_e	Alginate  4 units of acetylated D mannuronate and one unit ofL guluronate
+algac__M_e	Alginate  5 units of  D mannuronate completelly acetylated
+all__D_e	D-Allose
+alltn_e	Allantoin
+amp_e	AMP C10H12N5O7P
+anhgm_e	N-Acetyl-D-glucosamine(anhydrous)N-Acetylmuramic acid
+arab__D_e	D Arabinose C5H10O5
+arab__L_e	L-Arabinose
+araban__L_e	Alpha-L-Arabinan (3 subunits)
+arbt6p_e	Arbutin 6-phosphate
+arbt_e	Arbutin C12H16O7
+arg__D_e	D-Arginine
+arg__L_e	L-Arginine
+argp_e	L Arginine phosphate C6H14N4O5P
+ascb__L_e	L-Ascorbate
+asn__D_e	D Asparagine
+asn__L_e	L-Asparagine
+aso3_e	Arsenite
+aso4_e	Arsenate
+asp__D_e	D-Aspartate
+asp__L_e	L-Aspartate
+balaala_e	Beta alanylL alanine
+balabala_e	Beta alanyl beta alanine
+balagly_e	Beta alanylL glycine
+balaleu_e	Beta alanylL leucine
+balamd_e	Beta Alaninamide
+bhb_e	(R)-3-Hydroxybutanoate
+biliverd_e	Biliverdin cytosol
+bmn_e	Bimane
+btd_RR_e	 R R  2 3 Butanediol C4H10O2
+btn_e	Biotin
+btoh_e	Butanol
+but_e	Butyrate (n-C4:0)
+buts_e	Butanesulfonate C4H9O3S
+butso3_e	Butanesulfonate
+bz_e	Benzoate
+bzal_e	Benzaldehyde
+bzalc_e	Benzyl alcohol
+ca2_e	Calcium
+carn_e	L-Carnosine
+catechol_e	Catechol
+cbl1_e	Cob(I)alamin
+cd2_e	Cadmium
+cell4_e	Cellulose (n=4 repeating units)
+cell6_e	Cellulose (n=6 repeating units)
+cellb_e	Cellobiose
+cgly_e	Cys Gly C5H10N2O3S
+ch4s_e	Methanethiol CH4S
+chol_e	Choline C5H14NO
+chols_e	Choline sulfate
+chor_e	Chorismate
+chsterol_e	Chsterol c
+chtbs_e	N,N'-diacetylchitobiose
+cinnm_e	Trans-Cinnamate
+cit_e	Citrate
+citr__L_e	L-Citrulline
+cl_e	Chloride
+cmcbtt_e	Carboxymycobactin T (R=8 carbon, final carbon is carboxyl group)
+cmp_e	CMP C9H12N3O8P
+co2_e	CO2 CO2
+co_e	Carbon monoxide
+coa_e	Coenzyme A
+cobalt2_e	Co2+
+confrl_e	Coniferol
+cpgn_e	Coprogen
+cpgn_un_e	Coprogen unloaded (no Fe(III))
+creat_e	Creatine cytosol
+cresol_e	4-Cresol
+crn_e	L-Carnitine
+cro4_e	Chromate
+crtn_e	Creatinine
+csn_e	Cytosine
+ctbt_e	Crotonobetaine
+cu2_e	Copper
+cu_e	Cu+
+cyan_e	Hydrogen cyanide
+cynt_e	Cyanate
+cys__D_e	D-Cysteine
+cys__L_e	L-Cysteine
+cyst__L_e	L-Cystathionine
+cytd_e	Cytidine
+d23hb_e	2,3-dihydroxybenzoate
+dachi_e	Diacetylchitobiose
+dad_2_e	Deoxyadenosine
+dag181d9_e	1 2 Diacyl sn glycerol  nC181d9
+dag182d9d12_e	1 2 Diacyl sn glycerol  nC182d9d12
+damp_e	DAMP C10H12N5O6P
+dca_e	Decanoate (n-C10:0)
+dcmp_e	DCMP C9H12N3O7P
+dcyt_e	Deoxycytidine
+ddca_e	Dodecanoate (n-C12:0)
+dextrin_e	Dextrin C12H20O10
+dgmp_e	DGMP C10H12N5O7P
+dgsn_e	Deoxyguanosine
+dgudbutn_e	1 4 Diguanidinobutane
+dha_e	Dihydroxyacetone
+dhap_e	Dihydroxyacetone phosphate
+dhptd_e	4,5-dihydroxy-2,3-pentanedione
+diact_e	Diacetyl C4H6O2
+dimp_e	DIMP C10H12N4O7P
+din_e	Deoxyinosine
+dmanur_e	Dimmer of D mannuronate
+dmgly_e	N,N-Dimethylglycine
+dms_e	Dimethyl sulfide
+dmso2_e	Dimethyl sulfone
+dmso_e	Dimethyl sulfoxide
+dopa_e	Dopamine
+drib_e	Deoxyribose C5H10O4
+dtbt_e	Dethiobiotin
+dtmp_e	DTMP C10H13N2O8P
+dump_e	DUMP C9H11N2O8P
+duri_e	Deoxyuridine
+dxyl_e	1-deoxy-D-xylulose
+dxylnt_e	D-Xylonate
+ecto__L_e	L Ectoine
+enter_e	Enterochelin
+etha_e	Ethanolamine
+eths_e	Ethanesulfonate C2H5O3S
+ethso3_e	Ethanesulfonate
+etoh_e	Ethanol
+f6p_e	D-Fructose 6-phosphate
+fad_e	Flavin adenine dinucleotide oxidized
+fald_e	Formaldehyde
+fcmcbtt_e	Iron(III) chelated carboxymycobactin T (R=8 carbon, final carbon is carboxyl group)
+fe2_e	Fe2+ mitochondria
+fe3_e	Iron (Fe3+)
+fe3dcit_e	Fe(III)dicitrate
+fe3dhbzs3_e	2-3-dihydroxybenzoylserine trimer-Fe-III
+fe3dhbzs_e	Ferric 2,3-dihydroxybenzoylserine
+fe3mcbtt_e	Iron III  chelated mycobactin T
+fe3pyovd_kt_e	Ferrypyoverdine  P putida KT2440 specific
+feenter_e	Fe-enterobactin
+feoxam_e	Generic ferrioxamine-Fe-III
+feoxam_un_e	Ferroxamine minus Fe(3)
+fer_e	Ferulate
+fmn_e	FMN C17H19N4O9P
+fol_e	Folate
+for_e	Formate
+forglu_e	N-Formimidoyl-L-glutamate
+frmd_e	Formamide
+fru_e	D-Fructose
+frulys_e	Fructoselysine
+fruur_e	D-Fructuronate
+fuc__L_e	L-Fucose
+fuc_e	L-fuculose
+fum_e	Fumarate
+g1p_e	D-Glucose 1-phosphate
+g3pc_e	Sn-Glycero-3-phosphocholine
+g3pe_e	Sn-Glycero-3-phosphoethanolamine
+g3pg_e	Glycerophosphoglycerol
+g3pi_e	Sn-Glycero-3-phospho-1-inositol
+g3ps_e	Glycerophosphoserine
+g6p_B_e	Beta D glucose 6 phosphate C6H11O9P
+g6p_e	D-Glucose 6-phosphate
+ga_e	Gallic acid
+gal1p_e	Alpha-D-Galactose 1-phosphate
+gal_bD_e	Beta D-Galactose
+gal_e	D-Galactose
+galam_e	D Galactosamine C6H13NO5
+galct__D_e	D-Galactarate
+galctn__D_e	D-Galactonate
+galctn__L_e	L-Galactonate
+galctr__D_e	D Galactarate C6H8O8
+galman4_e	Galactomannan(n=4 repeat units mannose, alpha-1,4 man)
+galman6_e	Galactomannan(n=6 repeat units mannose, alpha-1,4 man)
+galt_e	Galactitol
+galur_e	D-Galacturonate
+gam6p_e	D-Glucosamine 6-phosphate
+gam_e	D-Glucosamine
+gcald_e	Glycolaldehyde
+gdp_e	GDP C10H12N5O11P2
+glc__D_e	D-Glucose
+glc__aD_e	Alpha D-glucose
+glcman4_e	Glucomannan (n=4 repeat units, glc beta-1,4 man)
+glcman6_e	Glucomannan (n=6 repeat units, glc beta-1,4 man)
+glcn__D_e	D Gluconate C6H11O7
+glcn_e	D-Gluconate
+glcr_e	D-Glucarate
+glcur1p_e	D-Glucuronate 1-phosphate
+glcur_e	D-Glucuronate
+gln__L_e	L-Glutamine
+glu__D_e	D-Glutamate
+glu__L_e	L-Glutamate
+glucan4_e	Beta-1,3/1,4-glucan (Barley, n=4, Glc beta1->3,4 Glc)
+glucan6_e	Beta-1,3/1,4-glucan (Barley, n=6, Glc beta1->3,4 Glc)
+glutar_e	Glutarate
+glx_e	Glyoxylate
+gly_asn__L_e	Gly asn L C6H11N3O4
+gly_asp__L_e	Gly asp L C6H9N2O5
+gly_cys_e	Gly-Cys
+gly_e	Glycine
+gly_gln_e	Gly-Gln
+gly_glu__L_e	Gly glu L C7H11N2O5
+gly_leu_e	Gly-Leu
+gly_met_e	Gly-Met
+gly_phe_e	Gly-Phe
+gly_pro__L_e	Gly pro L C7H12N2O3
+gly_tyr_e	Gly-Tyr
+glyald_e	D-Glyceraldehyde
+glyb_e	Glycine betaine
+glyc2p_e	Glycerol 2-phosphate
+glyc3p_e	Glycerol 3-phosphate
+glyc__R_e	(R)-Glycerate
+glyc_e	Glycerol
+glyclt_e	Glycolate C2H3O3
+glycol_e	Glycol
+glygln_e	L glycinylglutamine
+glyglu_e	L glycinylglutamate
+glygly_e	Glycylglycine C4H8N2O3
+glyglygln_e	Glycine-glycine-glutamine tripeptide
+glymet_e	L Glycinylmethionine
+glyphe_e	Glycylphenylalanine
+glyser_e	L glycinylserine
+gmp_e	GMP C10H12N5O8P
+gsn_e	Guanosine
+gthox_e	Oxidized glutathione
+gthrd_e	Reduced glutathione
+gtp_e	GTP C10H12N5O14P3
+gua_e	Guanine
+gudac_e	Guanidinoacetate
+gudptn_e	Delta Guanidinovaleric acid
+guln__L_e	L-gulonate
+h2_e	Hydrogen
+h2co3_e	Carbonic acid
+h2o2_e	Hydrogen peroxide
+h2o_e	H2O H2O
+h2s_e	Hydrogen sulfide
+h_e	H+
+ham_e	Hydroxylamine
+hco3_e	Bicarbonate
+hcys__L_e	L-Homocysteine
+hdca_e	Hexadecanoate (n-C16:0)
+hdcea_e	Hexadecenoate (n-C16:1)
+hexs_e	Hexanesulfonate C6H13O3S
+hg2_e	Mercury  charged 2  Hg
+hgentis_e	Homogentisate C8H7O4
+hia_e	3-[(3aS,4S,5R,7aS)-5-hydroxy-7a-methyl-1-oxo-octahydro-1H-indene-4-carboxylate
+his__L_e	L-Histidine
+hisgly_e	L histidinylglycine
+hishis_e	L histidinylhistidine
+hom__L_e	L-Homoserine
+hpta_e	Heptanoate
+hqn_e	Hydroquinone
+hxa_e	Hexanoate (n-C6:0)
+hxan_e	Hypoxanthine
+ibt_e	Isobutyrate
+ibtol_e	Isobutanol
+icit_e	Isocitrate
+id3acald_e	Indole 3 acetaldehyde C10H9NO
+idon__L_e	L-Idonate
+ile__L_e	L-Isoleucine
+imp_e	IMP C10H11N4O8P
+ind3ac_e	Indole 3 acetate C10H8NO2
+indole_e	Indole
+inost_e	Myo-Inositol
+ins_e	Inosine
+isetac_e	Isethionic acid
+isobuta_e	Isobutyric acid
+isocap_e	Isocaproate
+istfrnA_e	Iron bound extracellular staphyloferrin A
+istfrnB_e	Iron bound extracellular staphyloferrin B
+istnt_e	Isethionate C2H5O4S
+ival_e	Isovalerate
+k_e	Potassium
+lac__D_e	D-Lactate
+lac__L_e	L-Lactate
+lcts_e	Lactose C12H22O11
+leu__D_e	D Leucine
+leu__L_e	L-Leucine
+leuleu_e	Leucylleucine
+lipoate_e	Lipoate
+lmn2_e	Laminaribiose
+lnlc_e	Linoleic acid (all cis C18:2) n-6
+lys__D_e	D-Lysine
+lys__L_e	L-Lysine
+lysglugly_e	Lysine-glutamine-glycine tripeptide
+lyx__L_e	L-Lyxose
+m2but_e	2-Methylbutyric acid
+m4po_e	4-methylphenol
+m_xyl_e	M-Xylene
+madg_e	Alpha Methyl D glucoside C7H14O6
+mal__D_e	D-Malate
+mal__L_e	L-Malate
+malt_e	Maltose C12H22O11
+malthp_e	Maltoheptaose
+malthx_e	Maltohexaose
+maltpt_e	Maltopentaose
+malttr_e	Maltotriose C18H32O16
+maltttr_e	Maltotetraose
+man1p_e	D-Mannose 1-phosphate
+man6p_e	D-Mannose 6-phosphate
+man6pglyc_e	2(alpha-D-Mannosyl-6-phosphate)-D-glycerate
+man_e	D-Mannose
+manb_e	Mannobiose (beta-1,4)
+manglyc_e	2(alpha-D-Mannosyl)-D-glycerate
+mantr_e	Mannotriose (beta-1,4)
+manttr_e	Mannotetraose
+manur_e	D Mannuronate
+mbdg_e	Beta Methylglucoside C7H14O6
+mcbtt_e	Mycobactin T
+melib_e	Melibiose C12H22O11
+meoh_e	Methanol
+met_L_ala__L_e	Met L ala L C8H16N2O3S
+met__D_e	D-Methionine
+met__L_e	L-Methionine
+metglcur_e	1-O-methyl-Beta-D-glucuronate
+metox__R_e	L methionine R oxide C5H11NO3S
+metox_e	L Methionine S oxide C5H11NO3S
+metsox_R__L_e	L-methionine-R-sulfoxide
+metsox_S__L_e	L-Methionine Sulfoxide
+mevR_e	(R)-mevalonate
+mg2_e	Magnesium
+minohp_e	Myo-Inositol hexakisphosphate
+mmet_e	S-Methyl-L-methionine
+mn2_e	Manganese
+mnl1p_e	D-Mannitol 1-phosphate
+mnl_e	D-Mannitol
+mobd_e	Molybdate
+mso3_e	Methanesulfonate
+mththf_e	(2R,4S)-2-methyl-2,3,3,4-tetrahydroxytetrahydrofuran
+n2_e	Nitrogen
+n2o_e	Nitrous oxide
+na1_e	Sodium
+nac_e	Nicotinate
+ncam_e	Nicotinamide
+nh4_e	Ammonium
+ni2_e	Nickel
+nmn_e	NMN C11H14N2O8P
+no2_e	Nitrite
+no3_e	Nitrate
+no_e	Nitric oxide
+nona_e	Nonanoate C9H17O2
+o2_e	O2 O2
+o2s_e	Superoxide anion
+oaa_e	Oxaloacetate
+ocdca_e	Octadecanoate (n-C18:0)
+ocdcea_e	Octadecenoate (n-C18:1)
+octa_e	Octanoate (n-C8:0)
+octscoa_e	Octacosanoyl-CoA
+orn__D_e	D-Ornithine
+orn__L_e	L Ornithine C5H13N2O2
+orn_e	Ornithine
+orot_e	Orotate C5H3N2O4
+oxa_e	Oxalate
+p_xyl_e	P-methyltoluene
+pac_e	Phenylacetic acid
+pacald_e	Phenylacetaldehyde
+pala_e	Palatinose C12H22O11
+pdima_e	Phthiocerol dimycocerosate A (Mtb)
+pea_e	Phenylethyl alcohol
+peamn_e	Phenethylamine
+peng_e	Penicillin G C16H18N2O4S
+pentso3_e	Pentanesulfonate
+pep_e	Phosphoenolpyruvate
+phdca_e	Phenol palmitic acid
+phe__D_e	D-phenylalanine
+phe__L_e	L-Phenylalanine
+phedca_e	10 Phenyldecanoic acid
+phehpa_e	7 Phenylheptanoic acid
+phehxa_e	6 Phenylhexanoic acid
+pheme_e	Protoheme C34H30FeN4O4
+phenol_e	Phenol
+phenona_e	9 Phenylnonanoic acid
+pheocta_e	8 Phenyloctanoic acid
+phept_e	5 phenylvaleric acid
+phpyr_e	Phenylpyruvate
+pi_e	Phosphate
+pime_e	Pimelate
+pnto__R_e	(R)-Pantothenate
+ppa_e	Propionate (n-C3:0)
+ppal_e	Propanal
+ppap_e	Propanoyl phosphate
+ppat_e	Phosphonate
+ppdima_e	Phenol phthiocerol dimycocerosate (Mtb)
+ppi_e	Diphosphate
+ppoh_e	1-Propanol
+pppn_e	Phenylpropanoate
+ppt_e	Phosphonate
+prealg_MG_14_e	Beta 1 4 glycosidic  1  beta D mannuronic  4L guluronic acid
+prealg_MG_23_e	Beta 1 4 glycosidic  2  beta D mannuronic  3L guluronic acid
+prealg_MG_32_e	Beta 1 4 glycosidic  3  beta D mannuronic  2L guluronic acid
+prealg_MG_41_e	Beta 1 4 glycosidic  4  beta D mannuronic  1L guluronic acid
+prealginate_G_e	Prealginate KT2440   beta 1 4  linked copolymers of  bL guluronic acid 5 units
+pro__D_e	D-Proline
+pro__L_e	L-Proline
+progly_e	L-Prolinylglycine
+prohisglu_e	Proline-histidine-glutamine tripeptide
+psclys_e	Psicoselysine
+pser__D_e	D-O-Phosphoserine
+pser__L_e	O-Phospho-L-serine
+psuri_e	Pseudouridine
+pta_e	Pentanoate
+ptrc_e	Putrescine
+ptsla_e	Petroselaidic acid
+pydam_e	Pyridoxamine
+pydx_e	Pyridoxal
+pydxn_e	Pyridoxine
+pyovd_kt_e	Pyoverdine  P putida specific
+pyr_e	Pyruvate
+quin_e	Quinate
+r5p_e	Alpha-D-Ribose 5-phosphate
+raffin_e	Raffinose C18H32O16
+rbt_e	Ribitol
+rib__D_e	D-Ribose
+ribflv_e	Riboflavin C17H20N4O6
+rmn_e	L-Rhamnose
+rnam_e	N Ribosylnicotinamide C11H15N2O5
+s_e	Sulfur
+salc_e	Salicylate
+salchs2_e	Salmochelin-S2
+salchs2fe_e	Salmochelin-S2-Fe-III
+salchs4_e	Salmochelin-S4
+salchs4fe_e	Salmochelin-S4-Fe-III
+salchsx_e	Salmochelin-SX
+salcn_e	Salicin C13H18O7
+sbt__D_e	D-Sorbitol
+sel_e	Selenate
+ser__D_e	D-Serine
+ser__L_e	L-Serine
+serglugly_e	Serine-glutamine-glycine tripeptide
+sheme_e	Siroheme C42H36FeN4O16
+skm_e	Shikimate
+slnt_e	Selenite
+so3_e	Sulfite
+so4_e	Sulfate
+spmd_e	Spermidine
+srb__L_e	L Sorbose C6H12O6
+starch_e	Starch C12H20O10
+stfrnA_e	Staphyloferrin A
+stfrnB_e	Staphyloferrin B
+succ_e	Succinate
+sucr_e	Sucrose C12H22O11
+sula_e	Sulfoacetate C2H2O5S
+sulfac_e	Sulfoacetate
+tag160_e	Triacylglycerol  hexadecanoate
+tag180_e	Triacylglycerol  octadecanoate
+tag181d9_e	Triacylglycerol  nC181d9
+tag182d9d12_e	Triacylglycerol  nC182d9d12
+tag__D_e	D-Tagatose
+tagur_e	D-Tagaturonate
+tartr__D_e	D-tartrate
+tartr__L_e	L-tartrate
+taur_e	Taurine C2H7NO3S
+tcb_e	Tricarballylate
+tcynt_e	Thiocyanate
+tet_e	Tetrathionate
+tgt_e	Tagatose
+thm_e	Thiamin
+thr__L_e	L-Threonine
+thrp_e	L-Threonine O-3-phosphate
+thym_e	Thymine C5H6N2O2
+thymd_e	Thymidine C10H14N2O5
+tma_e	Trimethylamine
+tmam_e	Trimethylamine
+tmanur_e	Trimmer of D mannuronate
+tmao_e	Trimethylamine N-oxide
+tnt_e	2 4 6 Trinitrotoluene
+tol_e	Toluene
+tre6p_e	Alpha,alpha'-Trehalose 6-phosphate
+tre_e	Trehalose
+trp__L_e	L-Tryptophan
+tsul_e	Thiosulfate
+ttdca_e	Tetradecanoate (n-C14:0)
+ttdcea_e	Tetradecenoate (n-C14:1)
+tton_e	Trithionate
+tym_e	Tyramine
+tyr__D_e	D Tyrosine
+tyr__L_e	L-Tyrosine
+tyrp_e	Phosphotyrosine
+uaccg_e	UDP-N-acetyl-3-O-(1-carboxyvinyl)-D-glucosamine
+uacgam_e	UDP-N-acetyl-D-glucosamine
+udcpdp_e	Undecaprenyl diphosphate
+udcpp_e	Undecaprenyl phosphate
+udpacgal_e	UDP-N-acetyl-D-galactosamine
+udpg_e	UDPglucose
+udpgal_e	UDPgalactose
+udpglcur_e	UDP-D-glucuronate
+ump_e	UMP C9H11N2O9P
+ura_e	Uracil
+urate_e	Urate C5H4N4O3
+urea_e	Urea CH4N2O
+uri_e	Uridine
+vacc_e	Vaccenic acid
+val__D_e	D Valine
+val__L_e	L-Valine
+vanln_e	Vanillin
+vanlt_e	Vanillate
+xan_e	Xanthine
+xmp_e	Xanthosine 5'-phosphate
+xtsn_e	Xanthosine
+xyl3_e	Xylotriose
+xyl__D_e	D-Xylose
+xylan4_e	Xylan (4 backbone units, 1 glcur side chain)
+xylan8_e	Xylan (8 backbone units, 2 glcur side chain)
+xylb_e	Xylobiose
+xylu__L_e	L-Xylulose
+zn2_e	Zinc
