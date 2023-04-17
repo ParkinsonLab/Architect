@@ -44,7 +44,7 @@ This section summarizes the steps going from protein sequence to gap-filled mode
 
 4.	The final output comes in the form of a simple Excel file, as well as an SBML file annotated with links from KEGG/BiGG identifiers to other databases.
 
-The manuscript for Architect is currently available at [bioRxiv](https://www.biorxiv.org/content/10.1101/2021.10.12.464133v1).  Please cite our manuscript and the tools that Architect uses when using our approach:
+The manuscript for Architect is currently published in [PLoS Computational Biology](https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1010452): Nursimulu N.*, Moses A.M. and Parkinson J. (2022) Architect: A tool for aiding the reconstruction of high-quality metabolic models through improved enzyme annotation. PLoS Computational Biology. 18(9): e1010452.  Please cite our manuscript and the tools that Architect uses when using our approach:
 
 * CatFam (Yu et al, 2009)
 * DETECT (Hung et al, 2010; Nursimulu et al, 2018)
