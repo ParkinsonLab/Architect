@@ -209,7 +209,7 @@ if __name__ == '__main__':
 
         architect_directory = os.path.dirname(os.path.abspath(__file__))
         modify_enzdp = architect_directory + "/dependency/EnzDP/perform_modifications.py"
-        subprocess.call(["python", modify_enzdp, "--enzdp_path", enzdp_folder, "--architect_path", architect_directory])
+        subprocess.call(["python2", modify_enzdp, "--enzdp_path", enzdp_folder, "--architect_path", architect_directory])
 
     # Step 6: Download PRIAM.
     download_tool = verify_if_tool_to_be_downloaded("PRIAM", path_for_tools)
