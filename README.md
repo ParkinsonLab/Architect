@@ -414,6 +414,8 @@ Ponce, M. et al., Deploying a Top-100 Supercomputer for Large Parallel Workloads
 
 Ryu, J.Y., et al., Deep learning enables high-quality and high-throughput prediction of enzyme commission numbers. PNAS, 2019. 116(28): p. 13996–14001.
 
+Seaver, S.M.D. et al., The ModelSEED Biochemistry Database for the integration of metabolic annotations and the reconstruction, comparison and analysis of metabolic models for plants, fungi and microbes.  Nucleic Acids Res., 2021.  49(D1): D575-D588.
+
 Thiele, I. and Palsson, B. O., A protocol for generating a high-quality genome-scale metabolic reconstruction.  Nat Protoc, 2010. 5(1): p. 93-121.
 
 Yu, C., et al., Genome-wide enzyme annotation with precision control: catalytic families (CatFam) databases. Proteins, 2009. 74(2): p. 449-60.
