@@ -386,7 +386,7 @@ In the case of BiGG reconstructions, growth in specific media (such as minimal m
 
 During model reconstruction, if you choose to use one of the BiGG universes for reconstruction, the reversibilities defined by Machado et al are used.  If you choose KEGG as the universe, then, by default, most reactions are set as reversible as per the protocol by Thiele et al, except for reactions that involve ATP (then, reaction reversibility is set in the direction of ATP consumption); an exception is ATP synthase known to operate in both directions.  This is as per the published version of Architect (Nursimulu et al, 2022).
 
-An alternate version of the KEGG reactions involves directionalities computed as per those determined in CarveMe, next by ModelSEED, then as per the rule of thumb given above.  To experiment with this, use the instructions given [here] (https://compsysbio.org/projects/Architect/Database/model_reconstruction/KEGG_universe_defined_rev/). Note that to transfer reaction reversibilities from one database to another, I used the code deposited [here](https://github.com/nnursimulu/Mapping_of_identifiers_for_metabolism).
+An alternate version of the KEGG reactions involves directionalities computed as per those determined in CarveMe, next by ModelSEED, then as per the rule of thumb given above.  To experiment with this, use the instructions given [here](https://compsysbio.org/projects/Architect/Database/model_reconstruction/KEGG_universe_defined_rev/). Note that to transfer reaction reversibilities from one database to another, I used the code deposited [here](https://github.com/nnursimulu/Mapping_of_identifiers_for_metabolism).
 
 # 7. References
 
