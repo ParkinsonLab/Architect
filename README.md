@@ -27,7 +27,8 @@ For more information, please contact nnursimulu@cs.toronto.edu.
     d. [Settings for gap-filling](#dSettings-for-gap-filling)  
     e. [Number of output models](#eNumber-of-output-models)  
     f. [Definition of a media to be used by a model (BiGG reconstructions)](#fDefinition-of-a-media-to-be-used-by-a-model-BiGG-reconstructions)
-6. [References](#6-References)  
+6. [Reaction reversibilities during model reconstruction](#6-Reaction-reversibilities-during-model-reconstruction)
+7. [References](#7-References)  
 
 # 1. Overview
 
@@ -381,7 +382,13 @@ The reason I separate these two kinds of outputs is that, in my experience, the 
 
 In the case of BiGG reconstructions, growth in specific media (such as minimal media) can be specified by a user.  Currently, the code does not support the specification of multiple media. These media definitions are borrowed from CarveMe (more information given [here](https://github.com/ParkinsonLab/Architect/blob/master/dependency/CarveMe/carveme/data/input/media_db.tsv)).  We suggest that when specific media is defined that a high penalty (for example 10) is specified for the addition of exchange reactions for deadend metabolites. 
 
-# 6. References
+# 6. Reaction reversibilities during model reconstruction
+
+During model reconstruction, if you choose to use one of the BiGG universes for reconstruction, the reversibilities defined by Machado et al are used.  If you choose KEGG as the universe, then, by default, most reactions are set as reversible as per the protocol by Thiele et al, except for reactions that involve ATP (then, reaction reversibility is set in the direction of ATP consumption); an exception is ATP synthase known to operate in both directions.  This is as per the published version of Architect (Nursimulu et al, 2022).
+
+An alternate version of the KEGG reactions involves directionalities computed as per those determined in CarveMe, next by ModelSEED, then as per the rule of thumb given above.  To experiment with this, use the instructions given [here] (https://compsysbio.org/projects/Architect/Database/model_reconstruction/KEGG_universe_defined_rev/). Note that to transfer reaction reversibilities from one database to another, I used the code deposited [here](https://github.com/nnursimulu/Mapping_of_identifiers_for_metabolism).
+
+# 7. References
 
 Buchfink, B. et al., Fast and sensitive protein alignment using DIAMOND.  Nature Methods, 2015. 12(1): p. 59-60.
 
@@ -401,10 +408,12 @@ Nguyen, N.N., et al., ENZDP: Improved enzyme annotation for metabolic network re
 
 Nursimulu, N., et al., Improved enzyme annotation with EC-specific cutoffs using DETECT v2. Bioinformatics, 2018. 34(19): p. 3393-3395.
 
-Nursimulu, N., Moses A.M. and Parkinson J. Architect: a tool for producing high-quality metabolic models through improved enzyme annotation. BioRxiv doi: 10.1101/2021.10.12.464133. https://www.biorxiv.org/content/10.1101/2021.10.12.464133v1.full
+Nursimulu, N., Moses A.M. and Parkinson J. Architect: a tool for producing high-quality metabolic models through improved enzyme annotation. PLoS Comput Biol, 2022.  18(9).
 
 Ponce, M. et al., Deploying a Top-100 Supercomputer for Large Parallel Workloads: the Niagara Supercomputer. PEARC'19 Proceedings, 2019.
 
 Ryu, J.Y., et al., Deep learning enables high-quality and high-throughput prediction of enzyme commission numbers. PNAS, 2019. 116(28): p. 13996–14001.
+
+Thiele, I. and Palsson, B. O., A protocol for generating a high-quality genome-scale metabolic reconstruction.  Nat Protoc, 2010. 5(1): p. 93-121.
 
 Yu, C., et al., Genome-wide enzyme annotation with precision control: catalytic families (CatFam) databases. Proteins, 2009. 74(2): p. 449-60.
